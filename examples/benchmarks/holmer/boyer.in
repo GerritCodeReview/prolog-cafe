@@ -1,0 +1,1 @@
+:- '$benchmark'(boyer, 1000, main, '$dummy').

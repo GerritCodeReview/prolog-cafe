@@ -1,0 +1,1 @@
+:- P = 1000, '$benchmark'(memfill(P), 100, memfill(P), '$dummy'(P)).

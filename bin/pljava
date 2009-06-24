@@ -1,0 +1,105 @@
+#! /usr/bin/perl
+require 'getopts.pl';
+use strict;
+use Getopt::Long;
+use File::Copy;
+
+# options
+my @optlist = ("h|help!","v|verbose!","S!","d=s","J=s");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v, $opt_S, $opt_d, $opt_J);
+
+# -h option || check the number of arguments
+if ($opt_h || @ARGV < 1 ) {
+    usage();
+    exit 1;
+}
+
+# local variables
+my $pl2am      = "pl2am.plj";
+my $pl2am_opts = "-O";
+my $am_dest    = "/tmp";
+my $am2j       = "am2j.plj";
+my $am2j_opts  = "";
+my $java_dest  = ".";
+
+# -v option
+if ($opt_v) {
+    $pl2am_opts .= " -v";
+    $am2j_opts  .= " -v";
+}
+
+# -d option
+if ($opt_d) {
+    if (! -d $opt_d) {
+	&error("directory $opt_d does not exist.");
+    } else {
+	$java_dest = $opt_d;
+    }
+}
+
+# -J option
+if ($opt_J) {
+    $pl2am_opts .= " -J '$opt_J'";
+    $am2j_opts  .= " -J '$opt_J'";
+}
+
+foreach my $file (@ARGV) {
+    my $f = $file;
+    $f =~ s/.pl$//g;
+    $f = &url_encode($f);
+    my $am_file = "$am_dest/$f.am";
+    my $cmd1 = "$pl2am $pl2am_opts $file $am_file";
+    my $cmd2 = "$am2j $am2j_opts -d $java_dest $am_file";
+    &message("{START translating $file --> java}");
+    &message($cmd1);
+    system($cmd1) && error("$cmd1 fails");
+    &message($cmd2);
+    system($cmd2) && error("$cmd2 fails");
+    if ($opt_S) {
+	&message("copy $am_file to $java_dest");
+	copy($am_file, $java_dest) || &error("can not copy $am_file to $java_dest");
+    } else {
+	&message("unlink $am_file");
+	unlink $am_file;
+    }
+    &message("{END translating $file --> java}\n");
+}    
+
+exit 0;
+
+# sub
+sub usage {
+    print "\nUsage: $0 [-options] prolog-file [prolog-files]\n";
+    print "\n where options include:\n";
+    print "\t-h -help         : print this help message\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\t-S               : output WAM-like abstract machine codes\n";
+    print "\t                 : the files suffied by \".am\" is created.\n";
+    print "\t-d directory     : set the destination directory for java files.\n";
+    print "\t                 : The destination directory must already exist\n";
+    print "\t-J option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Virtual Machine\n";
+    print "\t                 : (ex. -J '-Xmx100m -verbose:gc')\n";
+    print "\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x: $0\n";
+    exit(1);
+}
+
+sub url_encode{
+    my $x = shift;
+    $x =~ s/([^0-9A-Za-z_ ])/'%'.unpack('H2',$1)/ge;
+    $x =~ s/\s/+/g;
+    return $x;
+}

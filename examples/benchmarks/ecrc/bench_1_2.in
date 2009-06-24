@@ -1,0 +1,5 @@
+:- choice_point(10000).
+:- choice_point(10000).
+:- choice_point0ar(10000).
+:- baktrak1(1000000).
+:- baktrak2(1000000).

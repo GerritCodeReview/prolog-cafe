@@ -1,0 +1,1 @@
+:- '$benchmark'(simple_analyzer, 1000, main, '$dummy').

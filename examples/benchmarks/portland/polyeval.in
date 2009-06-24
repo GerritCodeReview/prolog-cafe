@@ -1,0 +1,1 @@
+:- P = 51, '$benchmark'(polybench(P), 1000, polybench(P,_), '$dummy'(P,_)).

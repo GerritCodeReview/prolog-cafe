@@ -1,0 +1,1 @@
+:- '$benchmark'(queens_8, 1000, queens_8, '$dummy').

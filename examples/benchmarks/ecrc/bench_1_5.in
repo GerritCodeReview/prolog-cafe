@@ -1,0 +1,5 @@
+:- construct_list(100000).
+:- match_list(100000).
+:- construct_structure(100000).
+:- match_structure(100000).
+:- match_nested_structure(100000).

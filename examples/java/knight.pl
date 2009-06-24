@@ -1,0 +1,1 @@
+../prolog/knight.pl

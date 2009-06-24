@@ -1,0 +1,48 @@
+
+This package contains the benchmarks that were used in the papers:
+
+  "Fast Prolog with an Extended General Purpose Architecture", by Bruce Holmer
+  et al (holmer@ernie.berkeley.edu), 17th International Symposium on Computer
+  Architecture, May 1990.
+
+  "The Benefits of Global Dataflow Analysis for an Optimizing Prolog Compiler",
+  by Peter Van Roy (vanroy@ernie.berkeley.edu) and Alvin Despain, 1990 North
+  American Conference on Logic Programming, October 1990.
+
+The package contains 26 programs, grouped into "small" and "large".  All
+program sizes are in lines of code excluding comments.  The programs have been
+run on Quintus Prolog, C-Prolog, and Aquarius Prolog, a new system under
+development at Berkeley.  The programs are to be run as is, with all built-in
+predicates *including* write/1 and nl/0.
+
+Small Program	 Size	Description
+
+nreverse.pl	  10	Naive reverse of a 30-element list.
+tak.pl		  15	Recursive integer arithmetic.
+qsort.pl	  19	Quicksort of a 50-element list.
+log10.pl	  27	Symbolic differentiation.
+ops8.pl	  	  27	Symbolic differentiation.
+times10.pl	  27	Symbolic differentiation.
+divide10.pl	  27	Symbolic differentiation.
+serialise.pl	  29	Calculate serial numbers of a list.
+queens_8.pl	  31	Solve the eight queens puzzle.
+mu.pl		  33	Prove a theorem of Hofstadter's "mu-math".
+zebra.pl	  36	A logical puzzle based on constraints.
+fast_mu.pl	  54	An optimized version of the mu-math prover.
+query.pl	  68	Query a static database (using integer arithmetic).
+poly_10.pl	  86	Symbolically raise a polynomial to the tenth power.
+
+Large Program	 Size	Description
+
+crypt.pl	  64	Solve a simple cryptarithmetic puzzle.
+meta_qsort.pl	  74	A meta-interpreter running qsort.
+prover.pl	  81	A simple theorem prover.
+browse.pl	  92	Build and query a database.
+unify.pl	 125	A compiler code generator for unification.
+flatten.pl	 158	Source transformation to remove disjunctions.
+sdda.pl	 	 273	A dataflow analyzer that represents aliasing.
+reducer.pl	 301	A graph reducer based on combinators.
+boyer.pl	 377	An extract from a Boyer-Moore theorem prover.
+simple_analyzer.pl 443	A dataflow analyzer analyzing qsort.
+nand.pl		 493	A logic synthesis program based on heuristic search.
+chat_parser.pl	1138	Parse a set of English sentences.

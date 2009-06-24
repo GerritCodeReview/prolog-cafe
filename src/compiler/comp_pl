@@ -1,0 +1,155 @@
+#! /usr/bin/perl
+require 'getopts.pl';
+use strict;
+use Getopt::Long;
+use File::Copy;
+
+# options
+my @optlist = ("h|help!","v|verbose!");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v);
+
+# -h option || check the number of arguments
+if ($opt_h || @ARGV < 2 || @ARGV > 4) {
+    usage();
+    exit 1;
+}
+
+# get arguments
+my $prolog_file   = $ARGV[0];
+my $command_file  = $ARGV[1];
+my $prolog        = $ARGV[2];
+my $prolog_system = $ARGV[3];
+
+# check arguments
+if (! -e $prolog_file) {
+    &error("File $prolog_file does not exist");
+}
+
+if (! $prolog) {
+    $prolog = "prolog";
+}
+
+if (! $prolog_system) {
+    $prolog_system = "Unknown";
+}
+
+# main
+my $nosuffix = $prolog_file;
+$nosuffix =~ s/.pl$//g;
+my $cmd_temp = $nosuffix . ".txt";
+
+if ($prolog_system eq "SICStus" || $prolog_system eq "SWI-Prolog") { # SICStus or SWI-Prolog
+    my $wam;
+    my $dump;
+    my $goal;
+    my $goal2;
+    if ($prolog_system eq "SICStus") {
+	$wam  = $nosuffix . ".ql";
+	$dump = $nosuffix . ".sav";
+	#$goal = "\"[operators], fcompile(\'$prolog_file\'), load(\'$wam\'), save_program(\'$dump\', main), halt.\"";
+	$goal = "\"[operators], fcompile([\'$prolog_file\',system]), load(\'$wam\'), load(system), save_program(\'$dump\', main), halt.\"";
+	$goal2 = "load(\'$wam\'), main.";
+    }
+    if ($prolog_system eq "SWI-Prolog") {
+	$wam  = $nosuffix . ".qlf";
+	$dump = $nosuffix . ".qsav";
+#	$goal = "\"[operators], qcompile(\'$prolog_file\'), load_files(\'$wam\'), qsave_program(\'$dump\', [goal=main]), halt.\"";
+	$goal = "\"[operators], qcompile([\'$prolog_file\',system]), load_files(\'$wam\'), load_files(system),qsave_program(\'$dump\', [goal=main]), halt.\"";
+	$goal2 = "load_files(\'$wam\'), main.";
+    }
+    &message("unlink $wam, $dump");
+    unlink $wam, $dump;
+    my $cmd = "echo $goal | $prolog";
+    if (! $opt_v) {# check -v option
+	$cmd .= " 2> /dev/null";
+    }
+    &message("making $wam, $dump");
+    &message($cmd);
+    system($cmd);
+    if (-e $dump) { # saving program succeeds
+	unlink $wam;
+	&message("making $command_file");
+	&mk_command($command_file, $cmd_temp, undef, $dump, undef, undef);
+	chmod 0755, $command_file;
+	exit 0;
+    } elsif (-e $wam) { # compilation succeeds, but saving program fails
+	&message("making $command_file");
+	&mk_command($command_file, $cmd_temp, $goal2, $prolog, undef, undef);
+	chmod 0755, $command_file;
+	exit 0;
+    } else {
+	&error("$0 fails");
+    }
+} elsif ($prolog_system eq "PrologCafe") {
+    my $file;
+    my $system_opts;
+    my $system_args;
+    # set $system_opts
+    #$system_opts = "-cp \\\$PLCAFEDIR/lang.jar:\\\$PLCAFEDIR/builtin.jar:\\\$PLCAFEDIR/compiler.jar";
+    $system_opts = "-cp \\\$PLCAFEDIR/plcafe.jar";
+    if ($prolog_file =~ m|.*/(.*).pl$|i) {
+	$file = $1;
+    } else {
+	&error("invalid prolog file found, $prolog_file");
+    }
+    # set $system_args
+    $system_args = "jp.ac.kobe_u.cs.prolog.lang.PrologMain jp.ac.kobe_u.cs.prolog.compiler.$file:main";
+    &message("making $command_file");
+    &mk_command($command_file, $cmd_temp, undef, $prolog, $system_opts, $system_args);
+    chmod 0755, $command_file;
+    exit 0;    
+} else {
+    my $goal3 = "[\'$prolog_file\',system], main.";
+#    my $goal3 = "[\'$prolog_file\'], main.";
+    &message("making $command_file");
+    &mk_command($command_file, $cmd_temp, $goal3, $prolog, undef, undef);
+    chmod 0755, $command_file;
+    exit 0;
+}
+
+exit 0;
+
+# sub
+sub usage {
+    print "\nUsage: $0 [-options] prolog_file command_file [prolog] [prolog_system]\n";
+    print "\n where options include:\n";
+    print "\t-h -help         : print this help message\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\n where prolog is the command of Prolog system:\n";
+    print "\t(ex.) sicstus, pl, swipl, prolog...\n";
+    print "\n where prolog_system include:\n";
+    print "\tSICStus\n";
+    print "\tSWI-Prolog\n\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x\n";
+    exit(1);
+}
+
+sub mk_command {
+    my ($command_file, $command_temp, @val) = @_;
+    my @key = ("goal", "system", "system_opts", "system_args");
+    copy($command_temp, $command_file) || &error("can not copy $command_temp to $command_file");
+    open(OUT, ">>$command_file") || &error("can not open $command_file");
+    print OUT "sub init {\n";
+    print OUT "\t%env = (\n";
+    for (my $i=0; $i < scalar(@key); $i++) {
+	next if (! $val[$i]);
+	print OUT "\t\t\"$key[$i]\", \"$val[$i]\",\n";
+    }
+    print OUT "\t)\n";
+    print OUT "}\n";
+    close(OUT) || &error("can not close $command_file");
+}
+
+

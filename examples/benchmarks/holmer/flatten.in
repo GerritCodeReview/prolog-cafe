@@ -1,0 +1,1 @@
+:- '$benchmark'(flatten, 1000, main, '$dummy').

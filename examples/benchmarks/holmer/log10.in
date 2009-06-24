@@ -1,0 +1,1 @@
+:- '$benchmark'(log10, 1000, log10, '$dummy').

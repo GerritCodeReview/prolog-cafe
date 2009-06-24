@@ -1,0 +1,1 @@
+:- '$benchmark'(zebra, 1000, main, '$dummy').

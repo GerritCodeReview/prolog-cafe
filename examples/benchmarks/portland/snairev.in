@@ -1,0 +1,1 @@
+:- P = 2000, mk_list(P, L), '$benchmark'(snairev(P), 10, rev(L,_), '$dummy'(L,_)).

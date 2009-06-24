@@ -1,0 +1,1 @@
+:- P = 1000, '$benchmark'(primes(P), 1000, primes(P,_), '$dummy'(P,_)).

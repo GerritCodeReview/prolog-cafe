@@ -1,0 +1,102 @@
+#! /usr/bin/perl
+require 'getopts.pl';
+use strict;
+use Getopt::Long;
+use File::Basename;
+
+# options
+my @optlist = ("h|help!","v|verbose!","J=s","cp|classpath=s","C=s");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v, $opt_J, $opt_cp, $opt_C);
+
+# -h option || check the number of arguments
+if ($opt_h || @ARGV < 2 ) {
+    usage();
+    exit 1;
+}
+
+# variables 
+my ($file, @args) = @ARGV;
+my ($jar_file, $jar_path, $jar_suffix) = fileparse($file, (".jar"));
+my $plcomp       = "plcomp";
+my $plcomp_opts  = "";
+my $java_dest    = "$jar_file";
+my $class_dest   = "$java_dest/classes";
+my $jar          = "jar";
+my $jar_opts     = "cf $file";
+
+# check arguments
+if (-d $java_dest) {
+    &error("directory $java_dest is already exist.");
+}
+
+if ($jar_suffix ne ".jar") {
+    &error("$file is not suffixed by .jar");
+}
+
+if ($opt_v) { # -v option
+    $plcomp_opts .= " -v";
+}
+
+if ($opt_J) { # -J option
+    $plcomp_opts .= " -J '$opt_J'";
+    $jar_opts .= " -J'$opt_J'";
+}
+
+if ($opt_cp) { # -cp option
+    $plcomp_opts .= " -cp '$opt_cp'";
+} 
+
+if ($opt_C) { # -C option
+    if ($opt_C =~ /-d\s+/) {
+	&error("can not use -d in -C option");
+    }
+    $plcomp_opts .= " -C '-d $class_dest $opt_C'";
+} else {
+    $plcomp_opts .= " -C '-d $class_dest'";
+}
+
+&message("mkdir $java_dest, 0777");
+mkdir $java_dest, 0777 || &error("can not mkdir $java_dest");
+&message("mkdir $class_dest, 0777");
+mkdir $class_dest, 0777 || &error("can not mkdir $class_dest");
+
+my $cmd1 = "$plcomp $plcomp_opts -d $java_dest @args";
+&message($cmd1);
+system($cmd1) && &error("$cmd1 fails");
+
+my $cmd2 = "$jar $jar_opts -C $class_dest .";
+&message($cmd2);
+system($cmd2) && &error("$cmd2 fails");
+
+exit 0;
+
+# sub
+sub usage {
+    print "\nUsage: $0 [-options] jar-file prolog-file [prolog-files]\n";
+    print "\n where options include:\n";
+    print "\t-h -help         : print this help message\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\t-J option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Virtual Machine\n";
+    print "\t                 : (ex. -J '-Xmx100m -verbose:gc')\n";
+    print "\t-cp -classpath <class search path of directories and zip/jar files>\n";
+    print "\t                 : A : separated list of directories and zip/jar files.\n";
+    print "\t-C option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Compiler\n";
+    print "\t                 : (ex. -C '-deprecation')\n";
+    print "\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x: $0\n";
+    exit(1);
+}

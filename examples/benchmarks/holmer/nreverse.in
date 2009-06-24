@@ -1,0 +1,1 @@
+:- '$benchmark'(nreverse, 1000, nreverse, '$dummy').

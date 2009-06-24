@@ -1,0 +1,1 @@
+:- '$benchmark'(query, 1000, query, '$dummy').

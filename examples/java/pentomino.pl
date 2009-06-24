@@ -1,0 +1,1 @@
+../prolog/pentomino.pl

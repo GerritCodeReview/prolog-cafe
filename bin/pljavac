@@ -1,0 +1,72 @@
+#! /usr/bin/perl 
+require 'getopts.pl';
+use Getopt::Long;
+use strict;
+
+my @optlist = ("h|help!","v|verbose!","cp|classpath=s","C=s");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v, $opt_cp, $opt_C);
+
+# -h option || check the number of arguments
+if ($opt_h || @ARGV < 1 ) {
+    usage();
+    exit 1;
+}
+
+# local variables
+my $javac = "javac";
+my $classpath;
+my $opts;
+my $files;
+
+# set $classpath
+$classpath = "\$PLCAFEDIR/plcafe.jar:\$CLASSPATH";
+#$classpath = "\$PLCAFEDIR/lang.jar:\$PLCAFEDIR/builtin.jar:\$PLCAFEDIR/compiler.jar:\$CLASSPATH";
+if ($opt_cp) { # -cp option
+    $classpath = ".:$opt_cp:$classpath";
+} 
+
+# set $opts
+if ($opt_C) { # -C option
+    if ($opt_C =~ /(-cp|-classpath)\s+/) {
+	&error("can not use $1 in -C option");
+    }
+    $opts .= $opt_C;
+}
+
+# set $files
+$files = "@ARGV";
+$files =~ s/(\$)/\\$1/g;
+
+my $cmd = "$javac $opts -classpath $classpath $files";
+&message($cmd);
+system($cmd) && error("$cmd fails");
+
+exit 0;
+
+sub usage {
+    print "\nUsage: $0 [-options] [source files]\n";
+    print "\n";
+    print "where options support:\n\n";
+    print "\t-h -help         : print this help\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\t-cp -classpath <class search path of directories and zip/jar files>\n";
+    print "\t                 : A : separated list of directories and zip/jar files.\n";
+    print "\t-C option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Compiler\n";
+    print "\t                 : (ex. -C '-deprecation')\n";
+    print "\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x: $0\n";
+    exit(1);
+}

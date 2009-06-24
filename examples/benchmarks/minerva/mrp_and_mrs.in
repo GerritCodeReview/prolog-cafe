@@ -1,0 +1,3 @@
+:- '$benchmark'('MrPandMrS', 10, ps, '$dummy').
+
+

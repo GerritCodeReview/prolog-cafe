@@ -1,0 +1,93 @@
+#! /usr/bin/perl
+require 'getopts.pl';
+use strict;
+use Getopt::Long;
+
+# options
+my @optlist = ("h|help!","v|verbose!","d=s","J=s","cp|classpath=s","C=s");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v, $opt_d, $opt_J,$opt_cp, $opt_C);
+
+# -h option || check the number of arguments
+if ($opt_h || @ARGV < 1 ) {
+    usage();
+    exit 1;
+}
+
+# variables 
+my $pljava       = "pljava";
+my $pljava_opts  = "";
+my $pljavac      = "pljavac";
+my $pljavac_opts = "";
+my $java_dest    = ".";
+
+if ($opt_v) { # -v option
+    $pljava_opts  .= " -v";
+    $pljavac_opts .= " -v";
+}
+
+if ($opt_d) { # -d option
+    if (! -d $opt_d) { 
+	&message("mkdir $opt_d, 0777");
+	mkdir $opt_d, 0777 || &error("can not mkdir $opt_d");
+    }
+    $java_dest = $opt_d;
+}
+
+if ($opt_J) { # -J option
+    $pljava_opts .= " -J '$opt_J'";
+}
+
+if ($opt_cp) { # -cp option
+    $pljavac_opts .= " -cp '$opt_cp'";
+} 
+
+if ($opt_C) { # -C option
+    $pljavac_opts .= " -C '$opt_C'";
+}
+
+# Prolog --> Java
+foreach my $file (@ARGV) {
+    my $cmd1 = "$pljava $pljava_opts -d $java_dest $file";
+    &message($cmd1);
+    system($cmd1) && error("$cmd1 fails");
+}
+
+# Java --> Class
+my $cmd2 = "$pljavac $pljavac_opts $java_dest/*.java";
+&message($cmd2);
+system($cmd2) && error("$cmd2 fails");
+
+exit 0;
+
+# sub
+sub usage {
+    print "\nUsage: $0 [-options] prolog-file [prolog-files]\n";
+    print "\n where options include:\n";
+    print "\t-h -help         : print this help message\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\t-d directory     : set the destination directory for java files.\n";
+    print "\t                 : make it if not exist\n";
+    print "\t-J option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Virtual Machine\n";
+    print "\t                 : (ex. -J '-Xmx100m -verbose:gc')\n";
+    print "\t-cp -classpath <class search path of directories and zip/jar files>\n";
+    print "\t                 : A : separated list of directories and zip/jar files.\n";
+    print "\t-C option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Compiler\n";
+    print "\t                 : (ex. -C '-deprecation')\n";
+    print "\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x: $0\n";
+    exit(1);
+}

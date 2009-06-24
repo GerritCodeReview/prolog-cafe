@@ -1,0 +1,1 @@
+../prolog/queens.pl

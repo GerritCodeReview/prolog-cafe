@@ -1,0 +1,1 @@
+:- P = 1000, '$benchmark'(qsort(P), 100, qsort(P), '$dummy'(P)).

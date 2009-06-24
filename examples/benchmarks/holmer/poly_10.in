@@ -1,0 +1,1 @@
+:- '$benchmark'(poly_10, 1000, poly_10, '$dummy').

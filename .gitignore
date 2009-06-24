@@ -1,0 +1,5 @@
+*.jar
+*.class
+/bin/am2j.plj
+/bin/pl2am.plj
+/doc/javadoc

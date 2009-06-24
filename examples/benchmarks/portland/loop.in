@@ -1,0 +1,1 @@
+:- P = 20000, '$benchmark'(loop(P), 1000, loop(P), '$dummy'(P)).

@@ -1,0 +1,1 @@
+:- P = 300, '$benchmark'(make_list(P), 1000, make_list(P,_), '$dummy'(P,_)).

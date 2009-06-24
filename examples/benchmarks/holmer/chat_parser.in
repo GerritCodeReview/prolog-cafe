@@ -1,0 +1,1 @@
+:- '$benchmark'(chat_parser, 1000, chat_parser, '$dummy').

@@ -1,0 +1,1 @@
+:- P = 100, make_list(P, L), '$benchmark'(bintree(P), 1000, make_tree(_,L), '$dummy'(_,L)).

@@ -1,0 +1,99 @@
+#! /usr/bin/perl 
+require 'getopts.pl';
+use Getopt::Long;
+use strict;
+
+my @optlist = ("h|help!","v|verbose!","cp|classpath=s","J=s", "t|toplevel=s", "rt|runtime!");
+my $result = GetOptions @optlist;
+our ($opt_h, $opt_v, $opt_cp, $opt_J, $opt_t, $opt_rt);
+
+# -h option 
+if ($opt_h) { 
+    usage();  
+    exit 1;
+}
+
+# local variables
+my $java = "java";
+my $classpath;
+my $opts;
+my $class;
+my @args;
+
+# set $class and @args
+if ($opt_t) {
+    if (@ARGV > 0) {
+	usage();  
+	exit 1;
+    } else { # $opt_t && @ARGV <= 0
+	$class = "jp.ac.kobe_u.cs.prolog.lang.PrologMain";
+	@args  = ($opt_t);
+    }
+} elsif (@ARGV > 0) { # !$opt_t && @ARGV > 0
+    ($class, @args) = @ARGV;
+} else { # !$opt_t && @ARGV <= 0
+    $class = "jp.ac.kobe_u.cs.prolog.lang.PrologMain";
+    @args  = "jp.ac.kobe_u.cs.prolog.builtin:cafeteria";
+}
+
+# set $classpath
+$classpath = "\$PLCAFEDIR/plcafe.jar";
+if ($opt_rt) {
+    $classpath = "\$PLCAFEDIR/lang.jar:\$PLCAFEDIR/builtin.jar";
+} 
+$classpath .= ":\$CLASSPATH";
+if ($opt_cp) { # -cp option
+    $classpath = "$opt_cp:$classpath";
+} 
+#$classpath = ".:$classpath";
+
+# set $opts
+if ($opt_J) { # -J option
+    if ($opt_J =~ /(-cp|-classpath)\s+/) {
+	&error("can not use $1 in -J option");
+    }
+    $opts .= $opt_J;
+}
+
+my $cmd = "$java $opts -cp $classpath $class @args";
+&message("{Enjoy Prolog Cafe!}");
+&message($cmd);
+system($cmd) && error("launching fails");
+&message("{Thank you for using Prolog Cafe!}\n");
+
+exit 0;
+
+sub usage {
+    print "\nUsage: $0 [-options] [class] [args...]\n";
+    print "\n";
+    print "where options support:\n\n";
+    print "\t-h -help         : print this help\n";
+    print "\t-v -verbose      : enable verbose output\n";
+    print "\t-cp -classpath <class search path of directories and zip/jar files>\n";
+    print "\t                 : A : separated list of directories and zip/jar files.\n";
+    print "\t-rt -runtime     : boot a runtime environment,\n";
+    print "\t                 : not including compiler system\n";
+    print "\t-t -toplevel <predicate name possibly with package name>\n";
+    print "\t                 : set toplevel goal limited to atom\n";
+    print "\t                 : (ex. -t main)\n";
+    print "\t                 : (ex. -t package:main)\n";
+    print "\t                 : Note that class and args must be empty.\n";
+    print "\t-J option        : option must be enclosed by '.\n";
+    print "\t                 : pass option to the Java Virtual Machine\n";
+    print "\t                 : (ex. -J '-Xmx100m -verbose:gc')\n";
+    print "\n";
+}
+
+sub message {
+    my ($x) = @_;
+    if ($opt_v) { # check -v option
+	print "\% $x\n";
+    }
+}
+
+sub error {
+    my ($x) = @_;
+    print "\% ERROR: $x: $0\n";
+    exit(1);
+}
+

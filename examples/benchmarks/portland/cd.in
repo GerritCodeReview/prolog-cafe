@@ -1,0 +1,1 @@
+:- P = 10000, '$benchmark'(cd(P), 1000, cd(P, 0), '$dummy'(P,0)).

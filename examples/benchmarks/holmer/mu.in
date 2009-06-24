@@ -1,0 +1,1 @@
+:- '$benchmark'(mu, 1000, mu, '$dummy').

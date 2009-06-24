@@ -1,0 +1,13 @@
+:- '$benchmark'(con1,    100000, con1,    '$dummy').
+:- '$benchmark'(con6,    100000, con6,    '$dummy').
+:- '$benchmark'(diff,    100000, diff,    '$dummy').
+:- '$benchmark'(hanoi,   100000, hanoi,   '$dummy').
+:- '$benchmark'(mu,      100000, mu,      '$dummy').
+:- '$benchmark'(nrev1,   100000, nrev1,   '$dummy').
+:- '$benchmark'(queens,  100000, queens,  '$dummy').
+:- '$benchmark'(query,   100000, query,   '$dummy').
+:- '$benchmark'(qs4,     100000, qs4,     '$dummy').
+:- '$benchmark'(palin25, 100000, palin25, '$dummy').
+:- '$benchmark'(sieve,   100000, sieve,   '$dummy').
+
+

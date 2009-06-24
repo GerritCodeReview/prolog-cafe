@@ -1,0 +1,25 @@
+################################################################
+ README
+################################################################
+
+This directory contains some demonstrations of calling Prolog from
+Java.
+
+* Knight tour
+
+  % java -cp .:knight.jar:$PLCAFEDIR/plcafe.jar Knight
+
+* Peg solitaire
+
+  % java -cp .:peg.jar:$PLCAFEDIR/plcafe.jar Peg
+
+* Pentomino puzzle
+
+  % java -cp .:pentomino.jar:$PLCAFEDIR/plcafe.jar Pentomino
+
+* N-Queens puzzle
+
+  % java -cp .:queens.jar:$PLCAFEDIR/plcafe.jar Queens
+
+--
+Mutsunori BANBARA
