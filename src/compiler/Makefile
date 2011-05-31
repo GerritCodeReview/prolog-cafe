@@ -32,9 +32,9 @@ JAVA      = java
 	./comp_pl -v `pwd`/$*.pl `pwd`/$*.plc $(PROLOG) $(PSYSTEM)
 
 .pl.am:
-	pl2am.plc -v -O $< $@
+	../../bin/pl2am.plc -v -O $< $@
 	-mkdir $*
-	am2j.plc -v -d $* $@
+	../../bin/am2j.plc -v -d $* $@
 
 .txt.plj:
 	./comp_pl -v `pwd`/$*.pl `pwd`/$*.plj $(JAVA) 'PrologCafe'

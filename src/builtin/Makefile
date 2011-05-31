@@ -22,9 +22,9 @@ am_objects = builtins.am \
 	system.am \
 
 .pl.am:
-	pl2am.plc -v -O $< $@
+	../../bin/pl2am.plc -v -O $< $@
 	-mkdir $*
-	am2j.plc -v -d $* $@
+	../../bin/am2j.plc -v -d $* $@
 
 builtin:$(am_objects)
 	$(JAVAC) $(JAVACOPTS) */*.java
