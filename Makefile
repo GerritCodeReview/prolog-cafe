@@ -6,10 +6,10 @@
 # PSYSTEM- the type of Prolog system 
 #        ::= 'SICStus' | 'SWI-Prolog' | 'Others'
 
-PROLOG  = sicstus
-PSYSTEM = 'SICStus'
-# PROLOG  = swipl
-# PSYSTEM = 'SWI-Prolog'
+PROLOG  = swipl
+PSYSTEM = 'SWI-Prolog'
+# PROLOG  = sicstus
+# PSYSTEM = 'SICStus'
 # PROLOG  = prolog
 # PSYSTEM = 'Others'
 
