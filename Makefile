@@ -49,7 +49,8 @@ compiler:
 	cp src/compiler/compiler.jar .
 
 plcafe:
-	$(JAVAC) $(JAVACOPTS) src/lang/*.java src/builtin/*/*.java \
+	$(JAVAC) $(JAVACOPTS) src/lang/*.java src/builtin/*.java \
+	target/generated-sources/prologcafe-builtin/jp/ac/kobe_u/cs/prolog/builtin/*.java \
 	src/compiler/pl2am/*.java src/compiler/am2j/*.java src/compiler/Compiler.java
 	$(JAR) $(JAROPTS) plcafe.jar jp/ac/kobe_u/cs/prolog
 

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.googlecode.prolog-cafe</groupId>
+  <artifactId>PrologCafe</artifactId>
+  <packaging>jar</packaging>
+  <version>1.3-SNAPSHOT</version>
+  <name>Prolog Cafe</name>
+
+  <build>
+    <sourceDirectory>java_src</sourceDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>clean_prolog</id>
+            <phase>clean</phase>
+            <configuration>
+              <target>
+                <exec executable="make">
+                  <arg value="realclean" />
+                </exec>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>build_prolog</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <target>
+                <exec executable="make">
+                  <arg value="plc" />
+                  <arg value="lang" />
+                  <arg value="builtin" />
+                  <arg value="compiler" />
+                </exec>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>target/generated-sources/prologcafe-builtin</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+          <debug>false</debug>
+          <optimize>true</optimize>
+          <excludes>
+            <exclude>jp/ac/kobe_u/cs/prolog/jp/**</exclude>
+            <exclude>jp/ac/kobe_u/cs/prolog/builtin/jp/**</exclude>
+            <exclude>jp/ac/kobe_u/cs/prolog/compiler/jp/**</exclude>
+            <exclude>jp/ac/kobe_u/cs/prolog/lang/jp/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <configuration>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+          <excludes>
+            <exclude>jp/ac/kobe_u/cs/prolog/compiler/am2j/**/*.java</exclude>
+            <exclude>jp/ac/kobe_u/cs/prolog/compiler/pl2am/**/*.java</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

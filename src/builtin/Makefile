@@ -14,6 +14,7 @@ JAVAC     = javac
 JAVACOPTS = -d . -Xlint -classpath $$PLCAFEDIR/lang.jar:$$CLASSPATH
 JAR       = jar
 JAROPTS   = cf
+T         = ../../target/generated-sources/prologcafe-builtin/jp/ac/kobe_u/cs/prolog/builtin
 ################################################################
 .SUFFIXES:
 .SUFFIXES: .am .pl $(SUFFIXES)
@@ -23,16 +24,15 @@ am_objects = builtins.am \
 
 .pl.am:
 	../../bin/pl2am.plc -v -O $< $@
-	-mkdir $*
-	../../bin/am2j.plc -v -d $* $@
+	-mkdir -p $(T)
+	../../bin/am2j.plc -v -d $(T) $@
 
 builtin:$(am_objects)
-	$(JAVAC) $(JAVACOPTS) */*.java
+	$(JAVAC) $(JAVACOPTS) *.java $(T)/*.java
 	$(JAR) $(JAROPTS) builtin.jar jp/ac/kobe_u/cs/prolog/builtin/
 
 clean:
-	-rm -f -r builtins
-	-rm -f -r system
+	-rm -f -r $(T)
 	-rm -f -r jp
 	-rm -f Base/core Base/*~ Base/*.class
 	-rm -f core *~ *.am *.jar *.class

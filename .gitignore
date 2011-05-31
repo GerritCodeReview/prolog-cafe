@@ -1,6 +1,11 @@
 *.jar
 *.class
 
+/.classpath
+/.project
+/.settings
+/target
+
 /bin/am2j.plc
 /bin/am2j.plj
 /bin/pl2am.plc
