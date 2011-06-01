@@ -9,8 +9,10 @@ import java.util.LinkedList;
  * @version 1.1
  */
 public class InternalDatabase implements Serializable {
+    protected static final int DEFAULT_SIZE = 100000;
+
     /** Maximum size of enties. Initial size is <code>100000</code>. */
-    protected int maxContents = 100000;
+    protected int maxContents;
 
     /** An array of <code>Term</code> entries. */
     protected Term[] buffer;
@@ -24,14 +26,13 @@ public class InternalDatabase implements Serializable {
 
     /** Constructs a new internal dababase. */
     public InternalDatabase() {
-	buffer = new Term[maxContents];
-	top = -1;
+	this(DEFAULT_SIZE);
     }
 
     /** Constructs a new internal dababase with the given size. */
     public InternalDatabase(int n) {
 	maxContents = n;
-	buffer = new Term[maxContents];
+	buffer = new Term[Math.min(maxContents, DEFAULT_SIZE)];
 	top = -1;
     }
 
@@ -51,15 +52,15 @@ public class InternalDatabase implements Serializable {
 		return i;
 	    }
 	} catch (ArrayIndexOutOfBoundsException e) {
-	    System.out.println("{expanding internal database...}");
+	    if (maxContents == buffer.length)
+	      throw new SystemException("internal database capacity reached");
 	    int len = buffer.length;
-	    Term[] new_buffer = new Term[len+10000];
+	    Term[] new_buffer = new Term[Math.min(len+10000, maxContents)];
 	    for(int i=0; i<len; i++){
 		new_buffer[i] = buffer[i];
 	    }
 	    buffer = new_buffer;
 	    buffer[top] = t;
-	    maxContents = len+20000;
 	    return top;
 	}
     }

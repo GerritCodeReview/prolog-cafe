@@ -32,6 +32,17 @@ public abstract class PrologControl {
     public boolean getEnableReflection() { return enableReflection; }
     public void setEnableReflection(boolean on) { enableReflection = on; }
 
+    public int getMaxDatabaseSize() {
+      if (engine.internalDB != null)
+        return engine.internalDB.maxContents;
+      return InternalDatabase.DEFAULT_SIZE;
+    }
+    public void setMaxDatabaseSize(int size) {
+      if (engine.aregs != null)
+        throw new IllegalStateException("Prolog already initialized");
+      engine.internalDB = new InternalDatabase(size);
+    }
+
     public int getMaxArity() { return engine.getMaxArity(); }
     public void setMaxArity(int max) {
       if (max < 8)

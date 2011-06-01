@@ -117,7 +117,6 @@ public class Prolog implements Serializable {
 	trail      = new Trail(this);
 	//	pdl        = new PushDownList();
 	pcl        = new PrologClassLoader();
-	internalDB = new InternalDatabase();
     }
 
     /** 
@@ -135,6 +134,9 @@ public class Prolog implements Serializable {
      */
     protected void initOnce() {
 	aregs      = new Term[maxArity];
+	if (internalDB == null)
+	  internalDB = new InternalDatabase();
+
 	userInput   = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
 	userOutput  = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
 	userError   = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
