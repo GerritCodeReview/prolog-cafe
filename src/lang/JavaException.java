@@ -11,7 +11,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class JavaException extends BuiltinException {
     /** A functor symbol of <code>java_error/3</code>. */
-    public static SymbolTerm JAVA_ERROR = SymbolTerm.makeSymbol("java_error", 3);
+    public static final SymbolTerm JAVA_ERROR = SymbolTerm.makeSymbol("java_error", 3);
 
     /** Holds a Java exception. */
     public Exception e;

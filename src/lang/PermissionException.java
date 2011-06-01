@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class PermissionException extends BuiltinException {
     /** A functor symbol of <code>permission_error/5</code>. */
-    public static SymbolTerm PERMISSION_ERROR = SymbolTerm.makeSymbol("permission_error", 5);
+    public static final SymbolTerm PERMISSION_ERROR = SymbolTerm.makeSymbol("permission_error", 5);
 
     /* operation ::= access | create | input | modify | open | output | reposition | new */
     /** Holds a string representation of operation. */

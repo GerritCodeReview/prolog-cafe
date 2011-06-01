@@ -8,7 +8,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class InternalException extends PrologException {
     /** A functor symbol of <code>internal_error/1</code>. */
-    public static SymbolTerm INTERNAL_ERROR = SymbolTerm.makeSymbol("internal_error", 1);
+    public static final SymbolTerm INTERNAL_ERROR = SymbolTerm.makeSymbol("internal_error", 1);
 
     /** Holds a message. */
     public String message;

@@ -7,18 +7,18 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
    @version 1.0
 */
 class PRED_$get_prolog_impl_flag_2 extends Predicate {
-    static SymbolTerm TRUE                      = SymbolTerm.makeSymbol("true");
-    static SymbolTerm FALSE                     = SymbolTerm.makeSymbol("false");
-    static SymbolTerm BOUNDED                   = SymbolTerm.makeSymbol("bounded");
-    static SymbolTerm MAX_INTEGER               = SymbolTerm.makeSymbol("max_integer");
-    static SymbolTerm MIN_INTEGER               = SymbolTerm.makeSymbol("min_integer");
-    static SymbolTerm INTEGER_ROUNDING_FUNCTION = SymbolTerm.makeSymbol("integer_rounding_function");
-    static SymbolTerm CHAR_CONVERSION           = SymbolTerm.makeSymbol("char_conversion");
-    static SymbolTerm DEBUG                     = SymbolTerm.makeSymbol("debug");
-    static SymbolTerm MAX_ARITY                 = SymbolTerm.makeSymbol("max_arity");
-    static SymbolTerm UNKNOWN                   = SymbolTerm.makeSymbol("unknown");
-    static SymbolTerm DOUBLE_QUOTES             = SymbolTerm.makeSymbol("double_quotes");
-    static SymbolTerm PRINT_STACK_TRACE         = SymbolTerm.makeSymbol("print_stack_trace");
+    private static final SymbolTerm TRUE                      = SymbolTerm.makeSymbol("true");
+    private static final SymbolTerm FALSE                     = SymbolTerm.makeSymbol("false");
+    private static final SymbolTerm BOUNDED                   = SymbolTerm.makeSymbol("bounded");
+    private static final SymbolTerm MAX_INTEGER               = SymbolTerm.makeSymbol("max_integer");
+    private static final SymbolTerm MIN_INTEGER               = SymbolTerm.makeSymbol("min_integer");
+    private static final SymbolTerm INTEGER_ROUNDING_FUNCTION = SymbolTerm.makeSymbol("integer_rounding_function");
+    private static final SymbolTerm CHAR_CONVERSION           = SymbolTerm.makeSymbol("char_conversion");
+    private static final SymbolTerm DEBUG                     = SymbolTerm.makeSymbol("debug");
+    private static final SymbolTerm MAX_ARITY                 = SymbolTerm.makeSymbol("max_arity");
+    private static final SymbolTerm UNKNOWN                   = SymbolTerm.makeSymbol("unknown");
+    private static final SymbolTerm DOUBLE_QUOTES             = SymbolTerm.makeSymbol("double_quotes");
+    private static final SymbolTerm PRINT_STACK_TRACE         = SymbolTerm.makeSymbol("print_stack_trace");
 
     public Term arg1, arg2;
 

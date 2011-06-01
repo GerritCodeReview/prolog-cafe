@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class ExistenceException extends BuiltinException {
     /** A functor symbol of <code>existence_error/5</code>. */
-    public static SymbolTerm EXISTENCE_ERROR = SymbolTerm.makeSymbol("existence_error", 5);
+    public static final SymbolTerm EXISTENCE_ERROR = SymbolTerm.makeSymbol("existence_error", 5);
 
     /* objType ::= procedure | source_sink | stream | hash */
     /** Holds a string representation of object type. */

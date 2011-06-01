@@ -12,11 +12,11 @@ import java.io.Serializable;
 public abstract class Term implements Serializable,Comparable<Term> {
 
     /** Holds an integer value <code>0</code>. */
-    public static int EQUAL  =  0;
+    public static final int EQUAL  =  0;
     /** Holds an integer value <code>1</code>. */
-    public static int AFTER  =  1;
+    public static final int AFTER  =  1;
     /** Holds an integer value <code>-1</code>. */
-    public static int BEFORE = -1;
+    public static final int BEFORE = -1;
 
     /** 
      * Checks whether the argument term is unified with this one.

@@ -8,7 +8,7 @@ import java.util.Hashtable;
    @version 1.0
 */
 class PRED_$hash_remove_first_3 extends Predicate {
-    public static SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
     public Term arg1, arg2, arg3;
 
     public PRED_$hash_remove_first_3(Term a1, Term a2, Term a3, Operation cont) {

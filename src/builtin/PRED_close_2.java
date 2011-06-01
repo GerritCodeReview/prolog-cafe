@@ -8,10 +8,10 @@ import java.io.*;
  * @version 1.0
 */
 public class PRED_close_2 extends Predicate {
-    public static SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
-    public static SymbolTerm SYM_FORCE_1 = SymbolTerm.makeSymbol("force", 1);
-    public static SymbolTerm SYM_TRUE    = SymbolTerm.makeSymbol("true");
-    public static SymbolTerm SYM_FALSE   = SymbolTerm.makeSymbol("false");
+    private static final SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
+    private static final SymbolTerm SYM_FORCE_1 = SymbolTerm.makeSymbol("force", 1);
+    private static final SymbolTerm SYM_TRUE    = SymbolTerm.makeSymbol("true");
+    private static final SymbolTerm SYM_FALSE   = SymbolTerm.makeSymbol("false");
     public Term arg1, arg2;
 
     public PRED_close_2(Term a1, Term a2, Operation cont) {

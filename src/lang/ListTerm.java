@@ -32,7 +32,7 @@ import java.util.Vector;
  */
 public class ListTerm extends Term {
     /** A functor <code>'.' /2</code>. */
-    protected static SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".", 2);
+    protected static final SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".", 2);
 
     /** Holds the first element of this <code>ListTerm</code>. */
     protected Term car;

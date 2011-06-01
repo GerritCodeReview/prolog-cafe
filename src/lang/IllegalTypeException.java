@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class IllegalTypeException extends BuiltinException {
     /** A functor symbol of <code>type_error/4</code>. */
-    public static SymbolTerm TYPE_ERROR = SymbolTerm.makeSymbol("type_error", 4);
+    public static final SymbolTerm TYPE_ERROR = SymbolTerm.makeSymbol("type_error", 4);
 
     /*
       type ::= atom | atomic | byte | callable | character | compound | evaluable |

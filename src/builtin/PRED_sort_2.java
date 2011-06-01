@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @version 1.1
  */
 public class PRED_sort_2 extends Predicate {
-    static SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
     Term arg1, arg2;
 
     public PRED_sort_2(Term a1, Term a2, Operation cont) {

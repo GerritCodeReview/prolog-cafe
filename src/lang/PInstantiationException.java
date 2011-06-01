@@ -11,7 +11,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class PInstantiationException extends BuiltinException {
     /** A functor symbol of <code>instantiation/2</code>. */
-    public static SymbolTerm INSTANTIATION_ERROR = SymbolTerm.makeSymbol("instantiation_error", 2);
+    public static final SymbolTerm INSTANTIATION_ERROR = SymbolTerm.makeSymbol("instantiation_error", 2);
 
     /** Constructs a new <code>PInstantiationException</code>. */
     public PInstantiationException(){}

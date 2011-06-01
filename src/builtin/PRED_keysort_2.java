@@ -8,8 +8,8 @@ import java.util.Arrays;
  * @version 1.1
  */
 public class PRED_keysort_2 extends Predicate {
-    static SymbolTerm SYM_HYPHEN_2 = SymbolTerm.makeSymbol("-", 2);
-    static SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_HYPHEN_2 = SymbolTerm.makeSymbol("-", 2);
+    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
     Term arg1, arg2;
 
     public PRED_keysort_2(Term a1, Term a2, Operation cont) {

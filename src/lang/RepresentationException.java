@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class RepresentationException extends BuiltinException {
     /** A functor symbol of <code>representation_error/3</code>. */
-    public static SymbolTerm REPRESENTATION_ERROR = SymbolTerm.makeSymbol("representation_error", 3);
+    public static final SymbolTerm REPRESENTATION_ERROR = SymbolTerm.makeSymbol("representation_error", 3);
 
     /*
       flag ::= character | character_code | in_character_code | 

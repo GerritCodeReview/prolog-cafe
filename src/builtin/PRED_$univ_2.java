@@ -7,8 +7,8 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
    @version 1.0
 */
 public class PRED_$univ_2 extends Predicate {
-    static SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
-    static SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
+    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
     public Term arg1, arg2;
 
     public PRED_$univ_2(Term a1, Term a2, Operation cont) {

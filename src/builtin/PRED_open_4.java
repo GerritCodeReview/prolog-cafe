@@ -8,18 +8,17 @@ import java.io.*;
    @version 1.0
 */
 public class PRED_open_4 extends Predicate {
-    public static SymbolTerm SYM_NIL         = SymbolTerm.makeSymbol("[]");
-    public static SymbolTerm SYM_TEXT        = SymbolTerm.makeSymbol("text");
-    //    public static SymbolTerm SYM_BINARY      = SymbolTerm.makeSymbol("binary");
-    public static SymbolTerm SYM_READ        = SymbolTerm.makeSymbol("read");
-    public static SymbolTerm SYM_WRITE       = SymbolTerm.makeSymbol("write");
-    public static SymbolTerm SYM_APPEND      = SymbolTerm.makeSymbol("append");
-    public static SymbolTerm SYM_INPUT       = SymbolTerm.makeSymbol("input");
-    public static SymbolTerm SYM_OUTPUT      = SymbolTerm.makeSymbol("output");
-    public static SymbolTerm SYM_ALIAS_1     = SymbolTerm.makeSymbol("alias", 1);
-    public static SymbolTerm SYM_MODE_1      = SymbolTerm.makeSymbol("mode", 1);
-    public static SymbolTerm SYM_TYPE_1      = SymbolTerm.makeSymbol("type", 1);
-    public static SymbolTerm SYM_FILE_NAME_1 = SymbolTerm.makeSymbol("file_name", 1);
+    private static final SymbolTerm SYM_NIL         = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_TEXT        = SymbolTerm.makeSymbol("text");
+    private static final SymbolTerm SYM_READ        = SymbolTerm.makeSymbol("read");
+    private static final SymbolTerm SYM_WRITE       = SymbolTerm.makeSymbol("write");
+    private static final SymbolTerm SYM_APPEND      = SymbolTerm.makeSymbol("append");
+    private static final SymbolTerm SYM_INPUT       = SymbolTerm.makeSymbol("input");
+    private static final SymbolTerm SYM_OUTPUT      = SymbolTerm.makeSymbol("output");
+    private static final SymbolTerm SYM_ALIAS_1     = SymbolTerm.makeSymbol("alias", 1);
+    private static final SymbolTerm SYM_MODE_1      = SymbolTerm.makeSymbol("mode", 1);
+    private static final SymbolTerm SYM_TYPE_1      = SymbolTerm.makeSymbol("type", 1);
+    private static final SymbolTerm SYM_FILE_NAME_1 = SymbolTerm.makeSymbol("file_name", 1);
 
     public Term arg1, arg2, arg3, arg4;
 

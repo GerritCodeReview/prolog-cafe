@@ -25,9 +25,9 @@ import java.util.StringTokenizer;
  */
 public class PrologMain {
     /** Version information */
-    public static String VERSION   = "Prolog Cafe 1.2.5 (mantis)";
+    public static final String VERSION   = "Prolog Cafe 1.2.5 (mantis)";
     /** Copyright information */
-    public static String COPYRIGHT = "Copyright(C) 1997-2009 M.Banbara and N.Tamura";
+    public static final String COPYRIGHT = "Copyright(C) 1997-2009 M.Banbara and N.Tamura";
 
     public static void main(String argv[]) {
 	BlockingPrologControl p;

@@ -7,7 +7,7 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @version 1.0
  */
 public class PRED_functor_3 extends Predicate {
-    static SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
+    private static final SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
     Term arg1, arg2, arg3;
 
     public PRED_functor_3(Term a1, Term a2, Term a3, Operation cont) {

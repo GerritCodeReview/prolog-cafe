@@ -8,7 +8,7 @@ import java.io.*;
  * @version 1.0
 */
 public class PRED_get_char_2 extends Predicate {
-    public static SymbolTerm SYM_EOF = SymbolTerm.makeSymbol("end_of_file");
+    private static final SymbolTerm SYM_EOF = SymbolTerm.makeSymbol("end_of_file");
     public Term arg1, arg2;
 
     public PRED_get_char_2(Term a1, Term a2, Operation cont) {

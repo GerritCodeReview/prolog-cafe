@@ -7,8 +7,8 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
    @version 1.0
 */
 public class PRED_new_hash_2 extends Predicate {
-    public static SymbolTerm SYM_NIL     = SymbolTerm.makeSymbol("[]");
-    public static SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
+    private static final SymbolTerm SYM_NIL     = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
     public Term arg1, arg2;
 
     public PRED_new_hash_2(Term a1, Term a2, Operation cont) {

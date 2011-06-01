@@ -9,7 +9,7 @@ import java.io.*;
    @since 1.1
 */
 public class PRED_peek_byte_2 extends Predicate {
-    public static IntegerTerm INT_EOF = new IntegerTerm(-1);
+    private static final IntegerTerm INT_EOF = new IntegerTerm(-1);
     public Term arg1, arg2;
 
     public PRED_peek_byte_2(Term a1, Term a2, Operation cont) {

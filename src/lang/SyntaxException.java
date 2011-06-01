@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class SyntaxException extends BuiltinException {
     /** A functor symbol of <code>syntax_error/5</code>. */
-    public static SymbolTerm SYNTAX_ERROR = SymbolTerm.makeSymbol("syntax_error", 5);
+    public static final SymbolTerm SYNTAX_ERROR = SymbolTerm.makeSymbol("syntax_error", 5);
 
     /** Holds a string representation of valid type. */
     public String type;

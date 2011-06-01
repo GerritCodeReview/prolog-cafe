@@ -7,11 +7,11 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
    @version 1.0
 */
 class PRED_$set_prolog_impl_flag_2 extends Predicate {
-    static SymbolTerm CHAR_CONVERSION   = SymbolTerm.makeSymbol("char_conversion");
-    static SymbolTerm DEBUG             = SymbolTerm.makeSymbol("debug");
-    static SymbolTerm UNKNOWN           = SymbolTerm.makeSymbol("unknown");
-    static SymbolTerm DOUBLE_QUOTES     = SymbolTerm.makeSymbol("double_quotes");
-    static SymbolTerm PRINT_STACK_TRACE = SymbolTerm.makeSymbol("print_stack_trace");
+    private static final SymbolTerm CHAR_CONVERSION   = SymbolTerm.makeSymbol("char_conversion");
+    private static final SymbolTerm DEBUG             = SymbolTerm.makeSymbol("debug");
+    private static final SymbolTerm UNKNOWN           = SymbolTerm.makeSymbol("unknown");
+    private static final SymbolTerm DOUBLE_QUOTES     = SymbolTerm.makeSymbol("double_quotes");
+    private static final SymbolTerm PRINT_STACK_TRACE = SymbolTerm.makeSymbol("print_stack_trace");
 
     public Term arg1, arg2;
 

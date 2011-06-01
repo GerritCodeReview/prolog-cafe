@@ -8,7 +8,7 @@ import java.io.*;
  * @version 1.0
 */
 public class PRED_get_code_2 extends Predicate {
-    public static IntegerTerm INT_EOF = new IntegerTerm(-1);
+    private static final IntegerTerm INT_EOF = new IntegerTerm(-1);
     public Term arg1, arg2;
 
     public PRED_get_code_2(Term a1, Term a2, Operation cont) {
