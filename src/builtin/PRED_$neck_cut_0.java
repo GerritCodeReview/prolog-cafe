@@ -8,23 +8,15 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
 */
 public class PRED_$neck_cut_0 extends Predicate {
 
-    public PRED_$neck_cut_0(Predicate cont) {
+    public PRED_$neck_cut_0(Operation cont) {
         this.cont = cont;
     }
-
-    public PRED_$neck_cut_0(){}
-
-    public void setArgument(Term[] args, Predicate cont) {
-        this.cont = cont;
-    }
-
-    public int arity() { return 0; }
 
     public String toString() {
         return "$neck_cut";
     }
 
-    public Predicate exec(Prolog engine) {
+    public Operation exec(Prolog engine) {
 	//        engine.setB0(); 
         engine.neckCut();
         return cont;

@@ -1,5 +1,5 @@
 package jp.ac.kobe_u.cs.prolog.lang;
-import java.util.Hashtable;
+import java.util.HashMap;
 /**
  * <code>Hashtable&lt;Term,Term&gt;</code>.<br>
  * <font color="red">This document is under construction.</font>
@@ -8,7 +8,7 @@ import java.util.Hashtable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class HashtableOfTerm extends Hashtable<Term,Term> {
+public class HashtableOfTerm extends HashMap<Term,Term> {
     public HashtableOfTerm() { 
 	super(); 
     }

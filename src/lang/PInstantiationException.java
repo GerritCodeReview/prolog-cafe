@@ -18,7 +18,7 @@ public class PInstantiationException extends BuiltinException {
 
     /** Constructs a new <code>PInstantiationException</code>
      * with the given arguments. */
-    public PInstantiationException(Predicate _goal, int _argNo) {
+    public PInstantiationException(Operation _goal, int _argNo) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
     }

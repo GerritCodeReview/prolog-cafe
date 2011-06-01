@@ -10,12 +10,12 @@ import java.io.Serializable;
 class CPFEntry implements Serializable {
     public long timeStamp;
     public Term[] args;     // argument register
-    public Predicate cont;  // continuation goal
-    public Predicate bp;    // next cluase
+    public Operation cont;  // continuation goal
+    public Operation bp;    // next cluase
     public int tr;          // trail pointer
     public int b0;          // cut point
 
-    protected CPFEntry(Term[] args, Predicate cont){
+    protected CPFEntry(Term[] args, Operation cont){
 	this.args = args;
 	this.cont = cont;
     }
@@ -85,7 +85,7 @@ public class CPFStack implements Serializable {
      * @param args <em>arguments</em>
      * @param p a <em>continuation goal</em>
      */
-    public void create(Term[] args, Predicate p){
+    public void create(Term[] args, Operation p){
 	try {
 	    buffer[++top] = new CPFEntry(args, p);
 	} catch (ArrayIndexOutOfBoundsException e) {
@@ -138,7 +138,7 @@ public class CPFStack implements Serializable {
     public Term[] getArgs() { return buffer[top].args; }
 
     /** Returns the <em>continuation goal</em> of current choice point frame. */
-    public Predicate getCont() { return buffer[top].cont; }
+    public Operation getCont() { return buffer[top].cont; }
 
     /** Returns the <em>time stamp</em> of current choice point frame. */
     public long getTimeStamp() { return buffer[top].timeStamp; }
@@ -146,9 +146,9 @@ public class CPFStack implements Serializable {
     public void setTimeStamp(long t) { buffer[top].timeStamp = t; }
     
     /** Returns the <em>next clause</em> of current choice point frame. */
-    public Predicate getBP() { return buffer[top].bp; }
+    public Operation getBP() { return buffer[top].bp; }
     /** Sets the <em>next clause</em> of current choice point frame. */
-    public void setBP(Predicate p) { buffer[top].bp = p; }
+    public void setBP(Operation p) { buffer[top].bp = p; }
 
     /** Returns the <em>trail pointer</em> of current choice point frame. */
     public int getTR() { return buffer[top].tr; }

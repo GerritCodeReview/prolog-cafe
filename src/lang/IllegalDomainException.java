@@ -36,7 +36,7 @@ public class IllegalDomainException extends BuiltinException {
 
     /** Constructs a new <code>IllegalDomainException</code> 
      * with the given arguments. */
-    public IllegalDomainException(Predicate _goal, int _argNo, String _domain, Term _culprit) {
+    public IllegalDomainException(Operation _goal, int _argNo, String _domain, Term _culprit) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
 	domain    = _domain;

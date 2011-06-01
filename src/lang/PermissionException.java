@@ -32,7 +32,7 @@ public class PermissionException extends BuiltinException {
 
     /** Constructs a new <code>PermissionException</code>
      * with the given arguments. */
-    public PermissionException(Predicate _goal, 
+    public PermissionException(Operation _goal, 
 			       String _operation, 
 			       String _permissionType, 
 			       Term _culprit, 

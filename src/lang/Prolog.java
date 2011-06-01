@@ -1,5 +1,5 @@
 package jp.ac.kobe_u.cs.prolog.lang;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.io.*;
 /**
  * Prolog engine.
@@ -14,7 +14,7 @@ public class Prolog implements Serializable {
     /** Argument registers */
     public Term[] aregs;
     /** Continuation goal register */
-    public Predicate cont;
+    public Operation cont;
     /** Choice point frame stack */
     public CPFStack stack;
     /** Trail stack */
@@ -72,7 +72,7 @@ public class Prolog implements Serializable {
     protected long previousRuntime;
 
     /** Hashtable for creating a copy of term. */
-    protected Hashtable<VariableTerm,VariableTerm> copyHash;
+    protected HashMap<VariableTerm,VariableTerm> copyHash;
 
     /** The size of the pushback buffer used for creating input streams. */
     public static final int PUSHBACK_SIZE = 3;
@@ -141,7 +141,7 @@ public class Prolog implements Serializable {
 	userOutput  = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
 	userError   = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
 
-	copyHash      = new Hashtable<VariableTerm,VariableTerm>();
+	copyHash      = new HashMap<VariableTerm,VariableTerm>();
 	hashManager   = new HashtableOfTerm();
 	streamManager = new HashtableOfTerm();
 
@@ -171,7 +171,7 @@ public class Prolog implements Serializable {
 	stack.create(noarg, null);
 	stack.setTR(trail.top());
 	stack.setTimeStamp(++CPFTimeStamp);
-	stack.setBP(new Failure(control));
+	stack.setBP(Failure.FAILURE);
 	stack.setB0(B0);
 
 	exceptionRaised = 0;
@@ -255,7 +255,7 @@ public class Prolog implements Serializable {
      * This method restores the value of <code>B0</code>
      * and returns the backtrak point in current choice point.
      */
-    public Predicate fail() {
+    public Operation fail() {
 	B0 = stack.getB0();     // restore B0
 	return stack.getBP();   // execute next clause
     }
@@ -269,12 +269,12 @@ public class Prolog implements Serializable {
      * variable, integer, float,
      * atom, compound term, or non-empty list, respectively.
      */
-    public Predicate switch_on_term(Predicate var, 
-				    Predicate Int, 
-				    Predicate flo,
-				    Predicate con, 
-				    Predicate str, 
-				    Predicate lis) {
+    public Operation switch_on_term(Operation var, 
+				    Operation Int, 
+				    Operation flo,
+				    Operation con, 
+				    Operation str, 
+				    Operation lis) {
 	Term arg1 = aregs[1].dereference();
 	if (arg1.isVariable())
 	    return var;
@@ -308,7 +308,7 @@ public class Prolog implements Serializable {
      * If there is no mapping for the key of <code>areg[1]</code>, 
      * this returns <code>otherwise</code>.
      */
-    public Predicate switch_on_hash(Hashtable<Term,Predicate> hash, Predicate otherwise) {
+    public Operation switch_on_hash(HashMap<Term,Operation> hash, Operation otherwise) {
 	Term arg1 = aregs[1].dereference();
 	Term key;
 	if (arg1.isInteger() || arg1.isDouble() || arg1.isSymbol()) {
@@ -318,7 +318,7 @@ public class Prolog implements Serializable {
 	} else {
 	    throw new SystemException("Invalid argument in switch_on_hash");
 	}
-	Predicate p = hash.get(key);
+	Operation p = hash.get(key);
 	if (p != null)
 	    return p;
 	else 
@@ -334,10 +334,9 @@ public class Prolog implements Serializable {
     }
 
     /** Creates a new choice point frame. */
-    public Predicate jtry(Predicate p, Predicate next) {
-	int i = p.arity();
-	Term[] args = new Term[i];
-	System.arraycopy(aregs, 1, args, 0, i);
+    public Operation jtry(int arity, Operation p, Operation next) {
+	Term[] args = new Term[arity];
+	System.arraycopy(aregs, 1, args, 0, arity);
 	stack.create(args, cont);
 	stack.setTR(trail.top());
 	stack.setTimeStamp(++CPFTimeStamp);
@@ -351,7 +350,7 @@ public class Prolog implements Serializable {
      * updates its next clause field to <code>next</code>,
      * and then returns <code>p</code>.
      */
-    public Predicate retry(Predicate p, Predicate next) {
+    public Operation retry(Operation p, Operation next) {
 	restore();
 	trail.unwind(stack.getTR());
 	stack.setBP(next);
@@ -362,7 +361,7 @@ public class Prolog implements Serializable {
      * Resets all necessary information from the current choice point frame,
      * discard it, and then returns <code>p</code>.
      */
-    public Predicate trust(Predicate p) {
+    public Operation trust(Operation p) {
 	restore();
 	trail.unwind(stack.getTR());
 	stack.delete();

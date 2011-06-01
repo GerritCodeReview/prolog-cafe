@@ -11,7 +11,7 @@ public class BuiltinException extends PrologException {
     Term message;
 
     /** Holds the goal in which this exception occurs. */
-    public Predicate goal = null;
+    public Operation goal = null;
 
     /** Holds the arity of goal in which this exception occurs. */
     public int argNo = 0;

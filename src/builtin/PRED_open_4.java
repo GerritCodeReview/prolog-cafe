@@ -23,7 +23,7 @@ public class PRED_open_4 extends Predicate {
 
     public Term arg1, arg2, arg3, arg4;
 
-    public PRED_open_4(Term a1, Term a2, Term a3, Term a4, Predicate cont) {
+    public PRED_open_4(Term a1, Term a2, Term a3, Term a4, Operation cont) {
         arg1 = a1;
         arg2 = a2;
         arg3 = a3;
@@ -31,23 +31,11 @@ public class PRED_open_4 extends Predicate {
         this.cont = cont;
     }
 
-    public PRED_open_4(){}
-
-    public void setArgument(Term[] args, Predicate cont) {
-        arg1 = args[0];
-        arg2 = args[1];
-        arg3 = args[2];
-        arg4 = args[3];
-        this.cont = cont;
-    }
-
-    public int arity() { return 4; }
-
     public String toString() {
         return "open(" + arg1 + "," + arg2 + "," + arg3 + "," + arg4 + ")";
     }
 
-    public Predicate exec(Prolog engine) {
+    public Operation exec(Prolog engine) {
         engine.setB0();
 	File file;
 	Term alias = null;

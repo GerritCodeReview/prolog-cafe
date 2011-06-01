@@ -33,7 +33,7 @@ public class IllegalTypeException extends BuiltinException {
 
     /** Constructs a new <code>IllegalTypeException</code> 
      * with the given arguments. */
-    public IllegalTypeException(Predicate _goal, int _argNo, String _type, Term _culprit) {
+    public IllegalTypeException(Operation _goal, int _argNo, String _type, Term _culprit) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
 	type    = _type;

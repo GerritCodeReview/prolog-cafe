@@ -23,7 +23,7 @@ public class EvaluationException extends BuiltinException {
     }
 
     /** Constructs a new <code>EvaluationException</code> with the given arguments. */
-    public EvaluationException(Predicate _goal, int _argNo, String _errorType) {
+    public EvaluationException(Operation _goal, int _argNo, String _errorType) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
 	errorType    = _errorType;

@@ -22,7 +22,7 @@ public class JavaException extends BuiltinException {
     }
 
     /** Constructs a new <code>JavaException</code> with the given arguments. */
-    public JavaException(Predicate _goal, int _argNo, Exception _e) {
+    public JavaException(Operation _goal, int _argNo, Exception _e) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
 	e = _e;

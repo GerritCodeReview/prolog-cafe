@@ -10,24 +10,15 @@ import java.lang.reflect.*;
 public class PRED_java_declared_constructor0_2 extends JavaPredicate {
     Term arg1, arg2;
 
-    public PRED_java_declared_constructor0_2(Term a1, Term a2, Predicate cont) {
+    public PRED_java_declared_constructor0_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;
 	this.cont = cont;
     }
-    public PRED_java_declared_constructor0_2() {}
-
-    public void setArgument(Term[] args, Predicate cont){
-	arg1 = args[0];
-	arg2 = args[1];
-	this.cont = cont;
-    }
-
-    public int arity() { return 2; }
 
     public String toString() { return "java_declared_constructor0(" + arg1 + "," + arg2 + ")"; }
 
-    public Predicate exec(Prolog engine) {
+    public Operation exec(Prolog engine) {
         engine.setB0();
         if (!engine.control.getEnableReflection())
           throw new PermissionException(this, "reflection", "call", arg1, "disabled");

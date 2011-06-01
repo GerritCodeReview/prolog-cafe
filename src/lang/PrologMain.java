@@ -31,9 +31,7 @@ public class PrologMain {
 
     public static void main(String argv[]) {
 	BlockingPrologControl p;
-	Predicate code;
 	String goal;
-	Class clazz;
 	try {
 	    System.err.println("\n" + VERSION); 
 	    System.err.println(COPYRIGHT);
@@ -41,24 +39,16 @@ public class PrologMain {
 		usage();
 		System.exit(999);
 	    } 
-	    clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.builtin",
-								 "initialization",
-								 2,
-								 true);
 	    Term arg1 = Prolog.Nil;
 	    arg1 = new ListTerm(SymbolTerm.makeSymbol("user"), arg1);
 	    arg1 = new ListTerm(SymbolTerm.makeSymbol("jp.ac.kobe_u.cs.prolog.builtin"), arg1);
-	    //	    arg1 = new ListTerm(SymbolTerm.makeSymbol("jp.ac.kobe_u.cs.prolog.compiler.pl2am"), arg1);
-	    //	    arg1 = new ListTerm(SymbolTerm.makeSymbol("jp.ac.kobe_u.cs.prolog.compiler.am2j"), arg1);
 	    Term arg2 = parseAtomicGoal(argv[0]);
 	    if (arg2  == null) {
 		usage();
 		System.exit(1);
 	    }
-	    Term[] args = {arg1, arg2};
-	    code = (Predicate)(clazz.newInstance());
 	    p = new BlockingPrologControl();
-	    p.setPredicate(code, args);
+	    p.setPredicate("jp.ac.kobe_u.cs.prolog.builtin", "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);
 	} catch (Exception e){

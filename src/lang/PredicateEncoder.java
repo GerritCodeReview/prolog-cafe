@@ -51,10 +51,7 @@ public class PredicateEncoder {
 	}
 	m.appendTail(sb);
 	x = sb.toString();
-	if (pkg.equals("user"))
-	    return "PRED_" + x + "_" + arity;
-	else
-	    return pkg + ".PRED_" + x + "_" + arity;
+	return pkg + ".PRED_" + x + "_" + arity;
     }
 
     /**

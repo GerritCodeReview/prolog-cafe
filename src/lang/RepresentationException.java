@@ -25,7 +25,7 @@ public class RepresentationException extends BuiltinException {
     }
 
     /** Constructs a new <code>RepresentationException</code> with the given arguments. */
-    public RepresentationException(Predicate _goal, int _argNo, String _flag) {
+    public RepresentationException(Operation _goal, int _argNo, String _flag) {
 	this.goal    = _goal;
 	this.argNo   = _argNo;
 	flag    = _flag;

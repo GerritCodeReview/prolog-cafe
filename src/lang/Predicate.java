@@ -1,29 +1,27 @@
 package jp.ac.kobe_u.cs.prolog.lang;
-import java.io.Serializable;
+
 /**
- * The superclass of classes for predicates.
- * The subclasses of <code>Predicate</code> must override
- * the <code>exec</code> and <code>arity</code> methods.
- *
- * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
- * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
- * @version 1.0
+ * Superclass of any predicate's implementation class.
+ * <p>
+ * Concrete implementations must provide a definition of the Operation's
+ * {@link Operation#exec(Prolog)} method. On a successful execution the
+ * method must return {@link #cont}.
+ * <p>
+ * To be compatible with the {@code am2j} compiler implementations must
+ * define a constructor matching the signature:
+ * <pre>
+ *   public ClassName(Term arg1, Term arg2, ..., Operation cont) {
+ *     // save arg1, arg2
+ *     this.cont = cont;
+ *   }
+ * </pre>
  */
-public abstract class Predicate implements Serializable {
-    /** Holds a continuation goal */
-    public Predicate cont = null;
-
-    /** 
-     * Executes this predicate and returns a continuation goal.
-     * @param engine current Prolog engine
-     * @exception PrologException if a Prolog exception is raised.
-     * @see Prolog
-     */
-    public abstract Predicate exec(Prolog engine) throws PrologException;
-
-    /** Returns the arity of this predicate. */
-    public abstract int arity();
-
-    /** Sets the specified arguments and continuation goal. */
-    public void setArgument(Term[] args, Predicate cont){}
+public abstract class Predicate extends Operation {
+  /**
+   * Holds the continuation goal of this predicate.
+   * <p>
+   * In a Prolog program this is the next operation to perform if this operation
+   * was executed successfully.
+   */
+  public Operation cont;
 }

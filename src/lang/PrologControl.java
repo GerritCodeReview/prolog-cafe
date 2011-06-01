@@ -1,5 +1,4 @@
 package jp.ac.kobe_u.cs.prolog.lang;
-import java.io.Serializable;
 /**
  * Tracks current evaluation goal and results.
  * <p>
@@ -17,7 +16,7 @@ public abstract class PrologControl {
     protected Prolog engine;
 
     /** Holds a Prolog goal to be executed. */
-    protected Predicate code;
+    protected Operation code;
 
     /** Should Java reflection be permitted. */
     private boolean enableReflection;
@@ -67,24 +66,25 @@ public abstract class PrologControl {
      * An initial continuation goal (a <code>Success</code> object)
      * is set to the <code>cont</code> field of goal <code>p</code> as continuation.
      */
-    public void setPredicate(Predicate p, Term[] args) {
-	code = p;
-	code.setArgument(args, new Success(this));
+    public void setPredicate(Predicate p) {
+      p.cont = Success.SUCCESS;
+      code = p;
     }
 
     /** Sets a goal <code>call(t)</code> to this Prolog thread. 
      * An initial continuation goal (a <code>Success</code> object)
+     * is set to the <code>cont</code> field of goal <code>p</code> as continuation.
+     */
+    public void setPredicate(String pkg, String functor, Term... args) {
+      setPredicate(getPrologClassLoader().predicate(pkg, functor, args));
+    }
+
+    /** Sets a goal <code>call(t)</code> to this Prolog thread.
+     * An initial continuation goal (a <code>Success</code> object)
      * is set to the <code>cont</code> field of <code>call(t)</code> as continuation.
      */
     public void setPredicate(Term t)  {
-	try {
-	    Class clazz = getPrologClassLoader().loadPredicateClass("jp.ac.kobe_u.cs.prolog.builtin", "call", 1, true);
-	    Term[] args = {engine.copy(t)};
-	    code = (Predicate)(clazz.newInstance());
-	    code.setArgument(args, new Success(this));
-	} catch (Exception e){
-	    e.printStackTrace();
-	}
+      setPredicate("jp.ac.kobe_u.cs.prolog.builtin", "call", t);
     }
 
     /**

@@ -32,7 +32,7 @@ public class ExistenceException extends BuiltinException {
 
     /** Constructs a new <code>ExistenceException</code> 
      * with the given arguments. */
-    public ExistenceException(Predicate _goal, int _argNo, String _objType, Term _culprit, String _message) {
+    public ExistenceException(Operation _goal, int _argNo, String _objType, Term _culprit, String _message) {
 	this.goal  = _goal;
 	this.argNo = _argNo;
 	objType    = _objType;

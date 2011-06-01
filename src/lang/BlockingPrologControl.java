@@ -129,9 +129,24 @@ public class BlockingPrologControl
    * if the goal succeeds, <code>false</code> otherwise.
    * @see #run
    */
-  public synchronized boolean execute(Predicate p, Term[] args) {
-  code = p;
-  code.setArgument(args, new Success(this));
+  public synchronized boolean execute(String pkg, String functor, Term... args) {
+    return execute(getPrologClassLoader().predicate(pkg, functor, args));
+  }
+
+  /**
+   * Returns <code>true</code> if the system succeeds to find a first solution
+   * of the given goal, <code>false</code> otherwise.<br>
+   *
+   * This method is useful to find only one solution.<br>
+   *
+   * This method first initilizes the Prolog engine by invoking <code>engine.init()</code>,
+   * allocates a new <code>Thread</code> object, and start the execution of the given goal.
+   * And then it stops the thread and returns <code>true</code>
+   * if the goal succeeds, <code>false</code> otherwise.
+   * @see #run
+   */
+  public synchronized boolean execute(Predicate p) {
+  setPredicate(p);
   thread = new Thread(this);
   thread.start(); // execute run() in new thread.
   try {

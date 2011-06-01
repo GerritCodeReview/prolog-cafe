@@ -10,26 +10,16 @@ import java.lang.reflect.*;
 public class PRED_java_method0_3 extends JavaPredicate {
     Term arg1, arg2, arg3;
 
-    public PRED_java_method0_3() {}
-    public PRED_java_method0_3(Term a1, Term a2, Term a3, Predicate cont) {
+    public PRED_java_method0_3(Term a1, Term a2, Term a3, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;
 	arg3 = a3;
 	this.cont = cont;
     }
 
-    public void setArgument(Term[] args, Predicate cont){
-	arg1 = args[0];
-	arg2 = args[1];
-	arg3 = args[2];
-	this.cont = cont;
-    }
-
-    public int arity() { return 3; }
-
     public String toString() { return "java_method0(" + arg1 + "," + arg2 + "," + arg3 + ")"; }
 
-    public Predicate exec(Prolog engine) {
+    public Operation exec(Prolog engine) {
         engine.setB0();
         if (!engine.control.getEnableReflection())
           throw new PermissionException(this, "reflection", "call", arg1, "disabled");

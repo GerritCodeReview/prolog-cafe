@@ -6,20 +6,12 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.2
  */
-public class Failure extends Predicate {
-    /** Prolog thread that this <code>Failure</code> belongs to. */
-    public PrologControl c;
+public class Failure extends Operation {
+    public static final Failure FAILURE = new Failure();
+    private Failure() {}
 
-    /** Constructs a new initial backtrak point. */
-    public Failure(){}
-
-    /** Constructs a new initial backtrak point with given Prolog thread. */
-    public Failure(PrologControl c) {
-	this.c = c;
-    }
-
-    public Predicate exec(Prolog engine) {
-	c.fail();
+    public Operation exec(Prolog engine) {
+	engine.control.fail();
 	engine.exceptionRaised = 1; // halt
 	return null;
     }
@@ -27,7 +19,12 @@ public class Failure extends Predicate {
     /** Returns a string representation of this <code>Failure</code>. */
     public String toString(){ return "Failure"; }
 
-    /** Returns <code>0</code>. */
-    public int arity() { return 0; }
+    public static final Operation FAIL_0 = new PRED_fail_0();
+    private static final class PRED_fail_0 extends Operation {
+      @Override
+      public Operation exec(Prolog engine) throws PrologException {
+        engine.setB0();
+        return engine.fail();
+      }
+    }
 }
-

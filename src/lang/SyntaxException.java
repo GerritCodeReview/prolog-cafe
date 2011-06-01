@@ -30,7 +30,7 @@ public class SyntaxException extends BuiltinException {
     }
 
     /** Constructs a new <code>SyntaxException</code> with the given arguments. */
-    public SyntaxException(Predicate _goal, int _argNo, String _type, Term _culprit, String _message) {
+    public SyntaxException(Operation _goal, int _argNo, String _type, Term _culprit, String _message) {
 	this.goal  = _goal;
 	this.argNo = _argNo;
 	type       = _type;

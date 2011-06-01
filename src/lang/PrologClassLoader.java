@@ -60,4 +60,48 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
     public Class findClass(String name) throws ClassNotFoundException {
 	throw new ClassNotFoundException();
     }
+
+  /**
+   * Allocate a predicate and configure it with the specified arguments.
+   *
+   * @param pkg package the predicate is in.
+   * @param functor name of the predicate.
+   * @param args arguments to pass. The arity is derived from the arguments.
+   * @return the predicate encapsulating the logic and the arguments.
+   */
+  public Predicate predicate(String pkg, String functor, Term... args) {
+    return predicate(pkg, functor, Success.SUCCESS, args);
+  }
+
+  /**
+   * Allocate a predicate and configure it with the specified arguments.
+   *
+   * @param pkg package the predicate is in.
+   * @param functor name of the predicate.
+   * @param cont operation to execute if the predicate is successful. Usually
+   *        this is {@link Success#SUCCESS}.
+   * @param args arguments to pass. The arity is derived from the arguments.
+   * @return the predicate encapsulating the logic and the arguments.
+   */
+  public Predicate predicate(String pkg, String functor, Operation cont, Term... args) {
+    int arity = args.length;
+    try {
+      Class<Predicate> clazz = loadPredicateClass(pkg, functor, arity, true);
+
+      Class[] params = new Class[arity + 1];
+      for (int i = 0; i < arity; i++)
+        params[i] = Term.class;
+      params[arity] = Operation.class;
+
+      Object[] a = new Object[arity + 1];
+      for (int i = 0; i < arity; i++)
+        a[i] = args[i];
+      a[arity] = cont;
+      return (Predicate) clazz.getDeclaredConstructor(params).newInstance(a);
+    } catch (Exception err) {
+      SymbolTerm slash2 = SymbolTerm.makeSymbol("/", 2);
+      Term[] fa = {SymbolTerm.makeSymbol(functor), new IntegerTerm(arity)};
+      throw new ExistenceException("procedure", new StructureTerm(slash2, fa), err.toString());
+    }
+  }
 }

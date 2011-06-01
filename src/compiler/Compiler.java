@@ -113,15 +113,9 @@ public class Compiler {
 		op = new ListTerm(SymbolTerm.makeSymbol("idx"), op);
 	    if (generateClosure)
 		op = new ListTerm(SymbolTerm.makeSymbol("clo"), op);
-	    Term[] args = {new ListTerm(prolog, new ListTerm(wam, new ListTerm(op, Prolog.Nil)))};
-	    // Create predicate
-	    Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am", 1, true);
-	    Predicate code = (Predicate)(clazz.newInstance());
-	    // Translate Prolog into WAM
-	    BlockingPrologControl p = new BlockingPrologControl();
-	    p.setPredicate(code, args);
-	    //	    System.out.println(code);
-	    return p.execute(code, args);
+	    BlockingPrologControl ctl = new BlockingPrologControl();
+	    return ctl.execute("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am",
+	      new ListTerm(prolog, new ListTerm(wam, new ListTerm(op, Prolog.Nil))));
 	} catch (Exception e){
 	    e.printStackTrace();
 	}
@@ -149,16 +143,9 @@ public class Compiler {
 	    // Create arguments
 	    Term wam    = SymbolTerm.makeSymbol(_wam);
 	    Term dir    = SymbolTerm.makeSymbol(_dir);
-	    Term[] args = {new ListTerm(wam, new ListTerm(dir, Prolog.Nil))};
-	    // Create predicate
-	    //	    Class clazz = PredicateEncoder.getClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1);
-	    Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1, true);
-	    Predicate code = (Predicate)(clazz.newInstance());
-	    // Translate WAM into Java
-	    BlockingPrologControl p = new BlockingPrologControl();
-	    p.setPredicate(code, args);
-	    //	    System.out.println(code);
-	    return p.execute(code, args);
+	    BlockingPrologControl ctl = new BlockingPrologControl();
+	    return ctl.execute("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j",
+	      new ListTerm(wam, new ListTerm(dir, Prolog.Nil)));
 	} catch (Exception e){
 	    e.printStackTrace();
 	}

@@ -8,17 +8,9 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class Success extends Predicate {
-    /** Prolog thread that this <code>Success</code> belongs to. */
-    public PrologControl c;
-
-    /** Constructs a new initial continuation goal. */
-    public Success(){}
-
-    /** Constructs a new initial continuation goal with given Prolog thread. */
-    public Success(PrologControl c) {
-	this.c = c;
-    }
+public class Success extends Operation {
+    public static final Success SUCCESS = new Success();
+    private Success() {}
 
     /**
      * Backtracks and returns a next clause
@@ -26,15 +18,11 @@ public class Success extends Predicate {
      * @param engine Prolog engine
      * @see PrologControl#success
      */
-    public Predicate exec(Prolog engine) {
-	c.success();
+    public Operation exec(Prolog engine) {
+	engine.control.success();
 	return engine.fail();
     }
 
     /** Returns a string representation of this <code>Success</code>. */
     public String toString(){ return "Success"; }
-
-    /** Returns <code>0</code>. */
-    public int arity() { return 0; }
 }
-
