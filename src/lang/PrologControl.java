@@ -19,11 +19,18 @@ public abstract class PrologControl {
     /** Holds a Prolog goal to be executed. */
     public Predicate code;
 
+    /** Should Java reflection be permitted. */
+    private boolean enableReflection;
+
     /** Constructs a new <code>PrologControl</code>. */
     public PrologControl() {
 	engine = new Prolog(this);
 	code = null;
+	enableReflection = true;
     }
+
+    public boolean getEnableReflection() { return enableReflection; }
+    public void setEnableReflection(boolean on) { enableReflection = on; }
 
     /** Sets a goal and its arguments to this Prolog thread. 
      * An initial continuation goal (a <code>Success</code> object)

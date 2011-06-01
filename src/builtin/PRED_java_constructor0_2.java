@@ -29,6 +29,9 @@ public class PRED_java_constructor0_2 extends JavaPredicate {
 
     public Predicate exec(Prolog engine) {
         engine.setB0();
+        if (!engine.control.getEnableReflection())
+          throw new PermissionException(this, "reflection", "call", arg1, "disabled");
+
 	Term a1, a2;
 	a1 = arg1;
 	a2 = arg2;
