@@ -12,6 +12,7 @@ public class Prolog implements Serializable {
     /** Prolog thread */
     public PrologControl control;
     /** Argument registers */
+    public Term areg1, areg2, areg3, areg4, areg5, areg6, areg7, areg8;
     public Term[] aregs;
     /** Continuation goal register */
     public Operation cont;
@@ -131,7 +132,7 @@ public class Prolog implements Serializable {
      * </ul>
      */
     protected void initOnce() {
-	aregs      = new Term[maxArity];
+	aregs = new Term[Math.max(0, maxArity - 8)];
 	if (pcl == null)
 	  pcl = new PrologClassLoader();
 	if (internalDB == null)
@@ -167,8 +168,7 @@ public class Prolog implements Serializable {
 	CPFTimeStamp = Long.MIN_VALUE;
 
 	// Creates an initial choice point frame.
-	Term[] noarg = {};
-	stack.create(noarg, null);
+	stack.push(CPFEntry.S0(null));
 	stack.setTR(trail.top());
 	stack.setTimeStamp(++CPFTimeStamp);
 	stack.setBP(Failure.FAILURE);
@@ -275,7 +275,7 @@ public class Prolog implements Serializable {
 				    Operation con, 
 				    Operation str, 
 				    Operation lis) {
-	Term arg1 = aregs[1].dereference();
+	Term arg1 = areg1.dereference();
 	if (arg1.isVariable())
 	    return var;
 	if (arg1.isInteger())
@@ -309,7 +309,7 @@ public class Prolog implements Serializable {
      * this returns <code>otherwise</code>.
      */
     public Operation switch_on_hash(HashMap<Term,Operation> hash, Operation otherwise) {
-	Term arg1 = aregs[1].dereference();
+	Term arg1 = areg1.dereference();
 	Term key;
 	if (arg1.isInteger() || arg1.isDouble() || arg1.isSymbol()) {
 	    key = arg1;
@@ -327,22 +327,30 @@ public class Prolog implements Serializable {
 
     /** Restores the argument registers and continuation goal register from the current choice point frame. */
     public void restore() {
-	Term[] args = stack.getArgs();
-	int i = args.length;
-	System.arraycopy(args, 0, aregs, 1, i);
-	cont = stack.getCont();
+      stack.restore();
     }
 
     /** Creates a new choice point frame. */
+    public Operation jtry0(Operation p, Operation next) { return finishjtry(p, next, CPFEntry.S0(cont)); }
+    public Operation jtry1(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S1(this)); }
+    public Operation jtry2(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S2(this)); }
+    public Operation jtry3(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S3(this)); }
+    public Operation jtry4(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S4(this)); }
+    public Operation jtry5(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S5(this)); }
+    public Operation jtry6(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S6(this)); }
+    public Operation jtry7(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S7(this)); }
+    public Operation jtry8(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S8(this)); }
     public Operation jtry(int arity, Operation p, Operation next) {
-	Term[] args = new Term[arity];
-	System.arraycopy(aregs, 1, args, 0, arity);
-	stack.create(args, cont);
-	stack.setTR(trail.top());
-	stack.setTimeStamp(++CPFTimeStamp);
-	stack.setBP(next);
-	stack.setB0(B0);
-	return p;
+	return finishjtry(p, next, new CPFEntry.S9(arity, this));
+    }
+
+    private Operation finishjtry(Operation p, Operation next, CPFEntry entry) {
+      stack.push(entry);
+      stack.setTR(trail.top());
+      stack.setTimeStamp(++CPFTimeStamp);
+      stack.setBP(next);
+      stack.setB0(B0);
+      return p;
     }
 
     /** 

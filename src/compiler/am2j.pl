@@ -473,7 +473,12 @@ write_java0(get_str(_F/A,Xi,Xj), In, Out) :- !,
 write_java0(try(Li,Lj), _, Out) :- !, 
 	clause(current_arity(A), _),
 	tab(Out, 8),
-	write(Out, 'return engine.jtry('), write(Out, A), write(Out, ', '),
+	write(Out, 'return engine.jtry'),
+	( A =< 8 ->
+		write(Out, A), write(Out, '(')
+		;
+		write(Out, '('), write(Out, A), write(Out, ', ')
+	),
 	write_index(Li, Out), 
 	write(Out, ', '),
 	write_index(Lj, Out),
@@ -1084,7 +1089,15 @@ write_reg(X, _) :- var(X), !,
 	am2j_error([register,expression,must,not,be,unbound,variable]),
 	fail.
 write_reg(void,   Out) :- !, write(Out, 'new VariableTerm(engine)').
-write_reg(ea(X),  Out) :- !, write(Out, 'engine.aregs['), write(Out, X), write(Out, ']').
+write_reg(ea(1),  Out) :- !, write(Out, 'engine.areg1').
+write_reg(ea(2),  Out) :- !, write(Out, 'engine.areg2').
+write_reg(ea(3),  Out) :- !, write(Out, 'engine.areg3').
+write_reg(ea(4),  Out) :- !, write(Out, 'engine.areg4').
+write_reg(ea(5),  Out) :- !, write(Out, 'engine.areg5').
+write_reg(ea(6),  Out) :- !, write(Out, 'engine.areg6').
+write_reg(ea(7),  Out) :- !, write(Out, 'engine.areg7').
+write_reg(ea(8),  Out) :- !, write(Out, 'engine.areg8').
+write_reg(ea(X),  Out) :- !, write(Out, 'engine.aregs['), Y is X - 9, write(Out, Y), write(Out, ']').
 write_reg(econt,  Out) :- !, write(Out, 'engine.cont').
 write_reg(arg(X), Out) :- !, write(Out, arg), write(Out, X).
 write_reg(a(X),   Out) :- !, write(Out, a), write(Out, X).
