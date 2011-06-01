@@ -352,6 +352,8 @@ public class BlockingPrologControl
   public void run() {
     try {
       executePredicate();
+  } catch (JavaInterruptedException e) {
+     System.exit(1);
   } catch (PrologException e){
       if (engine.getPrintStackTrace().equals("on"))
       e.printStackTrace();

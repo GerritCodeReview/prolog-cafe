@@ -40,7 +40,7 @@ class PRED_$print_stack_trace_1 extends Predicate {
 	    throw new IllegalTypeException(this, 1, "java", a1);
 	Object obj = ((JavaObjectTerm) a1).object();
 	if (obj instanceof InterruptedException)
-	    System.exit(1);
+	    throw new JavaInterruptedException((InterruptedException) obj);
 	if (engine.getPrintStackTrace().equals("on"))
 	    ((Exception) obj).printStackTrace();
         return cont;

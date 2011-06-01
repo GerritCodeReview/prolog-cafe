@@ -82,8 +82,10 @@ public abstract class PrologControl {
      * invocation to {@link #success()} or {@link #fail()}.
      *
      * @throws PrologException
+     * @throws JavaInterruptedException
      */
-    protected void executePredicate() throws PrologException {
+    protected void executePredicate()
+      throws PrologException, JavaInterruptedException {
 	    engine.init();
 	    main_loop:while(true) {
 		while (engine.exceptionRaised == 0) {
