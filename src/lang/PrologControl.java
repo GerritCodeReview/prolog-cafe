@@ -106,4 +106,9 @@ public abstract class PrologControl {
 		}
 	    }
     }
+
+    /** @param err stack trace to print (or log). */
+    public void printStackTrace(Throwable err) {
+      err.printStackTrace();
+    }
 }

@@ -356,11 +356,11 @@ public class BlockingPrologControl
      System.exit(1);
   } catch (PrologException e){
       if (engine.getPrintStackTrace().equals("on"))
-      e.printStackTrace();
+      printStackTrace(e);
       else
       System.out.println(e.toString());
   } catch (Exception e){
-      e.printStackTrace();
+      printStackTrace(e);
   }
   stop();
   }

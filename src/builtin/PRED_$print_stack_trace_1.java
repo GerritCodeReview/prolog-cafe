@@ -42,7 +42,7 @@ class PRED_$print_stack_trace_1 extends Predicate {
 	if (obj instanceof InterruptedException)
 	    throw new JavaInterruptedException((InterruptedException) obj);
 	if (engine.getPrintStackTrace().equals("on"))
-	    ((Exception) obj).printStackTrace();
+	    engine.control.printStackTrace((Throwable) obj);
         return cont;
     }
 }
