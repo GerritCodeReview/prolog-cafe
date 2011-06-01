@@ -94,20 +94,20 @@ public class Prolog implements Serializable {
     protected HashtableOfTerm hashManager;
 
     /** Holds an atom <code>[]<code> (empty list). */
-    public static SymbolTerm Nil     = SymbolTerm.makeSymbol("[]");
+    public static final SymbolTerm Nil     = SymbolTerm.makeSymbol("[]");
 
     /* Some symbols for stream options */
-    static SymbolTerm SYM_MODE_1     = SymbolTerm.makeSymbol("mode", 1);
-    static SymbolTerm SYM_ALIAS_1    = SymbolTerm.makeSymbol("alias", 1);
-    static SymbolTerm SYM_TYPE_1     = SymbolTerm.makeSymbol("type", 1);
-    static SymbolTerm SYM_READ       = SymbolTerm.makeSymbol("read");
-    static SymbolTerm SYM_APPEND     = SymbolTerm.makeSymbol("append");
-    static SymbolTerm SYM_INPUT      = SymbolTerm.makeSymbol("input");
-    static SymbolTerm SYM_OUTPUT     = SymbolTerm.makeSymbol("output");
-    static SymbolTerm SYM_TEXT       = SymbolTerm.makeSymbol("text");
-    static SymbolTerm SYM_USERINPUT  = SymbolTerm.makeSymbol("user_input");
-    static SymbolTerm SYM_USEROUTPUT = SymbolTerm.makeSymbol("user_output");
-    static SymbolTerm SYM_USERERROR  = SymbolTerm.makeSymbol("user_error");
+    static final SymbolTerm SYM_MODE_1     = SymbolTerm.makeSymbol("mode", 1);
+    static final SymbolTerm SYM_ALIAS_1    = SymbolTerm.makeSymbol("alias", 1);
+    static final SymbolTerm SYM_TYPE_1     = SymbolTerm.makeSymbol("type", 1);
+    static final SymbolTerm SYM_READ       = SymbolTerm.makeSymbol("read");
+    static final SymbolTerm SYM_APPEND     = SymbolTerm.makeSymbol("append");
+    static final SymbolTerm SYM_INPUT      = SymbolTerm.makeSymbol("input");
+    static final SymbolTerm SYM_OUTPUT     = SymbolTerm.makeSymbol("output");
+    static final SymbolTerm SYM_TEXT       = SymbolTerm.makeSymbol("text");
+    static final SymbolTerm SYM_USERINPUT  = SymbolTerm.makeSymbol("user_input");
+    static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.makeSymbol("user_output");
+    static final SymbolTerm SYM_USERERROR  = SymbolTerm.makeSymbol("user_error");
 
     /** Constructs new Prolog engine. */
     public Prolog(PrologControl c) { 
