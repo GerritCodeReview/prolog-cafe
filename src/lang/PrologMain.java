@@ -30,7 +30,7 @@ public class PrologMain {
     public static String COPYRIGHT = "Copyright(C) 1997-2009 M.Banbara and N.Tamura";
 
     public static void main(String argv[]) {
-	PrologControl p;
+	BlockingPrologControl p;
 	Predicate code;
 	String goal;
 	Class clazz;
@@ -57,7 +57,7 @@ public class PrologMain {
 	    }
 	    Term[] args = {arg1, arg2};
 	    code = (Predicate)(clazz.newInstance());
-	    p = new PrologControl();
+	    p = new BlockingPrologControl();
 	    p.setPredicate(code, args);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);

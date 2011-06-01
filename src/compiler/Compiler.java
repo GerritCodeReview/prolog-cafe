@@ -118,7 +118,7 @@ public class Compiler {
 	    Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am", 1, true);
 	    Predicate code = (Predicate)(clazz.newInstance());
 	    // Translate Prolog into WAM
-	    PrologControl p = new PrologControl();
+	    BlockingPrologControl p = new BlockingPrologControl();
 	    p.setPredicate(code, args);
 	    //	    System.out.println(code);
 	    return p.execute(code, args);
@@ -155,7 +155,7 @@ public class Compiler {
 	    Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1, true);
 	    Predicate code = (Predicate)(clazz.newInstance());
 	    // Translate WAM into Java
-	    PrologControl p = new PrologControl();
+	    BlockingPrologControl p = new BlockingPrologControl();
 	    p.setPredicate(code, args);
 	    //	    System.out.println(code);
 	    return p.execute(code, args);

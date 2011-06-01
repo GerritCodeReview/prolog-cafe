@@ -41,7 +41,7 @@ class PRED_$begin_exception_1 extends BlockPredicate {
 	try {
 	    main_loop:while(true) {
 		while (engine.exceptionRaised == 0) {
-		    if (engine.control.thread == null)
+		    if (engine.control.isEngineStopped())
 			break main_loop;
 		    if (outOfLoop)
 			break main_loop;

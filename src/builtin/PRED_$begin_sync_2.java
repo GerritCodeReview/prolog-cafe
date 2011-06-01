@@ -67,7 +67,7 @@ class PRED_$begin_sync_2 extends BlockPredicate {
 			    break main_loop;
 			}
 		    }
-		    if (engine.control.thread == null)
+		    if (engine.control.isEngineStopped())
 			break main_loop;
 		    if (outOfLoop)
 			break main_loop;
@@ -89,7 +89,7 @@ class PRED_$begin_sync_2 extends BlockPredicate {
 			break main_loop;
 		    }
 		}
-		if (engine.control.thread == null)
+		if (engine.control.isEngineStopped())
 		    break main_loop;
 		if (outOfLoop)
 		    break main_loop;
