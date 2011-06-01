@@ -315,28 +315,12 @@ public class CPFStack implements Serializable {
      */
     public int max() { return maxContents; }
 
+    CPFEntry topEntry() { return buffer[top]; }
     void restore() { buffer[top].restore(engine); }
 
     /** Returns the <em>time stamp</em> of current choice point frame. */
     public long getTimeStamp() { return buffer[top].timeStamp; }
-    /** Sets the <em>time stamp</em> of current choice point frame. */
-    public void setTimeStamp(long t) { buffer[top].timeStamp = t; }
     
-    /** Returns the <em>next clause</em> of current choice point frame. */
-    public Operation getBP() { return buffer[top].bp; }
-    /** Sets the <em>next clause</em> of current choice point frame. */
-    public void setBP(Operation p) { buffer[top].bp = p; }
-
-    /** Returns the <em>trail pointer</em> of current choice point frame. */
-    public int getTR() { return buffer[top].tr; }
-    /** Sets the <em>trail pointer</em> of current choice point frame. */
-    public void setTR(int i) { buffer[top].tr = i; }
-
-    /** Returns the <em>cut point</em> of current choice point frame. */
-    public int getB0() { return buffer[top].b0; }
-    /** Sets the <em>cut point</em> of current choice point frame. */
-    public void setB0(int i) { buffer[top].b0 = i; }
-
     /** Shows the contents of this <code>CPFStack</code>. */
     public void show() {
 	if (empty()) {

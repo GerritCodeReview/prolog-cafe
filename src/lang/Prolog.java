@@ -168,11 +168,12 @@ public class Prolog implements Serializable {
 	CPFTimeStamp = Long.MIN_VALUE;
 
 	// Creates an initial choice point frame.
-	stack.push(CPFEntry.S0(null));
-	stack.setTR(trail.top());
-	stack.setTimeStamp(++CPFTimeStamp);
-	stack.setBP(Failure.FAILURE);
-	stack.setB0(B0);
+	CPFEntry initialFrame = CPFEntry.S0(null);
+	initialFrame.b0 = B0;
+	initialFrame.bp = Failure.FAILURE;
+	initialFrame.tr = trail.top();
+	initialFrame.timeStamp = ++CPFTimeStamp;
+	stack.push(initialFrame);
 
 	exceptionRaised = 0;
 
@@ -256,8 +257,9 @@ public class Prolog implements Serializable {
      * and returns the backtrak point in current choice point.
      */
     public Operation fail() {
-	B0 = stack.getB0();     // restore B0
-	return stack.getBP();   // execute next clause
+	CPFEntry top = stack.topEntry();
+	B0 = top.b0;     // restore B0
+	return top.bp;   // execute next clause
     }
 
     /** 
@@ -345,11 +347,11 @@ public class Prolog implements Serializable {
     }
 
     private Operation finishjtry(Operation p, Operation next, CPFEntry entry) {
+      entry.b0 = B0;
+      entry.bp = next;
+      entry.tr = trail.top();
+      entry.timeStamp = ++CPFTimeStamp;
       stack.push(entry);
-      stack.setTR(trail.top());
-      stack.setTimeStamp(++CPFTimeStamp);
-      stack.setBP(next);
-      stack.setB0(B0);
       return p;
     }
 
@@ -360,8 +362,9 @@ public class Prolog implements Serializable {
      */
     public Operation retry(Operation p, Operation next) {
 	restore();
-	trail.unwind(stack.getTR());
-	stack.setBP(next);
+	CPFEntry top = stack.topEntry();
+	trail.unwind(top.tr);
+	top.bp = next;
 	return p;
     }
 
@@ -371,7 +374,7 @@ public class Prolog implements Serializable {
      */
     public Operation trust(Operation p) {
 	restore();
-	trail.unwind(stack.getTR());
+	trail.unwind(stack.topEntry().tr);
 	stack.delete();
 	return p;
     }
