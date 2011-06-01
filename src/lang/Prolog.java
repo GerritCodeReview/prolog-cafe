@@ -115,8 +115,6 @@ public class Prolog implements Serializable {
 	cont       = null;
 	stack      = new CPFStack(this);
 	trail      = new Trail(this);
-	//	pdl        = new PushDownList();
-	pcl        = new PrologClassLoader();
     }
 
     /** 
@@ -134,6 +132,8 @@ public class Prolog implements Serializable {
      */
     protected void initOnce() {
 	aregs      = new Term[maxArity];
+	if (pcl == null)
+	  pcl = new PrologClassLoader();
 	if (internalDB == null)
 	  internalDB = new InternalDatabase();
 

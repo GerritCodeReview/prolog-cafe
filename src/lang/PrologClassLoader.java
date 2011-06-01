@@ -8,6 +8,18 @@ import java.io.Serializable;
  * @version 1.1
  */
 public class PrologClassLoader extends ClassLoader implements Serializable {
+    /** Initialize using the {@link ClassLoader#getSystemClassLoader()}.  */
+    public PrologClassLoader() {
+    }
+
+    /**
+     * Initialize using a specific parent ClassLoader.
+     *
+     * @param parent source for all predicates in this context.
+     */
+    public PrologClassLoader(ClassLoader parent) {
+      super(parent);
+    }
 
     /**
      * Returns a <code>java.lang.Class</code> object associated with the predicate

@@ -43,6 +43,17 @@ public abstract class PrologControl {
       engine.internalDB = new InternalDatabase(size);
     }
 
+    public PrologClassLoader getPrologClassLoader() {
+      if (engine.pcl == null)
+        engine.pcl = new PrologClassLoader();
+      return engine.pcl;
+    }
+    public void setPrologClassLoader(PrologClassLoader cl) {
+      if (engine.aregs != null)
+        throw new IllegalStateException("Prolog already initialized");
+      engine.pcl = cl;
+    }
+
     public int getMaxArity() { return engine.getMaxArity(); }
     public void setMaxArity(int max) {
       if (max < 8)
@@ -67,7 +78,7 @@ public abstract class PrologControl {
      */
     public void setPredicate(Term t)  {
 	try {
-	    Class clazz = engine.pcl.loadPredicateClass("jp.ac.kobe_u.cs.prolog.builtin", "call", 1, true);
+	    Class clazz = getPrologClassLoader().loadPredicateClass("jp.ac.kobe_u.cs.prolog.builtin", "call", 1, true);
 	    Term[] args = {engine.copy(t)};
 	    code = (Predicate)(clazz.newInstance());
 	    code.setArgument(args, new Success(this));
