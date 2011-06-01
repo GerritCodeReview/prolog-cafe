@@ -10,7 +10,7 @@ import java.io.Serializable;
 class CPFEntry implements Serializable {
     public long timeStamp;
     public Operation cont;  // continuation goal
-    public Operation bp;    // next cluase
+    public Operation bp;    // next clause
     public int tr;          // trail pointer
     public int b0;          // cut point
 
