@@ -32,6 +32,15 @@ public abstract class PrologControl {
     public boolean getEnableReflection() { return enableReflection; }
     public void setEnableReflection(boolean on) { enableReflection = on; }
 
+    public int getMaxArity() { return engine.getMaxArity(); }
+    public void setMaxArity(int max) {
+      if (max < 8)
+        throw new IllegalStateException("invalid arity " + max);
+      if (engine.aregs != null)
+        throw new IllegalStateException("Prolog already initialized");
+      engine.maxArity = max;
+    }
+
     /** Sets a goal and its arguments to this Prolog thread. 
      * An initial continuation goal (a <code>Success</code> object)
      * is set to the <code>cont</code> field of goal <code>p</code> as continuation.

@@ -112,14 +112,12 @@ public class Prolog implements Serializable {
     /** Constructs new Prolog engine. */
     public Prolog(PrologControl c) { 
 	control    = c;
-	aregs      = new Term[maxArity];
 	cont       = null;
 	stack      = new CPFStack(this);
 	trail      = new Trail(this);
 	//	pdl        = new PushDownList();
 	pcl        = new PrologClassLoader();
 	internalDB = new InternalDatabase();
-	initOnce();
     }
 
     /** 
@@ -136,6 +134,7 @@ public class Prolog implements Serializable {
      * </ul>
      */
     protected void initOnce() {
+	aregs      = new Term[maxArity];
 	userInput   = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
 	userOutput  = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
 	userError   = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
@@ -157,6 +156,8 @@ public class Prolog implements Serializable {
 
     /** Initializes this Prolog engine. */
     public void init() { 
+	if (aregs == null)
+	  initOnce();
 	stack.init();
 	trail.init();
 	//	pdl.init();
