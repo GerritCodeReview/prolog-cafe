@@ -43,9 +43,9 @@ public class Prolog implements Serializable {
     /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>bounded</code>. */
     protected boolean bounded = false;
     /** Prolog implementation flag: <code>max_integer</code>. */
-    protected int maxInteger = Integer.MAX_VALUE;
+    protected static final int maxInteger = Integer.MAX_VALUE;
     /** Prolog implementation flag: <code>min_integer</code>. */
-    protected int minInteger = Integer.MIN_VALUE;
+    protected static final int minInteger = Integer.MIN_VALUE;
     /** Prolog implementation flag: <code>integer_rounding_function</code>. */
     protected String integerRoundingFunction = "down";
     /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>char_conversion</code>. */
