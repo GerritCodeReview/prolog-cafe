@@ -8,9 +8,7 @@ import java.io.*;
  * @version 1.0
  * @since 0.7
  */
-class PRED_$read_token0_3 extends Predicate {
-    Term arg1, arg2, arg3;
-  
+class PRED_$read_token0_3 extends Predicate.P3 {
     public PRED_$read_token0_3(Term a1, Term a2, Term a3, Operation cont){ 
 	arg1 = a1;
 	arg2 = a2;

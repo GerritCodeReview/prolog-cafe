@@ -6,9 +6,8 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.1
 */
-class PRED_$get_instances_2 extends Predicate {
+class PRED_$get_instances_2 extends Predicate.P2 {
     private static final SymbolTerm COMMA = SymbolTerm.makeSymbol(",", 2);
-    public Term arg1, arg2;
 
     public PRED_$get_instances_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

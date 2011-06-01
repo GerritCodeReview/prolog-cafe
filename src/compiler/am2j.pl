@@ -525,12 +525,14 @@ write_label(main(F/A, Modifier), Out) :- !,
 	(Modifier == (public) -> write(Out, 'public ') ; true), 
 	write(Out, 'final class '),
 	write_class_name(F/A, Out), 
-	write(Out, ' extends Predicate {'), nl(Out).
+	write(Out, ' extends '),
+	write_predicate_base_class(A, Out),
+	write(Out, ' {'), nl(Out).
 write_label(F/A, Out) :- !,
 	% instance variable declaration
-	(A > 0 -> 
+	(A > 4 -> 
 	    nl(Out),
-	    write_enum('public Term ', arg, 1, A, ', ', ';', 4, Out), nl(Out)
+	    write_enum('private final Term ', arg, 5, A, ', ', ';', 4, Out), nl(Out)
 	    ;
 	    true
 	),
@@ -586,7 +588,7 @@ write_constructor(F/A, Out) :-
 	A > 0,
 	for(I, 1, A),
 	    tab(Out, 8),
-	    write(Out, arg), write(Out, I), 
+	    write(Out, 'this.'), write(Out, arg), write(Out, I), 
 	    write(Out, ' = '), 
 	    write(Out, a), write(Out, I), 
 	    write(Out, ';'),  nl(Out),
@@ -986,6 +988,14 @@ write_package(P, Out) :- !,
 % Write class name
 write_class_name(L, Out) :- 
 	write(Out, 'PRED'), write_index(L, Out).
+
+% Write out base class name
+write_predicate_base_class(0, Out) :- !, write(Out, 'Predicate').
+write_predicate_base_class(1, Out) :- !, write(Out, 'Predicate.P1').
+write_predicate_base_class(2, Out) :- !, write(Out, 'Predicate.P2').
+write_predicate_base_class(3, Out) :- !, write(Out, 'Predicate.P3').
+write_predicate_base_class(4, Out) :- !, write(Out, 'Predicate.P4').
+write_predicate_base_class(_, Out) :- !, write(Out, 'Predicate.P4').
 
 % Write label
 write_index(F/A, Out) :- !, 

@@ -7,9 +7,7 @@ import java.io.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class PRED_read_line_2 extends Predicate {
-    Term arg1, arg2;
-
+class PRED_read_line_2 extends Predicate.P2 {
     public PRED_read_line_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;

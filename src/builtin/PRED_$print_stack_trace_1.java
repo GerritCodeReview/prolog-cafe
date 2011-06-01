@@ -6,10 +6,7 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-class PRED_$print_stack_trace_1 extends Predicate {
-
-    public Term arg1;
-
+class PRED_$print_stack_trace_1 extends Predicate.P1 {
     public PRED_$print_stack_trace_1(Term a1, Operation cont) {
         arg1 = a1;
         this.cont = cont;

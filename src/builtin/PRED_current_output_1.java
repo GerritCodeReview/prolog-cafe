@@ -6,9 +6,7 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class PRED_current_output_1 extends Predicate {
-    Term arg1;
-
+public class PRED_current_output_1 extends Predicate.P1 {
     public PRED_current_output_1(Term a1, Operation cont) {
 	arg1 = a1;
 	this.cont = cont;

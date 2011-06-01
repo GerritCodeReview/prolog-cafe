@@ -7,9 +7,7 @@ import java.io.PrintWriter;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class PRED_$fast_writeq_2 extends Predicate {
-    Term arg1, arg2;
-
+public class PRED_$fast_writeq_2 extends Predicate.P2 {
     public PRED_$fast_writeq_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;

@@ -6,9 +6,8 @@ import jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-public class PRED_atom_concat_3 extends Predicate {
+public class PRED_atom_concat_3 extends Predicate.P3 {
     private static final SymbolTerm AC_2 = SymbolTerm.makeSymbol("ac", 2);
-    public Term arg1, arg2, arg3;
 
     public PRED_atom_concat_3(Term a1, Term a2, Term a3, Operation cont) {
         arg1 = a1;

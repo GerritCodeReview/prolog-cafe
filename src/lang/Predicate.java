@@ -24,4 +24,26 @@ public abstract class Predicate extends Operation {
    * was executed successfully.
    */
   public Operation cont;
+
+  public static abstract class P1 extends Predicate {
+    protected Term arg1;
+  }
+
+  public static abstract class P2 extends Predicate {
+    protected Term arg1;
+    protected Term arg2;
+  }
+
+  public static abstract class P3 extends Predicate {
+    protected Term arg1;
+    protected Term arg2;
+    protected Term arg3;
+  }
+
+  public static abstract class P4 extends Predicate {
+    protected Term arg1;
+    protected Term arg2;
+    protected Term arg3;
+    protected Term arg4;
+  }
 }

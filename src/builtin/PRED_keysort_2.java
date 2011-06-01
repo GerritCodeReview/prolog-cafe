@@ -7,10 +7,9 @@ import java.util.Arrays;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.1
  */
-public class PRED_keysort_2 extends Predicate {
+public class PRED_keysort_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_HYPHEN_2 = SymbolTerm.makeSymbol("-", 2);
     private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
-    Term arg1, arg2;
 
     public PRED_keysort_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;

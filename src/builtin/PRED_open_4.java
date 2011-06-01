@@ -7,7 +7,7 @@ import java.io.*;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-public class PRED_open_4 extends Predicate {
+public class PRED_open_4 extends Predicate.P4 {
     private static final SymbolTerm SYM_NIL         = SymbolTerm.makeSymbol("[]");
     private static final SymbolTerm SYM_TEXT        = SymbolTerm.makeSymbol("text");
     private static final SymbolTerm SYM_READ        = SymbolTerm.makeSymbol("read");
@@ -19,8 +19,6 @@ public class PRED_open_4 extends Predicate {
     private static final SymbolTerm SYM_MODE_1      = SymbolTerm.makeSymbol("mode", 1);
     private static final SymbolTerm SYM_TYPE_1      = SymbolTerm.makeSymbol("type", 1);
     private static final SymbolTerm SYM_FILE_NAME_1 = SymbolTerm.makeSymbol("file_name", 1);
-
-    public Term arg1, arg2, arg3, arg4;
 
     public PRED_open_4(Term a1, Term a2, Term a3, Term a4, Operation cont) {
         arg1 = a1;

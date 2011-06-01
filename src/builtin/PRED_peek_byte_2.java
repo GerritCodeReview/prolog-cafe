@@ -8,9 +8,8 @@ import java.io.*;
    @version 1.1
    @since 1.1
 */
-public class PRED_peek_byte_2 extends Predicate {
+public class PRED_peek_byte_2 extends Predicate.P2 {
     private static final IntegerTerm INT_EOF = new IntegerTerm(-1);
-    public Term arg1, arg2;
 
     public PRED_peek_byte_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

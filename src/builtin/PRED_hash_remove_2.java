@@ -7,10 +7,7 @@ import java.util.Hashtable;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-public class PRED_hash_remove_2 extends Predicate {
-
-    public Term arg1, arg2;
-
+public class PRED_hash_remove_2 extends Predicate.P2 {
     public PRED_hash_remove_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
         arg2 = a2;

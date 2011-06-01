@@ -7,12 +7,11 @@ import java.io.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-public class PRED_close_2 extends Predicate {
+public class PRED_close_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
     private static final SymbolTerm SYM_FORCE_1 = SymbolTerm.makeSymbol("force", 1);
     private static final SymbolTerm SYM_TRUE    = SymbolTerm.makeSymbol("true");
     private static final SymbolTerm SYM_FALSE   = SymbolTerm.makeSymbol("false");
-    public Term arg1, arg2;
 
     public PRED_close_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

@@ -7,9 +7,8 @@ import java.io.*;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-public class PRED_peek_char_2 extends Predicate {
+public class PRED_peek_char_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_EOF = SymbolTerm.makeSymbol("end_of_file");
-    public Term arg1, arg2;
 
     public PRED_peek_char_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

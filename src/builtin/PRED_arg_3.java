@@ -6,9 +6,7 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class PRED_arg_3 extends Predicate {
-    Term arg1, arg2, arg3;
-
+public class PRED_arg_3 extends Predicate.P3 {
     public PRED_arg_3(Term a1, Term a2, Term a3, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;

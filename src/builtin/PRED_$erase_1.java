@@ -6,9 +6,7 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.1
  */
-class PRED_$erase_1 extends Predicate {
-     Term arg1;
-
+class PRED_$erase_1 extends Predicate.P1 {
     public PRED_$erase_1(Term a1, Operation cont) {
 	arg1 = a1;
 	this.cont = cont;

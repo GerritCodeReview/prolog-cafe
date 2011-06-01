@@ -7,9 +7,8 @@ import java.util.Hashtable;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-class PRED_$hash_addz_3 extends Predicate {
+class PRED_$hash_addz_3 extends Predicate.P3 {
     private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
-    public Term arg1, arg2, arg3;
 
     public PRED_$hash_addz_3(Term a1, Term a2, Term a3, Operation cont) {
         arg1 = a1;

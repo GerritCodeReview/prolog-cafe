@@ -7,10 +7,8 @@ import java.lang.reflect.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class PRED_$call_2 extends Predicate {
+class PRED_$call_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_SLASH_2 = SymbolTerm.makeSymbol("/", 2);
-    Term arg1, arg2;
-    Operation cont;
 
     public PRED_$call_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;

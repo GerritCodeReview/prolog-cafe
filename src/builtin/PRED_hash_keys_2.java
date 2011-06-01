@@ -8,9 +8,8 @@ import java.util.Enumeration;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-public class PRED_hash_keys_2 extends Predicate {
+public class PRED_hash_keys_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
-    public Term arg1, arg2;
 
     public PRED_hash_keys_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

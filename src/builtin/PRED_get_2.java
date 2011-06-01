@@ -7,9 +7,8 @@ import java.io.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-public class PRED_get_2 extends Predicate {
+public class PRED_get_2 extends Predicate.P2 {
     private static final IntegerTerm INT_EOF = new IntegerTerm(-1);
-    public Term arg1, arg2;
 
     public PRED_get_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

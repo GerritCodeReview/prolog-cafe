@@ -6,9 +6,8 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class PRED_number_chars_2 extends Predicate {
+public class PRED_number_chars_2 extends Predicate.P2 {
     private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
-    Term arg1, arg2;
 
     public PRED_number_chars_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;

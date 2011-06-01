@@ -6,13 +6,11 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
    @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
    @version 1.0
 */
-class PRED_$statistics_2 extends Predicate {
+class PRED_$statistics_2 extends Predicate.P2 {
     private static final SymbolTerm Nil         = SymbolTerm.makeSymbol("[]");
     private static final SymbolTerm SYM_RUNTIME = SymbolTerm.makeSymbol("runtime");
     private static final SymbolTerm SYM_TRAIL   = SymbolTerm.makeSymbol("trail");
     private static final SymbolTerm SYM_CHOICE  = SymbolTerm.makeSymbol("choice");
-
-    Term arg1, arg2;
 
     public PRED_$statistics_2(Term a1, Term a2, Operation cont){
 	arg1 = a1;

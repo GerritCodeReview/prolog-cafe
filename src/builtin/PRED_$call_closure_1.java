@@ -6,10 +6,7 @@ import  jp.ac.kobe_u.cs.prolog.lang.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class PRED_$call_closure_1 extends Predicate {
-    Term arg1;
-    Operation cont;
-
+class PRED_$call_closure_1 extends Predicate.P1 {
     public PRED_$call_closure_1(Term a1, Operation cont) {
 	arg1 = a1;
 	this.cont = cont;
@@ -34,5 +31,3 @@ class PRED_$call_closure_1 extends Predicate {
 	return code;
     }
 }
-
-
