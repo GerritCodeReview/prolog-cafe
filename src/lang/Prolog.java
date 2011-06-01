@@ -75,8 +75,7 @@ public class Prolog implements Serializable {
     protected Hashtable<VariableTerm,VariableTerm> copyHash;
 
     /** The size of the pushback buffer used for creating input streams. */
-    public static int PUSHBACK_SIZE = 3;
-    //    public static int PUSHBACK_SIZE = 2;
+    public static final int PUSHBACK_SIZE = 3;
 
     /** Standard input stream. */
     protected transient PushbackReader userInput;
