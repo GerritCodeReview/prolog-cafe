@@ -14,10 +14,10 @@ import java.io.Serializable;
  */
 public abstract class PrologControl {
     /** Holds a Prolog engine. */
-    public Prolog engine;
+    protected Prolog engine;
 
     /** Holds a Prolog goal to be executed. */
-    public Predicate code;
+    protected Predicate code;
 
     /** Should Java reflection be permitted. */
     private boolean enableReflection;
