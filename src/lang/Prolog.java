@@ -20,8 +20,6 @@ public class Prolog implements Serializable {
     public CPFStack stack;
     /** Trail stack */
     public Trail trail;
-    /* Push down list */
-    //    public PushDownList pdl;
     /** Cut pointer */
     public int B0;
     /** Class loader */
