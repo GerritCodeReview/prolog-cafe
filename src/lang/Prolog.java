@@ -210,45 +210,6 @@ public class Prolog implements Serializable {
 	return t.copy(this);
     }
 
-    /* 
-    public boolean unify(Term a1, Term a2) {
-	Term d1, d2;
-	pdl.init();
-	pdl.push(a1);
-	pdl.push(a2);
-	while (! pdl.empty()) {
-	    d1 = pdl.pop().dereference();
-	    d2 = pdl.pop().dereference();
-	    if (d1 != d2) {
-		if (d1.isVariable()) {
-		    ((VariableTerm)d1).bind(d2, trail);
-		} else if (d2.isVariable()) {
-		    ((VariableTerm)d2).bind(d1, trail);
-		} else if (d2.isList()) {
-		    if (! d1.isList())
-			return false;
-		    pdl.push(((ListTerm)d1).cdr());
-		    pdl.push(((ListTerm)d2).cdr());
-		    pdl.push(((ListTerm)d1).car());
-		    pdl.push(((ListTerm)d2).car());
-		} else if (d2.isStructure()) {
-		    if (! d1.isStructure())
-			return false;
-		    if (! ((StructureTerm)d1).functor.equals(((StructureTerm)d2).functor))
-			return false;
-		    for (int i=0; i<((StructureTerm)d1).arity; i++) {
-			pdl.push(((StructureTerm)d1).args[i]);
-			pdl.push(((StructureTerm)d2).args[i]);
-		    }
-		} else if (! d1.equals(d2)) {
-		    return false;
-		}
-	    }
-	}
-	return true;
-    }
-    */
-
     /** 
      * Do backtrak.
      * This method restores the value of <code>B0</code>
