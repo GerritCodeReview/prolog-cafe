@@ -12,8 +12,6 @@ public class PRED_$fast_writeq_1 extends Predicate.P1 {
 	this.cont = cont;
     }
 
-    public String toString() { return "$fast_writeq(" + arg1 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1;

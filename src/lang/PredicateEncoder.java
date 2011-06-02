@@ -54,6 +54,32 @@ public class PredicateEncoder {
 	return pkg + ".PRED_" + x + "_" + arity;
     }
 
+    public static String decodeFunctor(String className) {
+      // Remove the Java package name, if present.
+      int dot = className.lastIndexOf('.');
+      if (0 < dot)
+        className = className.substring(dot + 1);
+
+      // Trim the common PRED_ prefix.
+      if (className.startsWith("PRED_"))
+        className = className.substring("PRED_".length());
+
+      // Drop the arity from the end.
+      int us = className.lastIndexOf('_');
+      if (0 < us)
+        className = className.substring(0, us);
+
+      Pattern p = Pattern.compile("\\$([0-9A-F]{4})");
+      Matcher m = p.matcher(className);
+      StringBuffer r = new StringBuffer();
+      while (m.find()) {
+        char c = (char) Integer.parseInt(m.group());
+        m.appendReplacement(r, Character.toString(c));
+      }
+      m.appendTail(r);
+      return r.toString();
+    }
+
     /**
      * Returns a <code>java.lang.Class</code> object associated with the predicate
      * class with the given arguments.

@@ -15,8 +15,6 @@ public class PRED_atom_codes_2 extends Predicate.P2 {
 	this.cont = cont;
     }
 
-    public String toString() { return "atom_codes(" + arg1 + "," + arg2 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2;

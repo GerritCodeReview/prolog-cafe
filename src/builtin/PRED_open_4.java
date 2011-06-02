@@ -28,10 +28,6 @@ public class PRED_open_4 extends Predicate.P4 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "open(" + arg1 + "," + arg2 + "," + arg3 + "," + arg4 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	File file;

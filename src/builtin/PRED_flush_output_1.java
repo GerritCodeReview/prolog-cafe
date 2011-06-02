@@ -13,10 +13,6 @@ public class PRED_flush_output_1 extends Predicate.P1 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "flush_output(" + arg1 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1;

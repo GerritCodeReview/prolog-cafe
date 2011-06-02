@@ -12,8 +12,6 @@ class PRED_$erase_1 extends Predicate.P1 {
 	this.cont = cont;
     }
 
-    public String toString() { return "$erase(" + arg1 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1 = arg1;

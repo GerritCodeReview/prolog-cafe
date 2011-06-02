@@ -17,10 +17,6 @@ class PRED_$hash_remove_first_3 extends Predicate.P3 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "$hash_remove_first(" + arg1 + "," + arg2 + "," + arg3 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2, a3;

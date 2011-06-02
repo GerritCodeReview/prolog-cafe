@@ -12,10 +12,6 @@ public class PRED_$neck_cut_0 extends Predicate {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "$neck_cut";
-    }
-
     public Operation exec(Prolog engine) {
 	//        engine.setB0(); 
         engine.neckCut();

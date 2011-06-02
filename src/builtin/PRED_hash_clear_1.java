@@ -13,10 +13,6 @@ public class PRED_hash_clear_1 extends Predicate.P1 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "hash_clear(" + arg1 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1;

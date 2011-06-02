@@ -15,10 +15,6 @@ public class PRED_hash_put_3 extends Predicate.P3 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "hash_put(" + arg1 + "," + arg2 + "," + arg3 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2, a3;

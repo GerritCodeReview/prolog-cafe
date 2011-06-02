@@ -16,8 +16,6 @@ public class PRED_java_constructor0_2 extends JavaPredicate {
 	this.cont = cont;
     }
 
-    public String toString() { return "java_constructor0(" + arg1 + "," + arg2 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         if (!engine.control.getEnableReflection())

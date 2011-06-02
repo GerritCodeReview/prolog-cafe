@@ -14,10 +14,6 @@ public class PRED_put_code_2 extends Predicate.P2 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "put_code(" + arg1 + "," + arg2 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2;

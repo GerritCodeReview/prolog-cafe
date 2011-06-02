@@ -1,5 +1,9 @@
 package jp.ac.kobe_u.cs.prolog.lang;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.LinkedList;
+
 /**
  * Superclass of any predicate's implementation class.
  * <p>
@@ -24,6 +28,47 @@ public abstract class Predicate extends Operation {
    * was executed successfully.
    */
   public Operation cont;
+
+  @Override
+  public String toString() {
+    LinkedList<Class> toScan = new LinkedList<Class>();
+    Class clazz = getClass();
+    while (clazz != Predicate.class) {
+      toScan.addFirst(clazz);
+      clazz = clazz.getSuperclass();
+    }
+
+    StringBuffer sb = new StringBuffer();
+    sb.append(PredicateEncoder.decodeFunctor(getClass().getName()));
+    boolean first = true;
+    for (Class c : toScan) {
+      for (Field f : c.getDeclaredFields()) {
+        if ((f.getModifiers() & Modifier.STATIC) == 0
+            && f.getType() == Term.class
+            && f.getName().startsWith("arg")) {
+          Term val;
+          try {
+            f.setAccessible(true);
+            val = (Term) f.get(this);
+          } catch (IllegalArgumentException e) {
+            continue;
+          } catch (IllegalAccessException e) {
+            continue;
+          }
+
+          if (first) {
+            sb.append('(');
+            first = false;
+          } else
+            sb.append(", ");
+          sb.append(val);
+        }
+      }
+    }
+    if (!first)
+      sb.append(')');
+    return sb.toString();
+  }
 
   public static abstract class P1 extends Predicate {
     protected Term arg1;

@@ -14,8 +14,6 @@ public class PRED_arg_3 extends Predicate.P3 {
 	this.cont = cont;
     }
 
-    public String toString() { return "arg(" + arg1 + "," + arg2 + "," + arg3 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2, a3;

@@ -16,10 +16,6 @@ public class PRED_new_hash_2 extends Predicate.P2 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "new_hash(" + arg1 + "," + arg2 + ")";
-    }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2;

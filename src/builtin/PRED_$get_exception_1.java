@@ -12,8 +12,6 @@ class PRED_$get_exception_1 extends Predicate.P1 {
 	this.cont = cont;
     }
 
-    public String toString() { return "$get_exception(" + arg1 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1;

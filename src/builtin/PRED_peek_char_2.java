@@ -16,10 +16,6 @@ public class PRED_peek_char_2 extends Predicate.P2 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "peek_char(" + arg1 + "," + arg2 + ")";
-    }
-
     boolean inCharacter(Term t) {
 	if (! t.isSymbol())
 	    return false;

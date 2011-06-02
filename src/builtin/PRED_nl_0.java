@@ -12,8 +12,6 @@ public class PRED_nl_0 extends Predicate {
 	this.cont = cont;
     }
 
-    public String toString() { return "nl"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	engine.getCurrentOutput().println();

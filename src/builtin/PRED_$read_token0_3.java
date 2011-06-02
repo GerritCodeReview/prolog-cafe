@@ -16,10 +16,6 @@ class PRED_$read_token0_3 extends Predicate.P3 {
 	this.cont = cont;
     }
 
-    public String toString() {
-	return "$read_token0(" + arg1 + ", " + arg2 + "," + arg3 + ")";
-    }
-
     /* The a1 must be user, user_input, and 
        java.io.PushbackReader, otherwise fails. */
     public Operation exec(Prolog engine) {

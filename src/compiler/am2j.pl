@@ -541,24 +541,9 @@ write_label(F/A, Out) :- !,
 	    ;
 	    true
 	),
-	% decl cont; ???
 	% constructor
 	nl(Out), 
 	write_constructor(F/A, Out), nl(Out),
-	% toString method
-	nl(Out),
-	tab(Out, 4),
-	write(Out, 'public String toString() {'), nl(Out),
-	tab(Out, 8),
-	write(Out, 'return "'), write_constant(F, Out), 
-	(A > 0 ->
-	    write_enum('(" + ', arg, 1, A, ' + "," + ', ' + ")',0, Out)
-	    ;
-	    true
-	),
-	write(Out, '";'), nl(Out), 
-	tab(Out, 4),
-	write(Out, '}'), nl(Out),
 	% exec method
 	nl(Out),
 	tab(Out, 4),

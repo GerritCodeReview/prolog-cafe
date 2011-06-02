@@ -13,8 +13,6 @@ class PRED_$atom_type0_2 extends Predicate.P2 {
 	this.cont = cont;
     }
 
-    public String toString() { return "$atom_type0(" + arg1 + ", " + arg2 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2;

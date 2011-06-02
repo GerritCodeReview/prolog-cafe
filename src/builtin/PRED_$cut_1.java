@@ -12,10 +12,6 @@ public class PRED_$cut_1 extends Predicate.P1 {
         this.cont = cont;
     }
 
-    public String toString() {
-        return "$cut(" + arg1 + ")";
-    }
-
     public Operation exec(Prolog engine) {
 	//        engine.setB0(); 
         Term a1;

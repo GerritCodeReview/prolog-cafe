@@ -15,8 +15,6 @@ public class PRED_number_codes_2 extends Predicate.P2 {
 	this.cont = cont;
     }
 
-    public String toString() { return "number_codes(" + arg1 + "," + arg2 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2;

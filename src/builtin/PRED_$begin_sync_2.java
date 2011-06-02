@@ -15,8 +15,6 @@ class PRED_$begin_sync_2 extends BlockPredicate {
 	this.cont = cont;
     }
 
-    public String toString() { return "$begin_sync(" + arg1 + "," + arg2 + ")"; }
-
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2;
