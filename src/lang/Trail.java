@@ -10,31 +10,24 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class Trail implements Serializable {
-    /** Maximum size of enties. Initial size is <code>20000</code>. */
-    protected int maxContents = 20000;
-
+public final class Trail {
     /** An array of <code>Undoable</code> entries. */
-    protected Undoable[] buffer;
+    private Undoable[] buffer;
 
     /** the top index of this <code>Trail</code>. */
-    protected int top;
+    private int top;
 
-    /** Holds the Prolog engine that this <code>Trail</code> belongs to. */
-    protected Prolog engine;
-	
+    /** Current timestamp of the top of {@link ChoicePointStack}. */
+    long timeStamp;
+
     /** Constructs a new trail stack. */
-    public Trail(Prolog _engine) {
-	engine = _engine;
-	buffer = new Undoable[maxContents];
-	top = -1;
+    public Trail() {
+	this(20000);
     }
 
     /** Constructs a new trail stack with the given size. */
-    public Trail(Prolog _engine, int n) {
-	engine = _engine;
-	maxContents = n;
-	buffer = new Undoable[maxContents];
+    public Trail(int n) {
+	buffer = new Undoable[n];
 	top = -1;
     }
 
@@ -46,15 +39,11 @@ public class Trail implements Serializable {
 	try {
 	    buffer[++top] = t;
 	} catch (ArrayIndexOutOfBoundsException e) {
-	    System.out.println("{expanding trail...}");
 	    int len = buffer.length;
 	    Undoable[] new_buffer = new Undoable[len+20000];
-	    for(int i=0; i<len; i++){
-		new_buffer[i] = buffer[i];
-	    }
+		System.arraycopy(buffer, 0, new_buffer, 0, len);
 	    buffer = new_buffer;
 	    buffer[top] = t;
-	    maxContents = len+20000;
 	}
     }
 
@@ -77,10 +66,8 @@ public class Trail implements Serializable {
 	return top == -1;
     }
 
-    /** Returns the value of <code>maxContents</code>. 
-     * @see #maxContents
-     */
-    public int max() { return maxContents; }
+    /** Current allocation of the trail storage array.  */
+    public int max() { return buffer.length; }
 
     /** Returns the value of <code>top</code>. 
      * @see #top

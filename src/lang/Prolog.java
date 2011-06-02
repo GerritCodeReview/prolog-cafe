@@ -8,7 +8,7 @@ import java.io.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.2
 */
-public class Prolog implements Serializable {
+public final class Prolog {
     /** Prolog thread */
     public PrologControl control;
     /** Argument registers */
@@ -19,7 +19,7 @@ public class Prolog implements Serializable {
     /** Choice point frame stack */
     public final ChoicePointStack stack;
     /** Trail stack */
-    public Trail trail;
+    public final Trail trail;
     /** Cut pointer */
     public int B0;
     /** Class loader */
@@ -112,8 +112,8 @@ public class Prolog implements Serializable {
     public Prolog(PrologControl c) { 
 	control    = c;
 	cont       = null;
-	stack      = new ChoicePointStack();
-	trail      = new Trail(this);
+	trail      = new Trail();
+	stack      = new ChoicePointStack(trail);
     }
 
     /** 

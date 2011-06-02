@@ -32,7 +32,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see VariableTerm
      */
-    public boolean isVariable() { return this instanceof VariableTerm; }
+    public final boolean isVariable() { return this instanceof VariableTerm; }
 
     /** 
      * Check whether this term is an integer.
@@ -40,7 +40,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see IntegerTerm
      */
-    public boolean isInteger() { return this instanceof IntegerTerm; }
+    public final boolean isInteger() { return this instanceof IntegerTerm; }
 
     /** 
      * Check whether this term is a float.
@@ -48,7 +48,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see DoubleTerm
      */
-    public boolean isDouble() { return this instanceof DoubleTerm; }
+    public final boolean isDouble() { return this instanceof DoubleTerm; }
 
     /** 
      * Check whether this term is a number.
@@ -57,7 +57,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * @see IntegerTerm
      * @see DoubleTerm
      */
-    public boolean isNumber() { return ((this instanceof IntegerTerm) || (this instanceof DoubleTerm)); }
+    public final boolean isNumber() { return ((this instanceof IntegerTerm) || (this instanceof DoubleTerm)); }
 
     /** 
      * Check whether this term is an atom.
@@ -65,10 +65,10 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see SymbolTerm
      */
-    public boolean isSymbol() { return this instanceof SymbolTerm; }
+    public final boolean isSymbol() { return this instanceof SymbolTerm; }
 
     /** Check whether this term is an empty list. */
-    public boolean isNil() { return Prolog.Nil.equals(this); }
+    public final boolean isNil() { return Prolog.Nil.equals(this); }
 
     /** 
      * Check whether this term is a list structure.
@@ -76,7 +76,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see ListTerm
      */
-    public boolean isList() { return this instanceof ListTerm; }
+    public final boolean isList() { return this instanceof ListTerm; }
 
     /** 
      * Check whether this term is a compound term.
@@ -84,7 +84,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see StructureTerm
      */
-    public boolean isStructure() { return this instanceof StructureTerm; }
+    public final boolean isStructure() { return this instanceof StructureTerm; }
 
     /** 
      * Check whether this term is a java term.
@@ -92,7 +92,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see JavaObjectTerm
      */
-    public boolean isJavaObject() { return this instanceof JavaObjectTerm; }
+    public final boolean isJavaObject() { return this instanceof JavaObjectTerm; }
 
     /** 
      * Check whether this term is a closure term.
@@ -100,7 +100,7 @@ public abstract class Term implements Serializable,Comparable<Term> {
      * otherwise <code>false</code>.
      * @see ClosureTerm
      */
-    public boolean isClosure() { return this instanceof ClosureTerm; }
+    public final boolean isClosure() { return this instanceof ClosureTerm; }
 
     /** 
      * Check whether this object is convertible with the given Java class type.

@@ -18,6 +18,9 @@ package com.googlecode.prolog_cafe.lang;
  * @version 1.0
  */
 public final class ChoicePointStack {
+  /** Trail of the associated Prolog instance. */
+  private final Trail trail;
+
   /** Top of the stack. */
   ChoicePointFrame top;
 
@@ -26,7 +29,12 @@ public final class ChoicePointStack {
    * <p>
    * This matches the length of the chain stored in {@link #top}.
    */
-  private int level = -1;
+  private int level;
+
+  ChoicePointStack(Trail trail) {
+    this.trail = trail;
+    this.level = -1;
+  }
 
   /**
    * Create a new choice point frame.
@@ -37,6 +45,7 @@ public final class ChoicePointStack {
     entry.prior = top;
     top = entry;
     level++;
+    trail.timeStamp = entry.timeStamp;
   }
 
   /** Discards all choice points after the value of <code>i</code>. */
@@ -45,18 +54,25 @@ public final class ChoicePointStack {
       top = top.prior;
       level--;
     }
+    updateTrailTimeStamp();
   }
 
   /** Discards the top of choice points. */
   void delete() {
     top = top.prior;
     level--;
+    updateTrailTimeStamp();
   }
 
   /** Discards all choice points. */
   void init() {
     top = null;
     level = -1;
+    updateTrailTimeStamp();
+  }
+
+  private void updateTrailTimeStamp() {
+    trail.timeStamp = top != null ? top.timeStamp : Long.MIN_VALUE;
   }
 
   /** Get the current top of the stack. */
@@ -68,11 +84,6 @@ public final class ChoicePointStack {
   public int max() {
     // Since the stack is represented as a linked list, there is no limit.
     return Integer.MAX_VALUE;
-  }
-
-  /** Returns the <em>time stamp</em> of current choice point frame. */
-  public long getTimeStamp() {
-    return top.timeStamp;
   }
 
   /** Shows the contents of this <code>CPFStack</code>. */

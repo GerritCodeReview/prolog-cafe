@@ -13,9 +13,9 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class VariableTerm extends Term implements Undoable {
     /** Holds a term to which this variable is bound. Initial value is <code>this</code> (self-reference). */
-    protected Term val;
+    private Term val;
     /** A CPF time stamp when this object is newly constructed. */
-    protected long timeStamp;
+    private long timeStamp;
 
     /** Constructs a new logical variable so that
      * the <code>timeStamp</code> field is set to <code>Long.MIN_VALUE</code>.
@@ -35,12 +35,6 @@ public class VariableTerm extends Term implements Undoable {
 	val = this;
 	timeStamp = engine.getCPFTimeStamp();
     }
-
-    /** 
-     * Returns the value of <code>timeStamp</code>.
-     * @see #timeStamp
-     */
-    public long timeStamp() { return timeStamp; }
 
     /** Returns a string representation of this object.*/
     protected String name() { return "_" + Integer.toHexString(hashCode()).toUpperCase(); }
@@ -75,17 +69,21 @@ public class VariableTerm extends Term implements Undoable {
      * @param trail Trail Stack
      * @see Trail
      */
-    public void bind(Term t, Trail trail) {
-	if (t.isVariable() && ((VariableTerm)t).timeStamp() >= this.timeStamp) {
-	    ((VariableTerm)t).val = this;
-	    if (((VariableTerm)t).timeStamp() < trail.engine.stack.getTimeStamp())
-		trail.push((VariableTerm)t);
-	} else {
-	    this.val = t;
-	    if (this.timeStamp() < trail.engine.stack.getTimeStamp())
-		trail.push(this);
-	}
+  public void bind(Term t, Trail trail) {
+    if (t.isVariable()) {
+      VariableTerm v = (VariableTerm) t;
+      if (v.timeStamp >= this.timeStamp) {
+        v.val = this;
+        if (v.timeStamp < trail.timeStamp)
+          trail.push(v);
+        return;
+      }
     }
+
+    val = t;
+    if (timeStamp < trail.timeStamp)
+      trail.push(this);
+  }
 
     /** 
      * Checks whether this object is convertible with the given Java class type 
