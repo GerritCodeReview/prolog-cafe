@@ -148,6 +148,7 @@ public class BlockingPrologControl
   public synchronized boolean execute(Predicate p) {
   setPredicate(p);
   thread = new Thread(this);
+  thread.setName("Prolog-" + p.toString());
   thread.start(); // execute run() in new thread.
   try {
       wait();     // wait caller's thread.
