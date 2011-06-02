@@ -17,7 +17,7 @@ public class Prolog implements Serializable {
     /** Continuation goal register */
     public Operation cont;
     /** Choice point frame stack */
-    public CPFStack stack;
+    public final ChoicePointStack stack;
     /** Trail stack */
     public Trail trail;
     /** Cut pointer */
@@ -112,7 +112,7 @@ public class Prolog implements Serializable {
     public Prolog(PrologControl c) { 
 	control    = c;
 	cont       = null;
-	stack      = new CPFStack(this);
+	stack      = new ChoicePointStack();
 	trail      = new Trail(this);
     }
 
@@ -166,7 +166,7 @@ public class Prolog implements Serializable {
 	CPFTimeStamp = Long.MIN_VALUE;
 
 	// Creates an initial choice point frame.
-	CPFEntry initialFrame = CPFEntry.S0(null);
+	ChoicePointFrame initialFrame = ChoicePointFrame.S0(null);
 	initialFrame.b0 = B0;
 	initialFrame.bp = Failure.FAILURE;
 	initialFrame.tr = trail.top();
@@ -192,7 +192,7 @@ public class Prolog implements Serializable {
 	currentOutput = userOutput;
     }
 
-    /** Sets the top of choice porint stack to <code>B0</code> (cut pointer). */
+    /** Sets B0 to the top of the choice point stack.. */
     public void setB0()    { B0 = stack.top(); }
 
     /** Discards all choice points after the value of <code>i</code>. */
@@ -255,7 +255,7 @@ public class Prolog implements Serializable {
      * and returns the backtrak point in current choice point.
      */
     public Operation fail() {
-	CPFEntry top = stack.topEntry();
+	ChoicePointFrame top = stack.top;
 	B0 = top.b0;     // restore B0
 	return top.bp;   // execute next clause
     }
@@ -327,24 +327,24 @@ public class Prolog implements Serializable {
 
     /** Restores the argument registers and continuation goal register from the current choice point frame. */
     public void restore() {
-      stack.restore();
+      stack.top.restore(this);
     }
 
     /** Creates a new choice point frame. */
-    public Operation jtry0(Operation p, Operation next) { return finishjtry(p, next, CPFEntry.S0(cont)); }
-    public Operation jtry1(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S1(this)); }
-    public Operation jtry2(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S2(this)); }
-    public Operation jtry3(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S3(this)); }
-    public Operation jtry4(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S4(this)); }
-    public Operation jtry5(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S5(this)); }
-    public Operation jtry6(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S6(this)); }
-    public Operation jtry7(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S7(this)); }
-    public Operation jtry8(Operation p, Operation next) { return finishjtry(p, next, new CPFEntry.S8(this)); }
+    public Operation jtry0(Operation p, Operation next) { return finishjtry(p, next, ChoicePointFrame.S0(cont)); }
+    public Operation jtry1(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S1(this)); }
+    public Operation jtry2(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S2(this)); }
+    public Operation jtry3(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S3(this)); }
+    public Operation jtry4(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S4(this)); }
+    public Operation jtry5(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S5(this)); }
+    public Operation jtry6(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S6(this)); }
+    public Operation jtry7(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S7(this)); }
+    public Operation jtry8(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S8(this)); }
     public Operation jtry(int arity, Operation p, Operation next) {
-	return finishjtry(p, next, new CPFEntry.S9(arity, this));
+	return finishjtry(p, next, new ChoicePointFrame.S9(arity, this));
     }
 
-    private Operation finishjtry(Operation p, Operation next, CPFEntry entry) {
+    private Operation finishjtry(Operation p, Operation next, ChoicePointFrame entry) {
       entry.b0 = B0;
       entry.bp = next;
       entry.tr = trail.top();
@@ -360,7 +360,7 @@ public class Prolog implements Serializable {
      */
     public Operation retry(Operation p, Operation next) {
 	restore();
-	CPFEntry top = stack.topEntry();
+	ChoicePointFrame top = stack.top;
 	trail.unwind(top.tr);
 	top.bp = next;
 	return p;
@@ -372,7 +372,7 @@ public class Prolog implements Serializable {
      */
     public Operation trust(Operation p) {
 	restore();
-	trail.unwind(stack.topEntry().tr);
+	trail.unwind(stack.top.tr);
 	stack.delete();
 	return p;
     }
