@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 import java.util.StringTokenizer;
 /**
  * Prolog Cafe launcher.
@@ -7,13 +7,13 @@ import java.util.StringTokenizer;
  * <code>package</code> is a package name, and 
  * <code>predicate</code> is a predicate name (only atom).
  * <pre>
- *   % java -cp $PLCAFEDIR/plcafe.jar jp.ac.kobe_u.cs.prolog.lang.PrologMain package:predicate
- *   % java -cp $PLCAFEDIR/plcafe.jar jp.ac.kobe_u.cs.prolog.lang.PrologMain predicate
+ *   % java -cp $PLCAFEDIR/plcafe.jar com.googlecode.prolog_cafe.lang.PrologMain package:predicate
+ *   % java -cp $PLCAFEDIR/plcafe.jar com.googlecode.prolog_cafe.lang.PrologMain predicate
  * </pre>
  * Let us show a sample session for launching a small Prolog interpreter:
- * <code>jp.ac.kobe_u.cs.prolog.builtin:cafeteria/0</code>.<br>
+ * <code>com.googlecode.prolog_cafe.builtin:cafeteria/0</code>.<br>
  * <pre>
- *    % java  -cp $PLCAFEDIR/plcafe.jar:$CLASSPATH jp.ac.kobe_u.cs.prolog.lang.PrologMain jp.ac.kobe_u.cs.prolog.builtin:cafeteria
+ *    % java  -cp $PLCAFEDIR/plcafe.jar:$CLASSPATH com.googlecode.prolog_cafe.lang.PrologMain com.googlecode.prolog_cafe.builtin:cafeteria
  *    Prolog Cafe X.X.X (YYY)
  *    Copyright(C) 1997-200X M.Banbara and N.Tamura
  *    | ?- 
@@ -41,14 +41,14 @@ public class PrologMain {
 	    } 
 	    Term arg1 = Prolog.Nil;
 	    arg1 = new ListTerm(SymbolTerm.makeSymbol("user"), arg1);
-	    arg1 = new ListTerm(SymbolTerm.makeSymbol("jp.ac.kobe_u.cs.prolog.builtin"), arg1);
+	    arg1 = new ListTerm(SymbolTerm.makeSymbol("com.googlecode.prolog_cafe.builtin"), arg1);
 	    Term arg2 = parseAtomicGoal(argv[0]);
 	    if (arg2  == null) {
 		usage();
 		System.exit(1);
 	    }
 	    p = new BlockingPrologControl();
-	    p.setPredicate("jp.ac.kobe_u.cs.prolog.builtin", "initialization", arg1, arg2);
+	    p.setPredicate("com.googlecode.prolog_cafe.builtin", "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);
 	} catch (Exception e){
@@ -83,9 +83,9 @@ public class PrologMain {
     protected static void usage() {
 	String s = "Usage:\n";
 	s += "java -cp $PLCAFEDIR/plcafe.jar";
-	s += " jp.ac.kobe_u.cs.prolog.lang.PrologMain package:predicate\n";
+	s += " com.googlecode.prolog_cafe.lang.PrologMain package:predicate\n";
 	s += "java -cp $PLCAFEDIR/plcafe.jar";
-	s += " jp.ac.kobe_u.cs.prolog.lang.PrologMain predicate\n";
+	s += " com.googlecode.prolog_cafe.lang.PrologMain predicate\n";
 	s += "    package:        package name\n";
 	s += "    predicate:      predicate name (only atom)";
 	System.out.println(s);

@@ -111,7 +111,7 @@ sub error {
 #	"goal",        "",
 #	"system",      "java",
 #	"system_opts", "-cp \$PLCAFEDIR/plcafe.jar:\$CLASSPATH",
-#	"system_args", "jp.ac.kobe_u.cs.prolog.lang.PrologMain jp.ac.kobe_u.cs.prolog.compiler.pl2am:main",
+#	"system_args", "com.googlecode.prolog_cafe.lang.PrologMain com.googlecode.prolog_cafe.compiler.pl2am:main",
 #	);
 #}
 

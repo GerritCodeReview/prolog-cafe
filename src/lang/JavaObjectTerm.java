@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Java-term.<br>
  * The <code>JavaObjectTerm</code> class wraps a java object.<br>

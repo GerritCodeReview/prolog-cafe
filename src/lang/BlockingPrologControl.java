@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 
 import java.io.Serializable;
 
@@ -42,7 +42,7 @@ import java.io.Serializable;
  * // Usage:
  * //   % plcafe -cp queens.jar T
  * //
- * import jp.ac.kobe_u.cs.prolog.lang.*;
+ * import com.googlecode.prolog_cafe.lang.*;
  * public class T {
  *     public static void main(String args[]) {
  *     long t = System.currentTimeMillis();

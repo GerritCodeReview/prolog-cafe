@@ -50,9 +50,9 @@ compiler:
 
 plcafe:
 	$(JAVAC) $(JAVACOPTS) src/lang/*.java src/builtin/*.java \
-	target/generated-sources/prologcafe-builtin/jp/ac/kobe_u/cs/prolog/builtin/*.java \
+	target/generated-sources/prologcafe-builtin/com/googlecode/prolog_cafe/builtin/*.java \
 	src/compiler/pl2am/*.java src/compiler/am2j/*.java src/compiler/Compiler.java
-	$(JAR) $(JAROPTS) plcafe.jar jp/ac/kobe_u/cs/prolog
+	$(JAR) $(JAROPTS) plcafe.jar com/googlecode/prolog_cafe
 
 plj:
 	(cd src/compiler; $(MAKE) plj PROLOG='$(JAVA)')

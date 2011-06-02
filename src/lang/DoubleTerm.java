@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Floating point number.
  * The class <code>DoubleTerm</code> wraps a value of 

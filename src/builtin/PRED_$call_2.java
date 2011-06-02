@@ -1,5 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.builtin;
-import  jp.ac.kobe_u.cs.prolog.lang.*;
+package com.googlecode.prolog_cafe.builtin;
+import  com.googlecode.prolog_cafe.lang.*;
 import java.lang.reflect.*;
 /**
  * <code>'$call'/2</code><br>
@@ -47,7 +47,7 @@ class PRED_$call_2 extends Predicate.P2 {
 	      return engine.pcl.predicate(((SymbolTerm)a1).name(), functor, cont, args);
 	    } catch (ExistenceException e) {
 		try {
-            return engine.pcl.predicate("jp.ac.kobe_u.cs.prolog.builtin", functor, cont, args);
+            return engine.pcl.predicate("com.googlecode.prolog_cafe.builtin", functor, cont, args);
 		} catch (ExistenceException ee) {
 		    if ((engine.getUnknown()).equals("fail"))
 			return engine.fail();

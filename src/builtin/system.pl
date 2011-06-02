@@ -1,6 +1,6 @@
 %:- op(1150,  fx, (package)). 
 %package(_). 
-:- package 'jp.ac.kobe_u.cs.prolog.builtin'.
+:- package 'com.googlecode.prolog_cafe.builtin'.
 :- public system_predicate/1.
 
 system_predicate(system_predicate(_)).

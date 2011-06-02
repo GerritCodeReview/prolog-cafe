@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Permission error.<br>
  * There will be a permission error when it is not permitted

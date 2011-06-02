@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Instantiation error.<br>
  * There will be an instantiation error 

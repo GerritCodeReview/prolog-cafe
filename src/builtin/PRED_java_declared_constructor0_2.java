@@ -1,5 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.builtin;
-import  jp.ac.kobe_u.cs.prolog.lang.*;
+package com.googlecode.prolog_cafe.builtin;
+import  com.googlecode.prolog_cafe.lang.*;
 import java.lang.reflect.*;
 /**
  * <code>java_declared_constructor0/2</code>

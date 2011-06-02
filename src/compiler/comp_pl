@@ -94,7 +94,7 @@ if ($prolog_system eq "SICStus" || $prolog_system eq "SWI-Prolog") { # SICStus o
 	&error("invalid prolog file found, $prolog_file");
     }
     # set $system_args
-    $system_args = "jp.ac.kobe_u.cs.prolog.lang.PrologMain jp.ac.kobe_u.cs.prolog.compiler.$file:main";
+    $system_args = "com.googlecode.prolog_cafe.lang.PrologMain com.googlecode.prolog_cafe.compiler.$file:main";
     &message("making $command_file");
     &mk_command($command_file, $cmd_temp, undef, $prolog, $system_opts, $system_args);
     chmod 0755, $command_file;

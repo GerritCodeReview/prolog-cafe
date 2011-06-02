@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Initial continuation goal.<br>
  * That is to say, this <code>Success</code> will be executed 

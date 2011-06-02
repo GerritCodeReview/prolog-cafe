@@ -1,5 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.compiler;
-import jp.ac.kobe_u.cs.prolog.lang.*;
+package com.googlecode.prolog_cafe.compiler;
+import com.googlecode.prolog_cafe.lang.*;
 import java.io.File;
 /**
  * The <code>Compiler</code> class provides methods for 
@@ -22,7 +22,7 @@ import java.io.File;
  * <ul>
  * <li>From Command line<br>
  * <pre>
- *    % java -cp $PLCAFEDIR/plcafe.jar jp.ac.kobe_u.cs.prolog.compiler.Compiler:$CLASSPATH $PLCAFEDIR/examples/prolog/list.pl 
+ *    % java -cp $PLCAFEDIR/plcafe.jar com.googlecode.prolog_cafe.compiler.Compiler:$CLASSPATH $PLCAFEDIR/examples/prolog/list.pl 
  *    Prolog Cafe X.X.X (YYY)
  *    Copyright(C) 1997-200X M.Banbara and N.Tamura
  *    % ls
@@ -30,7 +30,7 @@ import java.io.File;
  * </pre>
  * <li>From Java program<br>
  * <pre>
- *    import jp.ac.kobe_u.cs.prolog.compiler.Compiler;
+ *    import com.googlecode.prolog_cafe.compiler.Compiler;
  *    public class T {
  *        public static void main(String argv[]) {
  *            Compiler comp = new Compiler();
@@ -114,7 +114,7 @@ public class Compiler {
 	    if (generateClosure)
 		op = new ListTerm(SymbolTerm.makeSymbol("clo"), op);
 	    BlockingPrologControl ctl = new BlockingPrologControl();
-	    return ctl.execute("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am",
+	    return ctl.execute("com.googlecode.prolog_cafe.compiler.pl2am", "pl2am",
 	      new ListTerm(prolog, new ListTerm(wam, new ListTerm(op, Prolog.Nil))));
 	} catch (Exception e){
 	    e.printStackTrace();
@@ -144,7 +144,7 @@ public class Compiler {
 	    Term wam    = SymbolTerm.makeSymbol(_wam);
 	    Term dir    = SymbolTerm.makeSymbol(_dir);
 	    BlockingPrologControl ctl = new BlockingPrologControl();
-	    return ctl.execute("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j",
+	    return ctl.execute("com.googlecode.prolog_cafe.compiler.am2j", "am2j",
 	      new ListTerm(wam, new ListTerm(dir, Prolog.Nil)));
 	} catch (Exception e){
 	    e.printStackTrace();
@@ -205,7 +205,7 @@ public class Compiler {
     protected static void usage() {
 	String s = "Usage:\n";
 	s += "java -cp $PLCAFEDIR/plcafe.jar";
-	s += " jp.ac.kobe_u.cs.prolog.compiler.Compiler prolog_file\n";
+	s += " com.googlecode.prolog_cafe.compiler.Compiler prolog_file\n";
 	System.out.println(s);
     }
 

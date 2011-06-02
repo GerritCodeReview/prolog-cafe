@@ -46,9 +46,9 @@ SEE ALSO
 :- dynamic current_arity/1.
 :- dynamic current_package/1.
 
-% :- module('jp.ac.kobe_u.cs.prolog.compiler.am2j', [main/0,am2j/1]).
+% :- module('com.googlecode.prolog_cafe.compiler.am2j', [main/0,am2j/1]).
 package(_). 
-:- package 'jp.ac.kobe_u.cs.prolog.compiler.am2j'.
+:- package 'com.googlecode.prolog_cafe.compiler.am2j'.
 :- public main/0, am2j/1.
 /*****************************************************************
   Main
@@ -149,7 +149,7 @@ write_java0(label(fail/0), _, Out) :- !,
 	tab(Out, 4),
 	write(Out, 'static final Operation '),
 	write_index(fail/0, Out),
-	write(Out, ' = jp.ac.kobe_u.cs.prolog.lang.Failure.FAIL_0'),
+	write(Out, ' = com.googlecode.prolog_cafe.lang.Failure.FAIL_0'),
 	write(Out, ';'), nl(Out).
 write_java0(label(L), _, Out) :- !,
 	tab(Out, 4),

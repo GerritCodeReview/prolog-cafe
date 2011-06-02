@@ -26,14 +26,14 @@ if ($opt_t) {
 	usage();  
 	exit 1;
     } else { # $opt_t && @ARGV <= 0
-	$class = "jp.ac.kobe_u.cs.prolog.lang.PrologMain";
+	$class = "com.googlecode.prolog_cafe.lang.PrologMain";
 	@args  = ($opt_t);
     }
 } elsif (@ARGV > 0) { # !$opt_t && @ARGV > 0
     ($class, @args) = @ARGV;
 } else { # !$opt_t && @ARGV <= 0
-    $class = "jp.ac.kobe_u.cs.prolog.lang.PrologMain";
-    @args  = "jp.ac.kobe_u.cs.prolog.builtin:cafeteria";
+    $class = "com.googlecode.prolog_cafe.lang.PrologMain";
+    @args  = "com.googlecode.prolog_cafe.builtin:cafeteria";
 }
 
 # set $classpath

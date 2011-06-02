@@ -1,5 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.builtin;
-import jp.ac.kobe_u.cs.prolog.lang.*;
+package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>'$print_stack_trace'/1</code>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

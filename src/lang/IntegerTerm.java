@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Integer.<br>
  * The class <code>IntegerTerm</code> wraps a value of primitive type 

@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Variable.<br>
  * The <code>VariableTerm</code> class represents a logical variable.<br>

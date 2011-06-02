@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Implementing this interface allows an object to be pushed to trail stack.<br>
  * @see Trail

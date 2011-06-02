@@ -81,10 +81,10 @@
           <debug>false</debug>
           <optimize>true</optimize>
           <excludes>
-            <exclude>jp/ac/kobe_u/cs/prolog/jp/**</exclude>
-            <exclude>jp/ac/kobe_u/cs/prolog/builtin/jp/**</exclude>
-            <exclude>jp/ac/kobe_u/cs/prolog/compiler/jp/**</exclude>
-            <exclude>jp/ac/kobe_u/cs/prolog/lang/jp/**</exclude>
+            <exclude>com/googlecode/prolog_cafe/jp/**</exclude>
+            <exclude>com/googlecode/prolog_cafe/builtin/jp/**</exclude>
+            <exclude>com/googlecode/prolog_cafe/compiler/jp/**</exclude>
+            <exclude>com/googlecode/prolog_cafe/lang/jp/**</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -96,8 +96,8 @@
             <include>**/*.java</include>
           </includes>
           <excludes>
-            <exclude>jp/ac/kobe_u/cs/prolog/compiler/am2j/**/*.java</exclude>
-            <exclude>jp/ac/kobe_u/cs/prolog/compiler/pl2am/**/*.java</exclude>
+            <exclude>com/googlecode/prolog_cafe/compiler/am2j/**/*.java</exclude>
+            <exclude>com/googlecode/prolog_cafe/compiler/pl2am/**/*.java</exclude>
           </excludes>
         </configuration>
         <executions>

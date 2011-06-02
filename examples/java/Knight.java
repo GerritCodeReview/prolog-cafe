@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.Vector;
-import jp.ac.kobe_u.cs.prolog.lang.*;
+import com.googlecode.prolog_cafe.lang.*;
 /**
  * Knight Tour.<br>
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)

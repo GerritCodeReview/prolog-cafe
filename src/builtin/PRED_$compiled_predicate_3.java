@@ -1,10 +1,10 @@
-package jp.ac.kobe_u.cs.prolog.builtin;
-import jp.ac.kobe_u.cs.prolog.lang.IntegerTerm;
-import jp.ac.kobe_u.cs.prolog.lang.Operation;
-import jp.ac.kobe_u.cs.prolog.lang.Predicate;
-import jp.ac.kobe_u.cs.prolog.lang.Prolog;
-import jp.ac.kobe_u.cs.prolog.lang.SymbolTerm;
-import jp.ac.kobe_u.cs.prolog.lang.Term;
+package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.lang.IntegerTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.Term;
 
 public final class PRED_$compiled_predicate_3 extends Predicate.P3 {
     public PRED_$compiled_predicate_3(Term a1, Term a2, Term a3, Operation cont) {

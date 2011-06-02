@@ -169,9 +169,9 @@ Notation
 :- dynamic pl2am_flag/1.
 :- dynamic fail_flag/0.  % used for generating label(fail/0) or not
 
-% :- module('jp.ac.kobe_u.cs.prolog.compiler.pl2am', [main/0,pl2am/1]).
+% :- module('com.googlecode.prolog_cafe.compiler.pl2am', [main/0,pl2am/1]).
 package(_). 
-:- package 'jp.ac.kobe_u.cs.prolog.compiler.pl2am'.
+:- package 'com.googlecode.prolog_cafe.compiler.pl2am'.
 
 :- public main/0, pl2am/1.
 /*****************************************************************
@@ -253,8 +253,8 @@ copt_expr(clo).
 
 %%% Post-init
 pl2am_postread :- 
-	assert_import('jp.ac.kobe_u.cs.prolog.lang'),
-	assert_import('jp.ac.kobe_u.cs.prolog.builtin'),
+	assert_import('com.googlecode.prolog_cafe.lang'),
+	assert_import('com.googlecode.prolog_cafe.builtin'),
 	assert_dummy_package,
 	assert_dummy_public.
 
@@ -308,7 +308,7 @@ assert_dynamic_predicates([G|Gs]) :-
 	assert_dynamic_predicates(Gs).
 
 assert_dynamic(G) :-
-	\+ clause(package_name('jp.ac.kobe_u.cs.prolog.builtin'), _),
+	\+ clause(package_name('com.googlecode.prolog_cafe.builtin'), _),
 	G = F/A,
 	functor(Head, F, A),
 	system_predicate(Head),
@@ -415,7 +415,7 @@ assert_cls(Head) :- !,
 	assert(internal_clause(Head, true)).
 
 assert_predicate(Head) :-
-	\+ clause(package_name('jp.ac.kobe_u.cs.prolog.builtin'), _),
+	\+ clause(package_name('com.googlecode.prolog_cafe.builtin'), _),
 	system_predicate(Head),
 	!,
 	functor(Head, Functor, Arity),	

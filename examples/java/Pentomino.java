@@ -1,5 +1,5 @@
 import java.awt.*;
-import jp.ac.kobe_u.cs.prolog.lang.*;
+import com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>Pentomino</code><br>
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)

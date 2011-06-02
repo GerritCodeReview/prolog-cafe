@@ -1,5 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.builtin;
-import  jp.ac.kobe_u.cs.prolog.lang.*;
+package com.googlecode.prolog_cafe.builtin;
+import  com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>number_chars/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

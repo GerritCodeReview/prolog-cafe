@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * Tracks current evaluation goal and results.
  * <p>
@@ -84,7 +84,7 @@ public abstract class PrologControl {
      * is set to the <code>cont</code> field of <code>call(t)</code> as continuation.
      */
     public void setPredicate(Term t)  {
-      setPredicate("jp.ac.kobe_u.cs.prolog.builtin", "call", t);
+      setPredicate("com.googlecode.prolog_cafe.builtin", "call", t);
     }
 
     /**

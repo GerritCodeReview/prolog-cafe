@@ -1,4 +1,4 @@
-import jp.ac.kobe_u.cs.prolog.lang.*;
+import com.googlecode.prolog_cafe.lang.*;
 /**
  * A sample program for multi-thread execution.<br>
  * Usage: <br>

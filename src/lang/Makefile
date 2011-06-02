@@ -17,7 +17,7 @@ JAROPTS   = cvf
 ################################################################
 lang: 
 	$(JAVAC)  $(JAVACOPTS) *.java
-	$(JAR) $(JAROPTS) lang.jar jp/ac/kobe_u/cs/prolog/lang/
+	$(JAR) $(JAROPTS) lang.jar com/googlecode/prolog_cafe/lang/
 
 clean:
 	-rm -f -r jp

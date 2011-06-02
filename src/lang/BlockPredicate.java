@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package com.googlecode.prolog_cafe.lang;
 /**
  * The <code>BlockPredicate</code> class is used to implement
  * builtin-predicates. For example,

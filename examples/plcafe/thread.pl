@@ -56,7 +56,7 @@ msg(Msg) :-
 %% Utilities
 %%
 start(G, Engine) :-
-	java_constructor0('jp.ac.kobe_u.cs.prolog.lang.PrologControl', Engine),
+	java_constructor0('com.googlecode.prolog_cafe.lang.PrologControl', Engine),
 	java_method0(Engine, setPredicate(G), _),
 	java_method0(Engine, start, _).
 
