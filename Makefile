@@ -51,7 +51,7 @@ compiler:
 plcafe:
 	$(JAVAC) $(JAVACOPTS) src/lang/*.java src/builtin/*.java \
 	target/generated-sources/prologcafe-builtin/com/googlecode/prolog_cafe/builtin/*.java \
-	src/compiler/pl2am/*.java src/compiler/am2j/*.java src/compiler/Compiler.java
+	src/compiler/pl2am/*.java src/compiler/am2j/*.java src/compiler/*.java
 	$(JAR) $(JAROPTS) plcafe.jar com/googlecode/prolog_cafe
 
 plj:

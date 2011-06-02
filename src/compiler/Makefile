@@ -42,7 +42,7 @@ JAVA      = java
 plc: pl2am.plc am2j.plc
 
 compiler:pl2am.am am2j.am
-	$(JAVAC) $(JAVACOPTS) pl2am/*.java am2j/*.java Compiler.java
+	$(JAVAC) $(JAVACOPTS) pl2am/*.java am2j/*.java *.java
 	$(JAR) $(JAROPTS) compiler.jar com/googlecode/prolog_cafe/compiler
 
 plj: pl2am.plj am2j.plj
