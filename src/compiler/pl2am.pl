@@ -89,7 +89,6 @@ Control Instructions
   execute(p:BinG)
   execute(BinG)
   inline(G)
-  '$INSERT'(ListOfAtom)
 
 Other Instructions
 ==================
@@ -1073,12 +1072,6 @@ precompile_body(Goals) -->
 	precomp_body(Goals).
 
 precomp_body([]) --> !, [execute(cont)].
-precomp_body(['$INSERT_AM'(Code)|_]) --> !, 
-	{pl2am_error([invalid,instruction,'$INSERT_AM'(Code)])},
-	{fail}.
-precomp_body(['$INSERT'(Code)|_]) --> !, 
-	{pl2am_error([invalid,instruction,'$INSERT'(Code)])},
-	{fail}.
 precomp_body([M:G|Cont]) --> !, 
 	binarize_body(G, Cont, G1), 
 	[execute(M:G1)].
@@ -1118,10 +1111,6 @@ precomp_cont([G|Cont], V) -->
 
 precomp_inline([], Gs1) --> !, precomp_body(Gs1).
 precomp_inline([fail|_], _) --> !, [inline(fail)].
-precomp_inline(['$INSERT_AM'(Code)|Gs], Gs1) --> !, 
-	[Code], precomp_inline(Gs, Gs1).
-precomp_inline(['$INSERT'(Code)|Gs], Gs1) --> !, 
-	['$INSERT'(Code)], precomp_inline(Gs, Gs1).
 precomp_inline([G|Gs], Gs1) --> 
 	{G  =.. [F|Args]},
 	{functor(G, F, A)},
@@ -1626,9 +1615,6 @@ builtin_inline_predicates('$greater_or_equal'(_,_)).
 builtin_inline_predicates('$greater_than'(_,_)).
 builtin_inline_predicates('$less_or_equal'(_,_)).
 builtin_inline_predicates('$less_than'(_,_)).
-% Prolog Cafe Specific
-builtin_inline_predicates('$INSERT_AM'(_)).
-builtin_inline_predicates('$INSERT'(_)).
 
 builtin_arith_constant(random).
 builtin_arith_constant(pi).

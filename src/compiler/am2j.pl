@@ -223,9 +223,6 @@ write_java0(execute(BinG), _, Out) :- !,
 write_java0(inline(G), In, Out) :- 
 	write_inline(G, In, Out),
 	!.
-write_java0('$INSERT'(X), In, Out) :- 
-	write_insert(X, In, Out),
-	!.
 write_java0(new_hash(Tag,I), _, Out) :- !,
 	tab(Out, 4),
 	write(Out, 'static final java.util.HashMap<Term, Operation> '),

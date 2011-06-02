@@ -244,11 +244,6 @@ X @>= Y :- X @>= Y.
 
 compare(Op, X, Y) :- '$compare0'(Op0, X, Y), '$map_compare_op'(Op0, Op).
 
-'$compare0'(Op0, X, Y) :-
-	'$INSERT_AM'([deref(a(2),a(2)),deref(a(3),a(3))]),
-	'$INSERT'(['\tif(! a1.unify(new IntegerTerm(a2.compareTo(a3)), engine.trail))',
-	           '\t\treturn engine.fail();']).
-
 '$map_compare_op'(Op0, Op) :- Op0 =:= 0, !, Op = (=).
 '$map_compare_op'(Op0, Op) :- Op0 < 0, !, Op = (<).
 '$map_compare_op'(Op0, Op) :- Op0 > 0, !, Op = (>).
@@ -461,19 +456,7 @@ clause(Head, B) :-
         illarg(permission(Operation,ObjType,P:F/A,_), Goal, _).
 '$check_procedure_permission'(_, _, _, _).
 
-% checks if predicate P:F/A is compiled or not.
-'$compiled_predicate'(P, F, A) :-
-	'$INSERT_AM'([deref(a(1),a(1)),deref(a(2),a(2)),deref(a(3),a(3))]),
-	'$INSERT'(['\tif(! engine.pcl.definedPredicate(((SymbolTerm)a1).name(), ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue()))',
-	           '\t\treturn engine.fail();']).
-
-'$compiled_predicate_or_builtin'(P, F, A) :-
-	'$INSERT_AM'([deref(a(1),a(1)),deref(a(2),a(2)),deref(a(3),a(3))]),
-	'$INSERT'(['\tif(! engine.pcl.definedPredicate(((SymbolTerm)a1).name(), ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue()) && ! engine.pcl.definedPredicate("jp.ac.kobe_u.cs.prolog.builtin", ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue()))',
-	           '\t\treturn engine.fail();']).
-
 % initialize internal databases of given packages.
-%initialization([], Goal) :- !, call(Goal).
 initialization([], Goal) :- !, once(Goal).
 initialization([P|Ps], Goal) :-
 	'$new_internal_database'(P),
