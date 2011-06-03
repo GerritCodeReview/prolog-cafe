@@ -14,7 +14,6 @@ package(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- public true/0, therwise/0.
 :- public fail/0, false/0.
-%:- public (!)/0, '$get_level'/1, '$neck_cut'/0, '$cut'/1.
 :- public (!)/0.
 :- public (^)/2.
 :- public (',')/2.
@@ -29,9 +28,6 @@ fail :- fail.
 false :- fail.
 
 !.
-%'$get_level'(X) :- '$get_level'(X).
-%'$neck_cut' :- '$neck_cut'.
-%'$cut'(X) :- '$cut'(X).
 
 (_ ^ G) :- call(G).
 
@@ -46,7 +42,6 @@ false :- fail.
 (_IF -> _THEN; ELSE) :- call(ELSE).
 
 call(Term) :- 
-	%'$get_level'(Cut),
 	'$get_current_B'(Cut),
 	'$meta_call'(Term, user, Cut, 0, interpret).
 
@@ -120,7 +115,6 @@ call(Term) :-
 	'$new_internal_database'(P),
 	hash_contains_key(P, FA),
 	!,
-	%'$get_level'(Cut),
 	'$get_current_B'(Cut),
 	Depth1 is Depth + 1,
 	clause(P:X, Body),
@@ -130,7 +124,6 @@ call(Term) :-
 
 :- public catch/3, throw/1.
 :- public on_exception/3.
-%:- public raise_exception/1. (written in Java)
 
 catch(Goal, Catch, Recovery) :-
 	on_exception(Catch, Goal, Recovery).
@@ -2084,8 +2077,6 @@ consult(File) :- atom(File), !, '$consult'(File).
 	print_message(info, [File,'consulted,',T,msec]),
 	close(In).
 
-%'$prolog_file_name'(File,  File) :- sub_atom(File, _, 3, 0, '.pl'), !.
-%'$prolog_file_name'(File,  File) :- sub_atom(File, _, 4, 0, '.pro'), !.
 '$prolog_file_name'(File,  File) :- sub_atom(File, _, _, After, '.'), After > 0, !.
 '$prolog_file_name'(File0, File) :- atom_concat(File0, '.pl', File).
 
@@ -2228,7 +2219,7 @@ leash(L) :- illarg(type('leash_specifier'), leash(L), 1).
 %%% Trace a Goal
 '$trace_goal'(Term) :- 
 	'$set_debug_flag'(leap, no),
-	'$get_level'(Cut), 
+	'$get_current_B'(Cut),
 	'$meta_call'(Term, user, Cut, 0, trace).
 
 '$trace_goal'(X, P, FA, Depth) :- 
