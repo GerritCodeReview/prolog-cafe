@@ -1983,6 +1983,7 @@ synchronized(Object, Goal) :-
 :- dynamic '$current_spypoint'/3.
 :- dynamic '$leap_flag'/1.
 :- dynamic '$consulted_file'/1.
+:- dynamic '$consulted_import'/2.
 :- dynamic '$consulted_package'/1.
 :- dynamic '$consulted_predicate'/3.
 
@@ -2083,6 +2084,7 @@ consult(File) :- atom(File), !, '$consult'(File).
 '$consult_init'(File) :-
 	retractall('$consulted_file'(_)),
 	retractall('$consulted_package'(_)),
+	retractall('$consulted_import'(File, _)),
 	retract('$consulted_predicate'(P,PI,File)),
 	abolish(P:PI),
 	fail.
@@ -2093,14 +2095,13 @@ consult(File) :- atom(File), !, '$consult'(File).
 '$consult_clause'(end_of_file          ) :- !.
 '$consult_clause'((:- module(P,_))     ) :- !, '$assert_consulted_package'(P).
 '$consult_clause'((:- package P)       ) :- !, '$assert_consulted_package'(P).
-'$consult_clause'((:- import _)        ) :- !.
+'$consult_clause'((:- import P)        ) :- !, '$assert_consulted_import'(P).
 '$consult_clause'((:- dynamic _)       ) :- !.
 '$consult_clause'((:- public _)        ) :- !.
 '$consult_clause'((:- meta_predicate _)) :- !.
 '$consult_clause'((:- mode _)          ) :- !.
 '$consult_clause'((:- multifile _)     ) :- !.
 '$consult_clause'((:- block _)         ) :- !.
-%'$consult_clause'((:- G)               ) :- !, clause('$consulted_package'(P), _), call(P:G).
 '$consult_clause'((:- G)               ) :- !, clause('$consulted_package'(P), _), once(P:G).
 '$consult_clause'(Clause0) :- 
 	'$consult_preprocess'(Clause0, Clause), 
@@ -2112,6 +2113,10 @@ consult(File) :- atom(File), !, '$consult'(File).
 '$assert_consulted_package'(P) :-
 	retractall('$consulted_package'(_)),
 	assertz('$consulted_package'(P)).
+
+'$assert_consulted_import'(P) :-
+	clause('$consulted_file'(File), _),
+	assertz('$consulted_import'(File, P)).
 
 '$consult_preprocess'(Clause0, Clause) :-
 	expand_term(Clause0, Clause).
