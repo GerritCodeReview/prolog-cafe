@@ -543,6 +543,7 @@ write_label(F/A, Out) :- !,
 	write_constructor(F/A, Out), nl(Out),
 	% exec method
 	nl(Out),
+	tab(Out, 4), write(Out, '@Override'), nl(Out),
 	tab(Out, 4),
 	write(Out, 'public Operation exec(Prolog engine) {'), nl(Out).
 write_label(L, Out) :-
@@ -554,6 +555,7 @@ write_label(L, Out) :-
 	write(Out, 'final class '),
 	write_class_name(L, Out),
 	write(Out, ' extends Operation {'), nl(Out),
+	tab(Out, 4), write(Out, '@Override'), nl(Out),
 	tab(Out, 4),
 	write(Out, 'public Operation exec(Prolog engine) {'), nl(Out), !.
 write_label(Instruction, _, _) :-
