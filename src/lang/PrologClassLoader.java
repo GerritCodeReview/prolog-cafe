@@ -33,9 +33,9 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
      * if exists, otherwise throws <code>ClassNotFoundException</code>.
      * @exception ClassNotFoundException
      */
-    public Class loadPredicateClass(String pkg, 
-				    String functor, 
-				    int arity, 
+    public Class loadPredicateClass(String pkg,
+				    String functor,
+				    int arity,
 				    boolean resolve) throws ClassNotFoundException {
 	return loadClass(PredicateEncoder.encode(pkg, functor, arity), resolve);
     }
@@ -48,17 +48,11 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
      * @return <code>true</code> if the predicate <code>pkg:functor/arity</code>
      * is defined, otherwise <code>false</code>.
      */
-    public boolean definedPredicate(String pkg, 
-				    String functor, 
+    public boolean definedPredicate(String pkg,
+				    String functor,
 				    int arity) {
 	String cname = PredicateEncoder.encode(pkg, functor, arity);
-	cname = cname.replace('.', '/') + ".class";
-	java.net.URL url = getResource(cname);
-	return url != null;
-    }
-
-    public Class findClass(String name) throws ClassNotFoundException {
-	throw new ClassNotFoundException();
+	return getResource(cname.replace('.', '/') + ".class") != null;
     }
 
   /**
@@ -99,9 +93,15 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
       a[arity] = cont;
       return (Predicate) clazz.getDeclaredConstructor(params).newInstance(a);
     } catch (Exception err) {
+      SymbolTerm colon2 = SymbolTerm.makeSymbol(":", 2);
       SymbolTerm slash2 = SymbolTerm.makeSymbol("/", 2);
       Term[] fa = {SymbolTerm.makeSymbol(functor), new IntegerTerm(arity)};
-      throw new ExistenceException("procedure", new StructureTerm(slash2, fa), err.toString());
+      Term[] r = {SymbolTerm.makeSymbol(pkg), new StructureTerm(slash2, fa)};
+      Term what = new StructureTerm(colon2, r);
+
+      ExistenceException e2 = new ExistenceException("procedure", new StructureTerm(slash2, fa), err.toString());
+      e2.initCause(err);
+      throw e2;
     }
   }
 }

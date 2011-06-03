@@ -9,6 +9,7 @@ import java.lang.reflect.*;
  */
 class PRED_$call_2 extends Predicate.P2 {
     private static final SymbolTerm SYM_SLASH_2 = SymbolTerm.makeSymbol("/", 2);
+    private static final SymbolTerm SYM_COLON_2 = SymbolTerm.makeSymbol(":", 2);
 
     public PRED_$call_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
@@ -48,11 +49,17 @@ class PRED_$call_2 extends Predicate.P2 {
 	    } catch (ExistenceException e) {
 		try {
             return engine.pcl.predicate("com.googlecode.prolog_cafe.builtin", functor, cont, args);
-		} catch (ExistenceException ee) {
+		} catch (ExistenceException e2) {
 		    if ((engine.getUnknown()).equals("fail"))
 			return engine.fail();
+
 		    Term[] fa = {SymbolTerm.makeSymbol(functor), new IntegerTerm(arity)};
-		    throw new ExistenceException(this, 0, "procedure", new StructureTerm(SYM_SLASH_2, fa), "");
+		    Term[] r = {a1, new StructureTerm(SYM_SLASH_2, fa)};
+		    Term what = new StructureTerm(SYM_COLON_2, r);
+
+		    ExistenceException err = new ExistenceException(this, 0, "procedure", what, e.getMessage());
+		    err.initCause(e);
+		    throw err;
 		}
 	    }
 	} catch (IllegalArgumentException e) {
