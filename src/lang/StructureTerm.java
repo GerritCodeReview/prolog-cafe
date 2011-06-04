@@ -35,7 +35,7 @@ public class StructureTerm extends Term {
      * such that <code>_functor</code> is the functor symbol, and 
      * <code>_args</code> is the argument terms respectively.
      */
-    public StructureTerm(SymbolTerm _functor, Term[] _args){
+    public StructureTerm(SymbolTerm _functor, Term... _args){
 	functor = _functor;
 	arity = functor.arity();
 	args = _args;

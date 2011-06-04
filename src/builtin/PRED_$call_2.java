@@ -53,10 +53,11 @@ class PRED_$call_2 extends Predicate.P2 {
 		    if ((engine.getUnknown()).equals("fail"))
 			return engine.fail();
 
-		    Term[] fa = {SymbolTerm.makeSymbol(functor), new IntegerTerm(arity)};
-		    Term[] r = {a1, new StructureTerm(SYM_SLASH_2, fa)};
-		    Term what = new StructureTerm(SYM_COLON_2, r);
-
+		    Term what = new StructureTerm(SYM_COLON_2,
+		       a1,
+		       new StructureTerm(SYM_SLASH_2,
+		         SymbolTerm.makeSymbol(functor),
+		         new IntegerTerm(arity)));
 		    ExistenceException err = new ExistenceException(this, 0, "procedure", what, e.getMessage());
 		    err.initCause(e);
 		    throw err;

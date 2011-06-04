@@ -41,17 +41,8 @@ class PRED_$get_instances_2 extends Predicate.P2 {
 	    int i = ((IntegerTerm)car).intValue();
 	    Term e = engine.internalDB.get(i);
 	    if (e != null) {
-		Term[] arg = {e, car};
-		x = new ListTerm(new StructureTerm(COMMA, arg), x);
-	    } 
-	    //	    else {
-	    //		System.out.println("index " + i + " is deleted.");
-	    //	    }
-
-	    //	    if (e == null)
-	    //		throw new SystemException("invalid index");
-	    //	    Term[] arg = {e, car};
-	    //	    x = new ListTerm(new StructureTerm(COMMA, arg), x);
+		x = new ListTerm(new StructureTerm(COMMA, e, car), x);
+	    }
 	    tmp = ((ListTerm)tmp).cdr().dereference();
 	}
 	if (! a2.unify(x, engine.trail))

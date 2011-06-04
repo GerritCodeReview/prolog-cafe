@@ -111,16 +111,12 @@ public class PRED_open_4 extends Predicate.P4 {
 	    }
 	    tmp = ((ListTerm) tmp).cdr().dereference();
 	}
-	Term[] args1 = {SYM_TEXT};
-	Term[] args2 = {a2};
-	Term[] args3 = {SymbolTerm.makeSymbol(file.getAbsolutePath())};
-	opts = new ListTerm(new StructureTerm(SYM_TYPE_1, args1), opts);
-	opts = new ListTerm(new StructureTerm(SYM_MODE_1, args2), opts);
-	opts = new ListTerm(new StructureTerm(SYM_FILE_NAME_1, args3), opts);
+	opts = new ListTerm(new StructureTerm(SYM_TYPE_1, SYM_TEXT), opts);
+	opts = new ListTerm(new StructureTerm(SYM_MODE_1, a2), opts);
+	opts = new ListTerm(new StructureTerm(SYM_FILE_NAME_1, SymbolTerm.makeSymbol(file.getAbsolutePath())), opts);
 	if (alias != null) {
 	    engine.getStreamManager().put(alias, streamObject);
-	    Term[] as = {alias};
-	    opts = new ListTerm(new StructureTerm(SYM_ALIAS_1, as), opts);
+	    opts = new ListTerm(new StructureTerm(SYM_ALIAS_1, alias), opts);
 	}
 	((VariableTerm)a3).bind(streamObject, engine.trail);
 	engine.getStreamManager().put(streamObject, opts);

@@ -33,8 +33,7 @@ public class PRED_atom_concat_3 extends Predicate.P3 {
 			       SymbolTerm.makeSymbol(str3.substring(i, endIndex))};
 		t = new ListTerm(new StructureTerm(AC_2, args), t);
 	    }
-	    Term[] args12 = {a1,a2};
-	    return new PRED_$member_in_reverse_2(new StructureTerm(AC_2, args12), t, cont);
+	    return new PRED_$member_in_reverse_2(new StructureTerm(AC_2, a1, a2), t, cont);
 	} else if (! a3.isVariable()) {
 	    throw new IllegalTypeException(this, 3, "atom", a3);
 	}
