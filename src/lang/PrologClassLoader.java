@@ -1,5 +1,6 @@
 package com.googlecode.prolog_cafe.lang;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 /**
  * Prolog class loader.
  *
@@ -91,7 +92,10 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
       for (int i = 0; i < arity; i++)
         a[i] = args[i];
       a[arity] = cont;
-      return (Predicate) clazz.getDeclaredConstructor(params).newInstance(a);
+
+      Constructor<Predicate> cons = clazz.getDeclaredConstructor(params);
+      cons.setAccessible(true);
+      return cons.newInstance(a);
     } catch (Exception err) {
       SymbolTerm colon2 = SymbolTerm.makeSymbol(":", 2);
       SymbolTerm slash2 = SymbolTerm.makeSymbol("/", 2);
