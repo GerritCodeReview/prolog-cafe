@@ -92,6 +92,9 @@ public final class Prolog {
     /** Hashtable for managing internal databases. */
     protected HashtableOfTerm hashManager;
 
+    /** Name of the builtin package. */
+    public static final String BUILTIN = "com.googlecode.prolog_cafe.builtin";
+
     /** Holds an atom <code>[]<code> (empty list). */
     public static final SymbolTerm Nil     = SymbolTerm.makeSymbol("[]");
 

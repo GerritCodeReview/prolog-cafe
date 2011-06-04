@@ -41,14 +41,14 @@ public class PrologMain {
 	    } 
 	    Term arg1 = Prolog.Nil;
 	    arg1 = new ListTerm(SymbolTerm.makeSymbol("user"), arg1);
-	    arg1 = new ListTerm(SymbolTerm.makeSymbol("com.googlecode.prolog_cafe.builtin"), arg1);
+	    arg1 = new ListTerm(SymbolTerm.makeSymbol(Prolog.BUILTIN), arg1);
 	    Term arg2 = parseAtomicGoal(argv[0]);
 	    if (arg2  == null) {
 		usage();
 		System.exit(1);
 	    }
 	    p = new BlockingPrologControl();
-	    p.setPredicate("com.googlecode.prolog_cafe.builtin", "initialization", arg1, arg2);
+	    p.setPredicate(Prolog.BUILTIN, "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);
 	} catch (Exception e){

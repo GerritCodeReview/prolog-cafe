@@ -20,7 +20,7 @@ public final class PRED_$compiled_predicate_or_builtin_3 extends Predicate.P3 {
         Term a2 = arg2.dereference();
         Term a3 = arg3.dereference();
         if(! engine.pcl.definedPredicate(((SymbolTerm)a1).name(), ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue())
-        && ! engine.pcl.definedPredicate("com.googlecode.prolog_cafe.builtin", ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue()))
+        && ! engine.pcl.definedPredicate(Prolog.BUILTIN, ((SymbolTerm)a2).name(), ((IntegerTerm)a3).intValue()))
           return engine.fail();
         return cont;
     }

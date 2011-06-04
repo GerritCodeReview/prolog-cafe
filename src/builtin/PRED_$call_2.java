@@ -48,7 +48,7 @@ class PRED_$call_2 extends Predicate.P2 {
 	      return engine.pcl.predicate(((SymbolTerm)a1).name(), functor, cont, args);
 	    } catch (ExistenceException e) {
 		try {
-            return engine.pcl.predicate("com.googlecode.prolog_cafe.builtin", functor, cont, args);
+            return engine.pcl.predicate(Prolog.BUILTIN, functor, cont, args);
 		} catch (ExistenceException e2) {
 		    if ((engine.getUnknown()).equals("fail"))
 			return engine.fail();

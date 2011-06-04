@@ -84,7 +84,7 @@ public abstract class PrologControl {
      * is set to the <code>cont</code> field of <code>call(t)</code> as continuation.
      */
     public void setPredicate(Term t)  {
-      setPredicate("com.googlecode.prolog_cafe.builtin", "call", t);
+      setPredicate(Prolog.BUILTIN, "call", t);
     }
 
     /**
