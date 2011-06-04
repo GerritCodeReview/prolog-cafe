@@ -17,6 +17,20 @@ public class BufferingPrologControl extends PrologControl {
   private Term[] resTemplate;
 
   /**
+   * Initialize one or more packages in the interpreter.
+   *
+   * @param pkgs list of package names to initialize.
+   * @return true if initialization was successful.
+   */
+  public boolean initialize(String... pkgs) {
+    Term goal = SymbolTerm.makeSymbol("true");
+    Term head = Prolog.Nil;
+    for (int i = pkgs.length - 1; 0 <= i; i--)
+      head = new ListTerm(SymbolTerm.makeSymbol(pkgs[i]), head);
+    return execute(Prolog.BUILTIN, "initialization", head, goal);
+  }
+
+  /**
    * Determine if the predicate completes successfully.
    *
    * @param pkg package the functor is declared in. Typically "user".
