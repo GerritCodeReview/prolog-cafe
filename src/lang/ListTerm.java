@@ -1,5 +1,6 @@
 package com.googlecode.prolog_cafe.lang;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * List.<br>
  * The class <code>ListTerm</code> represents a list structure.<br>
@@ -89,11 +90,11 @@ public class ListTerm extends Term {
 
     /** 
      * @return the <code>boolean</code> whose value is
-     * <code>convertible(Vector.class, type)</code>.
+     * <code>convertible(List.class, type)</code>.
      * @see Term#convertible(Class, Class)
      */
     public boolean convertible(Class type) { 
-	return convertible(Vector.class, type); 
+	return convertible(List.class, type); 
     }
 
     protected Term copy(Prolog engine) { 
@@ -120,16 +121,16 @@ public class ListTerm extends Term {
     }
 
     /** 
-     * Returns a <code>java.util.Vector</code> corresponds to this <code>ListTerm</code>
+     * Returns a {@code java.util.List} corresponds to this <code>ListTerm</code>
      * according to <em>Prolog Cafe interoperability with Java</em>.
-     * @return a <code>java.util.Vector</code> object equivalent to
+     * @return a {@link java.util.List} object equivalent to
      * this <code>IntegerTerm</code>.
      */
-    public Object toJava() { 
-	Vector<Object> vec = new Vector<Object>();
+    public List toJava() { 
+	List<Object> vec = new ArrayList<Object>();
 	Term t = this;
 	while(t.isList()) {
-	    vec.addElement(((ListTerm)t).car().dereference().toJava());
+	    vec.add(((ListTerm)t).car().dereference().toJava());
 	    t = ((ListTerm)t).cdr().dereference();  
 	}
 	return vec;	
