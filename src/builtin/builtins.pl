@@ -1849,17 +1849,8 @@ expand_term(Dcg, Dcg).
 % Hash creation and control
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- public new_hash/1.
-%:- public new_hash/2.          written in Java
-%:- public hash_clear/1.        written in Java
-%:- public hash_contains_key/2. written in Java
-%:- public hash_get/3.          written in Java
-%:- public hash_is_empty/1.     written in Java
-%:- public hash_keys/2.         written in Java
 :- public hash_map/2.
-%:- public hash_put/3.          written in Java
-%:- public hash_remove/2.       written in Java
-%:- public hash_size/2.         written in Java
-%:- public '$get_hash_manager'/1.  written in Java
+:- public hash_exists/1.
 
 new_hash(Hash) :- new_hash(Hash, []).
 
@@ -1872,6 +1863,11 @@ hash_map([], [], _) :- !.
 hash_map([K|Ks], [(K,V)|Ls], H_or_a) :-
 	hash_get(H_or_a, K, V),
 	hash_map(Ks, Ls, H_or_a).
+
+hash_exists(Alias) :-
+  atom(Alias),
+  '$get_hash_manager'(HM),
+  hash_contains_key(HM, Alias).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Java interoperation
