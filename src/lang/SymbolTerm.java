@@ -14,9 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  */
 public class SymbolTerm extends Term {
-
     /** Symbol table. */
     protected static final ConcurrentHashMap<String,SymbolTerm> SYMBOL_TABLE = new ConcurrentHashMap<String,SymbolTerm>();
+
+    private static final SymbolTerm colon2 = makeSymbol(":", 2);
 
     /** Holds a string representation of this <code>SymbolTerm</code>. */
     protected String name;
@@ -27,6 +28,11 @@ public class SymbolTerm extends Term {
     /** Returns a Prolog atom for the given name. */
     public static SymbolTerm makeSymbol(String _name) {
 	return makeSymbol(_name, 0);
+    }
+
+    /** Returns a Prolog functor for the given name and arity. */
+    public static StructureTerm makeSymbol(String pkg, String name, int arity) {
+      return new StructureTerm(colon2, makeSymbol(pkg), makeSymbol(name, arity));
     }
 
     /** Returns a Prolog functor for the given name and arity. */
