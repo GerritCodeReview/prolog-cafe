@@ -90,7 +90,7 @@ public final class Prolog {
     protected HashtableOfTerm streamManager;
 
     /** Hashtable for managing internal databases. */
-    protected HashtableOfTerm hashManager;
+    protected final HashtableOfTerm hashManager;
 
     /** Name of the builtin package. */
     public static final String BUILTIN = "com.googlecode.prolog_cafe.builtin";
@@ -117,6 +117,7 @@ public final class Prolog {
 	cont       = null;
 	trail      = new Trail();
 	stack      = new ChoicePointStack(trail);
+	hashManager = new HashtableOfTerm();
     }
 
     /** 
@@ -128,7 +129,6 @@ public final class Prolog {
      *   <li><code>userOutput</code>
      *   <li><code>userError</code>
      *   <li><code>copyHash</code>
-     *   <li><code>hashManager</code>
      *   <li><code>streamManager</code>
      * </ul>
      */
@@ -144,7 +144,6 @@ public final class Prolog {
 	userError   = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
 
 	copyHash      = new HashMap<VariableTerm,VariableTerm>();
-	hashManager   = new HashtableOfTerm();
 	streamManager = new HashtableOfTerm();
 
 	streamManager.put(SYM_USERINPUT, new JavaObjectTerm(userInput));
