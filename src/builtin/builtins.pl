@@ -706,7 +706,7 @@ findall(Template, Goal, Instances) :-
 	fail.
 '$findall'(H, _, _, Instances) :-
 	hash_get(H, '$FINDALL', Vs),
-	'$builtin_reverse'(Vs, Instances).
+	reverse(Vs, Instances).
 
 % bagof/3 & setof/3
 bagof(Template, Goal, Instances) :- callable(Goal), !,	
@@ -2361,9 +2361,14 @@ listing(T) :- illarg(type(predicate_indicator), listing(T), 1).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Misc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- public reverse/2.
 :- public length/2.
 :- public numbervars/3.
 :- public statistics/2.
+
+reverse(Xs, Zs) :- reverse(Xs, [], Zs).
+reverse([], Zs, Zs).
+reverse([X|Xs], Tmp, Zs) :- reverse(Xs, [X|Tmp], Zs).
 
 length(L, N) :- var(N), !, '$length'(L, 0, N).
 length(L, N) :- '$length0'(L, 0, N).
@@ -2575,10 +2580,6 @@ illarg(Msg, _, _) :- raise_exception(Msg).
 
 '$builtin_member'(X, [X|_]).
 '$builtin_member'(X, [_|L]) :- '$builtin_member'(X, L).	
-
-'$builtin_reverse'(Xs, Zs) :- '$builtin_reverse'(Xs, [], Zs).
-'$builtin_reverse'([], Zs, Zs).
-'$builtin_reverse'([X|Xs], Ys, Zs) :- '$builtin_reverse'(Xs, [X|Ys], Zs).
 
 '$builtin_message'([]) :- !.
 '$builtin_message'([M]) :- !, write(M).
