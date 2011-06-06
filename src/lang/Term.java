@@ -105,6 +105,12 @@ public abstract class Term implements Serializable,Comparable<Term> {
     /** @return the name of this Term, if {@link #isStructure()}. */
     public abstract String name();
 
+    /** @return the arity of this Term, if {@link #isStructure()}. */
+	public int arity() { return 0; }
+
+    /** @return get the nth argument of {@link #isStructure()} or {@link #isList()}. */
+    public Term arg(int nth) { throw new ArrayIndexOutOfBoundsException(nth); }
+
     /** 
      * Check whether this object is convertible with the given Java class type.
      * @param type the Java class type to compare with.

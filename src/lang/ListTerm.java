@@ -111,6 +111,18 @@ public class ListTerm extends Term {
 
     public String name() { return SYM_DOT.name(); }
 
+    public Term arg(int nth) {
+      Term t = this;
+      int old_nth = nth;
+      while (t.isList() && 0 < nth) {
+        nth--;
+        t = ((ListTerm)t).cdr.dereference();
+      }
+      if (t.isList())
+        return ((ListTerm)t).car;
+      throw new ArrayIndexOutOfBoundsException(old_nth);
+    }
+
     /** Returns the length of this <code>ListTerm</code>. */
     public int length() {
 	int count = 0;

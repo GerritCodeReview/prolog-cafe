@@ -73,6 +73,8 @@ public class StructureTerm extends Term {
      */
     public String name(){ return functor.name(); }
 
+    public Term arg(int nth) { return args[nth]; }
+
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
 	if (t.isVariable()) {
