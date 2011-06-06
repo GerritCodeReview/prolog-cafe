@@ -22,7 +22,7 @@ public class VariableTerm extends Term implements Undoable {
      */
     public VariableTerm() {
 	val = this;
-    	timeStamp = Long.MIN_VALUE;
+    timeStamp = Long.MIN_VALUE;
     }
 
     /** Constructs a new logical variable so that
@@ -37,7 +37,7 @@ public class VariableTerm extends Term implements Undoable {
     }
 
     /** Returns a string representation of this object.*/
-    protected String name() { return "_" + Integer.toHexString(hashCode()).toUpperCase(); }
+    protected String variableName() { return "_" + Integer.toHexString(hashCode()).toUpperCase(); }
 
     /* Term */
     /** 
@@ -130,6 +130,12 @@ public class VariableTerm extends Term implements Undoable {
 	return false;
     }
 
+    public String name() {
+    if (val == this)
+      return "";
+    return val.dereference().name();
+    }
+
     /** 
      * Returns <code>this</code> if this variable is unbound.
      * Otherwise, returns a Java object that corresponds to the dereferenced term:
@@ -152,7 +158,7 @@ public class VariableTerm extends Term implements Undoable {
     public String toQuotedString() {
 	if (val != this)
 	    return val.toQuotedString();
-	return name();
+	return variableName();
     }
 
     /* Object */
@@ -184,7 +190,7 @@ public class VariableTerm extends Term implements Undoable {
     public String toString() {
 	if (val != this)
 	    return val.toString();
-	return name();
+	return variableName();
     }
 
     /* Undoable */

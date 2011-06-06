@@ -109,6 +109,8 @@ public class ListTerm extends Term {
 	return true;
     }
 
+    public String name() { return SYM_DOT.name(); }
+
     /** Returns the length of this <code>ListTerm</code>. */
     public int length() {
 	int count = 0;

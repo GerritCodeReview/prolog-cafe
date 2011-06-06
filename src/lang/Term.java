@@ -102,6 +102,9 @@ public abstract class Term implements Serializable,Comparable<Term> {
      */
     public final boolean isClosure() { return this instanceof ClosureTerm; }
 
+    /** @return the name of this Term, if {@link #isStructure()}. */
+    public abstract String name();
+
     /** 
      * Check whether this object is convertible with the given Java class type.
      * @param type the Java class type to compare with.

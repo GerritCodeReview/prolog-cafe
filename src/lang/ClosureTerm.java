@@ -30,6 +30,8 @@ public class ClosureTerm extends Term {
 
     public String toQuotedString() { return toString(); }
 
+    public String name() { return ""; }
+
     /* Object */
     /**
      * Checks <em>term equality</em> of two terms.

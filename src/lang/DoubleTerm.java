@@ -38,14 +38,14 @@ public class DoubleTerm extends NumberTerm {
 	return this.val == ((DoubleTerm)t).value();
     }
 
+    public String name() { return ""; }
+
     /** 
      * @return the <code>boolean</code> whose value is
      * <code>convertible(Double.class, type)</code>.
      * @see Term#convertible(Class, Class)
      */
     public boolean convertible(Class type) { return convertible(Double.class, type); }
-
-    //    protected Term copy(Prolog engine) { return new DoubleTerm(val); }
 
     /** 
      * Returns a <code>java.lang.Double</code> corresponds to this <code>DoubleTerm</code>

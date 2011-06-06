@@ -42,7 +42,7 @@ public class IntegerTerm extends NumberTerm {
      */
     public boolean convertible(Class type) { return convertible(Integer.class, type); }
 
-    //    protected Term copy(Prolog engine) { return new IntegerTerm(val); }
+    public String name() { return ""; }
 
     /** 
      * Returns a <code>java.lang.Integer</code> corresponds to this <code>IntegerTerm</code>

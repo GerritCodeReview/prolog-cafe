@@ -15,28 +15,25 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class JavaObjectTerm extends Term {
     /** Holds a java object that this <code>JavaObjectTerm</code> wraps. */
-    protected Object obj = null;
-
-    /** Holds a <code>java.lang.Class</code> of object wrapped by this <code>JavaObjectTerm</code>. */
-    protected Class clazz = null;
+    protected Object obj;
 
     /** Constructs a new Prolog java-term that wraps the argument object. */
     public JavaObjectTerm(Object _obj) { 
-	if (_obj != null)
-	    setObject(_obj);
+	obj   = _obj;
     }
 
     /** Sets the argument object to this <code>JavaObjectTerm</code>. */
     public void setObject(Object _obj) {
 	obj   = _obj;
-	clazz = _obj.getClass();
     }
 
     /** Returns the object wrapped by this <code>JavaObjectTerm</code>. */
     public Object  object() { return obj; }
 
     /** Returns a <code>java.lang.Class</code> of object wrapped by this <code>JavaObjectTerm</code>. */
-    public Class   getClazz() { return clazz; }
+    public Class   getClazz() { return obj.getClass(); }
+
+    public String name() { return ""; }
 
     public String  toQuotedString() { return toString(); }
 
@@ -52,11 +49,11 @@ public class JavaObjectTerm extends Term {
     /** 
      * Check whether the wrapped object is convertible with the given Java class type.
      * @return the <code>boolean</code> whose value is
-     * <code>convertible(clazz, type)</code>.
-     * @see #clazz
+     * <code>convertible(getClazz(), type)</code>.
+     * @see #getClazz()
      * @see Term#convertible(Class, Class)
      */
-    public boolean convertible(Class type) { return convertible(clazz, type); }
+    public boolean convertible(Class type) { return convertible(obj.getClass(), type); }
 
     /** 
      * Returns the object wrapped by this <code>JavaObjectTerm</code>.
@@ -89,7 +86,8 @@ public class JavaObjectTerm extends Term {
 
     /** Returns a string representation of this <code>JavaObjectTerm</code>. */
     public String toString() {
-	return clazz.getName() + "(" + hashCode() + ")";
+	return obj.getClass().getName()
+      + "(0x" + Integer.toHexString(hashCode()) + ")";
     }
 
     /* Comparable */
