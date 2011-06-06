@@ -20,20 +20,6 @@ public class IntegerTerm extends NumberTerm {
     public IntegerTerm(int i) {	val = i; }
 
     /**
-     * Constructs a new Prolog integer that represents integer value 
-     * of specified <code>String</code> parameter.
-     * @exception NumberFormatException
-     * if the <code>String</code> does not contain a parsable integer.
-     */
-    public IntegerTerm(String i) {
-	try {
-	    val = Integer.parseInt(i);
-	} catch (NumberFormatException e) {
-	    throw e;
-	}
-    }
-
-    /**
      * Returns the value of <code>val</code>.
      * @see #val
      */
@@ -64,7 +50,7 @@ public class IntegerTerm extends NumberTerm {
      * @return a <code>java.lang.Integer</code> object equivalent to
      * this <code>IntegerTerm</code>.
      */
-    public Object toJava() { return new Integer(this.val); }
+    public Object toJava() { return Integer.valueOf(val); }
 
     /* Object */
     /** Returns a string representation of this <code>IntegerTerm</code>. */

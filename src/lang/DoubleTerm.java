@@ -53,7 +53,7 @@ public class DoubleTerm extends NumberTerm {
      * @return a <code>java.lang.Double</code> object equivalent to
      * this <code>DoubleTerm</code>.
      */
-    public Object toJava() { return new Double(this.val); }
+    public Object toJava() { return Double.valueOf(val); }
 
     /* Object */
     /** Returns a string representation of this <code>DoubleTerm</code>. */
