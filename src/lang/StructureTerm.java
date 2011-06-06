@@ -27,8 +27,14 @@ public class StructureTerm extends Term {
     /** Holds the argument terms of this <code>StructureTerm</code>. */
     protected Term[] args;
 
-    /** Holds the arity of this <code>StructureTerm</code>. */
-    protected int arity;
+    /**
+     * Constructs a new Prolog compound term
+     * such that <code>name</code> is the functor symbol, and
+     * <code>args</code> is the argument terms respectively.
+     */
+    public StructureTerm(String name, Term... args){
+	this(SymbolTerm.makeSymbol(name, args.length), args);
+    }
 
     /**
      * Constructs a new Prolog compound term
@@ -36,11 +42,10 @@ public class StructureTerm extends Term {
      * <code>_args</code> is the argument terms respectively.
      */
     public StructureTerm(SymbolTerm _functor, Term... _args){
-	functor = _functor;
-	arity = functor.arity();
-	args = _args;
-	if (arity != args.length)
+	if (_functor.arity() != _args.length)
 	    throw new InternalException("Invalid argument length in StructureTerm");
+	functor = _functor;
+	args = _args;
     }
 
     /** Returns the functor symbol of this <code>StructureTerm</code>.
@@ -53,7 +58,7 @@ public class StructureTerm extends Term {
      * @return the value of <code>arity</code>.
      * @see #arity
      */
-    public int arity(){ return arity; }
+    public int arity(){ return args.length; }
 
     /** Returns the argument terms of this <code>StructureTerm</code>.
      * @return the value of <code>args</code>.
@@ -68,22 +73,6 @@ public class StructureTerm extends Term {
      */
     public String name(){ return functor.name(); }
 
-    /* Term
-    public boolean unify(Term t, Trail trail) {
-	if (t.isVariable())
-	    return t.unify(this, trail);
-	if (! t.isStructure())
-	    return false;
-	if (! functor.equals(((StructureTerm)t).functor()))
-	    return false;
-	for (int i=0; i<arity; i++) {
-	    if (! args[i].unify(((StructureTerm)t).args[i], trail))
-		return false;
-	}
-	return true;
-    } */
-
-
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
 	if (t.isVariable()) {
@@ -94,27 +83,22 @@ public class StructureTerm extends Term {
 	    return false;
 	if (! functor.equals(((StructureTerm)t).functor()))
 	    return false;
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    if (! args[i].unify(((StructureTerm)t).args[i], trail))
 		return false;
 	}
 	return true;
     }
 
-    //    public boolean unify(Term t, Trail trail) {
-    //	return trail.engine.unify(this, t);
-    //    }
-
-
     protected Term copy(Prolog engine) {
-	Term[] a = new Term[arity];
-	for (int i=0; i<arity; i++)
+	Term[] a = new Term[args.length];
+	for (int i=0; i<args.length; i++)
 	    a[i] = args[i].copy(engine);
 	return new StructureTerm(functor, a);
     }
 
     public boolean isGround() {
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    if (! args[i].isGround())
 		return false;
 	}
@@ -124,7 +108,7 @@ public class StructureTerm extends Term {
     public String toQuotedString() {
 	String delim = "";
 	String s = functor.toQuotedString() + "(";
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    s += delim + args[i].toQuotedString();
 	    delim = ",";
 	}
@@ -148,7 +132,7 @@ public class StructureTerm extends Term {
 	    return false;
 	if (! functor.equals(((StructureTerm)obj).functor()))
 	    return false;
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    if (! args[i].equals(((StructureTerm)obj).args[i].dereference()))
 		return false;
 	}
@@ -158,7 +142,7 @@ public class StructureTerm extends Term {
     public int hashCode() {
 	int h = 1;
 	h = 31*h + functor.hashCode();
-	for(int i=0; i<arity; i++)
+	for(int i=0; i<args.length; i++)
 	    h = 31*h + args[i].dereference().hashCode();
 	return h;
     }
@@ -167,7 +151,7 @@ public class StructureTerm extends Term {
     public String toString() {
 	String delim = "";
 	String s = functor.toString() + "(";
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    s += delim + args[i].toString();
 	    delim = ",";
 	}
@@ -193,23 +177,25 @@ public class StructureTerm extends Term {
 	if (anotherTerm.isVariable() || anotherTerm.isNumber() || anotherTerm.isSymbol())
 	    return AFTER;
 	if (anotherTerm.isList()) {
+	    ListTerm t = (ListTerm)anotherTerm;
 	    functor2 = ListTerm.SYM_DOT;
 	    args2    = new Term[2];
-	    args2[0] = ((ListTerm)anotherTerm).car();
-	    args2[1] = ((ListTerm)anotherTerm).cdr();
+	    args2[0] = t.car();
+	    args2[1] = t.cdr();
 	    arity2   = 2;
 	} else if (anotherTerm.isStructure()) {
-	    functor2 = ((StructureTerm)anotherTerm).functor();
-	    args2    = ((StructureTerm)anotherTerm).args();
-	    arity2   = ((StructureTerm)anotherTerm).arity();
+	    StructureTerm s = (StructureTerm)anotherTerm;
+	    functor2 = s.functor();
+	    args2    = s.args();
+	    arity2   = s.arity();
 	} else {
 	    return BEFORE;
 	}
-	if (arity != arity2)
-	    return (arity - arity2);
+	if (args.length != arity2)
+	    return (args.length - arity2);
 	if (! functor.equals(functor2))
 	    return functor.compareTo(functor2);
-	for (int i=0; i<arity; i++) {
+	for (int i=0; i<args.length; i++) {
 	    rc = args[i].compareTo(args2[i].dereference());
 	    if (rc != EQUAL) 
 		return rc;
