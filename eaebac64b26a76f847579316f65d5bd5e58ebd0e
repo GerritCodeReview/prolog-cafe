@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCH///j4\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1970,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-09T23:17:55Z",
+      "side": 1,
+      "message": "Add consult_stream/1.",
+      "revId": "eaebac64b26a76f847579316f65d5bd5e58ebd0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///kI\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 2077,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-09T23:17:55Z",
+      "side": 1,
+      "message": "A cut (!) isn\u0027t necessary right here. There is only one alternative to execute, so cutting away the choice points is useless.\n\nStyle wise, don\u0027t use camelCaseNames in Prolog code. Prolog style tends to prefer names_with_underscores.",
+      "revId": "eaebac64b26a76f847579316f65d5bd5e58ebd0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///j8\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-09T23:17:55Z",
+      "side": 1,
+      "message": "Lets drop this printing stuff, we don\u0027t want to print to the server\u0027s console.\n\nInstead lets export the time to consult as an output parameter:\n\n  \u0027$consult_stream\u0027(File, In, ConsultTime) :-\n\nThat way the caller can receive the running time from us.\n\nThen you can replace the block above in \u0027$consult\u0027 with your \u0027$consult_stream\u0027 and avoid the duplication of the read loop.",
+      "revId": "eaebac64b26a76f847579316f65d5bd5e58ebd0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
