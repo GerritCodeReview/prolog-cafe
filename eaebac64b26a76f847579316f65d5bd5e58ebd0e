@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAABCH///jw\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-09T23:18:48Z",
+      "side": 1,
+      "message": "Don\u0027t forget to update your commit message to say consult_stream.\n\nStyle wise, we don\u0027t speak in the past tense in commit messages, instead we try to be more present-tense.",
+      "revId": "eaebac64b26a76f847579316f65d5bd5e58ebd0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABCH///j4\u003d",
         "filename": "src/builtin/builtins.pl",
         "patchSetId": 1
