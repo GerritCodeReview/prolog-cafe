@@ -871,7 +871,7 @@ stream_property(Stream, Stream_property) :-
 	!,
 	'$stream_property'(Stream, Stream_property).
 stream_property(Stream, Stream_property) :- 
-	illarg(domain(term,stream_proeprty), stream_property(Stream, Stream_property), 2).
+	illarg(domain(term,stream_property), stream_property(Stream, Stream_property), 2).
 
 '$stream_property'(Stream, Stream_property) :- 
 	var(Stream),
@@ -2073,6 +2073,20 @@ consult(File) :- atom(File), !, '$consult'(File).
 	statistics(runtime, [_,T]),
 	print_message(info, [File,'consulted,',T,msec]),
 	close(In).
+
+consultStream(File, In) :- !,'$consultStream'(File, In).
+
+'$consultStream'(File, In) :-
+	print_message(info, [consulting,File,'...']),
+	statistics(runtime, _),
+	'$consult_init'(File),
+	repeat,
+	    read(In, Cl),
+	    '$consult_clause'(Cl),
+	    Cl == end_of_file,
+	    !,
+	statistics(runtime, [_,T]),
+	print_message(info, [File,'consulted,',T,msec]).
 
 '$prolog_file_name'(File,  File) :- sub_atom(File, _, _, After, '.'), After > 0, !.
 '$prolog_file_name'(File0, File) :- atom_concat(File0, '.pl', File).
