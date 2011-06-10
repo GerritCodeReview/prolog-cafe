@@ -871,7 +871,7 @@ stream_property(Stream, Stream_property) :-
 	!,
 	'$stream_property'(Stream, Stream_property).
 stream_property(Stream, Stream_property) :- 
-	illarg(domain(term,stream_proeprty), stream_property(Stream, Stream_property), 2).
+	illarg(domain(term,stream_property), stream_property(Stream, Stream_property), 2).
 
 '$stream_property'(Stream, Stream_property) :- 
 	var(Stream),
@@ -1968,6 +1968,7 @@ synchronized(Object, Goal) :-
 
 :- public cafeteria/0.
 :- public consult/1.
+:- public consult_stream/1.
 :- public trace/0, notrace/0.
 :- public debug/0, nodebug/0.
 :- public leash/1.
@@ -2064,6 +2065,31 @@ consult(File) :- atom(File), !, '$consult'(File).
 	stream_property(In, file_name(File)),
 	print_message(info, [consulting,File,'...']),
 	statistics(runtime, _),
+	'$consult_stream'(File,In),
+	statistics(runtime, [_,T]).
+	print_message(info, [File,'consulted,',T,msec]),
+	close(In).
+
+<<<<<<< HEAD
+=======
+consult_stream(File, In) :- '$consult_stream'(File, In).
+
+'$consult_stream'(File, In) :-
+	'$consult_init'(File),
+	repeat,
+	    read(In, Cl),
+	    '$consult_clause'(Cl),
+	    Cl == end_of_file,
+	    !.
+
+<<<<<<< HEAD
+>>>>>>> b4ff8e4... Adds consult_stream to builtins.pl
+=======
+consultStream(File, In) :- !,'$consultStream'(File, In).
+
+'$consultStream'(File, In) :-
+	print_message(info, [consulting,File,'...']),
+	statistics(runtime, _),
 	'$consult_init'(File),
 	repeat,
 	    read(In, Cl),
@@ -2071,9 +2097,9 @@ consult(File) :- atom(File), !, '$consult'(File).
 	    Cl == end_of_file,
 	    !,
 	statistics(runtime, [_,T]),
-	print_message(info, [File,'consulted,',T,msec]),
-	close(In).
+	print_message(info, [File,'consulted,',T,msec]).
 
+>>>>>>> eaebac6... added consultStream to allow for consulting a Java InputStreamReader directly
 '$prolog_file_name'(File,  File) :- sub_atom(File, _, _, After, '.'), After > 0, !.
 '$prolog_file_name'(File0, File) :- atom_concat(File0, '.pl', File).
 
