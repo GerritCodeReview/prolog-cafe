@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCH///ew\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T00:42:10Z",
+      "side": 1,
+      "message": "Repeating yourself is a bit funny. Maybe instead say:\n\n  Add consult_stream to builtins.pl\n\n  The predicate supports reading from any Java InputStream that has been\n  suitably wrapped by a BufferedReader and a PushbackReader.",
+      "revId": "b02cd3a40c6f8ecb5077cc8defc30f9b559b0406",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///es\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 2
+      },
+      "lineNbr": 2068,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T00:42:10Z",
+      "side": 1,
+      "message": "Style-nit: Space after comma in a predicate call.",
+      "revId": "b02cd3a40c6f8ecb5077cc8defc30f9b559b0406",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///eo\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 2
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T00:42:10Z",
+      "side": 1,
+      "message": "You have merge conflicts here that need to be resolved.",
+      "revId": "b02cd3a40c6f8ecb5077cc8defc30f9b559b0406",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///eg\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 2
+      },
+      "lineNbr": 2087,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T00:42:10Z",
+      "side": 1,
+      "message": "Merge conflict lines.",
+      "revId": "b02cd3a40c6f8ecb5077cc8defc30f9b559b0406",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///ek\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 2
+      },
+      "lineNbr": 2102,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T00:42:10Z",
+      "side": 1,
+      "message": "Merge conflict line.",
+      "revId": "b02cd3a40c6f8ecb5077cc8defc30f9b559b0406",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
