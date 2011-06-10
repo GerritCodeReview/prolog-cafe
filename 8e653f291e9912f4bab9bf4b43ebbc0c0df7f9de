@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCH///do\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 3
+      },
+      "lineNbr": 2063,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T01:06:28Z",
+      "side": 1,
+      "message": "You added trailing whitespace here.",
+      "revId": "8e653f291e9912f4bab9bf4b43ebbc0c0df7f9de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///dk\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 3
+      },
+      "lineNbr": 2068,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T01:06:28Z",
+      "side": 1,
+      "message": "You added trailing whitespace here.\n\nAlso missing space after \"File,\" before \"In\".",
+      "revId": "8e653f291e9912f4bab9bf4b43ebbc0c0df7f9de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH///dg\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 3
+      },
+      "lineNbr": 2075,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-10T01:06:28Z",
+      "side": 1,
+      "message": "Why bother with this intermediate \u0027$consult_stream\u0027/2 predicate? Why not just put this all under consult_stream/2?",
+      "revId": "8e653f291e9912f4bab9bf4b43ebbc0c0df7f9de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
