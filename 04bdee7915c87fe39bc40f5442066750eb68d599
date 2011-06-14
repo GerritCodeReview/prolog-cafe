@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCH//+4Y\u003d",
+        "filename": "src/lang/PrologException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-14T21:12:34Z",
+      "side": 1,
+      "message": "Style-nit: Trailing whitespace.",
+      "revId": "04bdee7915c87fe39bc40f5442066750eb68d599",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCH//+4U\u003d",
+        "filename": "src/lang/TermException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-14T21:12:34Z",
+      "side": 1,
+      "message": "Style-nit: Please edit this in vi (not eclipse) to get a tab here instead of two spaces. That way it lines up with the line below it in all tools, rather than just Eclipse.",
+      "revId": "04bdee7915c87fe39bc40f5442066750eb68d599",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
