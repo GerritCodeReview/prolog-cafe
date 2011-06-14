@@ -11,6 +11,10 @@ public abstract class PrologException extends RuntimeException implements Serial
 
     /** Constructs a new Prolog exception. */
     public PrologException() {}
+ 
+    public PrologException(String s) {
+      super(s);
+    }
 
     /** Returns the message term of this object. */
     abstract public Term getMessageTerm();
