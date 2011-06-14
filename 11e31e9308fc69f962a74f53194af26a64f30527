@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCH//+3o\u003d",
+        "filename": "src/lang/PrologException.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-06-14T21:59:32Z",
+      "side": 1,
+      "message": "There is still a trailing space here. :-(",
+      "revId": "11e31e9308fc69f962a74f53194af26a64f30527",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
