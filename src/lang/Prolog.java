@@ -1,6 +1,15 @@
 package com.googlecode.prolog_cafe.lang;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.io.*;
 /**
  * Prolog engine.
  *
@@ -111,6 +120,15 @@ public final class Prolog {
     static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.makeSymbol("user_output");
     static final SymbolTerm SYM_USERERROR  = SymbolTerm.makeSymbol("user_error");
 
+    public static enum Feature {
+      /** Enable the {@code java_*} predicates, supporting reflection in Prolog. */
+      JAVA_REFLECTION,
+
+      /** Access to the local filesystem and console. */
+      IO;
+    }
+    protected final EnumSet<Feature> features = EnumSet.allOf(Feature.class);
+
     /** Constructs new Prolog engine. */
     public Prolog(PrologControl c) { 
 	control    = c;
@@ -120,7 +138,7 @@ public final class Prolog {
 	hashManager = new HashtableOfTerm();
     }
 
-    /** 
+    /**
      * Initializes some local instances only once.
      * This <code>initOnce</code> method is invoked in the constructor
      * and initializes the following instances:
@@ -132,30 +150,59 @@ public final class Prolog {
      *   <li><code>streamManager</code>
      * </ul>
      */
-    protected void initOnce() {
-	aregs = new Term[Math.max(0, maxArity - 8)];
-	if (pcl == null)
-	  pcl = new PrologClassLoader();
-	if (internalDB == null)
-	  internalDB = new InternalDatabase();
+  protected void initOnce() {
+    aregs = new Term[Math.max(0, maxArity - 8)];
+    if (pcl == null) pcl = new PrologClassLoader();
+    if (internalDB == null) internalDB = new InternalDatabase();
 
-	userInput   = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
-	userOutput  = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
-	userError   = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
+    copyHash = new HashMap<VariableTerm, VariableTerm>();
+    streamManager = new HashtableOfTerm();
 
-	copyHash      = new HashMap<VariableTerm,VariableTerm>();
-	streamManager = new HashtableOfTerm();
+    if (features.contains(Feature.IO)) {
+      userInput = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
+      userOutput = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
+      userError = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
 
-	streamManager.put(SYM_USERINPUT, new JavaObjectTerm(userInput));
-	streamManager.put(new JavaObjectTerm(userInput), 
-			  makeStreamProperty(SYM_READ, SYM_INPUT, SYM_USERINPUT, SYM_TEXT));
-	streamManager.put(SYM_USEROUTPUT, new JavaObjectTerm(userOutput));
-	streamManager.put(new JavaObjectTerm(userOutput),
-			  makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USEROUTPUT, SYM_TEXT));
-	streamManager.put(SYM_USERERROR, new JavaObjectTerm(userError));
-	streamManager.put(new JavaObjectTerm(userError),
-			  makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USERERROR, SYM_TEXT));
+      streamManager.put(SYM_USERINPUT, new JavaObjectTerm(userInput));
+      streamManager.put(new JavaObjectTerm(userInput),
+        makeStreamProperty(SYM_READ, SYM_INPUT, SYM_USERINPUT, SYM_TEXT));
+
+      streamManager.put(SYM_USEROUTPUT, new JavaObjectTerm(userOutput));
+      streamManager.put(new JavaObjectTerm(userOutput),
+        makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USEROUTPUT, SYM_TEXT));
+
+      streamManager.put(SYM_USERERROR, new JavaObjectTerm(userError));
+      streamManager.put(new JavaObjectTerm(userError),
+        makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USERERROR, SYM_TEXT));
+    } else {
+      userInput = new PushbackReader(new Reader() {
+        @Override
+        public int read(char[] cbuf, int off, int len) throws IOException {
+          return -1;
+        }
+
+        @Override
+        public void close() throws IOException {
+        }
+      });
+
+      userOutput = new PrintWriter(new Writer() {
+        @Override
+        public void write(char[] cbuf, int off, int len) throws IOException {
+          throw new IOException("Prolog.Feature.IO disabled");
+        }
+
+        @Override
+        public void flush() throws IOException {
+        }
+
+        @Override
+        public void close() throws IOException {
+        }
+      });
+      userError = userOutput;
     }
+  }
 
     /** Initializes this Prolog engine. */
     public void init() { 
@@ -192,6 +239,13 @@ public final class Prolog {
 	userError.flush();
 	currentInput  = userInput;
 	currentOutput = userOutput;
+    }
+
+    /** Ensure a feature is enabled, throwing if not. */
+    public void requireFeature(Prolog.Feature f, Operation goal, Term arg) {
+      if (!features.contains(f)) {
+        throw new PermissionException(goal, "use", f.toString().toLowerCase(), arg, "disabled");
+      }
     }
 
     /** Sets B0 to the top of the choice point stack.. */

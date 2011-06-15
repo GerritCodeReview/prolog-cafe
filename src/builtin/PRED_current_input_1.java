@@ -13,6 +13,7 @@ public class PRED_current_input_1 extends Predicate.P1 {
     }
 
     public Operation exec(Prolog engine) {
+        engine.requireFeature(Prolog.Feature.IO, this, arg1);
         engine.setB0();
 	Term a1;
 	a1 = arg1;

@@ -20,6 +20,7 @@ public class PRED_close_2 extends Predicate.P2 {
     }
 
     public Operation exec(Prolog engine) {
+        engine.requireFeature(Prolog.Feature.IO, this, arg1);
         engine.setB0();
         Term a1, a2;
         a1 = arg1;

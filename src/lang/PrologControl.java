@@ -1,4 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
+
+import java.util.Set;
+
 /**
  * Tracks current evaluation goal and results.
  * <p>
@@ -18,18 +21,29 @@ public abstract class PrologControl {
     /** Holds a Prolog goal to be executed. */
     protected Operation code;
 
-    /** Should Java reflection be permitted. */
-    private boolean enableReflection;
-
     /** Constructs a new <code>PrologControl</code>. */
     public PrologControl() {
 	engine = new Prolog(this);
 	code = null;
-	enableReflection = true;
     }
 
-    public boolean getEnableReflection() { return enableReflection; }
-    public void setEnableReflection(boolean on) { enableReflection = on; }
+    public boolean isEnabled(Prolog.Feature f) {
+      return engine.features.contains(f);
+    }
+
+    public void setEnabled(Prolog.Feature f, boolean on) {
+      if (on)
+        engine.features.add(f);
+      else
+        engine.features.remove(f);
+    }
+
+    public void setEnabled(Set<Prolog.Feature> f, boolean on) {
+      if (on)
+        engine.features.addAll(f);
+      else
+        engine.features.removeAll(f);
+    }
 
     public int getMaxDatabaseSize() {
       if (engine.internalDB != null)

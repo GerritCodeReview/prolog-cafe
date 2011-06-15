@@ -20,6 +20,7 @@ public class PRED_exists_directory_1 extends Predicate.P1 {
 
   @Override
   public Operation exec(Prolog engine) throws PrologException {
+    engine.requireFeature(Prolog.Feature.IO, this, arg1);
     engine.setB0();
 
     Term a1 = arg1.dereference();

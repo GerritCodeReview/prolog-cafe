@@ -22,6 +22,7 @@ public class PRED_file_directory_name_2 extends Predicate.P2 {
 
   @Override
   public Operation exec(Prolog engine) throws PrologException {
+    engine.requireFeature(Prolog.Feature.IO, this, arg1);
     engine.setB0();
 
     Term a1 = arg1.dereference();

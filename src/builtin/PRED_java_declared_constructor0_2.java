@@ -17,9 +17,8 @@ public class PRED_java_declared_constructor0_2 extends JavaPredicate {
     }
 
     public Operation exec(Prolog engine) {
+        engine.requireFeature(Prolog.Feature.JAVA_REFLECTION, this, arg1);
         engine.setB0();
-        if (!engine.control.getEnableReflection())
-          throw new PermissionException(this, "reflection", "call", arg1, "disabled");
 
 	Term a1, a2;
 	a1 = arg1;
