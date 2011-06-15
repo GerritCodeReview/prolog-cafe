@@ -15,7 +15,7 @@ PSYSTEM = 'SWI-Prolog'
 
 JAVA      = java
 JAVAC     = javac
-JAVACOPTS = -d . -J-Xmx100m
+JAVACOPTS = -d .
 JAR       = jar
 JAROPTS   = cf
 
@@ -35,12 +35,16 @@ lang:
 	JAR='$(JAR)' JAROPTS='$(JAROPTS)')
 	cp src/lang/lang.jar .
 
+gen-builtin:
+	(cd src/builtin && $(MAKE) gen-builtin)
 builtin:
 	(cd src/builtin; $(MAKE) builtin \
 	JAVAC='$(JAVAC)' JAVACOPTS='$(JAVACOPTS) -classpath $(PWD)/lang.jar' \
 	JAR='$(JAR)' JAROPTS='$(JAROPTS)')
 	cp src/builtin/builtin.jar .
 
+gen-compiler:
+	(cd src/compiler && $(MAKE) gen-compiler)
 compiler:
 	(cd src/compiler; $(MAKE) compiler \
 	JAVAC='$(JAVAC)' \
@@ -49,9 +53,13 @@ compiler:
 	cp src/compiler/compiler.jar .
 
 plcafe:
-	$(JAVAC) $(JAVACOPTS) src/lang/*.java src/builtin/*.java \
-	target/generated-sources/prologcafe-builtin/com/googlecode/prolog_cafe/builtin/*.java \
-	src/compiler/pl2am/*.java src/compiler/am2j/*.java src/compiler/*.java
+	$(JAVAC) $(JAVACOPTS) \
+	  src/lang/*.java \
+	  src/builtin/*.java \
+	  src/compiler/*.java \
+	  target/generated-sources/prologcafe-builtin/com/googlecode/prolog_cafe/builtin/*.java \
+	  target/generated-sources/prologcafe-pl2am/com/googlecode/prolog_cafe/compiler/pl2am/*.java \
+	  target/generated-sources/prologcafe-am2j/com/googlecode/prolog_cafe/compiler/am2j/*.java
 	$(JAR) $(JAROPTS) plcafe.jar com/googlecode/prolog_cafe
 
 plj:
@@ -65,8 +73,9 @@ clean:
 	(cd src/compiler; $(MAKE) clean)
 	-rm -f bin/pl2am.plc
 	-rm -f bin/am2j.plc
-	-rm -f -r jp
+	-rm -f -r com
 	-rm -f core *~
+	-rm -r -f target
 
 realclean: clean
 	(cd src/builtin; $(MAKE) realclean)

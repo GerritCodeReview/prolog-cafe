@@ -20,7 +20,7 @@ lang:
 	$(JAR) $(JAROPTS) lang.jar com/googlecode/prolog_cafe/lang/
 
 clean:
-	-rm -f -r jp
+	-rm -f -r com
 	-rm -f core *~ *.class *.jar
 
 realclean: clean

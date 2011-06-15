@@ -98,10 +98,9 @@ Other Instructions
   debug(Message)
   info(Message)
 
-  begin_predicate(f/n)
-  end_predicate(f/n)
+  begin_predicate(p, f/n)
+  end_predicate(p, f/n)
 
-  package_name(p)
   import_package(p)
   import_package(p, f/n)
 
@@ -470,10 +469,10 @@ write_asm(_, []) :- !.
 write_asm(Out, [Instruction|Instructions]) :- !,
 	write_asm(Out, Instruction),
 	write_asm(Out, Instructions).
-write_asm(Out, begin_predicate(FA)) :- !,
-	writeq(Out, begin_predicate(FA)), write(Out, '.'), nl(Out).
-write_asm(Out, end_predicate(FA)) :- !,
-	writeq(Out, end_predicate(FA)), write(Out, '.'), nl(Out).
+write_asm(Out, begin_predicate(P, FA)) :- !,
+	writeq(Out, begin_predicate(P, FA)), write(Out, '.'), nl(Out).
+write_asm(Out, end_predicate(P, FA)) :- !,
+	writeq(Out, end_predicate(P, FA)), write(Out, '.'), nl(Out).
 write_asm(Out, comment(Comment0)) :- !,
 	copy_term(Comment0, Comment),
 	numbervars(Comment, 0, _),
@@ -519,12 +518,12 @@ assert_init_cls(Cls) :-
 compile_predicate(Functor, Arity) -->
 	{functor(Head, Functor, Arity)},
 	{findall((Head :- Body), internal_clause(Head, Body), Clauses)},
-	[begin_predicate(Functor/Arity)],
-	generate_package,
-	generate_import,
+	{clause(package_name(P), _)},
+	[begin_predicate(P, Functor/Arity)],
 	generate_info(Functor, Arity),
-        compile_pred(Clauses, Functor/Arity),
-	[end_predicate(Functor/Arity)].
+	generate_import,
+	compile_pred(Clauses, Functor/Arity),
+	[end_predicate(P, Functor/Arity)].
 
 %%% Program Code
 compile_pred([], _) --> [], !.
@@ -817,11 +816,7 @@ replace_key(K, _, _) :-
 	pl2am_error([replacement,of,hash,key,K,failed]),
 	fail.
 
-%%% Package and Import Declarations
-generate_package --> 
-	{clause(package_name(P), _)}, 
-	[package_name(P)].
-
+%%% Import Declarations
 generate_import --> 
 	{findall((P,C), import_package(P, C), X)},
 	gen_import(X).

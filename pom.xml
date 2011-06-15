@@ -39,9 +39,8 @@
               <target>
                 <exec executable="make">
                   <arg value="plc" />
-                  <arg value="lang" />
-                  <arg value="builtin" />
-                  <arg value="compiler" />
+                  <arg value="gen-builtin" />
+                  <arg value="gen-compiler" />
                 </exec>
               </target>
             </configuration>
@@ -51,6 +50,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -65,11 +65,14 @@
             <configuration>
               <sources>
                 <source>target/generated-sources/prologcafe-builtin</source>
+                <source>target/generated-sources/prologcafe-pl2am</source>
+                <source>target/generated-sources/prologcafe-am2j</source>
               </sources>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -80,20 +83,17 @@
           <encoding>UTF-8</encoding>
           <debug>false</debug>
           <optimize>true</optimize>
-          <excludes>
-            <exclude>com/googlecode/prolog_cafe/jp/**</exclude>
-            <exclude>com/googlecode/prolog_cafe/builtin/jp/**</exclude>
-            <exclude>com/googlecode/prolog_cafe/compiler/jp/**</exclude>
-            <exclude>com/googlecode/prolog_cafe/lang/jp/**</exclude>
-          </excludes>
         </configuration>
       </plugin>
+
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>2.1.2</version>
         <configuration>
           <includes>
             <include>**/*.java</include>
+            <include>**/*.pl</include>
           </includes>
           <excludes>
             <exclude>com/googlecode/prolog_cafe/compiler/am2j/**/*.java</exclude>

@@ -23,6 +23,8 @@ JAR       = jar
 JAROPTS   = cvf
 # JAVA  : the command of Java Virtual Machine (ex. java)
 JAVA      = java
+T         = ../../target/generated-sources/prologcafe
+P         = com/googlecode/prolog_cafe/compiler
 ################################################################
 .SUFFIXES:
 .SUFFIXES: .plj .txt .am .plc .pl $(SUFFIXES)
@@ -33,24 +35,23 @@ JAVA      = java
 
 .pl.am:
 	../../bin/pl2am.plc -v -O $< $@
-	-mkdir $*
-	../../bin/am2j.plc -v -d $* $@
+	-mkdir $T-$*
+	../../bin/am2j.plc -v -d $T-$* $@
 
 .txt.plj:
 	./comp_pl -v `pwd`/$*.pl `pwd`/$*.plj $(JAVA) 'PrologCafe'
 
 plc: pl2am.plc am2j.plc
 
-compiler:pl2am.am am2j.am
-	$(JAVAC) $(JAVACOPTS) pl2am/*.java am2j/*.java *.java
-	$(JAR) $(JAROPTS) compiler.jar com/googlecode/prolog_cafe/compiler
+compiler: gen-compiler
+	$(JAVAC) $(JAVACOPTS) *.java $T-pl2am/$P/pl2am/*.java $T-am2j/$P/am2j/*.java
+	$(JAR) $(JAROPTS) compiler.jar $P
+gen-compiler: pl2am.am am2j.am
 
 plj: pl2am.plj am2j.plj
 
 clean:
-	-rm -f -r am2j
-	-rm -f -r pl2am
-	-rm -f -r jp
+	-rm -f -r com
 	-rm -f core *~ *.ql *.sav *.plc *.qlf *.qsav *.am *.plj *.jar system.pl
 
 realclean: clean
