@@ -40,8 +40,8 @@ public class PrologMain {
 		System.exit(999);
 	    } 
 	    Term arg1 = Prolog.Nil;
-	    arg1 = new ListTerm(SymbolTerm.makeSymbol("user"), arg1);
-	    arg1 = new ListTerm(SymbolTerm.makeSymbol(Prolog.BUILTIN), arg1);
+	    arg1 = new ListTerm(SymbolTerm.intern("user"), arg1);
+	    arg1 = new ListTerm(SymbolTerm.intern(Prolog.BUILTIN), arg1);
 	    Term arg2 = parseAtomicGoal(argv[0]);
 	    if (arg2  == null) {
 		usage();
@@ -67,13 +67,13 @@ public class PrologMain {
 	StringTokenizer st = new StringTokenizer(s, ":");
 	int i = st.countTokens();
 	if (i == 1) {
-	    Term[] args = {SymbolTerm.makeSymbol("user"), 
-			   SymbolTerm.makeSymbol(st.nextToken())};
-	    return new StructureTerm(SymbolTerm.makeSymbol(":", 2), args);
+	    Term[] args = {SymbolTerm.intern("user"), 
+			   SymbolTerm.create(st.nextToken())};
+	    return new StructureTerm(SymbolTerm.intern(":", 2), args);
 	} else if (i == 2) {
-	    Term[] args = {SymbolTerm.makeSymbol(st.nextToken()), 
-			   SymbolTerm.makeSymbol(st.nextToken())};
-	    return new StructureTerm(SymbolTerm.makeSymbol(":", 2), args);
+	    Term[] args = {SymbolTerm.create(st.nextToken()), 
+			   SymbolTerm.create(st.nextToken())};
+	    return new StructureTerm(SymbolTerm.intern(":", 2), args);
 	} else {
 	    return null;
 	}
@@ -90,15 +90,5 @@ public class PrologMain {
 	s += "    predicate:      predicate name (only atom)";
 	System.out.println(s);
     }
-
-    /*
-    public static Term makeList(int n){
-	Term t = SymbolTerm.makeSymbol("[]");
-	for (int i=n; i>0; i--){
-	    t = new ListTerm(new IntegerTerm(i), t);
-	}
-	return t;
-    }
-    */
 }
 

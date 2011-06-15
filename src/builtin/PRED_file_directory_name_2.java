@@ -34,7 +34,7 @@ public class PRED_file_directory_name_2 extends Predicate.P2 {
     if (dir == null) throw new IllegalDomainException(this, 1, "file", a1);
 
     Term a2 = arg2.dereference();
-    if (a2.unify(SymbolTerm.makeSymbol(dir.getPath()), engine.trail))
+    if (a2.unify(SymbolTerm.create(dir.getPath()), engine.trail))
       return cont;
     else
       return engine.fail();

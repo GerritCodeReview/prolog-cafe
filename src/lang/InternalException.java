@@ -8,7 +8,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class InternalException extends PrologException {
     /** A functor symbol of <code>internal_error/1</code>. */
-    public static final SymbolTerm INTERNAL_ERROR = SymbolTerm.makeSymbol("internal_error", 1);
+    public static final SymbolTerm INTERNAL_ERROR = SymbolTerm.intern("internal_error", 1);
 
     /** Holds a message. */
     public String message;
@@ -22,7 +22,7 @@ public class InternalException extends PrologException {
      * <code>internal_error(message)</code>.
      */
     public Term getMessageTerm() {
-	Term[] args = {SymbolTerm.makeSymbol(message)};
+	Term[] args = {SymbolTerm.create(message)};
 	return new StructureTerm(INTERNAL_ERROR, args);
     }
 

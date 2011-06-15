@@ -7,8 +7,8 @@ import com.googlecode.prolog_cafe.lang.*;
    @version 1.0
 */
 public class PRED_$univ_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
-    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_DOT = SymbolTerm.intern(".");
+    private static final SymbolTerm SYM_NIL = Prolog.Nil;
 
     public PRED_$univ_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -37,7 +37,7 @@ public class PRED_$univ_2 extends Predicate.P2 {
 	    if (! a2.unify(t, engine.trail))
 		return engine.fail();
 	} else if (a1.isStructure()) {
-	    SymbolTerm sym = SymbolTerm.makeSymbol(((StructureTerm)a1).functor().name());
+	    SymbolTerm sym = SymbolTerm.create(((StructureTerm)a1).functor().name());
 	    Term[] args = ((StructureTerm)a1).args();
 	    Term t = SYM_NIL;
 	    for (int i=args.length; i>0; i--)
@@ -76,7 +76,7 @@ public class PRED_$univ_2 extends Predicate.P2 {
 		x = ((ListTerm)x).cdr().dereference();
 	    }
 	    int n = ((ListTerm)a2).length() - 1;
-	    SymbolTerm sym = SymbolTerm.makeSymbol(((SymbolTerm)head).name(), n);
+	    SymbolTerm sym = SymbolTerm.create(((SymbolTerm)head).name(), n);
 	    Term[] args = new Term[n];
 	    for(int i=0; i<n; i++) {
 		args[i] = ((ListTerm)tail).car().dereference();

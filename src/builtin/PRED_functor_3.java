@@ -7,7 +7,7 @@ import  com.googlecode.prolog_cafe.lang.*;
  * @version 1.0
  */
 public class PRED_functor_3 extends Predicate.P3 {
-    private static final SymbolTerm SYM_DOT = SymbolTerm.makeSymbol(".");
+    private static final SymbolTerm SYM_DOT = SymbolTerm.intern(".");
 
     public PRED_functor_3(Term a1, Term a2, Term a3, Operation cont) {
 	arg1 = a1;
@@ -55,7 +55,7 @@ public class PRED_functor_3 extends Predicate.P3 {
 	    Term[] args = new Term[n];
 	    for(int i=0; i<n; i++)
 		args[i] = new VariableTerm(engine);
-	    SymbolTerm sym = SymbolTerm.makeSymbol(((SymbolTerm)a2).name(), n);
+	    SymbolTerm sym = SymbolTerm.create(((SymbolTerm)a2).name(), n);
 	    if(! a1.unify(new StructureTerm(sym, args), engine.trail))
 		return engine.fail();
 	    return cont;
@@ -70,7 +70,7 @@ public class PRED_functor_3 extends Predicate.P3 {
 	    functor = SYM_DOT;
 	    arity   = new IntegerTerm(2);
 	} else if (a1.isStructure()) {
-	    functor = SymbolTerm.makeSymbol(((StructureTerm)a1).name());
+	    functor = SymbolTerm.create(((StructureTerm)a1).name());
 	    arity   = new IntegerTerm(((StructureTerm)a1).arity());
 	} else {
 	    return engine.fail();

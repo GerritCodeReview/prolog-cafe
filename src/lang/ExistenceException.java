@@ -10,7 +10,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class ExistenceException extends BuiltinException {
     /** A functor symbol of <code>existence_error/5</code>. */
-    public static final SymbolTerm EXISTENCE_ERROR = SymbolTerm.makeSymbol("existence_error", 5);
+    public static final SymbolTerm EXISTENCE_ERROR = SymbolTerm.intern("existence_error", 5);
 
     /* objType ::= procedure | source_sink | stream | hash */
     /** Holds a string representation of object type. */
@@ -47,9 +47,9 @@ public class ExistenceException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo),
-	    SymbolTerm.makeSymbol(objType),
+	    SymbolTerm.create(objType),
 	    culprit,
-	    SymbolTerm.makeSymbol(message)};
+	    SymbolTerm.create(message)};
 	return new StructureTerm(EXISTENCE_ERROR, args);
     }
 

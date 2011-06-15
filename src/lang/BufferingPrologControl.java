@@ -23,10 +23,10 @@ public class BufferingPrologControl extends PrologControl {
    * @return true if initialization was successful.
    */
   public boolean initialize(String... pkgs) {
-    Term goal = SymbolTerm.makeSymbol("true");
+    Term goal = SymbolTerm.intern("true");
     Term head = Prolog.Nil;
     for (int i = pkgs.length - 1; 0 <= i; i--)
-      head = new ListTerm(SymbolTerm.makeSymbol(pkgs[i]), head);
+      head = new ListTerm(SymbolTerm.intern(pkgs[i]), head);
     return execute(Prolog.BUILTIN, "initialization", head, goal);
   }
 

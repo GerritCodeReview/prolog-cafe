@@ -7,8 +7,7 @@ import com.googlecode.prolog_cafe.lang.*;
    @version 1.0
 */
 public class PRED_new_hash_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_NIL     = SymbolTerm.makeSymbol("[]");
-    private static final SymbolTerm SYM_ALIAS_1 = SymbolTerm.makeSymbol("alias", 1);
+    private static final SymbolTerm SYM_ALIAS_1 = SymbolTerm.intern("alias", 1);
 
     public PRED_new_hash_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

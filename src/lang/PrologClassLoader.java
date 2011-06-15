@@ -68,6 +68,9 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
     return predicate(pkg, functor, Success.SUCCESS, args);
   }
 
+  private static final SymbolTerm colon2 = SymbolTerm.intern(":", 2);
+  private static final SymbolTerm slash2 = SymbolTerm.intern("/", 2);
+
   /**
    * Allocate a predicate and configure it with the specified arguments.
    *
@@ -97,10 +100,8 @@ public class PrologClassLoader extends ClassLoader implements Serializable {
       cons.setAccessible(true);
       return cons.newInstance(a);
     } catch (Exception err) {
-      SymbolTerm colon2 = SymbolTerm.makeSymbol(":", 2);
-      SymbolTerm slash2 = SymbolTerm.makeSymbol("/", 2);
-      Term[] fa = {SymbolTerm.makeSymbol(functor), new IntegerTerm(arity)};
-      Term[] r = {SymbolTerm.makeSymbol(pkg), new StructureTerm(slash2, fa)};
+      Term[] fa = {SymbolTerm.create(functor), new IntegerTerm(arity)};
+      Term[] r = {SymbolTerm.create(pkg), new StructureTerm(slash2, fa)};
       Term what = new StructureTerm(colon2, r);
 
       ExistenceException e2 = new ExistenceException("procedure", new StructureTerm(slash2, fa), err.toString());

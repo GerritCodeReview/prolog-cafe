@@ -7,8 +7,6 @@ import  com.googlecode.prolog_cafe.lang.*;
  * @version 1.0
  */
 public class PRED_number_chars_2 extends Predicate.P2 {
-    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
-
     public PRED_number_chars_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;
@@ -60,9 +58,9 @@ public class PRED_number_chars_2 extends Predicate.P2 {
 	    }
 	} else if (a1.isNumber()) { // number_chars(+Number, ?CharList)
 	    String s = a1.toString();
-	    Term y = Nil;
+	    Term y = Prolog.Nil;
 	    for (int i=s.length(); i>0; i--) {
-		y = new ListTerm(SymbolTerm.makeSymbol(s.substring(i-1,i)), y);
+		y = new ListTerm(SymbolTerm.create(s.substring(i-1,i)), y);
 	    }
 	    if (! a2.unify(y, engine.trail) ) 
 		return engine.fail();

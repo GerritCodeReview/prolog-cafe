@@ -33,7 +33,7 @@ public class StructureTerm extends Term {
      * <code>args</code> is the argument terms respectively.
      */
     public StructureTerm(String name, Term... args){
-	this(SymbolTerm.makeSymbol(name, args.length), args);
+	this(SymbolTerm.create(name, args.length), args);
     }
 
     /**

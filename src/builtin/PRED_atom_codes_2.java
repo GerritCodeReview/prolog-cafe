@@ -7,8 +7,6 @@ import  com.googlecode.prolog_cafe.lang.*;
  * @version 1.1
  */
 public class PRED_atom_codes_2 extends Predicate.P2 {
-    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
-
     public PRED_atom_codes_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;
@@ -43,14 +41,14 @@ public class PRED_atom_codes_2 extends Predicate.P2 {
 		sb.append((char)i);
 		x = ((ListTerm)x).cdr().dereference();
 	    }
-	    if (! a1.unify(SymbolTerm.makeSymbol(sb.toString()), engine.trail))
+	    if (! a1.unify(SymbolTerm.create(sb.toString()), engine.trail))
 		return engine.fail();
 	    return cont;
 	} else { // atom_codes(+Atom, ?CharCodeList)
 	    if (! a1.isSymbol())
 		throw new IllegalTypeException(this, 1, "atom", a1);
 	    char[] chars = ((SymbolTerm)a1).name().toCharArray();
-	    Term x = Nil;
+	    Term x = Prolog.Nil;
 	    for (int i=chars.length; i>0; i--) {
 		x = new ListTerm(new IntegerTerm((int)chars[i-1]), x);
 	    }

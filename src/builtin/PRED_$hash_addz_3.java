@@ -8,7 +8,7 @@ import java.util.Hashtable;
    @version 1.0
 */
 class PRED_$hash_addz_3 extends Predicate.P3 {
-    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_NIL = Prolog.Nil;
 
     public PRED_$hash_addz_3(Term a1, Term a2, Term a3, Operation cont) {
         arg1 = a1;

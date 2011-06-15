@@ -7,7 +7,7 @@ import com.googlecode.prolog_cafe.lang.*;
    @version 1.1
 */
 class PRED_$get_instances_2 extends Predicate.P2 {
-    private static final SymbolTerm COMMA = SymbolTerm.makeSymbol(",", 2);
+    private static final SymbolTerm COMMA = SymbolTerm.intern(",", 2);
 
     public PRED_$get_instances_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;

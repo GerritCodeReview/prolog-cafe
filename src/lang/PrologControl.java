@@ -145,6 +145,7 @@ public abstract class PrologControl {
 			break main_loop;
 		    code = code.exec(engine);
 		}
+		SymbolTerm.gc();
 		switch (engine.exceptionRaised) {
 		case 1:  // halt/0
 		    break main_loop;

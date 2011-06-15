@@ -11,7 +11,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class IllegalDomainException extends BuiltinException {
     /** A functor symbol of <code>domain_error/4</code>. */
-    public static final SymbolTerm DOMAIN_ERROR = SymbolTerm.makeSymbol("domain_error", 4);
+    public static final SymbolTerm DOMAIN_ERROR = SymbolTerm.intern("domain_error", 4);
 
     /*
       domain ::= character_code_list | close_option | flag_value | io_mode | 
@@ -50,7 +50,7 @@ public class IllegalDomainException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo), 
-	    SymbolTerm.makeSymbol(domain),
+	    SymbolTerm.create(domain),
 	    culprit};
 	return new StructureTerm(DOMAIN_ERROR, args);
     }

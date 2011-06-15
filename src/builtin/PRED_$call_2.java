@@ -8,8 +8,8 @@ import java.lang.reflect.*;
  * @version 1.0
  */
 class PRED_$call_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_SLASH_2 = SymbolTerm.makeSymbol("/", 2);
-    private static final SymbolTerm SYM_COLON_2 = SymbolTerm.makeSymbol(":", 2);
+    private static final SymbolTerm SYM_SLASH_2 = SymbolTerm.intern("/", 2);
+    private static final SymbolTerm SYM_COLON_2 = SymbolTerm.intern(":", 2);
 
     public PRED_$call_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
@@ -56,7 +56,7 @@ class PRED_$call_2 extends Predicate.P2 {
 		    Term what = new StructureTerm(SYM_COLON_2,
 		       a1,
 		       new StructureTerm(SYM_SLASH_2,
-		         SymbolTerm.makeSymbol(functor),
+		         SymbolTerm.create(functor),
 		         new IntegerTerm(arity)));
 		    ExistenceException err = new ExistenceException(this, 0, "procedure", what, e.getMessage());
 		    err.initCause(e);

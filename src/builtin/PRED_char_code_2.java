@@ -30,7 +30,7 @@ public class PRED_char_code_2 extends Predicate.P2 {
 	    int i = ((IntegerTerm)a2).intValue();
 	    if (! Character.isDefined(i))
 		throw new RepresentationException(this, 2, "character_code");
-	    if (! a1.unify(SymbolTerm.makeSymbol(String.valueOf((char)i)), engine.trail))
+	    if (! a1.unify(SymbolTerm.create((char)i), engine.trail))
 		return engine.fail();
 	} else if (a1.isSymbol()) { // char_code(+Char, ?CharCode)
 	    String s = ((SymbolTerm)a1).name();

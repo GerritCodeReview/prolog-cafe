@@ -7,18 +7,18 @@ import com.googlecode.prolog_cafe.lang.*;
    @version 1.0
 */
 class PRED_$get_prolog_impl_flag_2 extends Predicate.P2 {
-    private static final SymbolTerm TRUE                      = SymbolTerm.makeSymbol("true");
-    private static final SymbolTerm FALSE                     = SymbolTerm.makeSymbol("false");
-    private static final SymbolTerm BOUNDED                   = SymbolTerm.makeSymbol("bounded");
-    private static final SymbolTerm MAX_INTEGER               = SymbolTerm.makeSymbol("max_integer");
-    private static final SymbolTerm MIN_INTEGER               = SymbolTerm.makeSymbol("min_integer");
-    private static final SymbolTerm INTEGER_ROUNDING_FUNCTION = SymbolTerm.makeSymbol("integer_rounding_function");
-    private static final SymbolTerm CHAR_CONVERSION           = SymbolTerm.makeSymbol("char_conversion");
-    private static final SymbolTerm DEBUG                     = SymbolTerm.makeSymbol("debug");
-    private static final SymbolTerm MAX_ARITY                 = SymbolTerm.makeSymbol("max_arity");
-    private static final SymbolTerm UNKNOWN                   = SymbolTerm.makeSymbol("unknown");
-    private static final SymbolTerm DOUBLE_QUOTES             = SymbolTerm.makeSymbol("double_quotes");
-    private static final SymbolTerm PRINT_STACK_TRACE         = SymbolTerm.makeSymbol("print_stack_trace");
+    private static final SymbolTerm TRUE                      = SymbolTerm.intern("true");
+    private static final SymbolTerm FALSE                     = SymbolTerm.intern("false");
+    private static final SymbolTerm BOUNDED                   = SymbolTerm.intern("bounded");
+    private static final SymbolTerm MAX_INTEGER               = SymbolTerm.intern("max_integer");
+    private static final SymbolTerm MIN_INTEGER               = SymbolTerm.intern("min_integer");
+    private static final SymbolTerm INTEGER_ROUNDING_FUNCTION = SymbolTerm.intern("integer_rounding_function");
+    private static final SymbolTerm CHAR_CONVERSION           = SymbolTerm.intern("char_conversion");
+    private static final SymbolTerm DEBUG                     = SymbolTerm.intern("debug");
+    private static final SymbolTerm MAX_ARITY                 = SymbolTerm.intern("max_arity");
+    private static final SymbolTerm UNKNOWN                   = SymbolTerm.intern("unknown");
+    private static final SymbolTerm DOUBLE_QUOTES             = SymbolTerm.intern("double_quotes");
+    private static final SymbolTerm PRINT_STACK_TRACE         = SymbolTerm.intern("print_stack_trace");
 
     public PRED_$get_prolog_impl_flag_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -49,25 +49,25 @@ class PRED_$get_prolog_impl_flag_2 extends Predicate.P2 {
 	    if (! a2.unify(new IntegerTerm(engine.getMinInteger()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(INTEGER_ROUNDING_FUNCTION)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getIntegerRoundingFunction()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getIntegerRoundingFunction()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(CHAR_CONVERSION)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getCharConversion()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getCharConversion()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(DEBUG)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getDebug()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getDebug()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(MAX_ARITY)) {
 	    if (! a2.unify(new IntegerTerm(engine.getMaxArity()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(UNKNOWN)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getUnknown()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getUnknown()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(DOUBLE_QUOTES)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getDoubleQuotes()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getDoubleQuotes()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(PRINT_STACK_TRACE)) {
-	    if (! a2.unify(SymbolTerm.makeSymbol(engine.getPrintStackTrace()), engine.trail))
+	    if (! a2.unify(SymbolTerm.intern(engine.getPrintStackTrace()), engine.trail))
 		return engine.fail();
 	} else {
 	    return engine.fail();

@@ -8,7 +8,7 @@ import java.io.*;
  * @version 1.0
 */
 public class PRED_get_char_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_EOF = SymbolTerm.makeSymbol("end_of_file");
+    private static final SymbolTerm SYM_EOF = SymbolTerm.intern("end_of_file");
 
     public PRED_get_char_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -60,7 +60,7 @@ public class PRED_get_char_2 extends Predicate.P2 {
 	    } 
 	    if (! Character.isDefined(c))
 		throw new RepresentationException(this, 0, "character");
-	    if (! a2.unify(SymbolTerm.makeSymbol(String.valueOf((char)c)), engine.trail))
+	    if (! a2.unify(SymbolTerm.create((char)c), engine.trail))
 		return engine.fail();
 	    return cont;
 	} catch (IOException e) {

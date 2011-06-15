@@ -8,17 +8,16 @@ import java.io.*;
    @version 1.0
 */
 public class PRED_open_4 extends Predicate.P4 {
-    private static final SymbolTerm SYM_NIL         = SymbolTerm.makeSymbol("[]");
-    private static final SymbolTerm SYM_TEXT        = SymbolTerm.makeSymbol("text");
-    private static final SymbolTerm SYM_READ        = SymbolTerm.makeSymbol("read");
-    private static final SymbolTerm SYM_WRITE       = SymbolTerm.makeSymbol("write");
-    private static final SymbolTerm SYM_APPEND      = SymbolTerm.makeSymbol("append");
-    private static final SymbolTerm SYM_INPUT       = SymbolTerm.makeSymbol("input");
-    private static final SymbolTerm SYM_OUTPUT      = SymbolTerm.makeSymbol("output");
-    private static final SymbolTerm SYM_ALIAS_1     = SymbolTerm.makeSymbol("alias", 1);
-    private static final SymbolTerm SYM_MODE_1      = SymbolTerm.makeSymbol("mode", 1);
-    private static final SymbolTerm SYM_TYPE_1      = SymbolTerm.makeSymbol("type", 1);
-    private static final SymbolTerm SYM_FILE_NAME_1 = SymbolTerm.makeSymbol("file_name", 1);
+    private static final SymbolTerm SYM_TEXT        = SymbolTerm.intern("text");
+    private static final SymbolTerm SYM_READ        = SymbolTerm.intern("read");
+    private static final SymbolTerm SYM_WRITE       = SymbolTerm.intern("write");
+    private static final SymbolTerm SYM_APPEND      = SymbolTerm.intern("append");
+    private static final SymbolTerm SYM_INPUT       = SymbolTerm.intern("input");
+    private static final SymbolTerm SYM_OUTPUT      = SymbolTerm.intern("output");
+    private static final SymbolTerm SYM_ALIAS_1     = SymbolTerm.intern("alias", 1);
+    private static final SymbolTerm SYM_MODE_1      = SymbolTerm.intern("mode", 1);
+    private static final SymbolTerm SYM_TYPE_1      = SymbolTerm.intern("type", 1);
+    private static final SymbolTerm SYM_FILE_NAME_1 = SymbolTerm.intern("file_name", 1);
 
     public PRED_open_4(Term a1, Term a2, Term a3, Term a4, Operation cont) {
         arg1 = a1;
@@ -33,7 +32,7 @@ public class PRED_open_4 extends Predicate.P4 {
         engine.setB0();
 	File file;
 	Term alias = null;
-	Term opts = SYM_NIL;
+	Term opts = Prolog.Nil;
 	JavaObjectTerm streamObject;
         Term a1, a2, a3, a4;
         a1 = arg1;
@@ -114,7 +113,7 @@ public class PRED_open_4 extends Predicate.P4 {
 	}
 	opts = new ListTerm(new StructureTerm(SYM_TYPE_1, SYM_TEXT), opts);
 	opts = new ListTerm(new StructureTerm(SYM_MODE_1, a2), opts);
-	opts = new ListTerm(new StructureTerm(SYM_FILE_NAME_1, SymbolTerm.makeSymbol(file.getAbsolutePath())), opts);
+	opts = new ListTerm(new StructureTerm(SYM_FILE_NAME_1, SymbolTerm.create(file.getAbsolutePath())), opts);
 	if (alias != null) {
 	    engine.getStreamManager().put(alias, streamObject);
 	    opts = new ListTerm(new StructureTerm(SYM_ALIAS_1, alias), opts);

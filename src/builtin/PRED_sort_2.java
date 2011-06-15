@@ -8,8 +8,6 @@ import java.util.Arrays;
  * @version 1.1
  */
 public class PRED_sort_2 extends Predicate.P2 {
-    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
-
     public PRED_sort_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
 	arg2 = a2;
@@ -28,8 +26,8 @@ public class PRED_sort_2 extends Predicate.P2 {
 	a1 = a1.dereference();
 	if (a1.isVariable()) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.equals(Nil)) {
-	    if (! a2.unify(Nil, engine.trail))
+	} else if (a1.equals(Prolog.Nil)) {
+	    if (! a2.unify(Prolog.Nil, engine.trail))
 		return engine.fail();
 	    return cont;
 	} else if (! a1.isList()) {
@@ -44,14 +42,14 @@ public class PRED_sort_2 extends Predicate.P2 {
 	    list[i] = ((ListTerm)tmp).car().dereference();
 	    tmp = ((ListTerm)tmp).cdr().dereference();
 	}
-	if (! tmp.equals(Nil))
+	if (! tmp.equals(Prolog.Nil))
 	    throw new PInstantiationException(this, 1);
 	try {
 	    Arrays.sort(list);
 	} catch (ClassCastException e) {
 	    throw new JavaException(this, 1, e);
 	}
-	tmp = Nil;
+	tmp = Prolog.Nil;
 	tmp2 = null;
 	for (int i=list.length-1; i>=0; i--) {
 	    if (! list[i].equals(tmp2))

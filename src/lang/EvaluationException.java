@@ -11,7 +11,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class EvaluationException extends BuiltinException {
     /** A functor symbol of <code>evaluation_error/3</code>. */
-    public static final SymbolTerm EVALUATION_ERROR = SymbolTerm.makeSymbol("evaluation_error", 3);
+    public static final SymbolTerm EVALUATION_ERROR = SymbolTerm.intern("evaluation_error", 3);
 
     /* errorType ::= float_overflow | int_overflow | undefined | underflow | zero_devisor */
     /** Holds a string representation of error type. */
@@ -36,7 +36,7 @@ public class EvaluationException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo), 
-	    SymbolTerm.makeSymbol(errorType)};
+	    SymbolTerm.create(errorType)};
 	return new StructureTerm(EVALUATION_ERROR, args);
     }
 

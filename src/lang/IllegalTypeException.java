@@ -10,7 +10,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class IllegalTypeException extends BuiltinException {
     /** A functor symbol of <code>type_error/4</code>. */
-    public static final SymbolTerm TYPE_ERROR = SymbolTerm.makeSymbol("type_error", 4);
+    public static final SymbolTerm TYPE_ERROR = SymbolTerm.intern("type_error", 4);
 
     /*
       type ::= atom | atomic | byte | callable | character | compound | evaluable |
@@ -47,7 +47,7 @@ public class IllegalTypeException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo), 
-	    SymbolTerm.makeSymbol(type),
+	    SymbolTerm.create(type),
 	    culprit};
 	return new StructureTerm(TYPE_ERROR, args);
     }

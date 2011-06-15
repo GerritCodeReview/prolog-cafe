@@ -8,8 +8,7 @@ import java.util.Arrays;
  * @version 1.1
  */
 public class PRED_keysort_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_HYPHEN_2 = SymbolTerm.makeSymbol("-", 2);
-    private static final SymbolTerm Nil = SymbolTerm.makeSymbol("[]");
+    private static final SymbolTerm SYM_HYPHEN_2 = SymbolTerm.intern("-", 2);
 
     public PRED_keysort_2(Term a1, Term a2, Operation cont) {
 	arg1 = a1;
@@ -29,8 +28,8 @@ public class PRED_keysort_2 extends Predicate.P2 {
 	a1 = a1.dereference();
 	if (a1.isVariable()) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.equals(Nil)) {
-	    if (! a2.unify(Nil, engine.trail))
+	} else if (a1.equals(Prolog.Nil)) {
+	    if (! a2.unify(Prolog.Nil, engine.trail))
 		return engine.fail();
 	    return cont;
 	} else if (! a1.isList()) {
@@ -51,7 +50,7 @@ public class PRED_keysort_2 extends Predicate.P2 {
 		throw new IllegalTypeException(this, 1, "key_value_pair", a1);
 	    tmp = ((ListTerm)tmp).cdr().dereference();
 	}
-	if (! tmp.equals(Nil))
+	if (! tmp.equals(Prolog.Nil))
 	    throw new PInstantiationException(this, 1);
 	try {
 	    Arrays.sort(list, new KeySortComparator());
@@ -60,7 +59,7 @@ public class PRED_keysort_2 extends Predicate.P2 {
 	} catch (ClassCastException e1) {
 	    throw new JavaException(this, 1, e1);
 	}
-	tmp = Nil;
+	tmp = Prolog.Nil;
 	for (int i=list.length-1; i>=0; i--) {
 	    tmp = new ListTerm(list[i], tmp);
 	}

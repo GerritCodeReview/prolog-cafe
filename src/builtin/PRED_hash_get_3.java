@@ -8,8 +8,6 @@ import java.util.Hashtable;
    @version 1.0
 */
 public class PRED_hash_get_3 extends Predicate.P3 {
-    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
-
     public PRED_hash_get_3(Term a1, Term a2, Term a3, Operation cont) {
         arg1 = a1;
         arg2 = a2;
@@ -43,7 +41,7 @@ public class PRED_hash_get_3 extends Predicate.P3 {
 	a2 = a2.dereference();
 	Term elem = ((HashtableOfTerm) hash).get(a2);
 	if (elem == null)
-	    elem = SYM_NIL;
+	    elem = Prolog.Nil;
 	if (! a3.unify(elem, engine.trail))
 	    return engine.fail();
         return cont;

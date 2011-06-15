@@ -9,8 +9,6 @@ import java.util.Enumeration;
    @version 1.0
 */
 public class PRED_hash_keys_2 extends Predicate.P2 {
-    private static final SymbolTerm SYM_NIL = SymbolTerm.makeSymbol("[]");
-
     public PRED_hash_keys_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
         arg2 = a2;
@@ -39,7 +37,7 @@ public class PRED_hash_keys_2 extends Predicate.P2 {
 	}
 	if (! (hash instanceof HashtableOfTerm))
 	    throw new InternalException(this + ": Hash is not HashtableOfTerm");
-	Term keys = SYM_NIL;
+	Term keys = Prolog.Nil;
 	for (Term t : ((HashtableOfTerm) hash).keySet())
 	    keys = new ListTerm(t, keys);
 	if (! a2.unify(keys, engine.trail))

@@ -10,7 +10,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class SyntaxException extends BuiltinException {
     /** A functor symbol of <code>syntax_error/5</code>. */
-    public static final SymbolTerm SYNTAX_ERROR = SymbolTerm.makeSymbol("syntax_error", 5);
+    public static final SymbolTerm SYNTAX_ERROR = SymbolTerm.intern("syntax_error", 5);
 
     /** Holds a string representation of valid type. */
     public String type;
@@ -45,9 +45,9 @@ public class SyntaxException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo), 
-	    SymbolTerm.makeSymbol(type),
+	    SymbolTerm.create(type),
 	    culprit,
-	    SymbolTerm.makeSymbol(message) };
+	    SymbolTerm.create(message) };
 	return new StructureTerm(SYNTAX_ERROR, args);
     }
 

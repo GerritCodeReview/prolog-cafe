@@ -8,7 +8,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class SystemException extends PrologException {
     /** A functor symbol of <code>system_error/1</code>. */
-    public static final SymbolTerm SYSTEM_ERROR = SymbolTerm.makeSymbol("system_error", 1);
+    public static final SymbolTerm SYSTEM_ERROR = SymbolTerm.intern("system_error", 1);
 
     /** Holds a message. */
     public String message;
@@ -22,7 +22,7 @@ public class SystemException extends PrologException {
      * <code>system_error(message)</code>.
      */
     public Term getMessageTerm() {
-	Term[] args = {SymbolTerm.makeSymbol(message)};
+	Term[] args = {SymbolTerm.create(message)};
 	return new StructureTerm(SYSTEM_ERROR, args);
     }
 

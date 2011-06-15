@@ -7,10 +7,10 @@ import  com.googlecode.prolog_cafe.lang.*;
    @version 1.0
 */
 class PRED_$statistics_2 extends Predicate.P2 {
-    private static final SymbolTerm Nil         = SymbolTerm.makeSymbol("[]");
-    private static final SymbolTerm SYM_RUNTIME = SymbolTerm.makeSymbol("runtime");
-    private static final SymbolTerm SYM_TRAIL   = SymbolTerm.makeSymbol("trail");
-    private static final SymbolTerm SYM_CHOICE  = SymbolTerm.makeSymbol("choice");
+    private static final SymbolTerm Nil         = Prolog.Nil;
+    private static final SymbolTerm SYM_RUNTIME = SymbolTerm.intern("runtime");
+    private static final SymbolTerm SYM_TRAIL   = SymbolTerm.intern("trail");
+    private static final SymbolTerm SYM_CHOICE  = SymbolTerm.intern("choice");
 
     public PRED_$statistics_2(Term a1, Term a2, Operation cont){
 	arg1 = a1;

@@ -64,7 +64,7 @@ class PRED_$read_token0_3 extends Predicate.P3 {
 		}
 		break;
 	    default :
-		token = SymbolTerm.makeSymbol(s.toString());
+		token = SymbolTerm.create(s.toString());
 		break;
 	    }
 	} catch (Exception e) {

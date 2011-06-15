@@ -271,7 +271,7 @@ write_java0(put_con(C,X), _, Out) :- !,
 	tab(Out, 4),
 	write(Out, 'static final SymbolTerm '),
 	write_reg(X, Out),
-	write(Out, ' = SymbolTerm.makeSymbol("'),
+	write(Out, ' = SymbolTerm.intern("'),
 	(C = F/A -> 
 	    write_constant(F, Out), write(Out, '", '), write(Out, A), write(Out, ');')
 	    ;
@@ -727,7 +727,7 @@ write_inline0(atomic(X), _, Out) :- !,
 	write_if_fail(op('&&',op('!',@('isSymbol'(X))), op('!',@('isNumber'(X)))), [X], 8, Out).
 write_inline0(java(X,Y), _, Out) :- !, 
 	write_if_fail(op('!', @('isJavaObject'(X))), [X], 8, Out),
-	EXP = #('SymbolTerm.makeSymbol'(@(getName(@(getClass(@(object(cast('JavaObjectTerm',X))))))))),
+	EXP = #('SymbolTerm.create'(@(getName(@(getClass(@(object(cast('JavaObjectTerm',X))))))))),
 	write_if_fail(op('!', unify(Y,EXP)), [], 8, Out).
 write_inline0(ground(X), _, Out) :- !, write_if_fail(op('!', @('isGround'(X))), [X], 8, Out).
 % Term comparison

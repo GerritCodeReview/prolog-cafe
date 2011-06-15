@@ -85,7 +85,7 @@ public class Compiler {
       final boolean onByDefault;
 
       Option(String symbol, boolean onByDefault) {
-        this.symbol = SymbolTerm.makeSymbol(symbol);
+        this.symbol = SymbolTerm.intern(symbol);
         this.onByDefault = onByDefault;
       }
     }
@@ -112,8 +112,8 @@ public class Compiler {
 		  throw new CompileException(new FileNotFoundException(_prolog));
 
 	    // Create arguments
-	    Term prolog = SymbolTerm.makeSymbol(_prolog);
-	    Term wam    = SymbolTerm.makeSymbol(_wam);
+	    Term prolog = SymbolTerm.create(_prolog);
+	    Term wam    = SymbolTerm.create(_wam);
 	    Term op     = Prolog.Nil;
 	    for (Option opt : options)
 	      op = new ListTerm(opt.symbol, op);
@@ -141,8 +141,8 @@ public class Compiler {
          throw new CompileException(new FileNotFoundException(_dir));
 
 	    // Create arguments
-	    Term wam    = SymbolTerm.makeSymbol(_wam);
-	    Term dir    = SymbolTerm.makeSymbol(_dir);
+	    Term wam    = SymbolTerm.create(_wam);
+	    Term dir    = SymbolTerm.create(_dir);
 	    ListTerm args = new ListTerm(wam, new ListTerm(dir, Prolog.Nil));
 	    try {
 	      if (!pcl.execute("com.googlecode.prolog_cafe.compiler.am2j", "am2j", args))

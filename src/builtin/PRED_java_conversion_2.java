@@ -1,6 +1,6 @@
 package com.googlecode.prolog_cafe.builtin;
 import com.googlecode.prolog_cafe.lang.*;
-import java.util.Vector;
+import java.util.List;
 /**
  * <code>java_conversion/2</code>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
@@ -53,12 +53,12 @@ public class PRED_java_conversion_2 extends Predicate.P2 {
 		   o instanceof Double) {
 	    return new DoubleTerm(((Number)o).doubleValue());
 	} else if (o instanceof String) {
-	    return SymbolTerm.makeSymbol((String) o);
-	} else if (o instanceof Vector) {
-	    Vector v = (Vector) o;
+	    return SymbolTerm.create((String) o);
+	} else if (o instanceof List) {
+	    List v = (List) o;
 	    Term t = Prolog.Nil;
 	    for(int i= v.size(); i>0; i--) {
-		t = new ListTerm(inverseConversion(v.elementAt(i-1)), t);
+		t = new ListTerm(inverseConversion(v.get(i-1)), t);
 	    }
 	    return t;
 	}

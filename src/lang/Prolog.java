@@ -103,20 +103,20 @@ public final class Prolog {
     public static final String BUILTIN = "com.googlecode.prolog_cafe.builtin";
 
     /** Holds an atom <code>[]<code> (empty list). */
-    public static final SymbolTerm Nil     = SymbolTerm.makeSymbol("[]");
+    public static final SymbolTerm Nil     = SymbolTerm.intern("[]");
 
     /* Some symbols for stream options */
-    static final SymbolTerm SYM_MODE_1     = SymbolTerm.makeSymbol("mode", 1);
-    static final SymbolTerm SYM_ALIAS_1    = SymbolTerm.makeSymbol("alias", 1);
-    static final SymbolTerm SYM_TYPE_1     = SymbolTerm.makeSymbol("type", 1);
-    static final SymbolTerm SYM_READ       = SymbolTerm.makeSymbol("read");
-    static final SymbolTerm SYM_APPEND     = SymbolTerm.makeSymbol("append");
-    static final SymbolTerm SYM_INPUT      = SymbolTerm.makeSymbol("input");
-    static final SymbolTerm SYM_OUTPUT     = SymbolTerm.makeSymbol("output");
-    static final SymbolTerm SYM_TEXT       = SymbolTerm.makeSymbol("text");
-    static final SymbolTerm SYM_USERINPUT  = SymbolTerm.makeSymbol("user_input");
-    static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.makeSymbol("user_output");
-    static final SymbolTerm SYM_USERERROR  = SymbolTerm.makeSymbol("user_error");
+    static final SymbolTerm SYM_MODE_1     = SymbolTerm.intern("mode", 1);
+    static final SymbolTerm SYM_ALIAS_1    = SymbolTerm.intern("alias", 1);
+    static final SymbolTerm SYM_TYPE_1     = SymbolTerm.intern("type", 1);
+    static final SymbolTerm SYM_READ       = SymbolTerm.intern("read");
+    static final SymbolTerm SYM_APPEND     = SymbolTerm.intern("append");
+    static final SymbolTerm SYM_INPUT      = SymbolTerm.intern("input");
+    static final SymbolTerm SYM_OUTPUT     = SymbolTerm.intern("output");
+    static final SymbolTerm SYM_TEXT       = SymbolTerm.intern("text");
+    static final SymbolTerm SYM_USERINPUT  = SymbolTerm.intern("user_input");
+    static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.intern("user_output");
+    static final SymbolTerm SYM_USERERROR  = SymbolTerm.intern("user_error");
 
     public static enum Feature {
       /** Enable the {@code java_*} predicates, supporting reflection in Prolog. */
@@ -228,7 +228,7 @@ public final class Prolog {
 	doubleQuotes    = "codes";
 	printStackTrace = "off";
 
-	exception       = SymbolTerm.makeSymbol("$none");
+	exception       = SymbolTerm.intern("$none");
 	startRuntime    = System.currentTimeMillis();
 	previousRuntime = 0;
 

@@ -10,7 +10,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class PermissionException extends BuiltinException {
     /** A functor symbol of <code>permission_error/5</code>. */
-    public static final SymbolTerm PERMISSION_ERROR = SymbolTerm.makeSymbol("permission_error", 5);
+    public static final SymbolTerm PERMISSION_ERROR = SymbolTerm.intern("permission_error", 5);
 
     /* operation ::= access | create | input | modify | open | output | reposition | new */
     /** Holds a string representation of operation. */
@@ -50,10 +50,10 @@ public class PermissionException extends BuiltinException {
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
-	    SymbolTerm.makeSymbol(operation),
-	    SymbolTerm.makeSymbol(permissionType),
+	    SymbolTerm.create(operation),
+	    SymbolTerm.create(permissionType),
 	    culprit,
-	    SymbolTerm.makeSymbol(message)};
+	    SymbolTerm.create(message)};
 	return new StructureTerm(PERMISSION_ERROR, args);
     }
 

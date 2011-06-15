@@ -10,7 +10,7 @@ package com.googlecode.prolog_cafe.lang;
  */
 public class RepresentationException extends BuiltinException {
     /** A functor symbol of <code>representation_error/3</code>. */
-    public static final SymbolTerm REPRESENTATION_ERROR = SymbolTerm.makeSymbol("representation_error", 3);
+    public static final SymbolTerm REPRESENTATION_ERROR = SymbolTerm.intern("representation_error", 3);
 
     /*
       flag ::= character | character_code | in_character_code | 
@@ -38,7 +38,7 @@ public class RepresentationException extends BuiltinException {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
 	    new IntegerTerm(argNo), 
-	    SymbolTerm.makeSymbol(flag)};
+	    SymbolTerm.create(flag)};
 	return new StructureTerm(REPRESENTATION_ERROR, args);
     }
 
