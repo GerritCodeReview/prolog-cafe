@@ -69,8 +69,6 @@ public final class Prolog {
     /** Prolog implementation flag: <code>print_stack_trace</code>. */
     protected String printStackTrace;
 
-    /** Holds a list of frozen goals for <code>freeze/2</code> (not implemented yet). */
-    protected Term pendingGoals; 
     /** Holds an exception term for <code>catch/3</code> and <code>throw/1</code>. */
     protected Term exception;
 
@@ -230,7 +228,6 @@ public final class Prolog {
 	doubleQuotes    = "codes";
 	printStackTrace = "off";
 
-	pendingGoals    = Nil;
 	exception       = SymbolTerm.makeSymbol("$none");
 	startRuntime    = System.currentTimeMillis();
 	previousRuntime = 0;
