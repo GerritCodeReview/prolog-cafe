@@ -260,8 +260,6 @@ public final class Prolog {
 	    : 0;
 	previousRuntime = 0;
 
-	userOutput.flush();
-	userError.flush();
 	currentInput  = userInput;
 	currentOutput = userOutput;
     }
