@@ -24,9 +24,12 @@ public final class Prolog {
 
     /** Prolog thread */
     public PrologControl control;
+
     /** Argument registers */
     public Term areg1, areg2, areg3, areg4, areg5, areg6, areg7, areg8;
     public Term[] aregs;
+    private static final Term[] NO_REGISTERS = {};
+
     /** Continuation goal register */
     public Operation cont;
     /** Choice point frame stack */
@@ -163,8 +166,12 @@ public final class Prolog {
      *   <li><code>streamManager</code>
      * </ul>
      */
-  protected void initOnce() {
-    aregs = new Term[Math.max(0, maxArity - 8)];
+  private void initOnce() {
+    if (8 < maxArity)
+      aregs = new Term[maxArity - 8];
+    else
+      aregs = NO_REGISTERS;
+
     if (pcl == null) pcl = new PrologClassLoader();
     if (internalDB == null) internalDB = new InternalDatabase();
 
