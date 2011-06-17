@@ -125,6 +125,32 @@ public final class Prolog {
     static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.intern("user_output");
     static final SymbolTerm SYM_USERERROR  = SymbolTerm.intern("user_error");
 
+    private static final PrintWriter NO_OUTPUT = new PrintWriter(new Writer() {
+      @Override
+      public void write(char[] cbuf, int off, int len) throws IOException {
+        throw new IOException("Prolog.Feature.IO disabled");
+      }
+
+      @Override
+      public void flush() throws IOException {
+      }
+
+      @Override
+      public void close() throws IOException {
+      }
+    });
+
+    private static final PushbackReader NO_INPUT = new PushbackReader(new Reader() {
+      @Override
+      public int read(char[] cbuf, int off, int len) throws IOException {
+        return -1;
+      }
+
+      @Override
+      public void close() throws IOException {
+      }
+    });
+
     public static enum Feature {
       /** Enable the {@code java_*} predicates, supporting reflection in Prolog. */
       JAVA_REFLECTION,
@@ -194,31 +220,8 @@ public final class Prolog {
       streamManager.put(new JavaObjectTerm(userError),
         makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USERERROR, SYM_TEXT));
     } else {
-      userInput = new PushbackReader(new Reader() {
-        @Override
-        public int read(char[] cbuf, int off, int len) throws IOException {
-          return -1;
-        }
-
-        @Override
-        public void close() throws IOException {
-        }
-      });
-
-      userOutput = new PrintWriter(new Writer() {
-        @Override
-        public void write(char[] cbuf, int off, int len) throws IOException {
-          throw new IOException("Prolog.Feature.IO disabled");
-        }
-
-        @Override
-        public void flush() throws IOException {
-        }
-
-        @Override
-        public void close() throws IOException {
-        }
-      });
+      userInput = NO_INPUT;
+      userOutput = NO_OUTPUT;
       userError = userOutput;
     }
   }
