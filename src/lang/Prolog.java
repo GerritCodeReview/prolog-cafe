@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 /**
  * Prolog engine.
  *
@@ -78,7 +79,7 @@ public final class Prolog {
     protected long previousRuntime;
 
     /** Hashtable for creating a copy of term. */
-    protected HashMap<VariableTerm,VariableTerm> copyHash;
+    protected final IdentityHashMap<VariableTerm,VariableTerm> copyHash;
 
     /** The size of the pushback buffer used for creating input streams. */
     public static final int PUSHBACK_SIZE = 3;
@@ -134,6 +135,7 @@ public final class Prolog {
 	trail      = new Trail();
 	stack      = new ChoicePointStack(trail);
 	hashManager = new HashtableOfTerm();
+	copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
     }
 
     /**
@@ -153,7 +155,6 @@ public final class Prolog {
     if (pcl == null) pcl = new PrologClassLoader();
     if (internalDB == null) internalDB = new InternalDatabase();
 
-    copyHash = new HashMap<VariableTerm, VariableTerm>();
     streamManager = new HashtableOfTerm();
 
     if (features.contains(Feature.IO)) {
