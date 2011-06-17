@@ -51,6 +51,8 @@ public class PrologMain {
 	    p.setPredicate(Prolog.BUILTIN, "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);
+	} catch (HaltException e) {
+	    System.exit(e.getStatus());
 	} catch (Exception e){
 	    e.printStackTrace();
 	    System.exit(1);

@@ -12,7 +12,7 @@ public class Failure extends Operation {
 
     public Operation exec(Prolog engine) {
 	engine.control.fail();
-	engine.exceptionRaised = 1; // halt
+	engine.halt = 1; // halt(0)
 	return null;
     }
 

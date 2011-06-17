@@ -22,7 +22,7 @@ public class PRED_halt_1 extends Predicate.P1 {
 	    throw new PInstantiationException(this, 1);
 	if (! a1.isInteger())
 	    throw new IllegalTypeException(this, 1, "integer", a1);
-	engine.exceptionRaised = ((IntegerTerm)a1).intValue();
+	engine.halt = 1 + ((IntegerTerm)a1).intValue();
         return cont;
     }
 }

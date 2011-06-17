@@ -143,28 +143,24 @@ public abstract class PrologControl {
      * @throws PrologException
      * @throws JavaInterruptedException
      */
-    protected void executePredicate()
-      throws PrologException, JavaInterruptedException {
-	    engine.init();
-	    main_loop:while(true) {
-		while (engine.exceptionRaised == 0) {
-		    if (isEngineStopped())
-			break main_loop;
-		    code = code.exec(engine);
-		}
-		SymbolTerm.gc();
-		switch (engine.exceptionRaised) {
-		case 1:  // halt/0
-		    break main_loop;
-		case 2:  // freeze/2
-		    throw new SystemException("freeze/2 is not supported yet");
-		    // Do something here
-		    // engine.exceptionRaised = 0 ;
-		    // break;
-		default:
-		    throw new SystemException("Invalid value of exceptionRaised");
-		}
-	    }
+    protected void executePredicate() throws PrologException, JavaInterruptedException {
+      Prolog engine = this.engine;
+      Operation code = this.code;
+      try {
+        engine.init();
+
+        do {
+          if (isEngineStopped()) return;
+          code = code.exec(engine);
+        } while (engine.halt == 0);
+
+        if (engine.halt != 1) {
+            throw new HaltException(engine.halt - 1);
+        }
+      } finally {
+        this.code = code;
+        SymbolTerm.gc();
+      }
     }
 
     /** @param err stack trace to print (or log). */

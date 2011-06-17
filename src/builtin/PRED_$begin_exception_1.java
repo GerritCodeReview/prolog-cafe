@@ -21,6 +21,7 @@ class PRED_$begin_exception_1 extends BlockPredicate {
 
 	if (! a1.unify(new JavaObjectTerm(this), engine.trail))
 	    return engine.fail();
+	PrologControl ctl = engine.control;
 	Operation code = cont;
 	int B = engine.stack.top();
 	this.outOfScope = false;
@@ -28,26 +29,11 @@ class PRED_$begin_exception_1 extends BlockPredicate {
 	engine.trail.push(new OutOfLoop(this));
 
 	try {
-	    main_loop:while(true) {
-		while (engine.exceptionRaised == 0) {
-		    if (engine.control.isEngineStopped())
-			break main_loop;
-		    if (outOfLoop)
-			break main_loop;
-		    code = code.exec(engine);
-		}
-		switch (engine.exceptionRaised) {
-		case 1:  // halt/0
-		    break main_loop;
-		case 2:  // freeze/2
-		    throw new SystemException("freeze/2 is not supported yet");
-		    // Do something here
-                    // engine.exceptionRaised = 0 ;
-		    // break
-		default:
-		    break main_loop;
-		}
-	    }
+	  do {
+	    if (ctl.isEngineStopped()) break;
+	    if (outOfLoop) break;
+	    code = code.exec(engine);
+	  } while (engine.halt == 0);
 	} catch (PrologException e) {
 	    if (outOfScope)
 		throw e;

@@ -1767,11 +1767,9 @@ current_prolog_flag(Flag, Term) :-
 '$prolog_impl_flag'(print_stack_trace, [on,off], changeable(yes)).
 
 :- public halt/0.
-%:- public halt/1. (written in Java)
 :- public abort/0.
 
-halt :- halt(1).
-
+halt :- halt(0).
 abort :- raise_exception('Execution aborted').
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

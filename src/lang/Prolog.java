@@ -50,10 +50,10 @@ public final class Prolog {
      * Exception level of continuation passing loop:
      * <li><code>0</code> for no exception,
      * <li><code>1</code> for <code>halt/0</code>,
-     * <li><code>2</code> for <code>freeze/2</code> (not supported yet)
+     * <li><code>1+N</code> for <code>halt(N)</code>.
      * </ul>
      */
-    public int exceptionRaised;
+    public int halt;
 
     /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>bounded</code>. */
     protected boolean bounded = false;
@@ -246,7 +246,7 @@ public final class Prolog {
 	initialFrame.timeStamp = ++CPFTimeStamp;
 	stack.push(initialFrame);
 
-	exceptionRaised = 0;
+	halt = 0;
 
 	charConversion  = "off";
 	debug           = "off";

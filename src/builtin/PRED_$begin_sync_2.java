@@ -44,18 +44,8 @@ class PRED_$begin_sync_2 extends BlockPredicate {
 	main_loop:while(true) {
 	    synchronized (o) {
 		while (! outOfScope) {
-		    if (engine.exceptionRaised != 0) {
-			switch (engine.exceptionRaised) {
-			case 1:  // halt/0
+		    if (engine.halt != 0) {
 			    break main_loop;
-			case 2:  // freeze/2
-			    throw new SystemException("freeze/2 is not supported yet");
-			    // Do something here
-			    // engine.exceptionRaised = 0 ;
-			    // break
-			default:
-			    break main_loop;
-			}
 		    }
 		    if (engine.control.isEngineStopped())
 			break main_loop;
@@ -66,18 +56,8 @@ class PRED_$begin_sync_2 extends BlockPredicate {
 
 	    }
 	    while (outOfScope) {
-		if (engine.exceptionRaised != 0) {
-		    switch (engine.exceptionRaised) {
-		    case 1:  // halt/0
+		if (engine.halt != 0) {
 			break main_loop;
-		    case 2:  // freeze/2
-			throw new SystemException("freeze/2 is not supported yet");
-			// Do something here
-			// engine.exceptionRaised = 0 ;
-			// break
-		    default:
-			break main_loop;
-		    }
 		}
 		if (engine.control.isEngineStopped())
 		    break main_loop;
