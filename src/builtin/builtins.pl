@@ -2064,8 +2064,8 @@ consult(File) :- atom(File), !, '$consult'(File).
 	print_message(info, [consulting,File,'...']),
 	statistics(runtime, _),
 	consult_stream(File, In),
-	statistics(runtime, [_,T]).
-	print_message(info, [File,'consulted,',T,msec]),
+	statistics(runtime, [_,T]),
+	print_message(info, [File,consulted,T,msec]),
 	close(In).
 
 consult_stream(File, In) :-
