@@ -31,6 +31,7 @@ class PRED_$statistics_2 extends Predicate.P2 {
 	} else if (! a1.isSymbol()) {
 	    throw new IllegalTypeException(this, 1, "atom", a1);
 	} else if (a1.equals(SYM_RUNTIME)) {
+	    engine.requireFeature(Prolog.Feature.STATISTICS_RUNTIME, this, a1);
 	    long val1, val2;
 	    Term start, previous;
 	    val1 = System.currentTimeMillis() - engine.getStartRuntime();

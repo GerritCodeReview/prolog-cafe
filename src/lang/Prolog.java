@@ -156,7 +156,10 @@ public final class Prolog {
       JAVA_REFLECTION,
 
       /** Access to the local filesystem and console. */
-      IO;
+      IO,
+
+      /** Track the running time of evaluations */
+      STATISTICS_RUNTIME;
     }
     protected final EnumSet<Feature> features = EnumSet.allOf(Feature.class);
 
@@ -251,8 +254,10 @@ public final class Prolog {
 	doubleQuotes    = "codes";
 	printStackTrace = "off";
 
-	exception       = NONE;
-	startRuntime    = System.currentTimeMillis();
+	exception = NONE;
+	startRuntime = features.contains(Feature.STATISTICS_RUNTIME)
+	    ? System.currentTimeMillis()
+	    : 0;
 	previousRuntime = 0;
 
 	userOutput.flush();
