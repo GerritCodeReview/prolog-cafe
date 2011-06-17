@@ -18,7 +18,7 @@ public class InternalDatabase {
 
     /* For GC */
     /** A list of reusable entry indices. */
-    protected LinkedList<Integer> reusableIndices = new LinkedList<Integer>();
+    protected LinkedList<Integer> reusableIndices;
 
     /** the top index of this <code>InternalDatabase</code>. */
     protected int top;
@@ -32,11 +32,27 @@ public class InternalDatabase {
     public InternalDatabase(int n) {
 	maxContents = n;
 	buffer = new Term[Math.min(maxContents, DEFAULT_SIZE)];
+	reusableIndices = new LinkedList<Integer>();
 	top = -1;
     }
 
-    /** Discards all entries. */
-    public void init() { eraseAll(); }
+    InternalDatabase(Prolog engine, InternalDatabase src, boolean deepCopy) {
+      maxContents = src.maxContents;
+      buffer = new Term[src.buffer.length];
+      reusableIndices = new LinkedList<Integer>(src.reusableIndices);
+      top = src.top;
+
+      if (deepCopy) {
+        for (int i = 0; i <= top; i++) {
+          Term s = src.buffer[i];
+          if (s != null) {
+            buffer[i] = s.copy(engine);
+          }
+        }
+      } else if (0 <= top) {
+        System.arraycopy(src.buffer, 0, buffer, 0, top + 1);
+      }
+    }
 
     /** Inserts an entry to this <code>InternalDatabase</code>. */
     public int insert(Term t) {
@@ -46,12 +62,11 @@ public class InternalDatabase {
 		return top;
 	    } else {
 		int i = reusableIndices.remove();
-		//		System.out.println("Reuse " + i);
 		buffer[i] = t;
 		return i;
 	    }
 	} catch (ArrayIndexOutOfBoundsException e) {
-	    if (maxContents == buffer.length)
+	    if (maxContents <= buffer.length)
 	      throw new SystemException("internal database capacity reached");
 	    int len = buffer.length;
 	    Term[] new_buffer = new Term[Math.min(len+10000, maxContents)];
@@ -73,27 +88,14 @@ public class InternalDatabase {
     public Term erase(int i) {
 	Term t = buffer[i];
 	buffer[i] = null;
-	//	System.out.println("add Reuse index" + i);
 	reusableIndices.add(i);
 	return t;
     }
 
-    /** Discards all entries. */
-    protected void eraseAll() {
-	while (! empty()) {
-	    buffer[top--] = null;
-	}	
-    }
-
     /** Tests if this has no entry. */
-    public boolean empty() {
+    private boolean empty() {
 	return top == -1;
     }
-
-    /** Returns the value of <code>top</code>. 
-     * @see #top
-     */
-    public int top() { return top; }
 
     /** Shows the contents of this <code>InternalDatabase</code>. */
     public void show() {

@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.Map;
 /**
  * Prolog engine.
  *
@@ -19,6 +20,8 @@ import java.util.IdentityHashMap;
  * @version 1.2
 */
 public final class Prolog {
+    private static final SymbolTerm NONE = SymbolTerm.intern("$none");
+
     /** Prolog thread */
     public PrologControl control;
     /** Argument registers */
@@ -128,14 +131,24 @@ public final class Prolog {
     }
     protected final EnumSet<Feature> features = EnumSet.allOf(Feature.class);
 
-    /** Constructs new Prolog engine. */
-    public Prolog(PrologControl c) { 
-	control    = c;
-	cont       = null;
-	trail      = new Trail();
-	stack      = new ChoicePointStack(trail);
-	hashManager = new HashtableOfTerm();
-	copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+    Prolog(PrologControl c) {
+      control = c;
+      trail = new Trail();
+      stack = new ChoicePointStack(trail);
+      copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+      hashManager = new HashtableOfTerm();
+    }
+
+    Prolog(PrologControl c, PrologMachineCopy pmc) {
+      control = c;
+      trail = new Trail();
+      stack = new ChoicePointStack(trail);
+      copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+
+      // During restore there is no need to copy terms. clause/2 inside of
+      // builtins.pl copies the predicate when it reads from internalDB.
+      hashManager = PrologMachineCopy.copyShallow(pmc.hashManager);
+      internalDB = new InternalDatabase(this, pmc.internalDB, false);
     }
 
     /**
@@ -209,7 +222,6 @@ public final class Prolog {
 	  initOnce();
 	stack.init();
 	trail.init();
-	//	pdl.init();
 	B0 = stack.top();
 	CPFTimeStamp = Long.MIN_VALUE;
 
@@ -229,7 +241,7 @@ public final class Prolog {
 	doubleQuotes    = "codes";
 	printStackTrace = "off";
 
-	exception       = SymbolTerm.intern("$none");
+	exception       = NONE;
 	startRuntime    = System.currentTimeMillis();
 	previousRuntime = 0;
 

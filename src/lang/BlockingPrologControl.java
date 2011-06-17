@@ -110,9 +110,11 @@ public class BlockingPrologControl
 
   /** Constructs a new <code>BlockingPrologControl</code>. */
   public BlockingPrologControl() {
-  thread = null;
-  result = false;
-  resultReady = false;
+  }
+
+  /** Constructs a new <code>BlockingPrologControl</code>. */
+  public BlockingPrologControl(PrologMachineCopy pmc) {
+    super(pmc);
   }
 
   /**

@@ -23,8 +23,12 @@ public abstract class PrologControl {
 
     /** Constructs a new <code>PrologControl</code>. */
     public PrologControl() {
-	engine = new Prolog(this);
-	code = null;
+      engine = new Prolog(this);
+    }
+
+    /** Constructs a new <code>PrologControl</code>. */
+    public PrologControl(PrologMachineCopy pmc) {
+      engine = new Prolog(this, pmc);
     }
 
     public boolean isEnabled(Prolog.Feature f) {
@@ -53,7 +57,10 @@ public abstract class PrologControl {
     public void setMaxDatabaseSize(int size) {
       if (engine.aregs != null)
         throw new IllegalStateException("Prolog already initialized");
-      engine.internalDB = new InternalDatabase(size);
+      if (engine.internalDB != null)
+        engine.internalDB.maxContents = size;
+      else
+        engine.internalDB = new InternalDatabase(size);
     }
 
     public PrologClassLoader getPrologClassLoader() {

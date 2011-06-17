@@ -16,6 +16,13 @@ public class BufferingPrologControl extends PrologControl {
   private boolean resSingle;
   private Term[] resTemplate;
 
+  public BufferingPrologControl() {
+  }
+
+  public BufferingPrologControl(PrologMachineCopy pmc) {
+    super(pmc);
+  }
+
   /**
    * Initialize one or more packages in the interpreter.
    *
