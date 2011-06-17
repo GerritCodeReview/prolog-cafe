@@ -1,7 +1,5 @@
 package com.googlecode.prolog_cafe.lang;
 
-import java.io.Serializable;
-
 /**
  * Prolog thread.<br>
  * The <code>BlockingPrologControl</code> class is an implementation of
@@ -99,7 +97,7 @@ import java.io.Serializable;
  */
 public class BlockingPrologControl
     extends PrologControl
-    implements Runnable, Serializable {
+    implements Runnable {
 
   /** A volatile instance variable holding a thread. */
   private volatile Thread thread;

@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 import java.util.LinkedList;
 /**
  * Internal database for dynamic predicates.<br>
@@ -8,7 +7,7 @@ import java.util.LinkedList;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.1
  */
-public class InternalDatabase implements Serializable {
+public class InternalDatabase {
     protected static final int DEFAULT_SIZE = 100000;
 
     /** Maximum size of enties. Initial size is <code>100000</code>. */

@@ -10,7 +10,7 @@ import java.io.*;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.2.5
  */
-public class Token implements Serializable {
+public class Token {
 
     public static boolean isSolo(int c) {
 	return (c =='!' || c ==';');

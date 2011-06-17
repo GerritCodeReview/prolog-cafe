@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 /**
  * Prolog class loader.
@@ -8,7 +7,7 @@ import java.lang.reflect.Constructor;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.1
  */
-public class PrologClassLoader extends ClassLoader implements Serializable {
+public class PrologClassLoader extends ClassLoader {
     /** Initialize using the {@link ClassLoader#getSystemClassLoader()}.  */
     public PrologClassLoader() {
     }

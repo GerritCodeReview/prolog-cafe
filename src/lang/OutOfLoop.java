@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 /**
  * A trail entry for out-of-loop flag.<br>
  * This <code>OutOfLoop</code> class is used in 
@@ -10,7 +9,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class OutOfLoop implements Serializable,Undoable {
+public class OutOfLoop implements Undoable {
     BlockPredicate p;
 
     public OutOfLoop(BlockPredicate _p) {

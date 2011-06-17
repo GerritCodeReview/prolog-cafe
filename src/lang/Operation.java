@@ -1,7 +1,5 @@
 package com.googlecode.prolog_cafe.lang;
 
-import java.io.Serializable;
-
 /**
  * Superclass any single step operation in the Prolog interpreter.
  * <p>
@@ -12,7 +10,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public abstract class Operation implements Serializable {
+public abstract class Operation {
   /**
    * Executes this operation and returns a continuation goal.
    *

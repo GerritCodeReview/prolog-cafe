@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 /**
  * The superclass of classes for Prolog exceptions.<br>
  *
@@ -7,7 +6,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public abstract class PrologException extends RuntimeException implements Serializable {
+public abstract class PrologException extends RuntimeException {
 
     /** Constructs a new Prolog exception. */
     public PrologException() {}

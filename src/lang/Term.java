@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 /**
  * The superclass of classes for term structures.
  * The subclasses of <code>Term</code> must override
@@ -9,7 +8,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public abstract class Term implements Serializable,Comparable<Term> {
+public abstract class Term implements Comparable<Term> {
 
     /** Holds an integer value <code>0</code>. */
     public static final int EQUAL  =  0;

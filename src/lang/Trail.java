@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.io.Serializable;
 /**
  * Trail stack.<br>
  * The class <code>Trail</code> represents a trail stack.<br>
