@@ -80,46 +80,11 @@ public class PredicateEncoder {
       return r.toString();
     }
 
-    /**
-     * Returns a <code>java.lang.Class</code> object associated with the predicate
-     * class with the given arguments.
-     * @param pkg package name
-     * @param functor predicate name
-     * @param arity predicate arity
-     * @return a <code>java.lang.Class</code> object associated with the predicate
-     * class that corresponds to <code>pkg:functor/arity</code>
-     * if exists, otherwise <code>null</code>.
-     * @deprecated As of Prolog Cafe 1.1, replaced by {@link PrologClassLoader#loadPredicateClass(String,String,int,boolean)};
-     */
-    public static Class getClass(String pkg, String functor, int arity) {
-	String className = PredicateEncoder.encode(pkg, functor, arity);
-	Class clazz = null;
-	try {
-	    clazz = Class.forName(className);
-	} catch (ClassNotFoundException e) {}
-	return clazz;
-    }
-
-    /**
-     * Check whether the predicate class for the given arguments is defined.
-     * @param pkg package name
-     * @param functor predicate name
-     * @param arity predicate arity
-     * @return <code>true</code> if the predicate <code>pkg:functor/arity</code>
-     * is defined, otherwise <code>false</code>.
-     * @deprecated As of Prolog Cafe 1.1, replaced by {@link PrologClassLoader#definedPredicate(String,String,int)};
-     */
-    public static boolean defined(String pkg, String functor, int arity) {
-	Class clazz = PredicateEncoder.getClass(pkg, functor, arity);
-	return clazz != null;
-    }
-
     public static void main(String argv[]) {
 	String p = argv[0];
 	String f = argv[1];
 	int n = (Integer.valueOf(argv[2])).intValue();
 	System.out.println(p + ":" + f + "/" + n);
 	System.out.println(PredicateEncoder.encode(p,f,n));
-	System.out.println(PredicateEncoder.defined(p,f,n));
     }
 }
