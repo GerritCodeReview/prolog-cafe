@@ -2,6 +2,7 @@ package com.googlecode.prolog_cafe.compiler;
 import com.googlecode.prolog_cafe.lang.BufferingPrologControl;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.PrologClassLoader;
 import com.googlecode.prolog_cafe.lang.PrologException;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
@@ -97,6 +98,7 @@ public class Compiler {
     /** Initialize a new compiler instance. */
     public Compiler() {
       pcl = new BufferingPrologControl();
+      pcl.setPrologClassLoader(new PrologClassLoader(Compiler.class.getClassLoader()));
       options = EnumSet.noneOf(Option.class);
       enableDefaultOptions();
     }
