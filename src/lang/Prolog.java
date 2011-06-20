@@ -176,6 +176,7 @@ public final class Prolog {
       trail = new Trail();
       stack = new ChoicePointStack(trail);
       copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+      pcl = pmc.pcl;
 
       // During restore there is no need to copy terms. clause/2 inside of
       // builtins.pl copies the predicate when it reads from internalDB.
