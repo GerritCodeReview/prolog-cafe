@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEX//++A\u003d",
+        "filename": "src/builtin/PRED_$regex_atom_3.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-01T23:41:06Z",
+      "side": 1,
+      "message": "Instead of doing the pattern compile on every test of the element in a list, why not compile once and store in a JavaObjectTerm that gets passed in to this predicate?\n\nThat is, create a regex_compile(+Pattern, -PatternObject) and then your builtins are more like:\n\n  regex(Pattern, L, Result) :- L \u003d [_ | _], !,\n    regex_compile(Pattern, P),\n    regex_match_list(P, L, Result).\n\n  regex_match_list(P, [H | T], Result) :-\n    regex_match(P, H, Result)\n    ;\n    regex_match_list(P, T, Result).",
+      "revId": "20e18a84ea22f9c508aac9beb3136798b9c88eee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//++E\u003d",
+        "filename": "src/builtin/PRED_$regex_atom_3.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-01T23:41:06Z",
+      "side": 1,
+      "message": "Hmm, we only export the entire substring that matches. What about exporting all groups as a list, with the first member being the entire thing?\n\nThat way callers can use patterns like \"foo-(bar|baz)\" and get back a list of \"[foo-bar, bar]\" as the result. They can use unification to extract out the element(s) they care about.",
+      "revId": "20e18a84ea22f9c508aac9beb3136798b9c88eee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//++U\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-01T23:41:06Z",
+      "side": 1,
+      "message": "So if Head matches, we don\u0027t examine Ls?\n\nI guess some callers might want this (\"do any files match this pattern\") but not all callers (\"find all files that match this pattern\"). Maybe its better to leave out this option?",
+      "revId": "20e18a84ea22f9c508aac9beb3136798b9c88eee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//++Q\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1722,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-01T23:41:06Z",
+      "side": 1,
+      "message": "You are leaving a choice point here. I think you want a cut as the first thing in the prior clause, that way if the 2nd argument is a list we don\u0027t even enter this clause. It saves the interpreter some state tracking, because the cut lets it GC this choicepoint before you enter into the recursion steps.",
+      "revId": "20e18a84ea22f9c508aac9beb3136798b9c88eee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//+98\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-01T23:41:06Z",
+      "side": 1,
+      "message": "This isn\u0027t really Chars, is it? Its not a list of characters (e.g. [25, 32, 48, ...]).  I think the name is a bit misleading.",
+      "revId": "20e18a84ea22f9c508aac9beb3136798b9c88eee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
