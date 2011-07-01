@@ -1693,6 +1693,8 @@ once(G) :- call(G), !.
 %:- public char_code/2.                    written in Java
 %:- public number_chars/2, number_codes/2. written in Java
 :- public name/2.
+:- public regex/3.
+:- public regex/2.
 
 sub_atom(Atom, Before, Length, After, Sub_atom) :-
     atom_concat(AtomL, X, Atom),
@@ -1713,6 +1715,22 @@ name(Constant, Chars) :-
 	;   atom_codes(Constant0, Chars) -> Constant = Constant0
 	;   illarg(type(list(char)), name(Constant,Chars), 2)
 	).
+
+regex(_, [], _) :- !, fail.
+regex(Pattern, List, Result) :-
+	List = [_ | _],
+	!,
+	regex_list(Pattern, List, Result).
+regex(Pattern, String, Result) :-
+	atom(String),
+	regex_compile(Pattern, Matcher),
+	regex_match(Matcher, String, Result).
+
+regex(Pattern, String) :-
+	once(regex(Pattern, String, _)).
+
+regex_list(Pattern, [H | _ ], Result) :- regex(Pattern, H, Result).
+regex_list(Pattern, [_ | Ls], Result) :- regex_list(Pattern, Ls, Result).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Implementation defined hooks
