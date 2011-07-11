@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEX//9xw\u003d",
+        "filename": "src/builtin/PRED_$regex_compile_2.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-11T02:09:19Z",
+      "side": 1,
+      "message": "I still think you should drop the \u0027$\u0027 and make this predicate available to anyone that wants to use it.",
+      "revId": "7831863d5a3df8181f92bd65d438c0b6f32ce8b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//9xs\u003d",
+        "filename": "src/builtin/PRED_$regex_match_3.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-11T02:09:19Z",
+      "side": 1,
+      "message": "I still think you should drop the \u0027$\u0027 and make this predicate available to anyone that wants to use it.",
+      "revId": "7831863d5a3df8181f92bd65d438c0b6f32ce8b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//9x8\u003d",
+        "filename": "src/builtin/PRED_$regex_match_3.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-11T02:09:19Z",
+      "side": 1,
+      "message": "These should be private, they aren\u0027t used outside of this class.",
+      "revId": "7831863d5a3df8181f92bd65d438c0b6f32ce8b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//9x4\u003d",
+        "filename": "src/builtin/PRED_$regex_match_3.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-11T02:09:19Z",
+      "side": 1,
+      "message": "Actually, you could put this into areg2 and use jtry2. jtryN just means that the first N registers need to be preserved across the Operation invocations. Since only two values are being used, you only need 2 registers, even though you started from a P3.",
+      "revId": "7831863d5a3df8181f92bd65d438c0b6f32ce8b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//9x0\u003d",
+        "filename": "src/builtin/PRED_$regex_match_3.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-11T02:09:19Z",
+      "side": 1,
+      "message": "This is unused.",
+      "revId": "7831863d5a3df8181f92bd65d438c0b6f32ce8b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
