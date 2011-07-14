@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEX//834\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1696,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-14T21:47:01Z",
+      "side": 1,
+      "message": "Style-nit: Please don\u0027t use tabs in the middle of a line.",
+      "revId": "1eb0f0262d3fb1f23435c3c7f36c9c743d367f1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX//830\u003d",
+        "filename": "src/builtin/builtins.pl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-07-14T21:47:01Z",
+      "side": 1,
+      "message": "Why did you add an \"i\" here?",
+      "revId": "1eb0f0262d3fb1f23435c3c7f36c9c743d367f1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
