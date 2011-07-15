@@ -37,7 +37,7 @@ public class PRED_regex_compile_2 extends Predicate.P2 {
       if (!a1.isSymbol()) {
         throw new IllegalTypeException(this, 1, "atom", a1);
       }
-      Pattern pattern = Pattern.compile(a1.name());
+      Pattern pattern = Pattern.compile(a1.name(), Pattern.MULTILINE);
 
       if (!a2.unify(new JavaObjectTerm(pattern), engine.trail)) {
         return engine.fail();
