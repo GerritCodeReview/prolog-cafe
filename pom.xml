@@ -110,4 +110,20 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>gerrit-snapshot-repository</id>
+      <name>gerrit Snapshot Repository</name>
+      <url>dav:https://gerrit-maven-repository.googlecode.com/svn/</url>
+      <uniqueVersion>true</uniqueVersion>
+    </snapshotRepository>
+
+    <repository>
+      <id>gerrit-maven-repository</id>
+      <name>gerrit Maven Repository</name>
+      <url>dav:https://gerrit-maven-repository.googlecode.com/svn/</url>
+      <uniqueVersion>true</uniqueVersion>
+    </repository>
+  </distributionManagement>
 </project>
