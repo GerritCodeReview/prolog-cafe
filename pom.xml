@@ -9,6 +9,14 @@
   <version>1.3-SNAPSHOT</version>
   <name>Prolog Cafe</name>
 
+  <mailingLists>
+    <mailingList>
+      <name>repo-discuss mailing list</name>
+      <post>repo-discuss@googlegroups.com</post>
+      <archive>https://groups.google.com/group/repo-discuss/about</archive>
+    </mailingList>
+  </mailingLists>
+
   <build>
     <sourceDirectory>java_src</sourceDirectory>
 
