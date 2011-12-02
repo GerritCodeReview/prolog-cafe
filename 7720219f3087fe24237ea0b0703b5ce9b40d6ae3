@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABm3////w\u003d",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2011-12-02T16:37:34Z",
+      "side": 1,
+      "message": "Could we perhaps add:\n\n  \u003carchive\u003ehttps://groups.google.com/group/repo-discuss/about\u003carchive/\u003e\n\n?",
+      "revId": "7720219f3087fe24237ea0b0703b5ce9b40d6ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
