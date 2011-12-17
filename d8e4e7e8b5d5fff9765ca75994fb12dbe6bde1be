@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABxn////g\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2011-12-17T01:02:18Z",
+      "side": 1,
+      "message": "Well, this fork of the project anyway. :-)",
+      "revId": "d8e4e7e8b5d5fff9765ca75994fb12dbe6bde1be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
