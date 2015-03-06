@@ -1,5 +1,4 @@
 #! /usr/bin/perl
-require 'getopts.pl';
 use strict;
 use Getopt::Long;
 use File::Basename;

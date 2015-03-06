@@ -1,5 +1,4 @@
 #! /usr/bin/perl 
-require 'getopts.pl';
 use Getopt::Long;
 use strict;
 
