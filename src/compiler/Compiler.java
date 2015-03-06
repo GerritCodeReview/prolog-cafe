@@ -1,5 +1,6 @@
 package com.googlecode.prolog_cafe.compiler;
 import com.googlecode.prolog_cafe.lang.BufferingPrologControl;
+import com.googlecode.prolog_cafe.lang.CompileException;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.PrologClassLoader;
