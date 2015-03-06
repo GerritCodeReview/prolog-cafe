@@ -1,5 +1,9 @@
 [alias]
   all = //:all
+  install = //:install
+  deploy = //:deploy
 
 [buildfile]
-  includes = //bootstrap.defs
+  includes = //bootstrap.defs \
+      //bucklets/java_sources.bucklet \
+      //bucklets/maven_package.bucklet

@@ -1,3 +1,4 @@
+VERSION = '1.4'
 SRC = 'java/com/googlecode/prolog_cafe/'
 
 REPL = [
@@ -118,4 +119,54 @@ pl2j(
   name = 'cafeteria_srcs',
   src = 'src/builtin/cafeteria.pl',
   out = 'cafeteria.src.zip',
+)
+
+java_sources(
+  name = 'runtime_src',
+  srcs = glob([
+      SRC + 'builtin/*.java',
+      SRC + 'lang/*.java',
+    ],
+    excludes = REPL + IO
+  ) + [
+    'src/builtin/builtins.pl',
+    'src/builtin/system.pl',
+  ],
+)
+
+java_sources(
+  name = 'io_src',
+  srcs = IO + ['src/builtin/io.pl'],
+)
+
+java_sources(
+  name = 'compiler_src',
+  srcs = glob([SRC + 'compiler/**/*.java']) + [
+    'src/compiler/pl2am.pl',
+    'src/compiler/am2j.pl',
+  ],
+)
+
+java_sources(
+  name = 'cafeteria_src',
+  srcs = REPL + ['src/builtin/cafeteria.pl'],
+)
+
+maven_package(
+  group = 'com.googlecode.prolog-cafe',
+  version = VERSION,
+  repository = 'gerrit-maven-repository',
+  url = 'gs://gerrit-maven/',
+  jar = {
+    'prolog-cafeteria': ':cafeteria_lib',
+    'prolog-compiler': ':compiler',
+    'prolog-io': ':io',
+    'prolog-runtime': ':runtime',
+  },
+  src = {
+    'prolog-cafeteria': ':cafeteria_src',
+    'prolog-compiler': ':compiler_src',
+    'prolog-io': ':io_src',
+    'prolog-runtime': ':runtime_src',
+  },
 )
