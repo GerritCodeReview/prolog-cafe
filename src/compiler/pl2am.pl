@@ -169,7 +169,6 @@ Notation
 :- dynamic fail_flag/0.  % used for generating label(fail/0) or not
 
 % :- module('com.googlecode.prolog_cafe.compiler.pl2am', [main/0,pl2am/1]).
-package(_). 
 :- package 'com.googlecode.prolog_cafe.compiler.pl2am'.
 
 :- public main/0, pl2am/1.
