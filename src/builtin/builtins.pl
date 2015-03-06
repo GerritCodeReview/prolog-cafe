@@ -385,10 +385,6 @@ clause(Head, B) :-
 	hash_contains_key(P, PI),
 	'$get_indices'(P, PI, H, RevRefs),
 	'$get_instances'(RevRefs, Cls_Refs),
-	% ???
-	%length(Cls_Refs,N),
-	%'$fast_write'([clause_internal,N,for,P,PI]),nl,
-	%
 	'$clause_internal0'(Cls_Refs, Cl, Ref).
 
 '$clause_internal0'([], _, _) :- fail.
@@ -462,7 +458,6 @@ assertz(T) :-
 	'$check_procedure_permission'(P:PI, modify, static_procedure, assertz(T)),
 	copy_term(Cl, NewCl),
 	'$insert'(NewCl, Ref),
-	%'$fast_write'([intert,NewCl,Ref]), nl, %???
 	'$update_indexing'(P, PI, Cl, Ref, 'z'),
 	fail.
 assertz(_).
@@ -473,7 +468,6 @@ asserta(T) :-
 	'$check_procedure_permission'(P:PI, modify, static_procedure, asserta(T)),
 	copy_term(Cl, NewCl),
 	'$insert'(NewCl, Ref),
-	%'$fast_write'([insert,NewCl,Ref]), nl, %???
 	'$update_indexing'(P, PI, Cl, Ref, 'a'),
 	fail.
 asserta(_).
@@ -484,7 +478,6 @@ abolish(T) :-
 	'$check_procedure_permission'(P:PI, modify, static_procedure, abolish(T)),
 	'$new_indexing_hash'(P, PI, IH),
 	hash_get(IH, all, Refs),
-	%'$fast_write'([erase_all,Refs]), nl, %???
 	'$erase_all'(Refs),
 	hash_remove(P, PI),
 	fail.
@@ -497,7 +490,6 @@ retract(Cl) :-
 	T = (H :- _),
 	'$clause_internal'(P, PI, H, Cl0, Ref),
 	copy_term(Cl0, T),
-	%'$fast_write'([erase,Cl0,Ref]), nl, %???
 	'$erase'(Ref),
 	'$rehash_indexing'(P, PI, Ref).
 
@@ -507,7 +499,6 @@ retractall(Head) :-
 	'$check_procedure_permission'(P:PI, access, static_procedure, retractall(Head)),
 	'$clause_internal'(P, PI, H, Cl, Ref),
 	copy_term(Cl, (H :- _)),
-	%'$fast_write'([erase,Cl,Ref]), nl, %???
 	'$erase'(Ref),
 	'$rehash_indexing'(P, PI, Ref),
 	fail.
@@ -626,7 +617,6 @@ retractall(_).
 '$update_indexing'(P, PI, Cl, Ref, A_or_Z) :-
 	'$new_indexing_hash'(P, PI, IH),
 	'$gen_indexing_keys'(Cl, IH, Keys),
-	%'$fast_write'([update_indexing,P,PI,Cl,Ref,Keys]), nl, %???
 	'$update_indexing_hash'(A_or_Z, Keys, IH, Ref).
 
 '$gen_indexing_keys'((H :- _), _, [all]) :- atom(H), !.
@@ -665,7 +655,6 @@ retractall(_).
 '$rehash_indexing'(P, PI, Ref) :-
 	'$new_indexing_hash'(P, PI, IH),
 	hash_keys(IH, Keys),
-	%'$fast_write'([rehash_indexing,P,PI,Keys]), nl, %???
 	'$remove_index_all'(Keys, IH, Ref).
 
 '$remove_index_all'([], _, _) :- !.
@@ -829,153 +818,22 @@ setof(Template, Goal, Instances) :-
 	'$builtin_set_diff0'([X|Xs], Ys, [Y|L]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Stream selection and control
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%:- public current_input/1  (written in Java)
-%:- public current_output/1 (written in Java)
-%:- public set_input/1, set_output/1. (written in Java)
-%:- public open/4 (written in Java)
-:- public open/3.
-%:- public close/2 (written in Java)
-:- public close/1.
-%:- public flush_output/1.(written in Java)
-:- public flush_output/0.
-:- public stream_property/2.
-
-open(Source_sink, Mode, Stream) :- open(Source_sink, Mode, Stream, []).
-
-close(S_or_a) :- close(S_or_a, []).
-
-flush_output :- 
-    current_output(S),
-    flush_output(S).
-
-stream_property(Stream, Stream_property) :- 
-	var(Stream_property), 
-	!,
-	'$stream_property'(Stream, Stream_property).
-stream_property(Stream, Stream_property) :- 
-	'$stream_property_specifier'(Stream_property), 
-	!,
-	'$stream_property'(Stream, Stream_property).
-stream_property(Stream, Stream_property) :- 
-	illarg(domain(term,stream_property), stream_property(Stream, Stream_property), 2).
-
-'$stream_property'(Stream, Stream_property) :- 
-	var(Stream),
-	!,
-	'$get_stream_manager'(SM),
-	hash_map(SM, Map),
-	'$builtin_member'((Stream,Vs), Map),
-	java(Stream),
-	'$builtin_member'(Stream_property, Vs).
-'$stream_property'(Stream, Stream_property) :- 
-	java(Stream),
-	!,
-	'$get_stream_manager'(SM),
-	hash_get(SM, Stream, Vs),
-	'$builtin_member'(Stream_property, Vs).
-'$stream_property'(Stream, Stream_property) :- 
-	illarg(domain(stream,stream), stream_property(Stream, Stream_property), 1).
-
-'$stream_property_specifier'(input).
-'$stream_property_specifier'(output).
-'$stream_property_specifier'(alias(_)).
-'$stream_property_specifier'(mode(_)).
-'$stream_property_specifier'(type(_)).
-'$stream_property_specifier'(file_name(_)).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Character input/output
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%:- public get_char/2, get_code/2.   (written in Java)
-%:- public peek_char/2, peek_code/2. (written in Java)
-%:- public put_char/2, put_code/2.   (written in Java)
-%:- public nl/0.                     (written in Java)
-
-:- public get_char/1, get_code/1.
-:- public peek_char/1, peek_code/1.
-:- public put_char/1, put_code/1.
-:- public nl/1.
-
-get_char(Char)  :- current_input(S), get_char(S, Char).
-get_code(Code)  :- current_input(S), get_code(S, Code).
-
-peek_char(Char) :- current_input(S), peek_char(S, Char).
-peek_code(Code) :- current_input(S), peek_code(S, Code).
-
-put_char(Char)  :- current_output(S), put_char(S, Char).
-put_code(Code)  :- current_output(S), put_code(S, Code).
-
-nl(S) :- put_char(S, '\n').
-
-:- public get0/1, get0/2.
-:- public get/1.
-%:- public get/2.  (written in Java)
-:- public put/1, put/2.
-:- public tab/1.
-%:- public tab/2.  (written in Java)
-:- public skip/1.
-%:- public skip/2. (written in Java)
-
-get0(Code)  :- current_input(S), get_code(S, Code).
-get0(S_or_a, Code)  :- get_code(S_or_a, Code).
-
-get(Code)  :- current_input(S), get(S, Code).
-
-put(Exp)  :- current_output(S), put(S, Exp).
-put(S_or_a, Exp)  :- Code is Exp, put_code(S_or_a, Code).
-
-tab(N) :- current_output(S), tab(S, N).
-
-skip(N) :- current_input(S), skip(S, N).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Byte input/output
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- public get_byte/1, peek_byte/1, put_byte/1.
-%:- public get_byte/2.  % written in java
-%:- public peek_byte/2. % written in java
-%:- public put_byte/2.  % written in java
-
-get_byte(Byte) :-
-    current_input(S),
-    get_byte(S, Byte).
-
-peek_byte(Byte) :-
-    current_input(S),
-    peek_byte(S, Byte).
-
-put_byte(Byte) :-
-    current_output(S),
-    put_byte(S, Byte).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Term input/output (read)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- public read/1, read/2.
-:- public read_with_variables/2, read_with_variables/3.
-:- public read_line/1.
+:- public read/2.
+:- public read_with_variables/3.
 %:- public read_line/2. (written in Java)
 :- dynamic '$tokens'/1. 
-
-read(X) :- current_input(S), read(S, X).
 
 read(S_or_a, X) :-
 	read_tokens(S_or_a, Tokens, _),
 	parse_tokens(X, Tokens),
 	!.
 
-read_with_variables(X, Vs) :- 
-	current_input(S), 
-	read_with_variables(S, X, Vs).
-
 read_with_variables(S_or_a, X, Vs) :-
 	read_tokens(S_or_a, Tokens, Vs),
 	parse_tokens(X, Tokens),
 	!.
-
-read_line(X) :- current_input(S), read_line(S, X).
 
 % read_token(S_or_a, Token) reads one token from the input, 
 % and unifies Token with:
@@ -986,8 +844,6 @@ read_line(X) :- current_input(S), read_line(S, X).
 %   atom(Atom), 
 %   var(Atom), 
 %   string(CharCodeList)
-
-%read_token(Token) :- current_input(S), read_token(S, Token).
 
 read_token(S_or_a, Token) :-
 	'$read_token0'(S_or_a, Type, Token0),
@@ -1007,11 +863,6 @@ read_token(S_or_a, Token) :-
 % Token for a variable has a form of var(Name,Variable).
 % Vs is a list of Name=Variable pairs.
 
-%read_tokens(Tokens, Vs) :-
-%	current_input(Stream),
-%	'$read_tokens'(Stream, Tokens, Vs, []),
-%	!.
-
 read_tokens(Stream, Tokens, Vs) :-
 	'$read_tokens'(Stream, Tokens, Vs, []),
 	!.
@@ -1021,9 +872,8 @@ read_tokens(Stream, Tokens, Vs) :-
 	'$read_tokens1'(Stream, Token, Tokens, Vs, VI).
 
 '$read_tokens1'(Stream, error(Message), [], _, _) :-  !,
-	write('{SYNTAX ERROR}'), nl, 
-	write('** '), write(Message), write(' **'), nl,
 	'$read_tokens_until_fullstop'(Stream),
+	raise_exception(syntax_error(Message)),
 	fail.
 '$read_tokens1'(_Stream, end_of_file, [end_of_file,'.'], [], _) :- !.
 '$read_tokens1'(_Stream, '.', ['.'], [], _) :- !.
@@ -1267,70 +1117,26 @@ parse_tokens(X, Tokens) :-
 '$parse_tokens_peep_next'(Next, S, S) :- S = [Next|_].
 
 '$parse_tokens_error'(Message, S0, _S) :-
-	write('{SYNTAX ERROR}'), nl, write('** '),
-	'$parse_tokens_write_message'(Message), write(' **'), nl,
-	'$parse_tokens_error1'([], S0),
 	clause('$tokens'(Tokens), _),
-	'$parse_tokens_error1'(Tokens, S0),
+	raise_exception(syntax_error(Message, at(Tokens))),
 	fail.
-
-'$parse_tokens_error1'([], _) :- !.
-'$parse_tokens_error1'(Tokens, S0) :- Tokens == S0, !,
-	nl, write('** here **'), nl,
-	'$parse_tokens_error1'(Tokens, []), nl.
-'$parse_tokens_error1'([Token|Tokens], S0) :-
-	'$parse_tokens_error2'(Token),
-	'$parse_tokens_error1'(Tokens, S0).
-
-'$parse_tokens_error2'(number(X)) :- !, write(X).
-'$parse_tokens_error2'(atom(X)) :- !, writeq(X).
-'$parse_tokens_error2'(var(X,_)) :- !, write(X).
-'$parse_tokens_error2'(string(X)) :- !,
-	write('"'), '$parse_tokens_write_string'(X), write('"').
-'$parse_tokens_error2'(X) :- write(X).
-
-'$parse_tokens_write_string'([]).
-'$parse_tokens_write_string'([C|Cs]) :- [C] = """", !,
-	put_code(C), put_code(C), '$parse_tokens_write_string'(Cs).
-'$parse_tokens_write_string'([C|Cs]) :- 
-	put_code(C), '$parse_tokens_write_string'(Cs).
-
-'$parse_tokens_write_message'([]).
-'$parse_tokens_write_message'([X|Xs]) :-
-	write(X), write(' '), '$parse_tokens_write_message'(Xs).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Term input/output (write)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- public write/1, write/2.
-:- public writeq/1, writeq/2.
-:- public write_canonical/1, write_canonical/2.
-:- public write_term/2, write_term/3.
-
-write(Term) :-
-	current_output(S),
-	write_term(S, Term, [numbervars(true)]).
+:- public write/2.
+:- public writeq/2.
+:- public write_canonical/2.
+:- public write_term/3.
 
 write(S_or_a, Term) :-
 	write_term(S_or_a, Term, [numbervars(true)]).
 
-writeq(Term) :-
-	current_output(S),
-	write_term(S, Term, [quoted(true),numbervars(true)]).
-
 writeq(S_or_a, Term) :-
 	write_term(S_or_a, Term, [quoted(true),numbervars(true)]).
 
-write_canonical(Term) :-
-	current_output(S),
-	write_term(S, Term, [quoted(true),ignore_ops(true)]).
-
 write_canonical(S_or_a, Term) :-
 	write_term(S_or_a, Term, [quoted(true),ignore_ops(true)]).
-
-write_term(Term, Options) :-
-	current_output(S),
-	write_term(S, Term, Options).
 
 write_term(S_or_a, Term, Options) :-
 	'$write_term'(S_or_a, Term, Options),
@@ -1763,16 +1569,12 @@ current_prolog_flag(Flag, Term) :- atom(Flag), !,
 current_prolog_flag(Flag, Term) :- 
 	illarg(type(atom), current_prolog_flag(Flag,Term), 1).
 
-% '$prolog_impl_flag'(bounded,     _, changeable(no)). 
 '$prolog_impl_flag'(max_integer, _, changeable(no)).
 '$prolog_impl_flag'(min_integer, _, changeable(no)).
-% '$prolog_impl_flag'(integer_rounding_function, [down,toward_zero], changeable(no)).
-% '$prolog_impl_flag'(char_conversion, [on,off], changeable(no)).
 '$prolog_impl_flag'(debug, [on,off], changeable(yes)).
 '$prolog_impl_flag'(max_arity, _, changeable(no)).
 '$prolog_impl_flag'(unknown, [error,fail,warning], changeable(yes)).
 '$prolog_impl_flag'(double_quotes, [chars,codes,atom], changeable(no)).
-'$prolog_impl_flag'(print_stack_trace, [on,off], changeable(yes)).
 
 :- public halt/0.
 :- public abort/0.
@@ -2018,97 +1820,6 @@ statistics(Key, Value) :-
 '$statistics_mode'(trail).
 '$statistics_mode'(choice).
 
-print_message(Type, Message) :- var(Type), !,
-	illarg(var, print_message(Type,Message), 1).
-print_message(error, Message) :- !, 
-	'$error_message'(Message).
-print_message(info,  Message) :- !,
-	'$fast_write'('{'), 
-	'$builtin_message'(Message), 
-	'$fast_write'('}'), nl.
-print_message(warning, Message) :- !,
-	'$fast_write'('{WARNING: '), 
-	'$builtin_message'(Message), 
-	'$fast_write'('}'), nl.
-
-'$error_message'(instantiation_error(Goal,0)) :- !,
-	'$fast_write'('{INSTANTIATION ERROR: '), 
-	'$write_goal'(Goal), 
-	'$fast_write'('}'), nl.
-'$error_message'(instantiation_error(Goal,ArgNo)) :- !,
-	'$fast_write'('{INSTANTIATION ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo), 
-	'$fast_write'('}'), nl.
-'$error_message'(type_error(Goal,ArgNo,Type,Culprit)) :- !,
-	'$fast_write'('{TYPE ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo), 
-	'$fast_write'(': expected '), '$fast_write'(Type),
-	'$fast_write'(', found '), write(Culprit),
-	'$fast_write'('}'), nl.
-'$error_message'(domain_error(Goal,ArgNo,Domain,Culprit)) :- !,
-	'$fast_write'('{DOMAIN ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
-	'$fast_write'(': expected '), '$fast_write'(Domain),
-	'$fast_write'(', found '), write(Culprit),
-	'$fast_write'('}'), nl.
-'$error_message'(existence_error(_Goal,0,ObjType,Culprit,_Message)) :- !,
-	'$fast_write'('{EXISTENCE ERROR: '),
-	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit), '$fast_write'(' does not exist'),
-	'$fast_write'('}'), nl.
-'$error_message'(existence_error(Goal,ArgNo,ObjType,Culprit,_Message)) :- !,
-	'$fast_write'('{EXISTENCE ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
-	'$fast_write'(': '), 
-	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit), '$fast_write'(' does not exist'),
-	'$fast_write'('}'), nl.
-'$error_message'(permission_error(Goal,Operation,ObjType,Culprit,Message)) :- !, 
-	'$fast_write'('{PERMISSION ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - can not '), '$fast_write'(Operation), '$fast_write'(' '), 
-	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit), 
-	'$fast_write'(': '), '$fast_write'(Message),
-	'$fast_write'('}'), nl.
-'$error_message'(representation_error(Goal,ArgNo,Flag)) :- !, 
-	'$fast_write'('{REPRESENTATION ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo), 
-	'$fast_write'(': limit of '), '$fast_write'(Flag), '$fast_write'(' is breached'),
-	'$fast_write'('}'), nl.
-'$error_message'(evaluation_error(Goal,ArgNo,Type)) :- !, 
-	'$fast_write'('{EVALUATION ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo), 
-	'$fast_write'(', found '), '$fast_write'(Type),
-	'$fast_write'('}'), nl.
-'$error_message'(syntax_error(Goal,ArgNo,Type,Culprit,_Message)) :- !,
-	'$fast_write'('{SYNTAX ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo), 
-	'$fast_write'(': expected '), '$fast_write'(Type),
-	'$fast_write'(', found '), write(Culprit),
-	'$fast_write'('}'), nl.
-'$error_message'(system_error(Message)) :- !,
-	'$fast_write'('{SYSTEM ERROR: '), write(Message), '$fast_write'('}'), nl.
-'$error_message'(internal_error(Message)) :- !,
-	'$fast_write'('{INTERNAL ERROR: '), write(Message), '$fast_write'('}'), nl.
-'$error_message'(java_error(Goal,ArgNo,Exception)) :- !,
-	'$fast_write'('{JAVA ERROR: '),
-	'$write_goal'(Goal), 
-	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
-	'$fast_write'(', found '), '$write_goal'(Exception),
-	'$fast_write'('}'), nl,
-	'$print_stack_trace'(Exception).
-'$error_message'(Message) :- 
-	'$fast_write'('{'), write(Message), '$fast_write'('}'), nl.
-
-'$write_goal'(Goal) :- java(Goal), !, 
-	current_output(S), '$write_toString'(S, Goal).
-'$write_goal'(Goal) :- write(Goal).
-
 illarg(Msg, Goal, ArgNo) :- var(Msg), !,
 	illarg(var, Goal, ArgNo).
 illarg(var, Goal, ArgNo) :-
@@ -2182,10 +1893,6 @@ illarg(Msg, _, _) :- raise_exception(Msg).
 
 '$builtin_member'(X, [X|_]).
 '$builtin_member'(X, [_|L]) :- '$builtin_member'(X, L).	
-
-'$builtin_message'([]) :- !.
-'$builtin_message'([M]) :- !, write(M).
-'$builtin_message'([M|Ms]) :- write(M), '$fast_write'(' '), '$builtin_message'(Ms).
 
 '$member_in_reverse'(X, [_|L]) :- '$member_in_reverse'(X, L).
 '$member_in_reverse'(X, [X|_]).

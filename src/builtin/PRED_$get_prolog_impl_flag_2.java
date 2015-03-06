@@ -18,7 +18,6 @@ class PRED_$get_prolog_impl_flag_2 extends Predicate.P2 {
     private static final SymbolTerm MAX_ARITY                 = SymbolTerm.intern("max_arity");
     private static final SymbolTerm UNKNOWN                   = SymbolTerm.intern("unknown");
     private static final SymbolTerm DOUBLE_QUOTES             = SymbolTerm.intern("double_quotes");
-    private static final SymbolTerm PRINT_STACK_TRACE         = SymbolTerm.intern("print_stack_trace");
 
     public PRED_$get_prolog_impl_flag_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -65,9 +64,6 @@ class PRED_$get_prolog_impl_flag_2 extends Predicate.P2 {
 		return engine.fail();
 	} else if (a1.equals(DOUBLE_QUOTES)) {
 	    if (! a2.unify(SymbolTerm.intern(engine.getDoubleQuotes()), engine.trail))
-		return engine.fail();
-	} else if (a1.equals(PRINT_STACK_TRACE)) {
-	    if (! a2.unify(SymbolTerm.intern(engine.getPrintStackTrace()), engine.trail))
 		return engine.fail();
 	} else {
 	    return engine.fail();

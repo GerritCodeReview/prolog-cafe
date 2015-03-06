@@ -1,4 +1,10 @@
 package com.googlecode.prolog_cafe.lang;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
 import java.util.StringTokenizer;
 /**
  * Prolog Cafe launcher.
@@ -47,7 +53,23 @@ public class PrologMain {
 		usage();
 		System.exit(1);
 	    }
+
 	    p = new BlockingPrologControl();
+	    p.engine.init();
+		p.engine.getStreamManager().put(
+			SymbolTerm.intern("user_input"),
+			new JavaObjectTerm(new PushbackReader(new BufferedReader(
+				new InputStreamReader(System.in)),
+				Prolog.PUSHBACK_SIZE)));
+		p.engine.getStreamManager().put(
+			SymbolTerm.intern("user_output"),
+			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
+				new OutputStreamWriter(System.out)), true)));
+		p.engine.getStreamManager().put(
+			SymbolTerm.intern("user_error"),
+			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
+				new OutputStreamWriter(System.err)), true)));
+
 	    p.setPredicate(Prolog.BUILTIN, "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);
