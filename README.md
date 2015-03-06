@@ -12,5 +12,13 @@ then build the runtime and compiler with:
 
     buck build all
 
+To package for Maven into the local `~/.m2/repository` directory:
+
+    buck build install
+
+To publish to the gerrit-maven storage bucket:
+
+    buck build deploy
+
 [Buck]: https://github.com/facebook/buck/
 [SWI-Prolog]: http://www.swi-prolog.org/
