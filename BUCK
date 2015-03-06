@@ -46,7 +46,7 @@ pl2j(
 
 java_library(
   name = 'compiler',
-  srcs = glob([SRC + 'compiler/*.java']) + [
+  srcs = glob([SRC + 'compiler/**/*.java']) + [
     ':pl2am_srcs',
     ':am2j_srcs',
   ],
