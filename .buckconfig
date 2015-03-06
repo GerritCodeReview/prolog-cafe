@@ -1,0 +1,5 @@
+[alias]
+  all = //:all
+
+[buildfile]
+  includes = //bootstrap.defs
