@@ -171,14 +171,10 @@ Notation
 % :- module('com.googlecode.prolog_cafe.compiler.pl2am', [main/0,pl2am/1]).
 :- package 'com.googlecode.prolog_cafe.compiler.pl2am'.
 
-:- public main/0, pl2am/1.
+:- public pl2am/1.
 /*****************************************************************
   Main
 *****************************************************************/
-main :- 
-	read(X), 
-	pl2am(X).
-
 pl2am([PrologFile, AsmFile, Opts]) :-
 	read_in_program(PrologFile, Opts),
 	open(AsmFile, write, Out),
@@ -287,11 +283,11 @@ assert_clause((:- public G)) :- !,
 assert_clause((:- import G)) :- !,
 	assert_import(G).
 assert_clause((:- mode _G)) :- !,
-	pl2am_message(['*** WARNING',mode,declaration,is,not,supported,yet]).
+	pl2am_error([mode,declaration,is,not,supported,yet]).
 assert_clause((:- multifile _G)) :- !,
-	pl2am_message(['*** WARNING',multifile,declaration,is,not,supported,yet]).
+	pl2am_error([multifile,declaration,is,not,supported,yet]).
 assert_clause((:- block _G)) :- !,
-	pl2am_message(['*** WARNING',block,declaration,is,not,supported,yet]).
+	pl2am_error([block,declaration,is,not,supported,yet]).
 assert_clause((:- G)) :- !, 
 	call(G),
 	assert_declarations(G).
@@ -1683,11 +1679,7 @@ intersect_sorted_vars([X|Xs], [Y|Ys], Rs) :- X @> Y, !,
 /*****************************************************************
   Utilities
 *****************************************************************/
-%%% print
-pl2am_error(M) :- pl2am_message(['***','PL2ASM','ERROR'|M]).
-
-pl2am_message([]) :- nl, flush_output(user_output).
-pl2am_message([M|Ms]) :- write(M), write(' '), pl2am_message(Ms).
+pl2am_error(M) :- raise_exception(pl2am_error(M)).
 
 %%% format
 mode_expr([]).

@@ -43,7 +43,7 @@ cafeteria :-
 	flush_output.
 
 '$cafeteria'(Goal) :-
-	read_with_variables(Goal, Vars),
+	read_with_variables('user_input', Goal, Vars),
 	'$process_order'(Goal, Vars).
 
 '$process_order'(G,               _) :- var(G), !, illarg(var, (?- G), 1).
@@ -68,7 +68,7 @@ cafeteria :-
 '$give_answers_with_prompt'(Vs) :-
 	'$give_an_answer'(Vs),
 	'$fast_write'(' ? '), flush_output,
-	read_line(Str),
+	read_line('user_input', Str),
 	Str \== ";",
 	nl.
 
@@ -92,7 +92,6 @@ consult(File) :- atom(File), !, '$consult'(File).
 '$consult'(F) :-
 	'$prolog_file_name'(F, PF),
 	open(PF, read, In),
-	stream_property(In, file_name(File)),
 	print_message(info, [consulting,File,'...']),
 	statistics(runtime, _),
 	consult_stream(File, In),
@@ -176,7 +175,7 @@ redo_procedure_box(X, P, FA, Depth) :-
 '$read_blocked'(G) :-
 	'$fast_write'(' ? '),
 	flush_output,
-	read_line(C),
+	read_line('user_input', C),
 	(C == [] -> DOP = 99 ; C = [DOP|_]),
 	'$debug_option'(DOP, G).
 
@@ -339,3 +338,108 @@ listing(T) :- illarg(type(predicate_indicator), listing(T), 1).
 	tab(N), write(')').
 '$write_dynamic_body'(B, N) :-
 	tab(N), writeq(B).
+
+
+print_message(Type, Message) :- var(Type), !,
+	illarg(var, print_message(Type,Message), 1).
+print_message(error, Message) :- !,
+	'$error_message'(Message).
+print_message(info,  Message) :- !,
+	'$fast_write'('{'),
+	'$builtin_message'(Message),
+	'$fast_write'('}'), nl.
+print_message(warning, Message) :- !,
+	'$fast_write'('{WARNING: '),
+	'$builtin_message'(Message),
+	'$fast_write'('}'), nl.
+
+write(M)  :- write('user_output', M).
+writeq(M) :- writeq('user_output', M).
+tab(S)    :- tab('user_output', S).
+nl        :- nl('user_output').
+flush_output :- flush_output('user_output').
+'$fast_write'(M) :- '$fast_write'('user_output', M).
+
+'$builtin_message'([]) :- !.
+'$builtin_message'([M]) :- !, write(M).
+'$builtin_message'([M|Ms]) :-
+	write(M),
+	'$fast_write'(' '),
+	'$builtin_message'(Ms).
+
+'$error_message'(instantiation_error(Goal,0)) :- !,
+	'$fast_write'('{INSTANTIATION ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'('}'), nl.
+'$error_message'(instantiation_error(Goal,ArgNo)) :- !,
+	'$fast_write'('{INSTANTIATION ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'('}'), nl.
+'$error_message'(type_error(Goal,ArgNo,Type,Culprit)) :- !,
+	'$fast_write'('{TYPE ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(': expected '), '$fast_write'(Type),
+	'$fast_write'(', found '), write(Culprit),
+	'$fast_write'('}'), nl.
+'$error_message'(domain_error(Goal,ArgNo,Domain,Culprit)) :- !,
+	'$fast_write'('{DOMAIN ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(': expected '), '$fast_write'(Domain),
+	'$fast_write'(', found '), write(Culprit),
+	'$fast_write'('}'), nl.
+'$error_message'(existence_error(_Goal,0,ObjType,Culprit,_Message)) :- !,
+	'$fast_write'('{EXISTENCE ERROR: '),
+	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit), '$fast_write'(' does not exist'),
+	'$fast_write'('}'), nl.
+'$error_message'(existence_error(Goal,ArgNo,ObjType,Culprit,_Message)) :- !,
+	'$fast_write'('{EXISTENCE ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(': '),
+	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit), '$fast_write'(' does not exist'),
+	'$fast_write'('}'), nl.
+'$error_message'(permission_error(Goal,Operation,ObjType,Culprit,Message)) :- !,
+	'$fast_write'('{PERMISSION ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - can not '), '$fast_write'(Operation), '$fast_write'(' '),
+	'$fast_write'(ObjType), '$fast_write'(' '), write(Culprit),
+	'$fast_write'(': '), '$fast_write'(Message),
+	'$fast_write'('}'), nl.
+'$error_message'(representation_error(Goal,ArgNo,Flag)) :- !,
+	'$fast_write'('{REPRESENTATION ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(': limit of '), '$fast_write'(Flag), '$fast_write'(' is breached'),
+	'$fast_write'('}'), nl.
+'$error_message'(evaluation_error(Goal,ArgNo,Type)) :- !,
+	'$fast_write'('{EVALUATION ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(', found '), '$fast_write'(Type),
+	'$fast_write'('}'), nl.
+'$error_message'(syntax_error(Goal,ArgNo,Type,Culprit,_Message)) :- !,
+	'$fast_write'('{SYNTAX ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(': expected '), '$fast_write'(Type),
+	'$fast_write'(', found '), write(Culprit),
+	'$fast_write'('}'), nl.
+'$error_message'(system_error(Message)) :- !,
+	'$fast_write'('{SYSTEM ERROR: '), write(Message), '$fast_write'('}'), nl.
+'$error_message'(internal_error(Message)) :- !,
+	'$fast_write'('{INTERNAL ERROR: '), write(Message), '$fast_write'('}'), nl.
+'$error_message'(java_error(Goal,ArgNo,Exception)) :- !,
+	'$fast_write'('{JAVA ERROR: '),
+	'$write_goal'(Goal),
+	'$fast_write'(' - arg '), '$fast_write'(ArgNo),
+	'$fast_write'(', found '), '$write_goal'(Exception),
+	'$fast_write'('}'), nl.
+'$error_message'(Message) :-
+	'$fast_write'('{'), write(Message), '$fast_write'('}'), nl.
+
+'$write_goal'(Goal) :- java(Goal), !,
+	'$write_toString'('user_error', Goal).
+'$write_goal'(Goal) :- write(Goal).
