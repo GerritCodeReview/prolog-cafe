@@ -11,7 +11,10 @@ java_binary(
 
 java_library(
   name = 'lang',
-  srcs = glob([SRC + 'lang/*.java']),
+  srcs = glob(
+    [SRC + 'lang/*.java'],
+    excludes = [SRC + 'lang/PrologMain.java'],
+  ),
 )
 
 java_library(
@@ -35,6 +38,7 @@ pl2j(
   out = 'system.src.zip',
 )
 
+
 java_library(
   name = 'compiler',
   srcs = glob([SRC + 'compiler/**/*.java']) + [
@@ -57,4 +61,29 @@ pl2j(
   name = 'am2j_srcs',
   src = 'src/compiler/am2j.pl',
   out = 'am2j.src.zip',
+)
+
+
+java_binary(
+  name = 'cafeteria',
+  main_class = 'com.googlecode.prolog_cafe.lang.PrologMain',
+  deps = [':cafeteria_lib'],
+)
+
+java_library(
+  name = 'cafeteria_lib',
+  srcs = [
+    SRC + 'lang/PrologMain.java',
+    ':cafeteria_srcs',
+  ],
+  deps = [
+    ':builtin',
+    ':lang',
+  ],
+)
+
+pl2j(
+  name = 'cafeteria_srcs',
+  src = 'src/builtin/cafeteria.pl',
+  out = 'cafeteria.src.zip',
 )
