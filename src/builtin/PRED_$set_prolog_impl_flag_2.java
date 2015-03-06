@@ -11,7 +11,6 @@ class PRED_$set_prolog_impl_flag_2 extends Predicate.P2 {
     private static final SymbolTerm DEBUG             = SymbolTerm.intern("debug");
     private static final SymbolTerm UNKNOWN           = SymbolTerm.intern("unknown");
     private static final SymbolTerm DOUBLE_QUOTES     = SymbolTerm.intern("double_quotes");
-    private static final SymbolTerm PRINT_STACK_TRACE = SymbolTerm.intern("print_stack_trace");
 
     public PRED_$set_prolog_impl_flag_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -43,10 +42,6 @@ class PRED_$set_prolog_impl_flag_2 extends Predicate.P2 {
 	    if (! a2.isSymbol())
 		return engine.fail();
 	    engine.setDoubleQuotes(((SymbolTerm)a2).name());
-	} else if (a1.equals(PRINT_STACK_TRACE)) {
-	    if (! a2.isSymbol())
-		return engine.fail();
-	    engine.setPrintStackTrace(((SymbolTerm)a2).name());
 	} else {
 	    return engine.fail();
 	}

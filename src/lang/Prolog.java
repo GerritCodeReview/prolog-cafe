@@ -73,8 +73,6 @@ public final class Prolog {
     protected String unknown;
     /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>double_quotes</code>. */
     protected String doubleQuotes;
-    /** Prolog implementation flag: <code>print_stack_trace</code>. */
-    protected String printStackTrace;
 
     /** Holds an exception term for <code>catch/3</code> and <code>throw/1</code>. */
     protected Term exception;
@@ -90,16 +88,6 @@ public final class Prolog {
     /** The size of the pushback buffer used for creating input streams. */
     public static final int PUSHBACK_SIZE = 3;
 
-    /** Standard input stream. */
-    protected transient PushbackReader userInput;
-    /** Standard output stream. */
-    protected transient PrintWriter userOutput;
-    /** Standard error stream. */
-    protected transient PrintWriter userError;
-    /** Current input stream. */
-    protected transient PushbackReader currentInput;
-    /** Current output stream. */
-    protected transient PrintWriter currentOutput;
     /** Hashtable for managing input and output streams. */
     protected HashtableOfTerm streamManager;
 
@@ -121,35 +109,6 @@ public final class Prolog {
     static final SymbolTerm SYM_INPUT      = SymbolTerm.intern("input");
     static final SymbolTerm SYM_OUTPUT     = SymbolTerm.intern("output");
     static final SymbolTerm SYM_TEXT       = SymbolTerm.intern("text");
-    static final SymbolTerm SYM_USERINPUT  = SymbolTerm.intern("user_input");
-    static final SymbolTerm SYM_USEROUTPUT = SymbolTerm.intern("user_output");
-    static final SymbolTerm SYM_USERERROR  = SymbolTerm.intern("user_error");
-
-    private static final PrintWriter NO_OUTPUT = new PrintWriter(new Writer() {
-      @Override
-      public void write(char[] cbuf, int off, int len) throws IOException {
-        throw new IOException("Prolog.Feature.IO disabled");
-      }
-
-      @Override
-      public void flush() throws IOException {
-      }
-
-      @Override
-      public void close() throws IOException {
-      }
-    });
-
-    private static final PushbackReader NO_INPUT = new PushbackReader(new Reader() {
-      @Override
-      public int read(char[] cbuf, int off, int len) throws IOException {
-        return -1;
-      }
-
-      @Override
-      public void close() throws IOException {
-      }
-    });
 
     public static enum Feature {
       /** Access to the local filesystem and console. */
@@ -186,9 +145,6 @@ public final class Prolog {
      * This <code>initOnce</code> method is invoked in the constructor
      * and initializes the following instances:
      * <ul>
-     *   <li><code>userInput</code>
-     *   <li><code>userOutput</code>
-     *   <li><code>userError</code>
      *   <li><code>copyHash</code>
      *   <li><code>streamManager</code>
      * </ul>
@@ -203,28 +159,6 @@ public final class Prolog {
     if (internalDB == null) internalDB = new InternalDatabase();
 
     streamManager = new HashtableOfTerm();
-
-    if (features.contains(Feature.IO)) {
-      userInput = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
-      userOutput = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
-      userError = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
-
-      streamManager.put(SYM_USERINPUT, new JavaObjectTerm(userInput));
-      streamManager.put(new JavaObjectTerm(userInput),
-        makeStreamProperty(SYM_READ, SYM_INPUT, SYM_USERINPUT, SYM_TEXT));
-
-      streamManager.put(SYM_USEROUTPUT, new JavaObjectTerm(userOutput));
-      streamManager.put(new JavaObjectTerm(userOutput),
-        makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USEROUTPUT, SYM_TEXT));
-
-      streamManager.put(SYM_USERERROR, new JavaObjectTerm(userError));
-      streamManager.put(new JavaObjectTerm(userError),
-        makeStreamProperty(SYM_APPEND, SYM_OUTPUT, SYM_USERERROR, SYM_TEXT));
-    } else {
-      userInput = NO_INPUT;
-      userOutput = NO_OUTPUT;
-      userError = userOutput;
-    }
   }
 
     /** Initializes this Prolog engine. */
@@ -250,16 +184,12 @@ public final class Prolog {
 	debug           = "off";
 	unknown         = "error";
 	doubleQuotes    = "codes";
-	printStackTrace = "off";
 
 	exception = NONE;
 	startRuntime = features.contains(Feature.STATISTICS_RUNTIME)
 	    ? System.currentTimeMillis()
 	    : 0;
 	previousRuntime = 0;
-
-	currentInput  = userInput;
-	currentOutput = userOutput;
     }
 
     /** Ensure a feature is enabled, throwing if not. */
@@ -415,19 +345,6 @@ public final class Prolog {
 	return p;
     }
 
-    Term makeStreamProperty(SymbolTerm _mode, SymbolTerm io, SymbolTerm _alias, SymbolTerm _type) {
-	Term[] mode  = {_mode};
-	Term[] alias = {_alias};
-	Term[] type  = {_type};
-
-	Term t = Nil;
-	t = new ListTerm(new StructureTerm(SYM_MODE_1,  mode ), t);
-	t = new ListTerm(io, t);
-	t = new ListTerm(new StructureTerm(SYM_ALIAS_1, alias), t);
-	t = new ListTerm(new StructureTerm(SYM_TYPE_1,  type ), t);
-	return t;
-    }
-
     /** Returns the current time stamp of choice point frame. */
     public long    getCPFTimeStamp() { return CPFTimeStamp; }
 
@@ -466,11 +383,6 @@ public final class Prolog {
     /** Sets the value of Prolog implementation flag: <code>double_quotes</code>. */
     public void setDoubleQuotes(String mode) { doubleQuotes = mode;}
 
-    /** Returns the value of Prolog implementation flag: <code>print_stack_trace</code>. */
-    public String getPrintStackTrace() { return printStackTrace; }
-    /** Sets the value of Prolog implementation flag: <code>print_stack_trace</code>. */
-    public void setPrintStackTrace(String mode) { printStackTrace = mode;}
-
     /** Returns the value of <code>exception</code>. This is used in <code>catch/3</code>. */
     public Term getException() { return exception; }
     /** Sets the value of <code>exception</code>. This is used in <code>throw/1</code>. */
@@ -483,23 +395,6 @@ public final class Prolog {
     public long getPreviousRuntime() { return previousRuntime; }
     /** Sets the value of <code>previousRuntime</code>. This is used in <code>statistics/2</code>. */
     public void setPreviousRuntime(long t) { previousRuntime = t; }
-
-    /** Returns the standard input stream. */
-    public PushbackReader  getUserInput() { return userInput; }
-    /** Returns the standard output stream. */
-    public PrintWriter     getUserOutput() { return userOutput; }
-    /** Returns the standard error stream. */
-    public PrintWriter     getUserError() { return userError; }
-
-    /** Returns the current input stream. */
-    public PushbackReader  getCurrentInput() { return currentInput; }
-    /** Sets the current input stream to <code>in</code>. */
-    public void            setCurrentInput(PushbackReader in) { currentInput = in; }
-
-    /** Returns the current output stream. */
-    public PrintWriter     getCurrentOutput() { return currentOutput; }
-    /** Sets the current output stream to <code>out</code>. */
-    public void            setCurrentOutput(PrintWriter out) { currentOutput = out; }
 
     /** Returns the stream manager. */
     public HashtableOfTerm getStreamManager() { return streamManager; }

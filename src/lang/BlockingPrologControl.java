@@ -371,9 +371,6 @@ public class BlockingPrologControl
   } catch (JavaInterruptedException e) {
      System.exit(1);
   } catch (PrologException e){
-      if (engine.getPrintStackTrace().equals("on"))
-      printStackTrace(e);
-      else
       System.out.println(e.toString());
   } catch (Exception e){
       printStackTrace(e);
