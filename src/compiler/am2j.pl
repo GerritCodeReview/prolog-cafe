@@ -49,14 +49,10 @@ SEE ALSO
 % :- module('com.googlecode.prolog_cafe.compiler.am2j', [main/0,am2j/1]).
 package(_). 
 :- package 'com.googlecode.prolog_cafe.compiler.am2j'.
-:- public main/0, am2j/1.
+:- public am2j/1.
 /*****************************************************************
   Main
 *****************************************************************/
-main :- 
-	read(X), 
-	am2j(X).
-
 am2j([File]) :- !, am2j([File, '.']).
 am2j([File,Dir]) :-
 	retractall(dest_dir(_)),
@@ -1228,11 +1224,7 @@ Notation
 for(M, M, N) :- M =< N.
 for(I, M, N) :- M =< N, M1 is M + 1, for(I, M1, N).
 
-%%% print
-am2j_error(M) :- am2j_message(['***','AM2JAVA','ERROR'|M]).
-
-am2j_message([]) :- nl, flush_output(user_output).
-am2j_message([M|Ms]) :- write(M), write(' '), am2j_message(Ms).
+am2j_error(M) :- raise_exception(am2j_error(M)).
 
 %%% list
 am2j_append([], Zs, Zs).

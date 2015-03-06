@@ -1,6 +1,23 @@
 package com.googlecode.prolog_cafe.builtin;
-import com.googlecode.prolog_cafe.lang.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
+
+import com.googlecode.prolog_cafe.lang.ExistenceException;
+import com.googlecode.prolog_cafe.lang.HashtableOfTerm;
+import com.googlecode.prolog_cafe.lang.IllegalDomainException;
+import com.googlecode.prolog_cafe.lang.IllegalTypeException;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.ListTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.PInstantiationException;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.StructureTerm;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.SystemException;
+import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.TermException;
 /**
  * <code>close/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
@@ -74,10 +91,6 @@ public class PRED_close_2 extends Predicate.P2 {
 	}
 	if (stream instanceof PushbackReader) {
 	    PushbackReader in = (PushbackReader) stream;
-	    if (in.equals(engine.getUserInput()))
-		return cont;
-	    if (in.equals(engine.getCurrentInput()))
-		engine.setCurrentInput(engine.getUserInput());
 	    try {
 		in.close();
 	    } catch (IOException e) {
@@ -90,10 +103,6 @@ public class PRED_close_2 extends Predicate.P2 {
 		    throw new SystemException("output stream error");
 	    }
 	    out.flush();
-	    if (out.equals(engine.getUserOutput()) || out.equals(engine.getUserError()))
-		return cont;
-	    if (out.equals(engine.getCurrentOutput()))
-		engine.setCurrentOutput(engine.getUserOutput());
 	    out.close();
 	} else {
 	    throw new IllegalDomainException(this, 1, "stream_or_alias", a1);

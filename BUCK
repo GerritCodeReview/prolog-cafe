@@ -1,5 +1,18 @@
 SRC = 'java/com/googlecode/prolog_cafe/'
 
+REPL = [
+  SRC + 'builtin/PRED_$write_toString_2.java',
+  SRC + 'lang/PrologMain.java',
+]
+
+IO = [
+  SRC + 'builtin/PRED_close_2.java',
+  SRC + 'builtin/PRED_flush_output_1.java',
+  SRC + 'builtin/PRED_open_4.java',
+  SRC + 'builtin/PRED_read_line_2.java',
+  SRC + 'builtin/PRED_tab_2.java',
+]
+
 genrule(
   name = 'all',
   cmd = ':>all',
@@ -21,15 +34,12 @@ java_binary(
 
 java_library(
   name = 'lang',
-  srcs = glob(
-    [SRC + 'lang/*.java'],
-    excludes = [SRC + 'lang/PrologMain.java'],
-  ),
+  srcs = glob([SRC + 'lang/*.java'], excludes = REPL),
 )
 
 java_library(
   name = 'builtin',
-  srcs = glob([SRC + 'builtin/*.java']) + [
+  srcs = glob([SRC + 'builtin/*.java'], excludes = REPL + IO) + [
     ':builtin_srcs',
     ':system_srcs',
   ],
@@ -49,6 +59,21 @@ pl2j(
 )
 
 java_library(
+  name = 'io',
+  srcs = IO + [':io_srcs'],
+  deps = [
+    ':builtin',
+    ':lang',
+  ],
+)
+
+pl2j(
+  name = 'io_srcs',
+  src = 'src/builtin/io.pl',
+  out = 'io.src.zip',
+)
+
+java_library(
   name = 'compiler',
   srcs = glob([SRC + 'compiler/**/*.java']) + [
     ':pl2am_srcs',
@@ -56,6 +81,7 @@ java_library(
   ],
   deps = [
     ':builtin',
+    ':io',
     ':lang',
   ],
 )
@@ -80,12 +106,10 @@ java_binary(
 
 java_library(
   name = 'cafeteria_lib',
-  srcs = [
-    SRC + 'lang/PrologMain.java',
-    ':cafeteria_srcs',
-  ],
+  srcs = REPL + [':cafeteria_srcs'],
   deps = [
     ':builtin',
+    ':io',
     ':lang',
   ],
 )
