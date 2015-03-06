@@ -152,9 +152,6 @@ public final class Prolog {
     });
 
     public static enum Feature {
-      /** Enable the {@code java_*} predicates, supporting reflection in Prolog. */
-      JAVA_REFLECTION,
-
       /** Access to the local filesystem and console. */
       IO,
 

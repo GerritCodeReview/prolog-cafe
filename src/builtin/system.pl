@@ -229,25 +229,6 @@ system_predicate(hash_put(_,_,_)).
 system_predicate(hash_remove(_,_)).
 system_predicate(hash_size(_,_)).
 system_predicate('$get_hash_manager'(_)).
-% Java interoperation
-system_predicate(java_constructor0(_,_)).
-system_predicate(java_constructor(_,_)).
-system_predicate(java_declared_constructor0(_,_)).
-system_predicate(java_declared_constructor(_,_)).
-system_predicate(java_method0(_,_,_)).
-system_predicate(java_method(_,_,_)).
-system_predicate(java_declared_method0(_,_,_)).
-system_predicate(java_declared_method(_,_,_)).
-system_predicate(java_get_field0(_,_,_)).
-system_predicate(java_get_field(_,_,_)).
-system_predicate(java_get_declared_field0(_,_,_)).
-system_predicate(java_get_declared_field(_,_,_)).
-system_predicate(java_set_field0(_,_,_)).
-system_predicate(java_set_field(_,_,_)).
-system_predicate(java_set_declared_field0(_,_,_)).
-system_predicate(java_set_declared_field(_,_,_)).
-system_predicate(synchronized(_,_)).
-system_predicate(java_conversion(_,_)).
 % Prolog interpreter
 system_predicate(cafeteria).
 system_predicate(consult(_)).

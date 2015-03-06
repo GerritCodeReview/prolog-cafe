@@ -90,8 +90,6 @@ call(Term) :-
 	catch('$meta_call'(X, P, Cut, Depth, Mode), Y, '$meta_call'(Z, P, Cut, Depth, Mode)).
 %'$meta_call'(freeze(X,Y), P, Cut, Depth, Mode) :- !, ???
 %	freeze(X, '$meta_call'(Y, P, Cut, Depth, Mode)).
-'$meta_call'(synchronized(X,Y), P, Cut, Depth, Mode) :- !,
-	synchronized(X, '$meta_call'(Y, P, Cut, Depth, Mode)).
 '$meta_call'(clause(X, Y), P, _, _, _) :- !, clause(P:X, Y).
 '$meta_call'(assert(X), P, _, _, _) :- !, assertz(P:X).
 '$meta_call'(assertz(X), P, _, _, _) :- !, assertz(P:X).
@@ -1887,85 +1885,6 @@ hash_exists(Alias) :-
   '$get_hash_manager'(HM),
   hash_contains_key(HM, Alias).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Java interoperation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%:- public java_constructor0/2.            (written in Java)
-%:- public java_declared_constructor0/2.   (written in Java)
-%:- public java_method0/3.                 (written in Java)
-%:- public java_declared_method0/3.        (written in Java)
-%:- public java_get_field0/3.              (written in Java)
-%:- public java_get_declared_field0/3.     (written in Java)
-%:- public java_set_field0/3.              (written in Java)
-%:- public java_set_declared_field0/3.     (written in Java)
-%:- public java_conversion/2.              (written in Java)
-:- public java_constructor/2.
-:- public java_declared_constructor/2.
-:- public java_method/3.
-:- public java_declared_method/3.
-:- public java_get_field/3.
-:- public java_get_declared_field/3.
-:- public java_set_field/3.
-:- public java_set_declared_field/3.
-:- public synchronized/2.
-
-java_constructor(Constr, Instance) :-
-	Constr =.. [F|As],
-	builtin_java_convert_args(As, As1),
-	Constr1 =.. [F|As1],
-	java_constructor0(Constr1, Instance1),
-	Instance = Instance1.
-
-java_declared_constructor(Constr, Instance) :-
-	Constr =.. [F|As],
-	builtin_java_convert_args(As, As1),
-	Constr1 =.. [F|As1],
-	java_declared_constructor0(Constr1, Instance1),
-	Instance = Instance1.
-
-java_method(Class_or_Instance, Method, Value) :- 
-	Method =.. [F|As],
-	builtin_java_convert_args(As, As1),
-	Method1 =.. [F|As1],
-	java_method0(Class_or_Instance, Method1, Value1),
-	java_conversion(Value2, Value1),
-	Value = Value2.
-
-java_declared_method(Class_or_Instance, Method, Value) :-
-	Method =.. [F|As],
-	builtin_java_convert_args(As, As1),
-	Method1 =.. [F|As1],
-	java_declared_method0(Class_or_Instance, Method1, Value1),
-	java_conversion(Value2, Value1),
-	Value = Value2.
-
-java_get_field(Class_or_Instance, Field, Value) :-
-	java_get_field0(Class_or_Instance, Field, Value1),
-	java_conversion(Value2, Value1),
-	Value = Value2.
-
-java_get_declared_field(Class_or_Instance, Field, Value) :-
-	java_get_declared_field0(Class_or_Instance, Field, Value1),
-	java_conversion(Value2, Value1),
-	Value = Value2.
-
-java_set_field(Class_or_Instance, Field, Value) :-
-	java_conversion(Value, Value1),
-	java_set_field0(Class_or_Instance, Field, Value1).
-
-java_set_declared_field(Class_or_Instance, Field, Value) :-
-	java_conversion(Value, Value1),
-	java_set_declared_field0(Class_or_Instance, Field, Value1).
-
-builtin_java_convert_args([], []) :- !.
-builtin_java_convert_args([X|Xs], [Y|Ys]) :-
-	java_conversion(X, Y),
-	builtin_java_convert_args(Xs, Ys).
-
-synchronized(Object, Goal) :- 
-	'$begin_sync'(Object, Ref), 
-	call(Goal), 
-	'$end_sync'(Ref).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Prolog interpreter
@@ -2588,7 +2507,6 @@ illarg(Msg, _, _) :- raise_exception(Msg).
 	atom(F),
 	integer(A).
 %'$match_type'(evaluable,    X).
-%'$match_type'('convertible to java',  X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Utilities
