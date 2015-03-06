@@ -1524,7 +1524,6 @@ builtin_meta_predicates(bagof, 3, [?,:,?]).
 builtin_meta_predicates(setof, 3, [?,:,?]).
 builtin_meta_predicates(on_exception, 3, [?,:,:]).
 builtin_meta_predicates(catch, 3, [:,?,:]).
-builtin_meta_predicates(synchronized, 2, [?,:]).
 builtin_meta_predicates(freeze, 2, [?,:]).
 
 builtin_local_predicates(assert, 1, [:]).
