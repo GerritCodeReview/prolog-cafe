@@ -1569,12 +1569,8 @@ current_prolog_flag(Flag, Term) :- atom(Flag), !,
 current_prolog_flag(Flag, Term) :- 
 	illarg(type(atom), current_prolog_flag(Flag,Term), 1).
 
-'$prolog_impl_flag'(max_integer, _, changeable(no)).
-'$prolog_impl_flag'(min_integer, _, changeable(no)).
 '$prolog_impl_flag'(debug, [on,off], changeable(yes)).
 '$prolog_impl_flag'(max_arity, _, changeable(no)).
-'$prolog_impl_flag'(unknown, [error,fail,warning], changeable(yes)).
-'$prolog_impl_flag'(double_quotes, [chars,codes,atom], changeable(no)).
 
 :- public halt/0.
 :- public abort/0.
