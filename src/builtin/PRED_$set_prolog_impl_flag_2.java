@@ -7,10 +7,7 @@ import com.googlecode.prolog_cafe.lang.*;
    @version 1.0
 */
 class PRED_$set_prolog_impl_flag_2 extends Predicate.P2 {
-    private static final SymbolTerm CHAR_CONVERSION   = SymbolTerm.intern("char_conversion");
     private static final SymbolTerm DEBUG             = SymbolTerm.intern("debug");
-    private static final SymbolTerm UNKNOWN           = SymbolTerm.intern("unknown");
-    private static final SymbolTerm DOUBLE_QUOTES     = SymbolTerm.intern("double_quotes");
 
     public PRED_$set_prolog_impl_flag_2(Term a1, Term a2, Operation cont) {
         arg1 = a1;
@@ -26,22 +23,10 @@ class PRED_$set_prolog_impl_flag_2 extends Predicate.P2 {
 	a1 = a1.dereference();
 	a2 = a2.dereference();
 
-	if (a1.equals(CHAR_CONVERSION)) {
-	    if (! a2.isSymbol())
-		return engine.fail();
-	    engine.setCharConversion(((SymbolTerm)a2).name());
-	} else if (a1.equals(DEBUG)) {
+	if (a1.equals(DEBUG)) {
 	    if (! a2.isSymbol())
 		return engine.fail();
 	    engine.setDebug(((SymbolTerm)a2).name());
-	} else if (a1.equals(UNKNOWN)) {
-	    if (! a2.isSymbol())
-		return engine.fail();
-	    engine.setUnknown(((SymbolTerm)a2).name());
-	} else if (a1.equals(DOUBLE_QUOTES)) {
-	    if (! a2.isSymbol())
-		return engine.fail();
-	    engine.setDoubleQuotes(((SymbolTerm)a2).name());
 	} else {
 	    return engine.fail();
 	}

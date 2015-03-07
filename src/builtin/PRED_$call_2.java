@@ -50,9 +50,6 @@ class PRED_$call_2 extends Predicate.P2 {
 		try {
             return engine.pcl.predicate(Prolog.BUILTIN, functor, cont, args);
 		} catch (ExistenceException e2) {
-		    if ((engine.getUnknown()).equals("fail"))
-			return engine.fail();
-
 		    Term what = new StructureTerm(SYM_COLON_2,
 		       a1,
 		       new StructureTerm(SYM_SLASH_2,
