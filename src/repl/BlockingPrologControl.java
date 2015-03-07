@@ -1,4 +1,10 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.repl;
+
+import com.googlecode.prolog_cafe.lang.HashtableOfTerm;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.PrologControl;
+import com.googlecode.prolog_cafe.lang.PrologException;
+import com.googlecode.prolog_cafe.lang.Term;
 
 /**
  * Prolog thread.<br>
@@ -110,11 +116,12 @@ public class BlockingPrologControl
 
   /** Constructs a new <code>BlockingPrologControl</code>. */
   public BlockingPrologControl() {
+    engine.init();
   }
 
-  /** Constructs a new <code>BlockingPrologControl</code>. */
-  public BlockingPrologControl(PrologMachineCopy pmc) {
-    super(pmc);
+  /** Returns the stream manager. */
+  HashtableOfTerm getStreamManager() {
+    return engine.getStreamManager();
   }
 
   /**
@@ -368,8 +375,6 @@ public class BlockingPrologControl
   public void run() {
     try {
       executePredicate();
-  } catch (JavaInterruptedException e) {
-     System.exit(1);
   } catch (PrologException e){
       System.out.println(e.toString());
   } catch (Exception e){

@@ -3,7 +3,6 @@ SRC = 'java/com/googlecode/prolog_cafe/'
 
 REPL = [
   SRC + 'builtin/PRED_$write_toString_2.java',
-  SRC + 'lang/PrologMain.java',
 ]
 
 IO = [
@@ -92,13 +91,13 @@ pl2j(
 
 java_binary(
   name = 'cafeteria',
-  main_class = 'com.googlecode.prolog_cafe.lang.PrologMain',
+  main_class = 'com.googlecode.prolog_cafe.repl.PrologMain',
   deps = [':cafeteria_lib'],
 )
 
 java_library(
   name = 'cafeteria_lib',
-  srcs = REPL + [':cafeteria_srcs'],
+  srcs = glob([SRC + 'repl/*.java']) + REPL + [':cafeteria_srcs'],
   deps = [
     ':builtin',
     ':io',
