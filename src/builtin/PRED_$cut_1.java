@@ -1,4 +1,5 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.lang.*;
 /**
  <code>'$cut'/1</code><br>

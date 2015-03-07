@@ -1,5 +1,8 @@
 package com.googlecode.prolog_cafe.lang;
 
+import com.googlecode.prolog_cafe.exceptions.HaltException;
+import com.googlecode.prolog_cafe.exceptions.PrologException;
+
 import java.util.Set;
 
 /**

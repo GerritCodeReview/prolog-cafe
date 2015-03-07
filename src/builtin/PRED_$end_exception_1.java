@@ -1,4 +1,6 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+import com.googlecode.prolog_cafe.exceptions.SystemException;
 import  com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>'$end_exception'/1<code><br>

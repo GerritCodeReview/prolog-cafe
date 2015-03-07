@@ -1,4 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.InternalException;
+
 /**
  * Variable.<br>
  * The <code>VariableTerm</code> class represents a logical variable.<br>

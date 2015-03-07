@@ -1,4 +1,7 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
 import  com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>arg/3</code><br>
