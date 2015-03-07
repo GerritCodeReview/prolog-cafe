@@ -93,6 +93,29 @@
     },
     {
       "key": {
+        "uuid": "72a1d25d_7c33d97b",
+        "filename": "bootstrap.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T21:47:50Z",
+      "side": 1,
+      "message": "I guess we are using different versions of SWI-Prolog? `swipl --version` produces here:\n\n  SWI-Prolog version 5.10.2 for x86_64-linux\n\nSo i am able to fix the invocation above by passing missing -f $TMP/go.pl option to the source file, as with my swipl version it\u0027s clearly needed and indicated in the man page:\n\n  -f file Use file as initialisation file instead of\n  `.plrc\u0027. `-f none\u0027 stops SWI-Prolog from searching for an \n  initialisation file.\n\n\nBut then, it\u0027s failing later with:\n\n Log:\n  ERROR: /home/davido/projects/prolog-cafe/buck-\n  out/gen/builtin_srcs.am__srcs/src/builtin/system.pl:4:0: \n  Syntax error: Operator expected\n\nNext issue is that this error is swallowed and the target zip is created, and repeating the target invocation doesn\u0027t fail any more:\n\n  $ buck build :builtin_srcs --verbose 42\n  Using buckd.\n  [-] PARSING BUCK FILES...FINISHED 0,1s\n  Creating a build with 10 threads.\n  [-] BUILDING...FINISHED 0,0s\n\nThe whole trace: [1].\n\n* [1] http://paste.openstack.org/show/190660/",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 57
+      },
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_7b1d7b94",
         "filename": "bootstrap.defs",
         "patchSetId": 2
