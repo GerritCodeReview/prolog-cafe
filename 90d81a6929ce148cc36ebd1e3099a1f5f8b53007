@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85527d4f_9b032f37",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:23:03Z",
+      "side": 1,
+      "message": "When we add javadocs here as well, we could have an option to deploy it on Maven Central.",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_dbf2c7ea",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:23:03Z",
+      "side": 1,
+      "message": "Move it on top of make file. It\u0027s not obvious how to use it; we have api_install and api_deploy in Gerrit.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
