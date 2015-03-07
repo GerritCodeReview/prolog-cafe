@@ -1,6 +1,9 @@
 package com.googlecode.prolog_cafe.lang;
 
 import static com.googlecode.prolog_cafe.lang.PredicateEncoder.encode;
+
+import com.googlecode.prolog_cafe.exceptions.ExistenceException;
+
 import java.lang.reflect.Constructor;
 import java.util.concurrent.ConcurrentHashMap;
 

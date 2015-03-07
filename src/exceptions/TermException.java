@@ -1,4 +1,7 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.exceptions;
+
+import com.googlecode.prolog_cafe.lang.Term;
+
 /**
  * User-defined exception.<br>
  *

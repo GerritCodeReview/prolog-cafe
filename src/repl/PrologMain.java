@@ -1,5 +1,5 @@
 package com.googlecode.prolog_cafe.repl;
-import com.googlecode.prolog_cafe.lang.HaltException;
+import com.googlecode.prolog_cafe.exceptions.HaltException;
 import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Prolog;

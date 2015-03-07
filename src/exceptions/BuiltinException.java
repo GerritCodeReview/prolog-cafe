@@ -1,4 +1,8 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.exceptions;
+
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Term;
+
 /**
  * Builtin exception.<br>
  *

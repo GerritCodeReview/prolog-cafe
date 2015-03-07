@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+import com.googlecode.prolog_cafe.exceptions.PermissionException;
 import com.googlecode.prolog_cafe.lang.*;
 /**
    <code>new_hash/2</code><br>

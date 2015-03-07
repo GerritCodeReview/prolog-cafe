@@ -247,8 +247,9 @@ copt_expr(clo).
 
 %%% Post-init
 pl2am_postread :- 
-	assert_import('com.googlecode.prolog_cafe.lang'),
 	assert_import('com.googlecode.prolog_cafe.builtin'),
+	assert_import('com.googlecode.prolog_cafe.exceptions'),
+	assert_import('com.googlecode.prolog_cafe.lang'),
 	assert_dummy_package,
 	assert_dummy_public.
 
