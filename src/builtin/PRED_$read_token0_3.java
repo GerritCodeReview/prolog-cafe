@@ -1,4 +1,9 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.ExistenceException;
+import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.JavaException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+import com.googlecode.prolog_cafe.exceptions.PermissionException;
 import  com.googlecode.prolog_cafe.lang.*;
 import java.io.*;
 /**

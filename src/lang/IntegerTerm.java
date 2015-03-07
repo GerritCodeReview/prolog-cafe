@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.EvaluationException;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+
 /**
  * Integer.<br>
  * The class <code>IntegerTerm</code> wraps a value of primitive type 

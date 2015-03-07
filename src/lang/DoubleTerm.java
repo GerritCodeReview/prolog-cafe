@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.EvaluationException;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+
 /**
  * Floating point number.
  * The class <code>DoubleTerm</code> wraps a value of 
