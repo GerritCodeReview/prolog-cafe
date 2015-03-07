@@ -106,7 +106,7 @@ public final class Prolog {
       /** Track the running time of evaluations */
       STATISTICS_RUNTIME;
     }
-    protected final EnumSet<Feature> features = EnumSet.allOf(Feature.class);
+    protected final EnumSet<Feature> features = EnumSet.noneOf(Feature.class);
 
     Prolog(PrologControl c) {
       control = c;
