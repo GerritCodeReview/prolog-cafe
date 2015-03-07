@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.PushbackReader;
+import java.util.EnumSet;
 import java.util.StringTokenizer;
 /**
  * Prolog Cafe launcher.
@@ -63,6 +64,7 @@ public class PrologMain {
 	    }
 
 	    p = new BlockingPrologControl();
+	    p.setEnabled(EnumSet.allOf(Prolog.Feature.class), true);
 		p.getStreamManager().put(
 			SymbolTerm.intern("user_input"),
 			new JavaObjectTerm(new PushbackReader(new BufferedReader(
