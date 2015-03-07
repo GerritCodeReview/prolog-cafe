@@ -141,9 +141,8 @@ public abstract class PrologControl {
      * invocation to {@link #success()} or {@link #fail()}.
      *
      * @throws PrologException
-     * @throws JavaInterruptedException
      */
-    protected void executePredicate() throws PrologException, JavaInterruptedException {
+    protected void executePredicate() throws PrologException {
       Prolog engine = this.engine;
       Operation code = this.code;
       try {
