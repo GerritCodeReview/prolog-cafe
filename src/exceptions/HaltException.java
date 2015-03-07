@@ -1,4 +1,4 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.exceptions;
 
 public class HaltException extends SystemException {
   private final int status;

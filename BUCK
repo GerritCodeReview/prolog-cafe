@@ -24,7 +24,11 @@ java_binary(
 
 java_library(
   name = 'lang',
-  srcs = glob([SRC + 'lang/*.java'], excludes = REPL),
+  srcs = glob([
+      SRC + 'exceptions/*.java',
+      SRC + 'lang/*.java',
+    ],
+    excludes = REPL),
 )
 
 java_library(

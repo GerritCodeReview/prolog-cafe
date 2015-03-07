@@ -1,4 +1,7 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.exceptions;
+
+import com.googlecode.prolog_cafe.lang.Term;
+
 /**
  * The superclass of classes for Prolog exceptions.<br>
  *

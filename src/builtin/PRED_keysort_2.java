@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.BuiltinException;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+import com.googlecode.prolog_cafe.exceptions.JavaException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
 import com.googlecode.prolog_cafe.lang.*;
 import java.util.Arrays;
 /**

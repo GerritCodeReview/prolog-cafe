@@ -1,5 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
 
+import com.googlecode.prolog_cafe.exceptions.PrologException;
+
 /**
  * Superclass any single step operation in the Prolog interpreter.
  * <p>

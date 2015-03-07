@@ -1,4 +1,6 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.JavaException;
+import com.googlecode.prolog_cafe.exceptions.PrologException;
 import  com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>'$begin_exception'/1</code><br>

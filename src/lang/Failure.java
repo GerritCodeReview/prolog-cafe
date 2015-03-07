@@ -1,4 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.PrologException;
+
 /**
  * Initial backtrak point.<br>
  *
