@@ -1,4 +1,12 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.repl;
+import com.googlecode.prolog_cafe.lang.HaltException;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.ListTerm;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.StructureTerm;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.Term;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -55,17 +63,16 @@ public class PrologMain {
 	    }
 
 	    p = new BlockingPrologControl();
-	    p.engine.init();
-		p.engine.getStreamManager().put(
+		p.getStreamManager().put(
 			SymbolTerm.intern("user_input"),
 			new JavaObjectTerm(new PushbackReader(new BufferedReader(
 				new InputStreamReader(System.in)),
 				Prolog.PUSHBACK_SIZE)));
-		p.engine.getStreamManager().put(
+		p.getStreamManager().put(
 			SymbolTerm.intern("user_output"),
 			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
 				new OutputStreamWriter(System.out)), true)));
-		p.engine.getStreamManager().put(
+		p.getStreamManager().put(
 			SymbolTerm.intern("user_error"),
 			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
 				new OutputStreamWriter(System.err)), true)));
