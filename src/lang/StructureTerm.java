@@ -1,4 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.InternalException;
+
 /**
  * Compound term. <br>
  * The <code>StructureTerm</code> class represents a compound term but list.<br>

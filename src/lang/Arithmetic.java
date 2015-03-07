@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.lang;
+
+import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+
 /**
  * The <code>Arithmetic</code> class contains a method
  * for evaluating arithmetic expressions.<br>

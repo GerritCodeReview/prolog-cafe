@@ -1,4 +1,6 @@
 package com.googlecode.prolog_cafe.lang;
+import com.googlecode.prolog_cafe.exceptions.InternalException;
+
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;

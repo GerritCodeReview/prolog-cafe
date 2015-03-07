@@ -1,4 +1,8 @@
 package com.googlecode.prolog_cafe.builtin;
+import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+import com.googlecode.prolog_cafe.exceptions.RepresentationException;
+import com.googlecode.prolog_cafe.exceptions.SyntaxException;
 import  com.googlecode.prolog_cafe.lang.*;
 /**
  * <code>number_codes/2</code><br>
