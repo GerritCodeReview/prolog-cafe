@@ -1,4 +1,6 @@
 package com.googlecode.prolog_cafe.lang;
+import com.googlecode.prolog_cafe.exceptions.SystemException;
+
 import java.util.LinkedList;
 /**
  * Internal database for dynamic predicates.<br>

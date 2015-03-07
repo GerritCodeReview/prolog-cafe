@@ -1,4 +1,4 @@
-package com.googlecode.prolog_cafe.lang;
+package com.googlecode.prolog_cafe.exceptions;
 
 /** Indicates compiling did not succeed. */
 public class CompileException extends Exception {

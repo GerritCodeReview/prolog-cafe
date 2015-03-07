@@ -1,12 +1,12 @@
 package com.googlecode.prolog_cafe.compiler.am2j;
 
-import com.googlecode.prolog_cafe.lang.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
+import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+import com.googlecode.prolog_cafe.exceptions.PermissionException;
+import com.googlecode.prolog_cafe.exceptions.PrologException;
 import com.googlecode.prolog_cafe.lang.Operation;
-import com.googlecode.prolog_cafe.lang.PInstantiationException;
-import com.googlecode.prolog_cafe.lang.PermissionException;
 import com.googlecode.prolog_cafe.lang.Predicate;
 import com.googlecode.prolog_cafe.lang.Prolog;
-import com.googlecode.prolog_cafe.lang.PrologException;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 
