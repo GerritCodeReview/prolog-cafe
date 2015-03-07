@@ -55,24 +55,10 @@ public final class Prolog {
      */
     public int halt;
 
-    /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>bounded</code>. */
-    protected boolean bounded = false;
-    /** Prolog implementation flag: <code>max_integer</code>. */
-    protected static final int maxInteger = Integer.MAX_VALUE;
-    /** Prolog implementation flag: <code>min_integer</code>. */
-    protected static final int minInteger = Integer.MIN_VALUE;
-    /** Prolog implementation flag: <code>integer_rounding_function</code>. */
-    protected String integerRoundingFunction = "down";
-    /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>char_conversion</code>. */
-    protected String charConversion;
     /** Prolog implementation flag: <code>debug</code>. */
     protected String debug;
     /** Prolog implementation flag: <code>max_arity</code>. */
     protected int maxArity = 255;
-    /** Prolog implementation flag: <code>unknown</code>. */
-    protected String unknown;
-    /** <font color="red">Not supported yet</font>. Prolog implementation flag: <code>double_quotes</code>. */
-    protected String doubleQuotes;
 
     /** Holds an exception term for <code>catch/3</code> and <code>throw/1</code>. */
     protected Term exception;
@@ -179,12 +165,7 @@ public final class Prolog {
 	stack.push(initialFrame);
 
 	halt = 0;
-
-	charConversion  = "off";
-	debug           = "off";
-	unknown         = "error";
-	doubleQuotes    = "codes";
-
+	debug = "off";
 	exception = NONE;
 	startRuntime = features.contains(Feature.STATISTICS_RUNTIME)
 	    ? System.currentTimeMillis()
@@ -348,23 +329,6 @@ public final class Prolog {
     /** Returns the current time stamp of choice point frame. */
     public long    getCPFTimeStamp() { return CPFTimeStamp; }
 
-    /** Returns the value of Prolog implementation flag: <code>bounded</code>. */
-    public boolean isBounded() { return bounded; }
-
-    /** Returns the value of Prolog implementation flag: <code>max_integer</code>. */
-    public int getMaxInteger() { return maxInteger; }
-
-    /** Returns the value of Prolog implementation flag: <code>min_integer</code>. */
-    public int getMinInteger() { return minInteger; }
-
-    /** Returns the value of Prolog implementation flag: <code>integer_rounding_function</code>. */
-    public String getIntegerRoundingFunction() { return integerRoundingFunction; }
-
-    /** Returns the value of Prolog implementation flag: <code>char_conversion</code>. */
-    public String getCharConversion() { return charConversion; }
-    /** Sets the value of Prolog implementation flag: <code>char_conversion</code>. */
-    public void setCharConversion(String mode) { charConversion = mode;}
-
     /** Returns the value of Prolog implementation flag: <code>debug</code>. */
     public String getDebug() { return debug; }
     /** Sets the value of Prolog implementation flag: <code>debug</code>. */
@@ -372,16 +336,6 @@ public final class Prolog {
 
     /** Returns the value of Prolog implementation flag: <code>max_arity</code>. */
     public int getMaxArity() { return maxArity; }
-
-    /** Returns the value of Prolog implementation flag: <code>unknown</code>. */
-    public String getUnknown() { return unknown; }
-    /** Sets the value of Prolog implementation flag: <code>unknown</code>. */
-    public void setUnknown(String mode) { unknown = mode;}
-
-    /** Returns the value of Prolog implementation flag: <code>double_quotes</code>. */
-    public String getDoubleQuotes() { return doubleQuotes; }
-    /** Sets the value of Prolog implementation flag: <code>double_quotes</code>. */
-    public void setDoubleQuotes(String mode) { doubleQuotes = mode;}
 
     /** Returns the value of <code>exception</code>. This is used in <code>catch/3</code>. */
     public Term getException() { return exception; }
