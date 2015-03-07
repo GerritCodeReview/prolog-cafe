@@ -99,6 +99,7 @@ public class Compiler {
     /** Initialize a new compiler instance. */
     public Compiler() {
       pcl = new BufferingPrologControl();
+      pcl.setEnabled(EnumSet.allOf(Prolog.Feature.class), true);
       pcl.setPrologClassLoader(new PrologClassLoader(Compiler.class.getClassLoader()));
       options = EnumSet.noneOf(Option.class);
       enableDefaultOptions();
