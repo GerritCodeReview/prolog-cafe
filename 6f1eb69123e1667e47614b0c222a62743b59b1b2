@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85527d4f_3b13038c",
+        "filename": ".buckconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "Add some target aliases, or even `all`?",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_1c1175d5",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "We are starting here from scratch. There is another build system out there, that is very similar to Buck, where all build files are called BUILD. Since [1],[2] Buck seamlesly support that. Rename all build files in BUILD?\n\n* [1] https://github.com/facebook/buck/issues/238\n* [2] https://github.com/facebook/buck/commit/f3b6cd48bab0247e8bf85ef3c52afd9b7e26dd95",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_3c16b1ce",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "Nit: unneeded new line.",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_bb06f346",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "Both targets are failinge here with:\n\n  ERROR: Prolog initialisation failed:\n  ERROR: \u0027\u003cmeta-call\u003e\u0027/1: Undefined procedure: go/0\n\nVerbose output: [1].\n\n* [1] http://paste.openstack.org/show/190593/",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_1b18bfa4",
+        "filename": "bootstrap.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "Add one liner comment?\n\n# Translating Prolog into WAM-based Intermediate Code",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_7b1d7b94",
+        "filename": "bootstrap.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "Add one liner comment?\n\n# Translating WAM-based Intermediate Code into Java",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_5b2237d2",
+        "filename": "src/compiler/pl2am.pl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T11:14:22Z",
+      "side": 1,
+      "message": "This is annoying that Prolog files are recognized and highlighted per default as Perl files. Not to mention, that CM doesn\u0027t have Prolog mode: [1].\n\n* [1] https://groups.google.com/forum/#!topic/codemirror/MFggtjT5j-Y",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
