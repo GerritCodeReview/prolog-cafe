@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "72a1d25d_5c2e1d15",
+        "filename": ".buckversion",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T13:51:11Z",
+      "side": 1,
+      "message": "Add link to bucklets/watchmanconfig as well, like in gitiles project?\n\nhttps://gerrit.googlesource.com/gitiles/+/master/.watchmanconfig",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_9b032f37",
         "filename": "BUCK",
         "patchSetId": 2
@@ -30,6 +47,30 @@
       "writtenOn": "2015-03-07T11:23:03Z",
       "side": 1,
       "message": "Move it on top of make file. It\u0027s not obvious how to use it; we have api_install and api_deploy in Gerrit.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_fb106b79",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-07T13:51:11Z",
+      "side": 1,
+      "message": "Another option is to include all used bucklets in bucklets.defs: [1] file (like we did in gitiles project) that is referenced from buildfile.includes in .buckconfig\n\n [buildfile]\n    includes \u003d //bucklets.defs\n\nAdvantage of doing that is that when someone cloned prolog-cafe non-recursively and bucklets submodule is missing, then we have the control and can check for existience of bucklets subdirectoy with bucklet files and issue sane error message when this is not the case.\n\n* [1] https://gerrit.googlesource.com/gitiles/+/master/bucklets.defs",
+      "parentUuid": "85527d4f_dbf2c7ea",
       "range": {
         "startLine": 116,
         "startChar": 0,
