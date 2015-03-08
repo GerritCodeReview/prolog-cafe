@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "97d47838_0dd9f170",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:08:29Z",
+      "side": 1,
+      "message": "I am aware of discrepancy between these two build tools. The question is, if Buck could introduce compatibility modus in future, and support genrule flavour of the similar build tool as well. It would be great when projects could be built interchangably with both tools, with the same set of BUILD files.",
+      "parentUuid": "451a45b5_49bc45b4",
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72a1d25d_3c16b1ce",
         "filename": "BUCK",
         "patchSetId": 2
@@ -118,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "97d47838_2ddcad60",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:08:29Z",
+      "side": 1,
+      "message": "Confirmed. Works as expected with SWI-Prolog 6.6.6.",
+      "parentUuid": "2517118d_2802a3f0",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_1b18bfa4",
         "filename": "bootstrap.defs",
         "patchSetId": 2
@@ -170,6 +212,30 @@
       "side": 1,
       "message": "Yes, I was using SWI-Prolog 6.6.6 on my Mac and 6.6.4 on my Linux workstation.\n\nWe may just need to demand a modern version of SWI-Prolog if a developer wants to build this from source. Most don\u0027t, we build Prolog Cafe approximately once and park it in the gerrit-maven storage bucket for download. The version we are using today in Gerrit hasn\u0027t been touched in _years_.\n\nI recently started slimming our version down because it has a lot of features we don\u0027t use. Once that is done I expect it to remain stable and again not be touched for years. Given that trend I would never suggest building this from source like we do for plugins, or making this a submodule to gerrit itself, or even fully importing it into Gerrit\u0027s tree like we did with gwtexpui.",
       "parentUuid": "72a1d25d_7c33d97b",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 57
+      },
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_1b6a7fd4",
+        "filename": "bootstrap.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:08:29Z",
+      "side": 1,
+      "message": "| We may just need to demand a modern version of SWI-Prolog if a developer wants to build this from source.\n\nGood idea, it would be enouph to mention that SWI-Prolog 6.6.6 verison is required.",
+      "parentUuid": "2517118d_e8d88b2a",
       "range": {
         "startLine": 20,
         "startChar": 9,
