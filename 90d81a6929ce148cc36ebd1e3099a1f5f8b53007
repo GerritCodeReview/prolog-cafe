@@ -80,6 +80,64 @@
       "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_5b74f7b2",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:16:36Z",
+      "side": 1,
+      "message": "Actually, this is just :install and :deploy and is good enough. It can be slightly improved, though, by adding these lines to .buckconfig:\n\n  [alias]\n    install \u003d //:install\n    deploy \u003d //:deploy",
+      "parentUuid": "85527d4f_dbf2c7ea",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97d47838_ede6a532",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:16:36Z",
+      "side": 1,
+      "message": "Sources for cafeteria_lib are missing:\n\n  java_sources(\n    name \u003d \u0027cafeteria_src\u0027,\n    srcs \u003d  glob([SRC + \u0027repl/*.java\u0027]) + REPL,\n  )",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97d47838_cdebe9f8",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-03-08T22:16:36Z",
+      "side": 1,
+      "message": "With suggested cafeteria_src target, sources can be mentioned here:\n\n  \u0027prolog-cafeteria\u0027: \u0027:cafeteria_src\u0027,",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
