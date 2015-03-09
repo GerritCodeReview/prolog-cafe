@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d76190bc_77d97070",
+        "filename": "src/compiler/pl2am.pl",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T21:19:10Z",
+      "side": 1,
+      "message": "Use tab not space. :(",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 57
+      },
+      "revId": "f5f9b7e65d7e4e76e045b8fa8549893e25326ad3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
