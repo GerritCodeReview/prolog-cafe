@@ -160,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "45c5e522_cef58387",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-09T07:04:53Z",
+      "side": 1,
+      "message": "Confirmed also on my Ubuntu workstation with SWI-Prolog version 6.6.6 for amd64",
+      "parentUuid": "97d47838_2ddcad60",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "6f1eb69123e1667e47614b0c222a62743b59b1b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_1b18bfa4",
         "filename": "bootstrap.defs",
         "patchSetId": 2
