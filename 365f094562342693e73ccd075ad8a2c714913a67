@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d76190bc_17d2f451",
+        "filename": "src/builtin/cafeteria.pl",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T20:51:24Z",
+      "side": 1,
+      "message": "Its these dynamic statements that are the problem.\n\nI think can just drop them from this file to fix the issue.",
+      "revId": "365f094562342693e73ccd075ad8a2c714913a67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
