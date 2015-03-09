@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "65e029b0_6fdd71e5",
+        "filename": ".buckversion",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T18:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a1d25d_5c2e1d15",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_9b032f37",
         "filename": "BUCK",
         "patchSetId": 2
@@ -107,6 +125,54 @@
     },
     {
       "key": {
+        "uuid": "45c5e522_0e894b0a",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T18:04:33Z",
+      "side": 1,
+      "message": "Done, added aliases for install and deploy.",
+      "parentUuid": "85527d4f_5b74f7b2",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65e029b0_0fd2a5d4",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T18:04:33Z",
+      "side": 1,
+      "message": "Done, moved to .buckconfig as part of the includes list.",
+      "parentUuid": "85527d4f_dbf2c7ea",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97d47838_ede6a532",
         "filename": "BUCK",
         "patchSetId": 2
@@ -124,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "65e029b0_2fd769c5",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T18:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d47838_ede6a532",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97d47838_cdebe9f8",
         "filename": "BUCK",
         "patchSetId": 2
@@ -135,6 +219,24 @@
       "writtenOn": "2015-03-08T22:16:36Z",
       "side": 1,
       "message": "With suggested cafeteria_src target, sources can be mentioned here:\n\n  \u0027prolog-cafeteria\u0027: \u0027:cafeteria_src\u0027,",
+      "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45c5e522_2e8e8713",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T18:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d47838_cdebe9f8",
       "revId": "90d81a6929ce148cc36ebd1e3099a1f5f8b53007",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
