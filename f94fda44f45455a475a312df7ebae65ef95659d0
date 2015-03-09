@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d76190bc_b7c22881",
+        "filename": ".buckconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T20:39:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7799c4f8_9cbd4502",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "f94fda44f45455a475a312df7ebae65ef95659d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7799c4f8_bcc20181",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2015-03-09T20:18:48Z",
       "side": 1,
       "message": "Now, that REAMDE.md was introduced, mention `buck install` and `buck deploy` there as the main targets users want to use?",
+      "revId": "f94fda44f45455a475a312df7ebae65ef95659d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "177fa84d_e1c7868f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-09T20:39:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7799c4f8_bcc20181",
       "revId": "f94fda44f45455a475a312df7ebae65ef95659d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
