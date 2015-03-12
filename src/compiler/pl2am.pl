@@ -102,6 +102,7 @@ Other Instructions
   end_predicate(p, f/n)
 
   import_package(p)
+  import_static(p, f/n)
   import_package(p, f/n)
 
   main(f/n, public): [Instructions]
@@ -162,6 +163,7 @@ Notation
 :- dynamic package_name/1.
 :- dynamic public_predicates/2.
 :- dynamic import_package/2.
+:- dynamic import_static/2.
 :- dynamic internal_declarations/1.
 :- dynamic file_name/1.
 :- dynamic dummy_clause_counter/1.
@@ -205,6 +207,7 @@ pl2am_preread(File, Opts) :-
 	retractall(package_name(_)),
 	retractall(public_predicates(_,_)),
 	retractall(import_package(_,_)),
+	retractall(import_static(_,_)),
 	retractall(internal_declarations(_)),
 	retractall(file_name(_)),
 	retractall(dummy_clause_counter(_)),
@@ -251,6 +254,7 @@ pl2am_postread :-
 	assert_import('com.googlecode.prolog_cafe.exceptions'),
 	assert_import('com.googlecode.prolog_cafe.lang'),
 	assert_import('com.googlecode.prolog_cafe.lang.ChoicePointFrame'),
+	assert(import_static('com.googlecode.prolog_cafe.lang.Failure', fail_0)),
 	assert_dummy_package,
 	assert_dummy_public.
 
@@ -815,16 +819,23 @@ replace_key(K, _, _) :-
 
 %%% Import Declarations
 generate_import --> 
+	{findall((P,C), import_static(P, C), S)},
+	gen_importstatic(S),
 	{findall((P,C), import_package(P, C), X)},
-	gen_import(X).
+	gen_importpkg(X).
 
-gen_import([]) --> !.
-gen_import([(P,'*')|Xs]) --> !, 
+gen_importstatic([]) --> !.
+gen_importstatic([(P,C)|Xs]) -->
+	[import_static(P, C)],
+	gen_importstatic(Xs).
+
+gen_importpkg([]) --> !.
+gen_importpkg([(P,'*')|Xs]) --> !,
 	[import_package(P)],
-	gen_import(Xs).
-gen_import([(P,C)|Xs]) --> 
+	gen_importpkg(Xs).
+gen_importpkg([(P,C)|Xs]) -->
 	[import_package(P, C)],
-	gen_import(Xs).
+	gen_importpkg(Xs).
 
 %%% Information
 generate_info(Functor, Arity) --> 
