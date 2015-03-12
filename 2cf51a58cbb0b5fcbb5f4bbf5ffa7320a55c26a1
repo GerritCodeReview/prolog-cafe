@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e18ed27f_6f84110c",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-12T23:40:33Z",
+      "side": 1,
+      "message": "The entire project is missing copyright and license headers.",
+      "parentUuid": "410f9eb1_4acd93ad",
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e18ed27f_efc0017e",
         "filename": "src/exceptions/ReductionLimitException.java",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "410f9eb1_0a4c3b97",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-12T23:40:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e18ed27f_efc0017e",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e18ed27f_cfbbbd09",
         "filename": "src/exceptions/ReductionLimitException.java",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2015-03-12T05:23:11Z",
       "side": 1,
       "message": "tabs",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 1
+      },
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e18ed27f_0f81c5fa",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-12T23:40:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e18ed27f_cfbbbd09",
       "range": {
         "startLine": 5,
         "startChar": 0,
