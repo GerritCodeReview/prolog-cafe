@@ -9,7 +9,7 @@ package com.googlecode.prolog_cafe.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public abstract class ChoicePointFrame {
+class ChoicePointFrame {
     ChoicePointFrame prior;
 
     long timeStamp;
@@ -31,13 +31,10 @@ public abstract class ChoicePointFrame {
       return t;
     }
 
-    public static final class S0 extends ChoicePointFrame {
-    }
-
-    public static final class S1 extends ChoicePointFrame {
+    static final class S1 extends ChoicePointFrame {
       private final Term r1;
 
-      public S1(Prolog engine) {
+      S1(Prolog engine) {
         this.r1 = engine.r1;
       }
 
@@ -47,10 +44,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S2 extends ChoicePointFrame {
+    static final class S2 extends ChoicePointFrame {
       private final Term r1, r2;
 
-      public S2(Prolog engine) {
+      S2(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
       }
@@ -61,10 +58,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S3 extends ChoicePointFrame {
+    static final class S3 extends ChoicePointFrame {
       private final Term r1, r2, r3;
 
-      public S3(Prolog engine) {
+      S3(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -78,10 +75,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S4 extends ChoicePointFrame {
+    static final class S4 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4;
 
-      public S4(Prolog engine) {
+      S4(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -97,10 +94,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S5 extends ChoicePointFrame {
+    static final class S5 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5;
 
-      public S5(Prolog engine) {
+      S5(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -118,10 +115,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S6 extends ChoicePointFrame {
+    static final class S6 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5, r6;
 
-      public S6(Prolog engine) {
+      S6(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -141,10 +138,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static final class S7 extends ChoicePointFrame {
+    static final class S7 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5, r6, r7;
 
-      public S7(Prolog engine) {
+      S7(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -166,10 +163,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static class S8 extends ChoicePointFrame {
+    static class S8 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5, r6, r7, r8;
 
-      public S8(Prolog engine) {
+      S8(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
@@ -193,7 +190,7 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static class S9 extends ChoicePointFrame {
+    static class S9 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5, r6, r7, r8, r9;
 
       S9(Prolog engine) {
@@ -222,10 +219,10 @@ public abstract class ChoicePointFrame {
       }
     }
 
-    public static class S10 extends ChoicePointFrame {
+    static class S10 extends ChoicePointFrame {
       private final Term r1, r2, r3, r4, r5, r6, r7, r8, r9, r10;
 
-      public S10(Prolog engine) {
+      S10(Prolog engine) {
         this.r1 = engine.r1;
         this.r2 = engine.r2;
         this.r3 = engine.r3;
