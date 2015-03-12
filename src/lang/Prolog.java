@@ -89,16 +89,6 @@ public final class Prolog {
     /** Holds an atom <code>[]<code> (empty list). */
     public static final SymbolTerm Nil     = SymbolTerm.intern("[]");
 
-    /* Some symbols for stream options */
-    static final SymbolTerm SYM_MODE_1     = SymbolTerm.intern("mode", 1);
-    static final SymbolTerm SYM_ALIAS_1    = SymbolTerm.intern("alias", 1);
-    static final SymbolTerm SYM_TYPE_1     = SymbolTerm.intern("type", 1);
-    static final SymbolTerm SYM_READ       = SymbolTerm.intern("read");
-    static final SymbolTerm SYM_APPEND     = SymbolTerm.intern("append");
-    static final SymbolTerm SYM_INPUT      = SymbolTerm.intern("input");
-    static final SymbolTerm SYM_OUTPUT     = SymbolTerm.intern("output");
-    static final SymbolTerm SYM_TEXT       = SymbolTerm.intern("text");
-
     public static enum Feature {
       /** Access to the local filesystem and console. */
       IO,
