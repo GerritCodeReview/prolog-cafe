@@ -469,16 +469,10 @@ write_java0(get_str(_F/A,Xi,Xj), In, Out) :- !,
 write_java0(try(Li,Lj), _, Out) :- !, 
 	clause(current_arity(A), _),
 	tab(Out, 8),
-	write(Out, 'return engine.jtry('),
+	write(Out, 'return engine.jtry'), write(Out, A), write(Out, '('),
 	write_index(Li, Out), 
 	write(Out, ', '),
 	write_index(Lj, Out),
-	write(Out, ', '),
-	( A == 0 ->
-		write(Out, 'new S0()')
-		;
-		write(Out, 'new S'), write(Out, A), write(Out, '(engine)')
-	),
 	write(Out, ');'), nl(Out).
 write_java0(retry(Li,Lj), _, Out) :- !, 
 	tab(Out, 8),

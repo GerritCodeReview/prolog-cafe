@@ -253,7 +253,6 @@ pl2am_postread :-
 	assert_import('com.googlecode.prolog_cafe.builtin'),
 	assert_import('com.googlecode.prolog_cafe.exceptions'),
 	assert_import('com.googlecode.prolog_cafe.lang'),
-	assert_import('com.googlecode.prolog_cafe.lang.ChoicePointFrame'),
 	assert(import_static('com.googlecode.prolog_cafe.lang.Failure', fail_0)),
 	assert_dummy_package,
 	assert_dummy_public.
