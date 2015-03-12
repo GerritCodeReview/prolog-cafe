@@ -65,20 +65,7 @@ public class PrologMain {
 
 	    p = new BlockingPrologControl();
 	    p.setEnabled(EnumSet.allOf(Prolog.Feature.class), true);
-		p.getStreamManager().put(
-			SymbolTerm.intern("user_input"),
-			new JavaObjectTerm(new PushbackReader(new BufferedReader(
-				new InputStreamReader(System.in)),
-				Prolog.PUSHBACK_SIZE)));
-		p.getStreamManager().put(
-			SymbolTerm.intern("user_output"),
-			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(System.out)), true)));
-		p.getStreamManager().put(
-			SymbolTerm.intern("user_error"),
-			new JavaObjectTerm(new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(System.err)), true)));
-
+	    p.configureUserIO(System.in, System.out, System.err);
 	    p.setPredicate(Prolog.BUILTIN, "initialization", arg1, arg2);
 	    for (boolean r = p.call(); r; r = p.redo()) {}
 	    System.exit(0);

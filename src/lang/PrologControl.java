@@ -3,6 +3,14 @@ package com.googlecode.prolog_cafe.lang;
 import com.googlecode.prolog_cafe.exceptions.HaltException;
 import com.googlecode.prolog_cafe.exceptions.PrologException;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
 import java.util.Set;
 
 /**
@@ -73,7 +81,36 @@ public abstract class PrologControl {
       engine.pcl = cl;
     }
 
-    /** Sets a goal and its arguments to this Prolog thread. 
+    /**
+     * Registers {@code user_input}, {@code user_output}, and {@code user_error}
+     * streams.
+     */
+    public void configureUserIO(InputStream in, OutputStream out,
+        OutputStream err) {
+      if (in != null) {
+        engine.streamManager.put(
+            SymbolTerm.intern("user_input"),
+            new JavaObjectTerm(new PushbackReader(
+                new BufferedReader(new InputStreamReader(in)),
+                Prolog.PUSHBACK_SIZE)));
+      }
+      if (out != null) {
+        engine.streamManager.put(
+            SymbolTerm.intern("user_output"),
+            new JavaObjectTerm(new PrintWriter(
+                new BufferedWriter(new OutputStreamWriter(out)),
+                true)));
+      }
+      if (err != null) {
+        engine.streamManager.put(
+            SymbolTerm.intern("user_error"),
+            new JavaObjectTerm(new PrintWriter(
+                new BufferedWriter(new OutputStreamWriter(err)),
+                true)));
+      }
+    }
+
+    /** Sets a goal and its arguments to this Prolog thread.
      * An initial continuation goal (a <code>Success</code> object)
      * is set to the <code>cont</code> field of goal <code>p</code> as continuation.
      */
@@ -82,7 +119,7 @@ public abstract class PrologControl {
       code = p;
     }
 
-    /** Sets a goal <code>call(t)</code> to this Prolog thread. 
+    /** Sets a goal <code>call(t)</code> to this Prolog thread.
      * An initial continuation goal (a <code>Success</code> object)
      * is set to the <code>cont</code> field of goal <code>p</code> as continuation.
      */
