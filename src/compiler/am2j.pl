@@ -130,6 +130,12 @@ write_java0(import_package(P), _, Out) :- !,
 	write(Out, 'import '), 
 	write_package(P, Out), 
 	write(Out, '.*;'), nl(Out).
+write_java0(import_static(P,F), _, Out) :- !,
+	write(Out, 'import static '),
+	write_package(P, Out),
+	write(Out, '.'),
+	write(Out, F),
+	write(Out, ';'), nl(Out).
 write_java0(import_package(P,FA), _, Out) :- !,
 	write(Out, 'import '), 
 	write_package(P, Out), 
@@ -143,12 +149,7 @@ write_java0(import_package(P,FA), _, Out) :- !,
 write_java0((Label: Instruction), In, Out) :- !,
 	write_label(Label, Out),
 	write_java0(Instruction, In, Out).
-write_java0(label(fail/0), _, Out) :- !,
-	tab(Out, 4),
-	write(Out, 'static final Operation '),
-	write_index(fail/0, Out),
-	write(Out, ' = com.googlecode.prolog_cafe.lang.Failure.FAIL_0'),
-	write(Out, ';'), nl(Out).
+write_java0(label(fail/0), _, _) :- !.
 write_java0(label(L), _, Out) :- !,
 	tab(Out, 4),
 	write(Out, 'static final Operation '),
@@ -468,16 +469,10 @@ write_java0(get_str(_F/A,Xi,Xj), In, Out) :- !,
 write_java0(try(Li,Lj), _, Out) :- !, 
 	clause(current_arity(A), _),
 	tab(Out, 8),
-	write(Out, 'return engine.jtry('),
+	write(Out, 'return engine.jtry'), write(Out, A), write(Out, '('),
 	write_index(Li, Out), 
 	write(Out, ', '),
 	write_index(Lj, Out),
-	write(Out, ', '),
-	( A == 0 ->
-		write(Out, 'new S0()')
-		;
-		write(Out, 'new S'), write(Out, A), write(Out, '(engine)')
-	),
 	write(Out, ');'), nl(Out).
 write_java0(retry(Li,Lj), _, Out) :- !, 
 	tab(Out, 8),
@@ -1170,6 +1165,7 @@ Other Instructions
 +  end_predicate(p, f/n)
 
 +  import_package(p)
++  import_static(p, f/n)
 +  import_package(p, f/n)
 
 +  main(f/n, public): [Instructions]

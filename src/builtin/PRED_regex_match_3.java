@@ -1,7 +1,6 @@
 package com.googlecode.prolog_cafe.builtin;
 import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
-import com.googlecode.prolog_cafe.lang.ChoicePointFrame;
 import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Operation;
@@ -10,7 +9,6 @@ import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +57,7 @@ public class PRED_regex_match_3 extends Predicate.P3 {
 
       engine.r1 = new JavaObjectTerm(matcher);
       engine.r2 = arg3;
-      return engine.jtry(regex_check, regex_next, new ChoicePointFrame.S2(engine));
+      return engine.jtry2(regex_check, regex_next);
   }
 
   private static final class PRED_regex_check extends Operation {
@@ -94,7 +92,7 @@ public class PRED_regex_match_3 extends Predicate.P3 {
         return engine.fail();
       }
 
-      return engine.jtry(regex_check, regex_next, new ChoicePointFrame.S2(engine));
+      return engine.jtry2(regex_check, regex_next);
     }
   }
 

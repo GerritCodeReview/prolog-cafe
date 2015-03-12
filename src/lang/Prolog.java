@@ -139,7 +139,7 @@ public final class Prolog {
 	CPFTimeStamp = Long.MIN_VALUE;
 
 	// Creates an initial choice point frame.
-	ChoicePointFrame initialFrame = new ChoicePointFrame.S0();
+	ChoicePointFrame initialFrame = new ChoicePointFrame();
 	initialFrame.b0 = B0;
 	initialFrame.bp = Failure.FAILURE;
 	initialFrame.tr = trail.top();
@@ -261,8 +261,20 @@ public final class Prolog {
       stack.top.restore(this);
     }
 
+    public Operation jtry0(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame()); }
+    public Operation jtry1(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S1(this)); }
+    public Operation jtry2(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S2(this)); }
+    public Operation jtry3(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S3(this)); }
+    public Operation jtry4(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S4(this)); }
+    public Operation jtry5(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S5(this)); }
+    public Operation jtry6(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S6(this)); }
+    public Operation jtry7(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S7(this)); }
+    public Operation jtry8(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
+    public Operation jtry9(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
+    public Operation jtry10(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
+
     /** Creates a new choice point frame. */
-    public Operation jtry(Operation p, Operation next, ChoicePointFrame entry) {
+    private Operation jtry(Operation p, Operation next, ChoicePointFrame entry) {
       entry.cont = cont;
       entry.b0 = B0;
       entry.bp = next;
