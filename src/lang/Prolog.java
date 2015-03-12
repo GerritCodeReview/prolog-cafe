@@ -90,7 +90,7 @@ public final class Prolog {
       IO,
 
       /** Track the running time of evaluations */
-      STATISTICS_RUNTIME;
+      STATISTICS;
     }
     protected final EnumSet<Feature> features = EnumSet.noneOf(Feature.class);
 
@@ -149,7 +149,7 @@ public final class Prolog {
 	halt = 0;
 	debug = "off";
 	exception = NONE;
-	startRuntime = features.contains(Feature.STATISTICS_RUNTIME)
+	startRuntime = features.contains(Feature.STATISTICS)
 	    ? System.currentTimeMillis()
 	    : 0;
 	previousRuntime = 0;

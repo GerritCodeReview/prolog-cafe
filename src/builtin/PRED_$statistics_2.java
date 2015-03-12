@@ -28,12 +28,12 @@ class PRED_$statistics_2 extends Predicate.P2 {
 	Term result = null;
 
 	a1 = a1.dereference();
+    engine.requireFeature(Prolog.Feature.STATISTICS, this, a1);
 	if (a1.isVariable()) {
 	    throw new PInstantiationException(this, 1);
 	} else if (! a1.isSymbol()) {
 	    throw new IllegalTypeException(this, 1, "atom", a1);
 	} else if (a1.equals(SYM_RUNTIME)) {
-	    engine.requireFeature(Prolog.Feature.STATISTICS_RUNTIME, this, a1);
 	    long val1, val2;
 	    Term start, previous;
 	    val1 = System.currentTimeMillis() - engine.getStartRuntime();
@@ -61,7 +61,7 @@ class PRED_$statistics_2 extends Predicate.P2 {
 	} else {
 	    return engine.fail();
 	}
-	if (! a2.unify(result, engine.trail)) 
+	if (! a2.unify(result, engine.trail))
 	    return engine.fail();
 	return cont;
     }
