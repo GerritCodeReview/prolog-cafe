@@ -2,6 +2,7 @@ package com.googlecode.prolog_cafe.lang;
 
 import com.googlecode.prolog_cafe.exceptions.HaltException;
 import com.googlecode.prolog_cafe.exceptions.PrologException;
+import com.googlecode.prolog_cafe.exceptions.ReductionLimitException;
 
 import java.util.Set;
 
@@ -23,6 +24,9 @@ public abstract class PrologControl {
 
     /** Holds a Prolog goal to be executed. */
     protected Operation code;
+
+    private int reductionLimit = 1 << 20;
+    private int reductionsRemaining;
 
     /** Constructs a new <code>PrologControl</code>. */
     public PrologControl() {
@@ -93,6 +97,7 @@ public abstract class PrologControl {
     public void setPredicate(Predicate p) {
       p.cont = Success.SUCCESS;
       code = p;
+      reductionsRemaining = reductionLimit;
     }
 
     /** Sets a goal <code>call(t)</code> to this Prolog thread. 
@@ -153,6 +158,8 @@ public abstract class PrologControl {
 
         do {
           if (isEngineStopped()) return;
+          if (--reductionsRemaining <= 0)
+              throw new ReductionLimitException(reductionLimit);
           code = code.exec(engine);
         } while (engine.halt == 0);
 
@@ -163,6 +170,16 @@ public abstract class PrologControl {
         this.code = code;
         SymbolTerm.gc();
       }
+    }
+
+    /** @return number of reductions used by execution. */
+    public int getReductions() {
+      return reductionLimit - reductionsRemaining;
+    }
+
+    /** Applies an upper limit on number of reductions. */
+    public void setReductionLimit(int limit) {
+      reductionLimit = limit;
     }
 
     /** @param err stack trace to print (or log). */
