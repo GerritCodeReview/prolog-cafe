@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "410f9eb1_4acd93ad",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-12T05:23:11Z",
+      "side": 1,
+      "message": "Missing copyright and license headers",
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e18ed27f_efc0017e",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-12T05:23:11Z",
+      "side": 1,
+      "message": "\"exceeds the allowed number of reductions\" or \"exceeds the reduction limit\"?",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e18ed27f_cfbbbd09",
+        "filename": "src/exceptions/ReductionLimitException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-12T05:23:11Z",
+      "side": 1,
+      "message": "tabs",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 1
+      },
+      "revId": "2cf51a58cbb0b5fcbb5f4bbf5ffa7320a55c26a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
