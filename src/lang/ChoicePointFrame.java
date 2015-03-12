@@ -9,7 +9,7 @@ package com.googlecode.prolog_cafe.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class ChoicePointFrame {
+public abstract class ChoicePointFrame {
     ChoicePointFrame prior;
 
     long timeStamp;
@@ -17,12 +17,6 @@ class ChoicePointFrame {
     Operation bp;    // next clause
     int tr;          // trail pointer
     int b0;          // cut point
-
-    static ChoicePointFrame S0(Operation cont) {
-      ChoicePointFrame r = new ChoicePointFrame();
-      r.cont = cont;
-      return r;
-    }
 
     void restore(Prolog engine) {
       engine.cont = this.cont;
@@ -37,186 +31,225 @@ class ChoicePointFrame {
       return t;
     }
 
-    static final class S1 extends ChoicePointFrame {
-      private Term areg1;
+    public static final class S0 extends ChoicePointFrame {
+    }
 
-      S1(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
+    public static final class S1 extends ChoicePointFrame {
+      private final Term r1;
+
+      public S1(Prolog engine) {
+        this.r1 = engine.r1;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
+        engine.r1 = this.r1;
       }
     }
 
-    static final class S2 extends ChoicePointFrame {
-      private Term areg1, areg2;
+    public static final class S2 extends ChoicePointFrame {
+      private final Term r1, r2;
 
-      S2(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
+      public S2(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+      }
+
+      void restore(Prolog engine) {
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+      }
+    }
+
+    public static final class S3 extends ChoicePointFrame {
+      private final Term r1, r2, r3;
+
+      public S3(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
       }
     }
 
-    static final class S3 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3;
+    public static final class S4 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4;
 
-      S3(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
+      public S4(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
       }
     }
 
-    static final class S4 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3, areg4;
+    public static final class S5 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5;
 
-      S4(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
-        this.areg4 = engine.areg4;
+      public S5(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
-        engine.areg4 = this.areg4;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
       }
     }
 
-    static final class S5 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3, areg4, areg5;
+    public static final class S6 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5, r6;
 
-      S5(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
-        this.areg4 = engine.areg4;
-        this.areg5 = engine.areg5;
+      public S6(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
+        this.r6 = engine.r6;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
-        engine.areg4 = this.areg4;
-        engine.areg5 = this.areg5;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
+        engine.r6 = this.r6;
       }
     }
 
-    static final class S6 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3, areg4, areg5, areg6;
+    public static final class S7 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5, r6, r7;
 
-      S6(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
-        this.areg4 = engine.areg4;
-        this.areg5 = engine.areg5;
-        this.areg6 = engine.areg6;
+      public S7(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
+        this.r6 = engine.r6;
+        this.r7 = engine.r7;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
-        engine.areg4 = this.areg4;
-        engine.areg5 = this.areg5;
-        engine.areg6 = this.areg6;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
+        engine.r6 = this.r6;
+        engine.r7 = this.r7;
       }
     }
 
-    static final class S7 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3, areg4, areg5, areg6, areg7;
+    public static class S8 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5, r6, r7, r8;
 
-      S7(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
-        this.areg4 = engine.areg4;
-        this.areg5 = engine.areg5;
-        this.areg6 = engine.areg6;
-        this.areg7 = engine.areg7;
+      public S8(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
+        this.r6 = engine.r6;
+        this.r7 = engine.r7;
+        this.r8 = engine.r8;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
-        engine.areg4 = this.areg4;
-        engine.areg5 = this.areg5;
-        engine.areg6 = this.areg6;
-        engine.areg7 = this.areg7;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
+        engine.r6 = this.r6;
+        engine.r7 = this.r7;
+        engine.r8 = this.r8;
       }
     }
 
-    static class S8 extends ChoicePointFrame {
-      private Term areg1, areg2, areg3, areg4, areg5, areg6, areg7, areg8;
+    public static class S9 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5, r6, r7, r8, r9;
 
-      S8(Prolog engine) {
-        this.cont = engine.cont;
-        this.areg1 = engine.areg1;
-        this.areg2 = engine.areg2;
-        this.areg3 = engine.areg3;
-        this.areg4 = engine.areg4;
-        this.areg5 = engine.areg5;
-        this.areg6 = engine.areg6;
-        this.areg7 = engine.areg7;
-        this.areg8 = engine.areg8;
+      S9(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
+        this.r6 = engine.r6;
+        this.r7 = engine.r7;
+        this.r8 = engine.r8;
+        this.r9 = engine.r9;
       }
 
       void restore(Prolog engine) {
         engine.cont = this.cont;
-        engine.areg1 = this.areg1;
-        engine.areg2 = this.areg2;
-        engine.areg3 = this.areg3;
-        engine.areg4 = this.areg4;
-        engine.areg5 = this.areg5;
-        engine.areg6 = this.areg6;
-        engine.areg7 = this.areg7;
-        engine.areg8 = this.areg8;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
+        engine.r6 = this.r6;
+        engine.r7 = this.r7;
+        engine.r8 = this.r8;
+        engine.r9 = this.r9;
       }
     }
 
-    static final class S9 extends S8 {
-      private Term[] aregs;
+    public static class S10 extends ChoicePointFrame {
+      private final Term r1, r2, r3, r4, r5, r6, r7, r8, r9, r10;
 
-      S9(int arity, Prolog engine) {
-        super(engine);
-        aregs = new Term[arity - 8];
-        System.arraycopy(engine.aregs, 0, aregs, 0, aregs.length);
+      public S10(Prolog engine) {
+        this.r1 = engine.r1;
+        this.r2 = engine.r2;
+        this.r3 = engine.r3;
+        this.r4 = engine.r4;
+        this.r5 = engine.r5;
+        this.r6 = engine.r6;
+        this.r7 = engine.r7;
+        this.r8 = engine.r8;
+        this.r9 = engine.r9;
+        this.r10 = engine.r10;
       }
 
       void restore(Prolog engine) {
-        System.arraycopy(aregs, 0, engine.aregs, 0, aregs.length);
-        super.restore(engine);
+        engine.cont = this.cont;
+        engine.r1 = this.r1;
+        engine.r2 = this.r2;
+        engine.r3 = this.r3;
+        engine.r4 = this.r4;
+        engine.r5 = this.r5;
+        engine.r6 = this.r6;
+        engine.r7 = this.r7;
+        engine.r8 = this.r8;
+        engine.r9 = this.r9;
+        engine.r10 = this.r10;
       }
     }
 }

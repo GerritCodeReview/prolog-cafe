@@ -1,6 +1,7 @@
 package com.googlecode.prolog_cafe.builtin;
 import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
+import com.googlecode.prolog_cafe.lang.ChoicePointFrame;
 import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Operation;
@@ -56,16 +57,16 @@ public class PRED_regex_match_3 extends Predicate.P3 {
         return engine.fail();
       }
 
-      engine.areg1 = new JavaObjectTerm(matcher);
-      engine.areg2 = arg3;
-      return engine.jtry2(regex_check, regex_next);
+      engine.r1 = new JavaObjectTerm(matcher);
+      engine.r2 = arg3;
+      return engine.jtry(regex_check, regex_next, new ChoicePointFrame.S2(engine));
   }
 
   private static final class PRED_regex_check extends Operation {
     @Override
     public Operation exec(Prolog engine) {
-      Term a1 = engine.areg1;
-      Term result = engine.areg2;
+      Term a1 = engine.r1;
+      Term result = engine.r2;
       Matcher matcher = (Matcher)((JavaObjectTerm)a1).object();
 
       Term matches = getMatches(matcher);
@@ -87,13 +88,13 @@ public class PRED_regex_match_3 extends Predicate.P3 {
   private static final class PRED_regex_empty extends Operation {
     @Override
     public Operation exec(Prolog engine) {
-      Term a1 = engine.areg1;
+      Term a1 = engine.r1;
       Matcher matcher = (Matcher)((JavaObjectTerm)a1).object();
       if (!matcher.find()) {
         return engine.fail();
       }
 
-      return engine.jtry2(regex_check, regex_next);
+      return engine.jtry(regex_check, regex_next, new ChoicePointFrame.S2(engine));
     }
   }
 
