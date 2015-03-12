@@ -250,6 +250,7 @@ pl2am_postread :-
 	assert_import('com.googlecode.prolog_cafe.builtin'),
 	assert_import('com.googlecode.prolog_cafe.exceptions'),
 	assert_import('com.googlecode.prolog_cafe.lang'),
+	assert_import('com.googlecode.prolog_cafe.lang.ChoicePointFrame'),
 	assert_dummy_package,
 	assert_dummy_public.
 
@@ -548,7 +549,7 @@ compile_pred(Clauses, FA) -->
 	%
 	[FA: []],
 	{FA = Functor/Arity},
-	set_arguments(1, Arity, arg, ea, set), % set arg(N) to engine.areg(N)
+	set_arguments(1, Arity, arg, ea, set), % set arg(N) to engine.r(N)
 	[set(cont, econt)], % set cont to engine.cont
 	[OPT2],
 	[OPT3],
@@ -576,7 +577,7 @@ compile_pred2([Clause|Clauses], FA, N, GTI0, GTI) -->
 	[DeclLocalVars],    % generates the declarations of local variables
 	[decl_pred_vars([cont])],
 	{FA = _/Arity},
-	set_arguments(1, Arity, ea, a, set), % set engine.areg(N) to a(N).
+	set_arguments(1, Arity, ea, a, set), % set engine.r(N) to a(N).
 	[set(econt, cont)], % set engine.cont to cont
 	compile_clause(Clause, GTI0, GTI1, LTI),
 	{N1 is N + 1},

@@ -58,8 +58,6 @@ public abstract class PrologControl {
       return InternalDatabase.DEFAULT_SIZE;
     }
     public void setMaxDatabaseSize(int size) {
-      if (engine.aregs != null)
-        throw new IllegalStateException("Prolog already initialized");
       if (engine.internalDB != null)
         engine.internalDB.maxContents = size;
       else
@@ -72,18 +70,7 @@ public abstract class PrologControl {
       return engine.pcl;
     }
     public void setPrologClassLoader(PrologClassLoader cl) {
-      if (engine.aregs != null)
-        throw new IllegalStateException("Prolog already initialized");
       engine.pcl = cl;
-    }
-
-    public int getMaxArity() { return engine.getMaxArity(); }
-    public void setMaxArity(int max) {
-      if (max < 8)
-        throw new IllegalStateException("invalid arity " + max);
-      if (engine.aregs != null)
-        throw new IllegalStateException("Prolog already initialized");
-      engine.maxArity = max;
     }
 
     /** Sets a goal and its arguments to this Prolog thread. 

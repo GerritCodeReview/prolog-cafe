@@ -20,18 +20,16 @@ import java.util.Map;
  *
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
- * @version 1.2
-*/
+ */
 public final class Prolog {
+    public static final int MAX_ARITY = 10;
     private static final SymbolTerm NONE = SymbolTerm.intern("$none");
 
     /** Prolog thread */
     public PrologControl control;
 
     /** Argument registers */
-    public Term areg1, areg2, areg3, areg4, areg5, areg6, areg7, areg8;
-    public Term[] aregs;
-    private static final Term[] NO_REGISTERS = {};
+    public Term r1, r2, r3, r4, r5, r6, r7, r8, r9, r10;
 
     /** Continuation goal register */
     public Operation cont;
@@ -60,8 +58,6 @@ public final class Prolog {
 
     /** Prolog implementation flag: <code>debug</code>. */
     protected String debug;
-    /** Prolog implementation flag: <code>max_arity</code>. */
-    protected int maxArity = 255;
 
     /** Holds an exception term for <code>catch/3</code> and <code>throw/1</code>. */
     protected Term exception;
@@ -129,28 +125,21 @@ public final class Prolog {
      * </ul>
      */
   private void initOnce() {
-    if (8 < maxArity)
-      aregs = new Term[maxArity - 8];
-    else
-      aregs = NO_REGISTERS;
-
     if (pcl == null) pcl = new PrologClassLoader();
     if (internalDB == null) internalDB = new InternalDatabase();
-
-    streamManager = new HashtableOfTerm();
+    if (streamManager == null) streamManager = new HashtableOfTerm();
   }
 
     /** Initializes this Prolog engine. */
     public void init() { 
-	if (aregs == null)
-	  initOnce();
+	initOnce();
 	stack.init();
 	trail.init();
 	B0 = stack.top();
 	CPFTimeStamp = Long.MIN_VALUE;
 
 	// Creates an initial choice point frame.
-	ChoicePointFrame initialFrame = ChoicePointFrame.S0(null);
+	ChoicePointFrame initialFrame = new ChoicePointFrame.S0();
 	initialFrame.b0 = B0;
 	initialFrame.bp = Failure.FAILURE;
 	initialFrame.tr = trail.top();
@@ -207,7 +196,7 @@ public final class Prolog {
      * <code>var</code>, <code>Int</code>, <code>flo</code>, 
      * <code>con</code>, <code>str</code>, or <code>lis</code>, 
      * depending on whether the dereferenced value of argument 
-     * register <code>areg[1]</code> is a
+     * register <code>r1</code> is a
      * variable, integer, float,
      * atom, compound term, or non-empty list, respectively.
      */
@@ -217,7 +206,7 @@ public final class Prolog {
 				    Operation con, 
 				    Operation str, 
 				    Operation lis) {
-	Term arg1 = areg1.dereference();
+	Term arg1 = r1.dereference();
 	if (arg1.isVariable())
 	    return var;
 	if (arg1.isInteger())
@@ -234,7 +223,7 @@ public final class Prolog {
     }
 
     /**
-     * If the dereferenced value of arugment register <code>areg[1]</code>
+     * If the dereferenced value of argument register <code>r[1]</code>
      * is an integer, float, atom, or compound term (except for non-empty list),
      * this returns the <code>Predicate</code> object to which its key is mapped
      * in hashtable <code>hash</code>.
@@ -247,11 +236,11 @@ public final class Prolog {
      *   <li>compound term - functor/arity
      * </ul>
      *
-     * If there is no mapping for the key of <code>areg[1]</code>, 
+     * If there is no mapping for the key of <code>r[1]</code>,
      * this returns <code>otherwise</code>.
      */
     public Operation switch_on_hash(HashMap<Term,Operation> hash, Operation otherwise) {
-	Term arg1 = areg1.dereference();
+	Term arg1 = r1.dereference();
 	Term key;
 	if (arg1.isInteger() || arg1.isDouble() || arg1.isSymbol()) {
 	    key = arg1;
@@ -273,20 +262,8 @@ public final class Prolog {
     }
 
     /** Creates a new choice point frame. */
-    public Operation jtry0(Operation p, Operation next) { return finishjtry(p, next, ChoicePointFrame.S0(cont)); }
-    public Operation jtry1(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S1(this)); }
-    public Operation jtry2(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S2(this)); }
-    public Operation jtry3(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S3(this)); }
-    public Operation jtry4(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S4(this)); }
-    public Operation jtry5(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S5(this)); }
-    public Operation jtry6(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S6(this)); }
-    public Operation jtry7(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S7(this)); }
-    public Operation jtry8(Operation p, Operation next) { return finishjtry(p, next, new ChoicePointFrame.S8(this)); }
-    public Operation jtry(int arity, Operation p, Operation next) {
-	return finishjtry(p, next, new ChoicePointFrame.S9(arity, this));
-    }
-
-    private Operation finishjtry(Operation p, Operation next, ChoicePointFrame entry) {
+    public Operation jtry(Operation p, Operation next, ChoicePointFrame entry) {
+      entry.cont = cont;
       entry.b0 = B0;
       entry.bp = next;
       entry.tr = trail.top();
@@ -326,9 +303,6 @@ public final class Prolog {
     public String getDebug() { return debug; }
     /** Sets the value of Prolog implementation flag: <code>debug</code>. */
     public void setDebug(String mode) { debug = mode;}
-
-    /** Returns the value of Prolog implementation flag: <code>max_arity</code>. */
-    public int getMaxArity() { return maxArity; }
 
     /** Returns the value of <code>exception</code>. This is used in <code>catch/3</code>. */
     public Term getException() { return exception; }

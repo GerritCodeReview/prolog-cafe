@@ -28,7 +28,7 @@ class PRED_$get_prolog_impl_flag_2 extends Predicate.P2 {
 	    if (! a2.unify(SymbolTerm.intern(engine.getDebug()), engine.trail))
 		return engine.fail();
 	} else if (a1.equals(MAX_ARITY)) {
-	    if (! a2.unify(new IntegerTerm(engine.getMaxArity()), engine.trail))
+	    if (! a2.unify(new IntegerTerm(Prolog.MAX_ARITY), engine.trail))
 		return engine.fail();
 	} else {
 	    return engine.fail();
