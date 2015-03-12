@@ -1,10 +1,18 @@
 package com.googlecode.prolog_cafe.lang;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
+import java.util.Set;
+
 import com.googlecode.prolog_cafe.exceptions.HaltException;
 import com.googlecode.prolog_cafe.exceptions.PrologException;
 import com.googlecode.prolog_cafe.exceptions.ReductionLimitException;
-
-import java.util.Set;
 
 /**
  * Tracks current evaluation goal and results.
@@ -88,6 +96,31 @@ public abstract class PrologControl {
       if (engine.aregs != null)
         throw new IllegalStateException("Prolog already initialized");
       engine.maxArity = max;
+    }
+
+    /** Registers {@code user_input}, {@code user_output}, and {@code user_error} streams. */
+    public void configureUserIO(InputStream in, OutputStream out, OutputStream err) {
+		if (in != null) {
+			engine.streamManager.put(
+				SymbolTerm.intern("user_input"),
+				new JavaObjectTerm(new PushbackReader(new BufferedReader(
+					new InputStreamReader(in)),
+					Prolog.PUSHBACK_SIZE)));
+		}
+		if (out != null) {
+			engine.streamManager.put(
+				SymbolTerm.intern("user_output"),
+				new JavaObjectTerm(new PrintWriter(
+					new BufferedWriter(new OutputStreamWriter(out)),
+					true)));
+		}
+		if (err != null) {
+			engine.streamManager.put(
+				SymbolTerm.intern("user_error"),
+				new JavaObjectTerm(new PrintWriter(
+					new BufferedWriter(new OutputStreamWriter(err)),
+					true)));
+		}
     }
 
     /** Sets a goal and its arguments to this Prolog thread. 
