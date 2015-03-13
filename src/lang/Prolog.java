@@ -262,8 +262,8 @@ public final class Prolog {
     public Operation jtry6(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S6(this)); }
     public Operation jtry7(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S7(this)); }
     public Operation jtry8(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
-    public Operation jtry9(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
-    public Operation jtry10(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S8(this)); }
+    public Operation jtry9(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S9(this)); }
+    public Operation jtry10(Operation p, Operation next) { return jtry(p, next, new ChoicePointFrame.S10(this)); }
 
     /** Creates a new choice point frame. */
     private Operation jtry(Operation p, Operation next, ChoicePointFrame entry) {
