@@ -182,7 +182,7 @@ public abstract class SymbolTerm extends Term {
     /* Term */
     public boolean unify(Term t, Trail trail) {
       t = t.dereference();
-      if (t.isVariable()) {
+      if (t instanceof VariableTerm) {
         ((VariableTerm) t).bind(this, trail);
         return true;
       }
@@ -241,9 +241,9 @@ public abstract class SymbolTerm extends Term {
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
-	if (anotherTerm.isVariable() || anotherTerm.isNumber())
+	if (anotherTerm instanceof VariableTerm || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)))
 	    return AFTER;
-	if (! anotherTerm.isSymbol())
+	if (! (anotherTerm instanceof SymbolTerm))
 	    return BEFORE;
 	if (this == anotherTerm)
 	    return EQUAL;

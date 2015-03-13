@@ -78,11 +78,11 @@ public class ListTerm extends Term {
     /* Term */
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
-	if (t.isVariable()) {
+	if (t instanceof VariableTerm) {
 	    ((VariableTerm) t).bind(this, trail);
 	    return true;
 	}
-	if (! t.isList())
+	if (! (t instanceof ListTerm))
 	    return false;
 	return car.unify(((ListTerm)t).car(), trail) 
 	    && cdr.unify(((ListTerm)t).cdr(), trail);
@@ -114,11 +114,11 @@ public class ListTerm extends Term {
     public Term arg(int nth) {
       Term t = this;
       int old_nth = nth;
-      while (t.isList() && 0 < nth) {
+      while (t instanceof ListTerm && 0 < nth) {
         nth--;
         t = ((ListTerm)t).cdr.dereference();
       }
-      if (t.isList())
+      if (t instanceof ListTerm)
         return ((ListTerm)t).car;
       throw new ArrayIndexOutOfBoundsException(old_nth);
     }
@@ -127,7 +127,7 @@ public class ListTerm extends Term {
     public int length() {
 	int count = 0;
 	Term t = this;
-	while(t.isList()) {
+	while(t instanceof ListTerm) {
 	    count++;
 	    t = ((ListTerm)t).cdr().dereference();
 	}
@@ -143,7 +143,7 @@ public class ListTerm extends Term {
     public List toJava() { 
 	List<Object> vec = new ArrayList<Object>();
 	Term t = this;
-	while(t.isList()) {
+	while(t instanceof ListTerm) {
 	    vec.add(((ListTerm)t).car().dereference().toJava());
 	    t = ((ListTerm)t).cdr().dereference();  
 	}
@@ -156,11 +156,11 @@ public class ListTerm extends Term {
 	for (;;) {
 	    s += ((ListTerm)x).car.dereference().toQuotedString();
 	    x  = ((ListTerm)x).cdr.dereference();
-	    if (! x.isList())
+	    if (! (x instanceof ListTerm))
 		break;
 	    s += ",";
 	}
-	if (! x.isNil())
+	if (! Prolog.Nil.equals(x))
 	    s += "|" + x.toQuotedString();
 	s += "]";
 	return s;
@@ -199,11 +199,11 @@ public class ListTerm extends Term {
 	for (;;) {
 	    s += ((ListTerm)x).car.dereference().toString();
 	    x  = ((ListTerm)x).cdr.dereference();
-	    if (! x.isList())
+	    if (! (x instanceof ListTerm))
 		break;
 	    s += ",";
 	}
-	if (! x.isNil())
+	if (! Prolog.Nil.equals(x))
 	    s += "|" + x.toString();
 	s += "]";
 	return s;
@@ -220,9 +220,9 @@ public class ListTerm extends Term {
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
-	if (anotherTerm.isVariable() || anotherTerm.isNumber() || anotherTerm.isSymbol())
+	if (anotherTerm instanceof VariableTerm || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)) || anotherTerm instanceof SymbolTerm)
 	    return AFTER;
-	if (anotherTerm.isStructure()) {
+	if (anotherTerm instanceof StructureTerm) {
 	    int arity = ((StructureTerm)anotherTerm).arity();
 	    if (2 != arity)
 		return (2 - arity);
@@ -231,10 +231,10 @@ public class ListTerm extends Term {
 		return SYM_DOT.compareTo(functor);
 	}
 	Term[] args = new Term[2];
-	if (anotherTerm.isList()) {
+	if (anotherTerm instanceof ListTerm) {
 	    args[0] = ((ListTerm)anotherTerm).car();
 	    args[1] = ((ListTerm)anotherTerm).cdr();
-	} else if (anotherTerm.isStructure()) {
+	} else if (anotherTerm instanceof StructureTerm) {
 	    args = ((StructureTerm)anotherTerm).args();
 	} else {
 	    return BEFORE;

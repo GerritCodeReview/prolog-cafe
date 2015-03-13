@@ -336,7 +336,7 @@ write_java0(get_int(N,Xi,Xj), In, Out) :- !,
 	write_java0(deref(Xj,Xj), In, Out),
 	% read mode
 	tab(Out, 8), 
-	write(Out, 'if ('), write_reg(Xj, Out), write(Out, '.isInteger()){'), nl(Out),
+	write(Out, 'if ('), write_reg(Xj, Out), write(Out, ' instanceof IntegerTerm){'), nl(Out),
 	tab(Out, 12), 
 	write(Out, 'if (((IntegerTerm) '), write_reg(Xj, Out), write(Out, ').intValue() != '),
 	write(Out, N), write(Out, ')'), nl(Out),
@@ -344,7 +344,7 @@ write_java0(get_int(N,Xi,Xj), In, Out) :- !,
  	write(Out, 'return engine.fail();'), nl(Out),
 	% write mode
 	tab(Out, 8),
-	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, '.isVariable()){'), nl(Out),
+	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, ' instanceof VariableTerm){'), nl(Out),
 	tab(Out, 12),
 	write(Out, '((VariableTerm) '), write_reg(Xj, Out), write(Out, ').bind('),
 	write_reg(Xi, Out), write(Out, ', engine.trail);'), nl(Out),
@@ -361,7 +361,7 @@ write_java0(get_float(N,Xi,Xj), In, Out) :- !,
 	write_java0(deref(Xj,Xj), In, Out),
 	% read mode
 	tab(Out, 8), 
-	write(Out, 'if ('), write_reg(Xj, Out), write(Out, '.isDouble()){'), nl(Out),
+	write(Out, 'if ('), write_reg(Xj, Out), write(Out, ' instanceof DoubleTerm)){'), nl(Out),
 	tab(Out, 12), 
 	write(Out, 'if (((DoubleTerm) '), write_reg(Xj, Out), write(Out, ').doubleValue() != '),
 	write(Out, N), write(Out, ')'), nl(Out),
@@ -369,7 +369,7 @@ write_java0(get_float(N,Xi,Xj), In, Out) :- !,
  	write(Out, 'return engine.fail();'), nl(Out),
 	% write mode
 	tab(Out, 8),
-	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, '.isVariable()){'), nl(Out),
+	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, ' instanceof VariableTerm){'), nl(Out),
 	tab(Out, 12),
 	write(Out, '((VariableTerm) '), write_reg(Xj, Out), write(Out, ').bind('),
 	write_reg(Xi, Out), write(Out, ', engine.trail);'), nl(Out),
@@ -386,7 +386,7 @@ write_java0(get_con(_,Xi,Xj), In, Out) :- !,
 	write_java0(deref(Xj,Xj), In, Out),
 	% read mode
 	tab(Out, 8), 
-	write(Out, 'if ('), write_reg(Xj, Out), write(Out, '.isSymbol()){'), nl(Out),
+	write(Out, 'if ('), write_reg(Xj, Out), write(Out, ' instanceof SymbolTerm){'), nl(Out),
 	tab(Out, 12), 
 	write(Out, 'if (! '), 
 	write_reg(Xj, Out), write(Out, '.equals('), write_reg(Xi, Out), 
@@ -395,7 +395,7 @@ write_java0(get_con(_,Xi,Xj), In, Out) :- !,
  	write(Out, 'return engine.fail();'), nl(Out),
 	% write mode
 	tab(Out, 8),
-	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, '.isVariable()){'), nl(Out),
+	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, ' instanceof VariableTerm){'), nl(Out),
 	tab(Out, 12),
 	write(Out, '((VariableTerm) '), write_reg(Xj, Out), write(Out, ').bind('),
 	write_reg(Xi, Out), write(Out, ', engine.trail);'), nl(Out),
@@ -413,7 +413,7 @@ write_java0(get_list(X), In, Out) :- !,
 	read_instructions(2, In, Us),
 	% read mode
 	tab(Out, 8), 
-	write(Out, 'if ('), write_reg(X, Out), write(Out, '.isList()){'), nl(Out),
+	write(Out, 'if ('), write_reg(X, Out), write(Out, ' instanceof ListTerm){'), nl(Out),
 	tab(Out, 12), 
 	write(Out, 'Term[] args = {((ListTerm)'), 
 	write_reg(X, Out), write(Out, ').car(), ((ListTerm)'),
@@ -421,7 +421,7 @@ write_java0(get_list(X), In, Out) :- !,
 	write_unify_read(Us, 0, Out),
 	% write mode
 	tab(Out, 8),
-	write(Out, '} else if ('), write_reg(X, Out), write(Out, '.isVariable()){'), nl(Out),
+	write(Out, '} else if ('), write_reg(X, Out), write(Out, ' instanceof VariableTerm){'), nl(Out),
 	write_unify_write(Us, Rs, Out),
 	tab(Out, 12),
 	write(Out, '((VariableTerm) '), write_reg(X, Out), write(Out, ').bind(new ListTerm('),
@@ -438,7 +438,7 @@ write_java0(get_str(_F/A,Xi,Xj), In, Out) :- !,
 	read_instructions(A, In, Us),
 	% read mode
 	tab(Out, 8), 
-	write(Out, 'if ('), write_reg(Xj, Out), write(Out, '.isStructure()){'), nl(Out), %??? == F
+	write(Out, 'if ('), write_reg(Xj, Out), write(Out, ' instanceof StructureTerm){'), nl(Out), %??? == F
 	tab(Out, 12),
 	write(Out, 'if (! '), write_reg(Xi, Out),
 	write(Out, '.equals(((StructureTerm)'), write_reg(Xj, Out),
@@ -451,7 +451,7 @@ write_java0(get_str(_F/A,Xi,Xj), In, Out) :- !,
 	write_unify_read(Us, 0, Out),
 	% write mode
 	tab(Out, 8),
-	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, '.isVariable()){'), nl(Out),
+	write(Out, '} else if ('), write_reg(Xj, Out), write(Out, ' instanceof VariableTerm){'), nl(Out),
 	write_unify_write(Us, Rs, Out),
 	tab(Out, 12),
 	write(Out, 'Term[] args = {'), write_reg_args(Rs, Out), write(Out, '};'), nl(Out),
@@ -692,33 +692,39 @@ write_inline0('$neck_cut', _, Out)     :- !,
 write_inline0('$cut'(X), _, Out)       :- !,
 	write_deref_args([X], Out),
 	tab(Out, 8),
-	write(Out, 'if (! '), write_reg(X, Out), write(Out, '.isInteger()) {'), nl(Out),
-	tab(Out, 12),
-	write(Out, 'throw new IllegalTypeException("integer", '), 
-	write_reg(X, Out), write(Out, ');'), nl(Out),
-	tab(Out, 8),
-	write(Out, '} else {'), nl(Out),
+	write(Out, 'if ('), write_reg(X, Out), write(Out, ' instanceof IntegerTerm) {'), nl(Out),
 	tab(Out, 12),
 	write(Out, 'engine.cut(((IntegerTerm) '), write_reg(X, Out), 
 	write(Out, ').intValue());'), nl(Out),
+	tab(Out, 8),
+	write(Out, '} else {'), nl(Out),
+	tab(Out, 12),
+	write(Out, 'throw new IllegalTypeException("integer", '), 
+	write_reg(X, Out), write(Out, ');'), nl(Out),
 	tab(Out, 8),
 	write(Out, '}'), nl(Out).
 % Term unification
 write_inline0('$unify'(X,Y), _, Out)         :- !, write_if_fail(op('!', unify(X,Y)), [], 8, Out).
 write_inline0('$not_unifiable'(X,Y), _, Out) :- !, write_if_fail(unify(X,Y), [], 8, Out).
 % Type testing
-write_inline0(var(X), _, Out)     :- !, write_if_fail(op('!', @('isVariable'(X))), [X], 8, Out).
-write_inline0(atom(X), _, Out)    :- !, write_if_fail(op('!', @('isSymbol'(X))), [X], 8, Out).
-write_inline0(integer(X), _, Out) :- !, write_if_fail(op('!', @('isInteger'(X))), [X], 8, Out).
-write_inline0(float(X), _, Out)   :- !, write_if_fail(op('!', @('isDouble'(X))), [X], 8, Out).
-write_inline0(nonvar(X), _, Out)  :- !, write_if_fail(@('isVariable'(X)), [X], 8, Out).
-write_inline0(number(X), _, Out)  :- !, write_if_fail(op('!', @('isNumber'(X))), [X], 8, Out).
-write_inline0(java(X), _, Out)    :- !, write_if_fail(op('!', @('isJavaObject'(X))), [X], 8, Out).
-write_inline0(closure(X), _, Out) :- !, write_if_fail(op('!', @('isClosure'(X))), [X], 8, Out).
+write_inline0(var(X), _, Out)     :- !, write_if_fail(op('!', instanceof(X, 'VariableTerm')), [X], 8, Out).
+write_inline0(atom(X), _, Out)    :- !, write_if_fail(op('!', instanceof(X, 'SymbolTerm')), [X], 8, Out).
+write_inline0(integer(X), _, Out) :- !, write_if_fail(op('!', instanceof(X, 'IntegerTerm')), [X], 8, Out).
+write_inline0(float(X), _, Out)   :- !, write_if_fail(op('!', instanceof(X, 'DoubleTerm')), [X], 8, Out).
+write_inline0(nonvar(X), _, Out)  :- !, write_if_fail(instanceof(X, 'VariableTerm'), [X], 8, Out).
+write_inline0(number(X), _, Out)  :- !,
+	NI = op('!', instanceof(X, 'IntegerTerm')),
+	ND = op('!', instanceof(X, 'DoubleTerm')),
+	write_if_fail(op('&&', NI, ND) , [X], 8, Out).
+write_inline0(java(X), _, Out)    :- !, write_if_fail(op('!', instanceof(X, 'JavaObjectTerm')), [X], 8, Out).
+write_inline0(closure(X), _, Out) :- !, write_if_fail(op('!', instanceof(X, 'ClosureTerm')), [X], 8, Out).
 write_inline0(atomic(X), _, Out) :- !, 
-	write_if_fail(op('&&',op('!',@('isSymbol'(X))), op('!',@('isNumber'(X)))), [X], 8, Out).
+	NS = op('!', instanceof(X, 'SymbolTerm')),
+	NI = op('!', instanceof(X, 'IntegerTerm')),
+	ND = op('!', instanceof(X, 'DoubleTerm')),
+	write_if_fail(op('&&', NS, op('&&', NI, ND)) , [X], 8, Out).
 write_inline0(java(X,Y), _, Out) :- !, 
-	write_if_fail(op('!', @('isJavaObject'(X))), [X], 8, Out),
+	write_if_fail(op('!', instanceof(X, 'JavaObjectTerm')), [X], 8, Out),
 	EXP = #('SymbolTerm.create'(@(getName(@(getClass(@(object(cast('JavaObjectTerm',X))))))))),
 	write_if_fail(op('!', unify(Y,EXP)), [], 8, Out).
 write_inline0(ground(X), _, Out) :- !, write_if_fail(op('!', @('isGround'(X))), [X], 8, Out).
@@ -895,6 +901,12 @@ write_inline_exp(op(Op, Exp1, Exp2), Tab, Out) :- !,
 	write(Out, Op),
 	write(Out, ' '), 
 	write_inline_exp(Exp2, 0, Out).
+write_inline_exp(instanceof(Exp,Class), Tab, Out) :- !,
+	tab(Out, Tab),
+	write(Out, '('),
+	write_inline_exp(Exp, 0, Out),
+	write(Out, ' instanceof '), write(Out, Class),
+	write(Out, ')').
 write_inline_exp(cast(Class,Exp), Tab, Out) :- !,
 	tab(Out, Tab), 
 	write(Out, '(('), write(Out, Class), write(Out, ') '), 

@@ -90,7 +90,7 @@ public final class Prolog {
       IO,
 
       /** Track the running time of evaluations */
-      STATISTICS_RUNTIME;
+      STATISTICS;
     }
     protected final EnumSet<Feature> features = EnumSet.noneOf(Feature.class);
 
@@ -149,7 +149,7 @@ public final class Prolog {
 	halt = 0;
 	debug = "off";
 	exception = NONE;
-	startRuntime = features.contains(Feature.STATISTICS_RUNTIME)
+	startRuntime = features.contains(Feature.STATISTICS)
 	    ? System.currentTimeMillis()
 	    : 0;
 	previousRuntime = 0;
@@ -207,17 +207,17 @@ public final class Prolog {
 				    Operation str, 
 				    Operation lis) {
 	Term arg1 = r1.dereference();
-	if (arg1.isVariable())
+	if (arg1 instanceof VariableTerm)
 	    return var;
-	if (arg1.isInteger())
+	if (arg1 instanceof IntegerTerm)
 	    return Int;
-	if (arg1.isDouble())
+	if (arg1 instanceof DoubleTerm)
 	    return flo;
-	if (arg1.isSymbol())
+	if (arg1 instanceof SymbolTerm)
 	    return con;
-	if (arg1.isStructure())
+	if (arg1 instanceof StructureTerm)
 	    return str;
-	if (arg1.isList())
+	if (arg1 instanceof ListTerm)
 	    return lis;
 	return var;
     }
@@ -242,9 +242,9 @@ public final class Prolog {
     public Operation switch_on_hash(HashMap<Term,Operation> hash, Operation otherwise) {
 	Term arg1 = r1.dereference();
 	Term key;
-	if (arg1.isInteger() || arg1.isDouble() || arg1.isSymbol()) {
+	if (arg1 instanceof IntegerTerm || arg1 instanceof DoubleTerm || arg1 instanceof SymbolTerm) {
 	    key = arg1;
-	} else if (arg1.isStructure()) {
+	} else if (arg1 instanceof StructureTerm) {
 	    key = ((StructureTerm) arg1).functor();
 	} else {
 	    throw new SystemException("Invalid argument in switch_on_hash");

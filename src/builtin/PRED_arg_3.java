@@ -28,20 +28,20 @@ public class PRED_arg_3 extends Predicate.P3 {
 	int arity, argNo;
 
 	a1 = a1.dereference();
-	if(a1.isVariable())
+	if(a1 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 1);
-	else if(! a1.isInteger())
+	else if(! (a1 instanceof IntegerTerm))
 	    throw new IllegalTypeException(this, 1, "integer", a1);
 	a2 = a2.dereference();
-	if (a2.isList()) {
+	if (a2 instanceof ListTerm) {
 	    args = new Term[2];
 	    args[0] = ((ListTerm)a2).car();
 	    args[1] = ((ListTerm)a2).cdr();
 	    arity = 2;
-	} else if (a2.isStructure()) {
+	} else if (a2 instanceof StructureTerm) {
 	    args =  ((StructureTerm)a2).args();
 	    arity = ((StructureTerm)a2).arity();
-	} else if (a2.isVariable()) {
+	} else if (a2 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 2);
 	} else {
 	    throw new IllegalTypeException(this, 2, "compound", a2);

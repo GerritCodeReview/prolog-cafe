@@ -35,9 +35,9 @@ public class DoubleTerm extends NumberTerm {
 
     /* Term */
     public boolean unify(Term t, Trail trail) {
-	if (t.isVariable())
+	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);
-	if (! t.isDouble())
+	if (! (t instanceof DoubleTerm))
 	    return false;
 	return this.val == ((DoubleTerm)t).value();
     }
@@ -94,9 +94,9 @@ public class DoubleTerm extends NumberTerm {
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced
-	if (anotherTerm.isVariable())
+	if (anotherTerm instanceof VariableTerm)
 	    return AFTER;
-	if (! anotherTerm.isDouble())
+	if (! (anotherTerm instanceof DoubleTerm))
 	    return BEFORE;
 	return Double.compare(this.val, ((DoubleTerm)anotherTerm).value());
     }

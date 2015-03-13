@@ -27,20 +27,20 @@ public class PRED_sort_2 extends Predicate.P2 {
 	Term[] list;
 
 	a1 = a1.dereference();
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
 	} else if (a1.equals(Prolog.Nil)) {
 	    if (! a2.unify(Prolog.Nil, engine.trail))
 		return engine.fail();
 	    return cont;
-	} else if (! a1.isList()) {
+	} else if (! (a1 instanceof ListTerm)) {
 	    throw new IllegalTypeException(this, 1, "list", a1);
 	}
 	len = ((ListTerm)a1).length();
 	list = new Term[len];
 	tmp = a1;
 	for (int i=0; i<len; i++) {
-	    if (! tmp.isList())
+	    if (! (tmp instanceof ListTerm))
 		throw new IllegalTypeException(this, 1, "list", a1);
 	    list[i] = ((ListTerm)tmp).car().dereference();
 	    tmp = ((ListTerm)tmp).cdr().dereference();

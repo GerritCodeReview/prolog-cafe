@@ -9,6 +9,7 @@ import com.googlecode.prolog_cafe.lang.Predicate;
 import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.VariableTerm;
 
 import java.io.File;
 
@@ -25,8 +26,8 @@ public class PRED_make_directory_1 extends Predicate.P1 {
     engine.setB0();
 
     Term a1 = arg1.dereference();
-    if (a1.isVariable()) throw new PInstantiationException(this, 1);
-    if (!a1.isSymbol()) throw new IllegalDomainException(this, 1, "dir", a1);
+    if (a1 instanceof VariableTerm) throw new PInstantiationException(this, 1);
+    if (!(a1 instanceof SymbolTerm)) throw new IllegalDomainException(this, 1, "dir", a1);
 
     File file = new File(((SymbolTerm) a1).name());
     if (file.mkdir())

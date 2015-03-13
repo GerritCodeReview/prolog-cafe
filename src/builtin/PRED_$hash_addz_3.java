@@ -31,13 +31,13 @@ class PRED_$hash_addz_3 extends Predicate.P3 {
 	Object hash = null;
 
 	a1 = a1.dereference();
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.isSymbol()) {
+	} else if (a1 instanceof SymbolTerm) {
 	    if (! engine.getHashManager().containsKey(a1))
 		throw new ExistenceException(this, 1, "hash", a1, "");
 	    hash = ((JavaObjectTerm) engine.getHashManager().get(a1)).object();
-	} else if (a1.isJavaObject()) {
+	} else if (a1 instanceof JavaObjectTerm) {
 	    hash = ((JavaObjectTerm) a1).object();
 	} else {
 	    throw new IllegalDomainException(this, 1, "hash_or_alias", a1);
@@ -49,16 +49,16 @@ class PRED_$hash_addz_3 extends Predicate.P3 {
 	if (elem == null)
 	    elem = SYM_NIL;
 	a3 = a3.dereference();
-	if (elem.isNil()) {
+	if (Prolog.Nil.equals(elem)) {
 	    elem = new ListTerm(a3, elem);
 	} else {
 	    Term x = elem;
 	    Term y;
 	    while(true) {
-		if (! x.isList())
+		if (! (x instanceof ListTerm))
 		    throw new InternalException(this + ": the valus of " + a2 + " is not list structure");
 		y = ((ListTerm)x).cdr().dereference();
-		if (y.isNil()) {
+		if (Prolog.Nil.equals(y)) {
 		    ((ListTerm)x).setCdr(new ListTerm(a3, SYM_NIL));
 		    break;
 		}

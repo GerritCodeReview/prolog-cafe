@@ -26,7 +26,7 @@ public class PRED_atom_concat_3 extends Predicate.P3 {
         a3 = arg3;
 
 	a3 = a3.dereference();
-	if (a3.isSymbol()) {
+	if (a3 instanceof SymbolTerm) {
 	    String str3 = ((SymbolTerm)a3).name();
 	    int endIndex = str3.length();
 	    Term t = Prolog.Nil;
@@ -36,19 +36,19 @@ public class PRED_atom_concat_3 extends Predicate.P3 {
 		t = new ListTerm(new StructureTerm(AC_2, args), t);
 	    }
 	    return new PRED_$member_in_reverse_2(new StructureTerm(AC_2, a1, a2), t, cont);
-	} else if (! a3.isVariable()) {
+	} else if (! (a3 instanceof VariableTerm)) {
 	    throw new IllegalTypeException(this, 3, "atom", a3);
 	}
 	// a3 is a variable
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a1.isVariable())
+	if (a1 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 1);
-	if (a2.isVariable())
+	if (a2 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 2);
-	if (! a1.isSymbol())
+	if (! (a1 instanceof SymbolTerm))
 	    throw new IllegalTypeException(this, 1, "integer", a1);
-	if (! a2.isSymbol())
+	if (! (a2 instanceof SymbolTerm))
 	    throw new IllegalTypeException(this, 2, "integer", a2);
 	String str3 = ((SymbolTerm) a1).name().concat(((SymbolTerm) a2).name());
 	if (! a3.unify(SymbolTerm.create(str3), engine.trail))

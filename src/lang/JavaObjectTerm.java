@@ -39,9 +39,9 @@ public class JavaObjectTerm extends Term {
 
     /* Term */
     public boolean unify(Term t, Trail trail) {
-	if (t.isVariable())
+	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);
-	if (! t.isJavaObject())
+	if (! (t instanceof JavaObjectTerm))
 	    return false;
 	return obj.equals(((JavaObjectTerm)t).obj);
     }
@@ -101,13 +101,13 @@ public class JavaObjectTerm extends Term {
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
-	if (anotherTerm.isVariable() 
-	    || anotherTerm.isNumber() 
-	    || anotherTerm.isSymbol()
-	    || anotherTerm.isList()
-	    || anotherTerm.isStructure())
+	if (anotherTerm instanceof VariableTerm 
+	    || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)) 
+	    || anotherTerm instanceof SymbolTerm
+	    || anotherTerm instanceof ListTerm
+	    || anotherTerm instanceof StructureTerm)
 	    return AFTER;
-	if (! anotherTerm.isJavaObject())
+	if (! (anotherTerm instanceof JavaObjectTerm))
 	    return BEFORE;
 	if (obj.equals(((JavaObjectTerm) anotherTerm).obj))
 	    return EQUAL;

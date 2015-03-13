@@ -21,9 +21,9 @@ public class ClosureTerm extends Term {
     /* Term */
     public boolean unify(Term t, Trail trail) {
 	//	t = t.dereference();
-	if (t.isVariable())
+	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);
-	if (! t.isClosure())
+	if (! (t instanceof ClosureTerm))
 	    return false;
 	return code.equals(((ClosureTerm)t).code);
     }
@@ -69,7 +69,7 @@ public class ClosureTerm extends Term {
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced
-	if (! anotherTerm.isClosure())
+	if (! (anotherTerm instanceof ClosureTerm))
 	    return AFTER;
 	if (code.equals(((ClosureTerm) anotherTerm).code))
 	    return EQUAL;

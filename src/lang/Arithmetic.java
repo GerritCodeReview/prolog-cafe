@@ -67,11 +67,11 @@ public class Arithmetic {
 	throws PInstantiationException,IllegalDomainException {
 	Term t = _t.dereference();
 
-	if (t.isVariable())
+	if (t instanceof VariableTerm)
 	    throw new PInstantiationException();
-	else if (t.isInteger())
+	else if (t instanceof IntegerTerm)
 	    return (IntegerTerm)t;
-	else if (t.isDouble())
+	else if (t instanceof DoubleTerm)
 	    return (DoubleTerm)t;
 	else if (t.equals(SYM_RANDOM))
 	    return new DoubleTerm(Math.random());
@@ -79,9 +79,9 @@ public class Arithmetic {
 	    return new DoubleTerm(Math.PI);
 	else if (t.equals(SYM_E))
 	    return new DoubleTerm(Math.E);
-	else if (t.isList())
+	else if (t instanceof ListTerm)
 	    return evaluate(((ListTerm)t).car());
-	else if (! t.isStructure()) 
+	else if (! (t instanceof StructureTerm)) 
 	    throw new IllegalDomainException("arithmetic expression", t);
 
 	SymbolTerm func = ((StructureTerm)t).functor();

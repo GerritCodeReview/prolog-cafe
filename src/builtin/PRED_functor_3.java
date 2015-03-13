@@ -28,16 +28,16 @@ public class PRED_functor_3 extends Predicate.P3 {
 
 	// functor(?X,+Y,+Z)
 	a1 = a1.dereference();
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    a2 = a2.dereference();
-	    if (a2.isVariable())
+	    if (a2 instanceof VariableTerm)
 		throw new PInstantiationException(this, 2);
-	    if (!a2.isSymbol() &&  !a2.isNumber() && !a2.isJavaObject() && !a2.isClosure())
+	    if (!(a2 instanceof SymbolTerm) &&  !((a2 instanceof IntegerTerm) || (a2 instanceof DoubleTerm)) && !(a2 instanceof JavaObjectTerm) && !(a2 instanceof ClosureTerm))
 		throw new IllegalTypeException(this, 2, "atomic", a2);
 	    a3 = a3.dereference();
-	    if (a3.isVariable())
+	    if (a3 instanceof VariableTerm)
 		throw new PInstantiationException(this, 3);
-	    if (! a3.isInteger())
+	    if (! (a3 instanceof IntegerTerm))
 		throw new IllegalTypeException(this, 3, "integer", a3);
 	    int n = ((IntegerTerm)a3).intValue();
 	    if (n < 0)
@@ -47,7 +47,7 @@ public class PRED_functor_3 extends Predicate.P3 {
 		    return engine.fail();
 		return cont;
 	    }
-	    if (! a2.isSymbol())
+	    if (! (a2 instanceof SymbolTerm))
 		throw new IllegalTypeException(this, 2, "atom", a2);
 	    if (n == 2  &&  a2.equals(SYM_DOT)) {
 		Term t = new ListTerm(new VariableTerm(engine), new VariableTerm(engine));
@@ -66,13 +66,13 @@ public class PRED_functor_3 extends Predicate.P3 {
 	// functor(+X,?Y,?Z)
 	Term functor;
 	IntegerTerm arity;
-	if (a1.isSymbol() || a1.isNumber() || a1.isJavaObject() || a1.isClosure()) {
+	if (a1 instanceof SymbolTerm || ((a1 instanceof IntegerTerm) || (a1 instanceof DoubleTerm)) || a1 instanceof JavaObjectTerm || a1 instanceof ClosureTerm) {
 	    functor = a1;
 	    arity   = new IntegerTerm(0);
-	} else if (a1.isList()) {
+	} else if (a1 instanceof ListTerm) {
 	    functor = SYM_DOT;
 	    arity   = new IntegerTerm(2);
-	} else if (a1.isStructure()) {
+	} else if (a1 instanceof StructureTerm) {
 	    functor = SymbolTerm.create(((StructureTerm)a1).name());
 	    arity   = new IntegerTerm(((StructureTerm)a1).arity());
 	} else {

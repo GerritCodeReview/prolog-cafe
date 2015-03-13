@@ -3,7 +3,7 @@ package com.googlecode.prolog_cafe.lang;
  * The superclass of classes for term structures.
  * The subclasses of <code>Term</code> must override
  * the <code>unify</code> method.
- * 
+ *
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
@@ -17,89 +17,13 @@ public abstract class Term implements Comparable<Term> {
     /** Holds an integer value <code>-1</code>. */
     public static final int BEFORE = -1;
 
-    /** 
+    /**
      * Checks whether the argument term is unified with this one.
      * @param t the term to be unified with.
      * @param trail Trail Stack.
      * @return <code>true</code> if succeeds, otherwise <code>false</code>.
      */
     abstract public boolean unify(Term t, Trail trail);
-
-    /** 
-     * Check whether this term is a logical variable.
-     * @return <code>true</code> if <code>this instanceof VariableTerm</code>, 
-     * otherwise <code>false</code>.
-     * @see VariableTerm
-     */
-    public final boolean isVariable() { return this instanceof VariableTerm; }
-
-    /** 
-     * Check whether this term is an integer.
-     * @return <code>true</code> if <code>this instanceof IntegerTerm</code>, 
-     * otherwise <code>false</code>.
-     * @see IntegerTerm
-     */
-    public final boolean isInteger() { return this instanceof IntegerTerm; }
-
-    /** 
-     * Check whether this term is a float.
-     * @return <code>true</code> if <code>this instanceof DoubleTerm</code>,
-     * otherwise <code>false</code>.
-     * @see DoubleTerm
-     */
-    public final boolean isDouble() { return this instanceof DoubleTerm; }
-
-    /** 
-     * Check whether this term is a number.
-     * @return <code>true</code> if <code>this instanceof IntegerTerm || this instanceof DoubleTerm</code>, 
-     * otherwise <code>false</code>.
-     * @see IntegerTerm
-     * @see DoubleTerm
-     */
-    public final boolean isNumber() { return ((this instanceof IntegerTerm) || (this instanceof DoubleTerm)); }
-
-    /** 
-     * Check whether this term is an atom.
-     * @return <code>true</code> if <code>this instanceof SymbolTerm</code>,
-     * otherwise <code>false</code>.
-     * @see SymbolTerm
-     */
-    public final boolean isSymbol() { return this instanceof SymbolTerm; }
-
-    /** Check whether this term is an empty list. */
-    public final boolean isNil() { return Prolog.Nil.equals(this); }
-
-    /** 
-     * Check whether this term is a list structure.
-     * @return <code>true</code> if <code>this instanceof ListTerm</code>,
-     * otherwise <code>false</code>.
-     * @see ListTerm
-     */
-    public final boolean isList() { return this instanceof ListTerm; }
-
-    /** 
-     * Check whether this term is a compound term.
-     * @return <code>true</code> if <code>this instanceof StructureTerm</code>,
-     * otherwise <code>false</code>.
-     * @see StructureTerm
-     */
-    public final boolean isStructure() { return this instanceof StructureTerm; }
-
-    /** 
-     * Check whether this term is a java term.
-     * @return <code>true</code> if <code>this instanceof JavaObjectTerm</code>,
-     * otherwise <code>false</code>.
-     * @see JavaObjectTerm
-     */
-    public final boolean isJavaObject() { return this instanceof JavaObjectTerm; }
-
-    /** 
-     * Check whether this term is a closure term.
-     * @return <code>true</code> if <code>this instanceof ClosureTerm</code>,
-     * otherwise <code>false</code>.
-     * @see ClosureTerm
-     */
-    public final boolean isClosure() { return this instanceof ClosureTerm; }
 
     /** @return the name of this Term, if {@link #isStructure()}. */
     public abstract String name();
@@ -110,10 +34,10 @@ public abstract class Term implements Comparable<Term> {
     /** @return get the nth argument of {@link #isStructure()} or {@link #isList()}. */
     public Term arg(int nth) { throw new ArrayIndexOutOfBoundsException(nth); }
 
-    /** 
+    /**
      * Check whether this object is convertible with the given Java class type.
      * @param type the Java class type to compare with.
-     * @return <code>true</code> if this is convertible with 
+     * @return <code>true</code> if this is convertible with
      * <code>type</code>. Otherwise <code>false</code>.
      * @see #convertible(Class, Class)
      */
@@ -125,27 +49,27 @@ public abstract class Term implements Comparable<Term> {
     /** Returns the dereference value of this term. */
     public Term    dereference() { return this; }
 
-    /** 
+    /**
      * Check whether this term is a ground term.
      * @return <code>true</code> if ground, otherwise <code>false</code>.
      */
     public boolean isGround() { return true; }
 
-    /** 
-     * Returns a Java object that corresponds to this term 
+    /**
+     * Returns a Java object that corresponds to this term
      * if defined in <em>Prolog Cafe interoperability with Java</em>.
      * Otherwise, returns <code>this</code>.
      * @return a Java object if defined in <em>Prolog Cafe interoperability with Java</em>,
      * otherwise <code>this</code>.
      */
-    public Object  toJava() { 
+    public Object  toJava() {
 	return this;
-    } 
+    }
 
     /** Returns a quoted string representation of this term. */
     public String  toQuotedString() { return this.toString(); }
 
-    /** 
+    /**
      * Check whether there is a widening conversion from <code>from</code> to <code>to</code>.
      */
     protected static boolean convertible(Class from, Class<?> to) {
@@ -196,7 +120,7 @@ public abstract class Term implements Comparable<Term> {
 
     /** Checks whether a given object is an instance of Prolog term. */
     public static boolean instanceOfTerm(Object obj) {
-	return obj instanceof VariableTerm || 
+	return obj instanceof VariableTerm ||
 	    obj instanceof IntegerTerm ||
 	    obj instanceof DoubleTerm ||
 	    obj instanceof SymbolTerm ||

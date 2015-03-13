@@ -24,7 +24,7 @@ class PRED_$set_prolog_impl_flag_2 extends Predicate.P2 {
 	a2 = a2.dereference();
 
 	if (a1.equals(DEBUG)) {
-	    if (! a2.isSymbol())
+	    if (! (a2 instanceof SymbolTerm))
 		return engine.fail();
 	    engine.setDebug(((SymbolTerm)a2).name());
 	} else {

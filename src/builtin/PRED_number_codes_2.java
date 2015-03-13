@@ -25,20 +25,20 @@ public class PRED_number_codes_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a2.isNil())
+	if (Prolog.Nil.equals(a2))
 	    throw new SyntaxException(this, 2, "character_code_list", a2, "");
-	if (a1.isVariable()) { // number_codes(-Number, +CharCodeList)
+	if (a1 instanceof VariableTerm) { // number_codes(-Number, +CharCodeList)
 	    StringBuffer sb = new StringBuffer();
 	    Term x = a2;
-	    while(! x.isNil()) {
-		if (x.isVariable())
+	    while(! Prolog.Nil.equals(x)) {
+		if (x instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! x.isList())
+		if (! (x instanceof ListTerm))
 		    throw new IllegalTypeException(this, 2, "list", a2);
 		Term car = ((ListTerm)x).car().dereference();
-		if (car.isVariable())
+		if (car instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! car.isInteger()) 
+		if (! (car instanceof IntegerTerm)) 
 		    throw new RepresentationException(this, 2, "character_code");
 		// car is an integer
 		int i = ((IntegerTerm)car).intValue();
@@ -59,7 +59,7 @@ public class PRED_number_codes_2 extends Predicate.P2 {
 	    } catch (NumberFormatException e) {
 		throw new SyntaxException(this, 2, "character_code_list", a2, "");
 	    }
-	} else if (a1.isNumber()) { // number_codes(+Number, ?CharCodeList)
+	} else if (((a1 instanceof IntegerTerm) || (a1 instanceof DoubleTerm))) { // number_codes(+Number, ?CharCodeList)
 	    char[] chars = a1.toString().toCharArray();
 	    Term y = Prolog.Nil;
 	    for (int i=chars.length; i>0; i--) {

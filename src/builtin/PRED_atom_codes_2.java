@@ -24,18 +24,18 @@ public class PRED_atom_codes_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a1.isVariable()) { // atom_codes(-Atom, +CharCodeList)
+	if (a1 instanceof VariableTerm) { // atom_codes(-Atom, +CharCodeList)
 	    StringBuffer sb = new StringBuffer();
 	    Term x = a2;
-	    while(! x.isNil()) {
-		if (x.isVariable())
+	    while(! Prolog.Nil.equals(x)) {
+		if (x instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! x.isList())
+		if (! (x instanceof ListTerm))
 		    throw new IllegalTypeException(this, 2, "list", a2);
 		Term car = ((ListTerm)x).car().dereference();
-		if (car.isVariable())
+		if (car instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! car.isInteger()) 
+		if (! (car instanceof IntegerTerm)) 
 		    throw new RepresentationException(this, 2, "character_code");
 		// car is an integer
 		int i = ((IntegerTerm)car).intValue();
@@ -48,7 +48,7 @@ public class PRED_atom_codes_2 extends Predicate.P2 {
 		return engine.fail();
 	    return cont;
 	} else { // atom_codes(+Atom, ?CharCodeList)
-	    if (! a1.isSymbol())
+	    if (! (a1 instanceof SymbolTerm))
 		throw new IllegalTypeException(this, 1, "atom", a1);
 	    char[] chars = ((SymbolTerm)a1).name().toCharArray();
 	    Term x = Prolog.Nil;

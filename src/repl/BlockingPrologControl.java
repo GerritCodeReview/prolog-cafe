@@ -119,11 +119,6 @@ public class BlockingPrologControl
     engine.init();
   }
 
-  /** Returns the stream manager. */
-  HashtableOfTerm getStreamManager() {
-    return engine.getStreamManager();
-  }
-
   /**
    * Returns <code>true</code> if the system succeeds to find a first solution
    * of the given goal, <code>false</code> otherwise.<br>

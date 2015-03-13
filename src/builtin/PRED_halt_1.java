@@ -20,9 +20,9 @@ public class PRED_halt_1 extends Predicate.P1 {
         a1 = arg1;
 
 	a1 = a1.dereference();
-	if (a1.isVariable())
+	if (a1 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 1);
-	if (! a1.isInteger())
+	if (! (a1 instanceof IntegerTerm))
 	    throw new IllegalTypeException(this, 1, "integer", a1);
 	engine.halt = 1 + ((IntegerTerm)a1).intValue();
         return cont;

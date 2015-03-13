@@ -19,7 +19,7 @@ class PRED_$get_hash_manager_1 extends Predicate.P1 {
         a1 = arg1;
 
 	a1 = a1.dereference();
-	if (! a1.isVariable())
+	if (! (a1 instanceof VariableTerm))
 	    throw new IllegalTypeException(this, 1, "variable", a1);
 	if (! a1.unify(new JavaObjectTerm(engine.getHashManager()), engine.trail))
 	    return engine.fail();

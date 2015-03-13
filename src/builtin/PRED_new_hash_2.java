@@ -26,33 +26,33 @@ public class PRED_new_hash_2 extends Predicate.P2 {
         a2 = arg2;
 
 	a1 = a1.dereference();
-	if (! a1.isVariable())
+	if (! (a1 instanceof VariableTerm))
 	    throw new IllegalTypeException(this, 1, "variable", a1);
 	Term newHash = new JavaObjectTerm(new HashtableOfTerm());
 	a2 = a2.dereference();
-	if (a2.isNil()) {
+	if (Prolog.Nil.equals(a2)) {
 	    if (! a1.unify(newHash, engine.trail))
 		return engine.fail();
 	    return cont;
-	} else if (! a2.isList()) {
+	} else if (! (a2 instanceof ListTerm)) {
 	    throw new IllegalTypeException(this, 2, "list", a2);
 	}
 	// a2 is list
 	Term tmp = a2;
-	while (! tmp.isNil()) {
-	    if (tmp.isVariable())
+	while (! Prolog.Nil.equals(tmp)) {
+	    if (tmp instanceof VariableTerm)
 		throw new PInstantiationException(this, 2);
-	    if (! tmp.isList())
+	    if (! (tmp instanceof ListTerm))
 		throw new IllegalTypeException(this, 2, "list", a2);
 	    Term car = ((ListTerm) tmp).car().dereference();
-	    if (car.isVariable())
+	    if (car instanceof VariableTerm)
 		throw new PInstantiationException(this, 2);
-	    if (car.isStructure()) {
+	    if (car instanceof StructureTerm) {
 		SymbolTerm functor = ((StructureTerm) car).functor();
 		Term[] args = ((StructureTerm) car).args();
 		if (functor.equals(SYM_ALIAS_1)) {
 		    Term alias = args[0].dereference();
-		    if (! alias.isSymbol())
+		    if (! (alias instanceof SymbolTerm))
 			throw new IllegalDomainException(this, 2, "hash_option", car);
 		    else {
 			if (engine.getHashManager().containsKey(alias))
