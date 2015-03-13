@@ -103,6 +103,12 @@ pl2j(
 )
 
 java_binary(
+  name = 'plc',
+  main_class = 'com.googlecode.prolog_cafe.compiler.Compiler',
+  deps = [':compiler'],
+)
+
+java_binary(
   name = 'cafeteria',
   main_class = 'com.googlecode.prolog_cafe.repl.PrologMain',
   deps = [':cafeteria_lib'],
