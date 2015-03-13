@@ -149,7 +149,6 @@ write_java0(import_package(P,FA), _, Out) :- !,
 write_java0((Label: Instruction), In, Out) :- !,
 	write_label(Label, Out),
 	write_java0(Instruction, In, Out).
-write_java0(label(fail/0), _, _) :- !.
 write_java0(label(L), _, Out) :- !,
 	tab(Out, 4),
 	write(Out, 'static final Operation '),

@@ -168,7 +168,6 @@ Notation
 :- dynamic file_name/1.
 :- dynamic dummy_clause_counter/1.
 :- dynamic pl2am_flag/1.
-:- dynamic fail_flag/0.  % used for generating label(fail/0) or not
 
 % :- module('com.googlecode.prolog_cafe.compiler.pl2am', [main/0,pl2am/1]).
 :- package 'com.googlecode.prolog_cafe.compiler.pl2am'.
@@ -212,7 +211,6 @@ pl2am_preread(File, Opts) :-
 	retractall(file_name(_)),
 	retractall(dummy_clause_counter(_)),
 	retractall(pl2am_flag(_)),
-	retractall(fail_flag),
 	assert(file_name(File)),
 	assert(dummy_clause_counter(0)),
 	assert_compile_opts(Opts),
@@ -592,9 +590,7 @@ generate_switch(Clauses, FA, [Label, Hash]) -->
 	% generates try, retry, trust, switch_on_term, and switch_on_hash
 	{generate_switch0(Clauses, FA, Instrs, [])},
 	% generates sub-labels for BP
-	generate_bp_label(Instrs, FA+sub, 1, Ls0, SWTs),
-	% generates fail label (fail_flag may be asserted by generate_switch0/4)
-	{(retract(fail_flag) -> Ls1 = [label(fail/0)|Ls0] ; Ls1 = Ls0)},
+	generate_bp_label(Instrs, FA+sub, 1, Ls1, SWTs),
 	% generates labels for clauses
 	{length(Clauses, N)},
 	{generate_cl_label(FA, 1, N, Ls2)},
@@ -629,7 +625,7 @@ generate_sw(Is, FA, Tag, L, PIs0, PIs) -->
 	generate_sw1(Is1, FA, Tag, L, PIs0, PIs).
 
 %%% 2nd. Indexing
-generate_sw1([], _, _, fail/0, PIs, PIs) --> !, {assert_fail}.
+generate_sw1([], _, _, fail/0, PIs, PIs) --> !.
 generate_sw1([I], _, _, L, PIs, PIs) --> !, {I = [L|_]}.
 generate_sw1(Is, FA, Tag, L, PIs0, PIs) -->
 	{no_switch_on_hash(Is, Tag)},
@@ -657,7 +653,6 @@ generate_sw2(Is, FA, Tag, FA+Tag, PIs0, [(FA+Tag,Is)|PIs0]) -->
 
 generate_hash_tries([], _, _, []) --> !.
 generate_hash_tries([K:[]|LIs], L0, N, [K:fail/0|Ls]) --> !,
-	{assert_fail},
 	generate_hash_tries(LIs, L0, N, Ls).
 generate_hash_tries([K:[I]|LIs], L0, N, [K:L|Ls]) --> !,
 	{I = [L|_]},
@@ -738,10 +733,6 @@ select_indices([I|Is0], Tag, [I|Is]) :-
 	select_indices(Is0, Tag, Is).
 select_indices([_|Is0], Tag, Is) :-
 	select_indices(Is0, Tag, Is).
-
-%%% Assert Fail Flag
-assert_fail:- clause(fail_flag, _), !.
-assert_fail:- assert(fail_flag).
 
 %%% Generate Labels for Backtrack Point
 generate_bp_label([], _, _, [], []) --> !.
