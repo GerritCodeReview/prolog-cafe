@@ -179,7 +179,11 @@ public abstract class SymbolTerm extends Term {
      */
     public String name() { return name; }
 
-    /* Term */
+    @Override
+    public int type() {
+      return TYPE_SYMBOL;
+    }
+
     public boolean unify(Term t, Trail trail) {
       t = t.dereference();
       if (t instanceof VariableTerm) {

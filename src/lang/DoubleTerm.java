@@ -33,7 +33,11 @@ public class DoubleTerm extends NumberTerm {
      */
     public double value() { return val; }
 
-    /* Term */
+    @Override
+    public int type() {
+      return TYPE_DOUBLE;
+    }
+
     public boolean unify(Term t, Trail trail) {
 	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);

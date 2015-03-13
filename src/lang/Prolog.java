@@ -206,20 +206,22 @@ public final class Prolog {
 				    Operation con, 
 				    Operation str, 
 				    Operation lis) {
-	Term arg1 = r1.dereference();
-	if (arg1 instanceof VariableTerm)
-	    return var;
-	if (arg1 instanceof IntegerTerm)
-	    return Int;
-	if (arg1 instanceof DoubleTerm)
-	    return flo;
-	if (arg1 instanceof SymbolTerm)
-	    return con;
-	if (arg1 instanceof StructureTerm)
-	    return str;
-	if (arg1 instanceof ListTerm)
-	    return lis;
-	return var;
+      switch (r1.dereference().type()) {
+        case Term.TYPE_VARIABLE:
+          return var;
+        case Term.TYPE_INTEGER:
+          return Int;
+        case Term.TYPE_DOUBLE:
+          return flo;
+        case Term.TYPE_SYMBOL:
+          return con;
+        case Term.TYPE_STRUCTURE:
+          return str;
+        case Term.TYPE_LIST:
+          return lis;
+        default:
+          return var;
+      }
     }
 
     /**
