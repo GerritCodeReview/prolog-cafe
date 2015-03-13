@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "410f9eb1_0aa55bb1",
+        "filename": "src/builtin/PRED_$statistics_2.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-13T00:41:31Z",
+      "side": 1,
+      "message": "nit: inconsistent tab/space indentation.",
+      "revId": "6ac9bc974598d5463b824d2fbe52d35080f21f2a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
