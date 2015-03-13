@@ -17,6 +17,18 @@ public abstract class Term implements Comparable<Term> {
     /** Holds an integer value <code>-1</code>. */
     public static final int BEFORE = -1;
 
+    public static final int TYPE_VARIABLE = 0;
+    public static final int TYPE_INTEGER = 1;
+    public static final int TYPE_DOUBLE = 2;
+    public static final int TYPE_SYMBOL = 3;
+    public static final int TYPE_STRUCTURE = 4;
+    public static final int TYPE_LIST = 5;
+    public static final int TYPE_CLOSURE = 6;
+    public static final int TYPE_JAVA_OBJECT = 7;
+
+    /** One of the {@code TYPE_*} constants from {@code Term}. */
+    public abstract int type();
+
     /**
      * Checks whether the argument term is unified with this one.
      * @param t the term to be unified with.

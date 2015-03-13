@@ -29,6 +29,11 @@ public class IntegerTerm extends NumberTerm {
      */
     public int value() { return val; }
 
+    @Override
+    public int type() {
+      return TYPE_INTEGER;
+    }
+
     /* Term */
     public boolean unify(Term t, Trail trail) {
 	if (t instanceof VariableTerm)

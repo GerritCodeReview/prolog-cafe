@@ -42,7 +42,11 @@ public class VariableTerm extends Term implements Undoable {
     /** Returns a string representation of this object.*/
     protected String variableName() { return "_" + Integer.toHexString(hashCode()).toUpperCase(); }
 
-    /* Term */
+    @Override
+    public int type() {
+      return TYPE_VARIABLE;
+    }
+
     /** 
      * Checks whether the argument term is unified with this one.
      * If this is an unbound variable, the <code>unify</code> method binds this to 

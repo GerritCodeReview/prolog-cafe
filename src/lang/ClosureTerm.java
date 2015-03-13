@@ -18,7 +18,11 @@ public class ClosureTerm extends Term {
     /** Returns the Prolog goal of this <code>ClosureTerm</code>. */
     public Predicate getCode() { return code; }
 
-    /* Term */
+    @Override
+    public int type() {
+      return TYPE_CLOSURE;
+    }
+
     public boolean unify(Term t, Trail trail) {
 	//	t = t.dereference();
 	if (t instanceof VariableTerm)

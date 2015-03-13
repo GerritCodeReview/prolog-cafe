@@ -75,6 +75,11 @@ public class ListTerm extends Term {
      */
     public void setCdr(Term t) { cdr = t; }
 
+    @Override
+    public int type() {
+      return TYPE_LIST;
+    }
+
     /* Term */
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();

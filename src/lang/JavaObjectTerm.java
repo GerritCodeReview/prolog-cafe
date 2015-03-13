@@ -37,7 +37,11 @@ public class JavaObjectTerm extends Term {
 
     public String  toQuotedString() { return toString(); }
 
-    /* Term */
+    @Override
+    public int type() {
+      return TYPE_JAVA_OBJECT;
+    }
+
     public boolean unify(Term t, Trail trail) {
 	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);

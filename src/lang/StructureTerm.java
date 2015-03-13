@@ -78,6 +78,11 @@ public class StructureTerm extends Term {
 
     public Term arg(int nth) { return args[nth]; }
 
+    @Override
+    public int type() {
+      return TYPE_STRUCTURE;
+    }
+
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
 	if (t instanceof VariableTerm) {
