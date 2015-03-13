@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e18ed27f_6f05f10e",
+        "filename": "src/lang/PrologControl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-13T00:40:47Z",
+      "side": 1,
+      "message": "nit: according to the Google code style if-statements should always have the { and }. This is consistent with the other code here though, so I guess it\u0027s OK to leave it like this?",
+      "revId": "f863c56471bc596b4ff0c868a5343b53b64729be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
