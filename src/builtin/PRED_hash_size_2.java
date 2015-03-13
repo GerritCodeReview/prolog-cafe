@@ -28,13 +28,13 @@ public class PRED_hash_size_2 extends Predicate.P2 {
 	Object hash = null;
 
 	a1 = a1.dereference();
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.isSymbol()) {
+	} else if (a1 instanceof SymbolTerm) {
 	    if (! engine.getHashManager().containsKey(a1))
 		throw new ExistenceException(this, 1, "hash", a1, "");
 	    hash = ((JavaObjectTerm) engine.getHashManager().get(a1)).object();
-	} else if (a1.isJavaObject()) {
+	} else if (a1 instanceof JavaObjectTerm) {
 	    hash = ((JavaObjectTerm) a1).object();
 	} else {
 	    throw new IllegalDomainException(this, 1, "hash_or_alias", a1);
@@ -42,7 +42,7 @@ public class PRED_hash_size_2 extends Predicate.P2 {
 	if (! (hash instanceof HashtableOfTerm))
 	    throw new InternalException(this + ": Hash is not HashtableOfTerm");
 	a2 = a2.dereference();
-	if (! a2.isVariable() && ! a2.isInteger())
+	if (! (a2 instanceof VariableTerm) && ! (a2 instanceof IntegerTerm))
 	    throw new IllegalTypeException(this, 1, "integer", a2);
 	if (! a2.unify(new IntegerTerm(((HashtableOfTerm)hash).size()), engine.trail))
 	    return engine.fail();

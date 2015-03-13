@@ -28,13 +28,13 @@ class PRED_$write_toString_2 extends Predicate.P2 {
 
 	// S_or_a
 	a1 = a1.dereference(); 
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.isSymbol()) {
+	} else if (a1 instanceof SymbolTerm) {
 	    if (! engine.getStreamManager().containsKey(a1))
 		throw new ExistenceException(this, 1, "stream", a1, "");
 	    stream = ((JavaObjectTerm) engine.getStreamManager().get(a1)).object();
-	} else if (a1.isJavaObject()) {
+	} else if (a1 instanceof JavaObjectTerm) {
 	    stream = ((JavaObjectTerm) a1).object();
 	} else {
 	    throw new IllegalDomainException(this, 1, "stream_or_alias", a1);
@@ -42,7 +42,7 @@ class PRED_$write_toString_2 extends Predicate.P2 {
 	if (! (stream instanceof PrintWriter))
 	    throw new PermissionException(this, "output", "stream", a1, "");
 	a2 = a2.dereference(); 
-	if (! a2.isJavaObject())
+	if (! (a2 instanceof JavaObjectTerm))
 	    throw new IllegalTypeException(this, 2, "java", a2);
 	// print java
 	((PrintWriter) stream).print(((JavaObjectTerm)a2).object().toString());

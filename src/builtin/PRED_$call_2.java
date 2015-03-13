@@ -34,13 +34,13 @@ class PRED_$call_2 extends Predicate.P2 {
 	Operation pred;
 
 	try {
-	    if (! a1.isSymbol())
+	    if (! (a1 instanceof SymbolTerm))
 		throw new IllegalTypeException(this, 1, "atom", a1);
-	    if (a2.isSymbol()) {
+	    if (a2 instanceof SymbolTerm) {
 		functor = ((SymbolTerm)a2).name();
 		args    = new Term[] {};
 		arity   = 0;
-	    } else if (a2.isStructure()) {
+	    } else if (a2 instanceof StructureTerm) {
 		functor = ((StructureTerm)a2).functor().name();
 		args    = ((StructureTerm)a2).args();
 		arity   = ((StructureTerm)a2).arity();

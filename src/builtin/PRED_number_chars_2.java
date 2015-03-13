@@ -24,25 +24,25 @@ public class PRED_number_chars_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a2.isNil())
+	if (Prolog.Nil.equals(a2))
 	    throw new SyntaxException(this, 2, "character_code_list", a2, "");
-	if (a1.isVariable()) { // number_chars(-Number, +CharList)
-	    if (a2.isVariable()) {
+	if (a1 instanceof VariableTerm) { // number_chars(-Number, +CharList)
+	    if (a2 instanceof VariableTerm) {
 		throw new PInstantiationException(this, 2);
-	    } else if (! a2.isList()) {
+	    } else if (! (a2 instanceof ListTerm)) {
 		throw new IllegalTypeException(this, 2, "list", a2);
 	    }
 	    StringBuffer sb = new StringBuffer();
 	    Term x = a2;
-	    while(! x.isNil()) {
-		if (x.isVariable())
+	    while(! Prolog.Nil.equals(x)) {
+		if (x instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! x.isList())
+		if (! (x instanceof ListTerm))
 		    throw new IllegalTypeException(this, 2, "list", a2);
 		Term car = ((ListTerm)x).car().dereference();
-		if (car.isVariable())
+		if (car instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! car.isSymbol() || ((SymbolTerm)car).name().length() != 1)
+		if (! (car instanceof SymbolTerm) || ((SymbolTerm)car).name().length() != 1)
 		    throw new IllegalTypeException(this, 2, "character", a2);
 		sb.append(((SymbolTerm)car).name());
 		x = ((ListTerm)x).cdr().dereference();
@@ -59,7 +59,7 @@ public class PRED_number_chars_2 extends Predicate.P2 {
 	    } catch (NumberFormatException e) {
 		throw new SyntaxException(this, 2, "character_code_list", a2, "");
 	    }
-	} else if (a1.isNumber()) { // number_chars(+Number, ?CharList)
+	} else if (((a1 instanceof IntegerTerm) || (a1 instanceof DoubleTerm))) { // number_chars(+Number, ?CharList)
 	    String s = a1.toString();
 	    Term y = Prolog.Nil;
 	    for (int i=s.length(); i>0; i--) {

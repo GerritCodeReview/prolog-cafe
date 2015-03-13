@@ -23,27 +23,27 @@ public class PRED_atom_chars_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a1.isVariable()) { // atom_chars(-Atom, +CharList)
-	    if (a2.isNil()) {
+	if (a1 instanceof VariableTerm) { // atom_chars(-Atom, +CharList)
+	    if (Prolog.Nil.equals(a2)) {
 		if (! a1.unify(SymbolTerm.intern(""), engine.trail))
 		    return engine.fail();
 		return cont;
-	    } else if (a2.isVariable()) {
+	    } else if (a2 instanceof VariableTerm) {
 		throw new PInstantiationException(this, 2);
-	    } else if (! a2.isList()) {
+	    } else if (! (a2 instanceof ListTerm)) {
 		throw new IllegalTypeException(this, 2, "list", a2);
 	    }
 	    StringBuffer sb = new StringBuffer();
 	    Term x = a2;
-	    while(! x.isNil()) {
-		if (x.isVariable())
+	    while(! Prolog.Nil.equals(x)) {
+		if (x instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! x.isList())
+		if (! (x instanceof ListTerm))
 		    throw new IllegalTypeException(this, 2, "list", a2);
 		Term car = ((ListTerm)x).car().dereference();
-		if (car.isVariable())
+		if (car instanceof VariableTerm)
 		    throw new PInstantiationException(this, 2);
-		if (! car.isSymbol() || ((SymbolTerm)car).name().length() != 1)
+		if (! (car instanceof SymbolTerm) || ((SymbolTerm)car).name().length() != 1)
 		    throw new IllegalTypeException(this, 2, "character", a2);
 		sb.append(((SymbolTerm)car).name());
 		x = ((ListTerm)x).cdr().dereference();
@@ -51,8 +51,8 @@ public class PRED_atom_chars_2 extends Predicate.P2 {
 	    if (! a1.unify(SymbolTerm.create(sb.toString()), engine.trail))
 		return engine.fail();
 	    return cont;
-	} else if (a2.isNil() || a2.isVariable() || a2.isList()) { // atom_chars(+Atom, ?CharList)
-	    if (! a1.isSymbol())
+	} else if (Prolog.Nil.equals(a2) || a2 instanceof VariableTerm || a2 instanceof ListTerm) { // atom_chars(+Atom, ?CharList)
+	    if (! (a1 instanceof SymbolTerm))
 		throw new IllegalTypeException(this, 1, "atom", a1);
 	    String s = ((SymbolTerm)a1).name();
 	    Term x = Prolog.Nil;

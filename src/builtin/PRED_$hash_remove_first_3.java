@@ -31,13 +31,13 @@ class PRED_$hash_remove_first_3 extends Predicate.P3 {
 	Object hash = null;
 
 	a1 = a1.dereference();
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.isSymbol()) {
+	} else if (a1 instanceof SymbolTerm) {
 	    if (! engine.getHashManager().containsKey(a1))
 		throw new ExistenceException(this, 1, "hash", a1, "");
 	    hash = ((JavaObjectTerm) engine.getHashManager().get(a1)).object();
-	} else if (a1.isJavaObject()) {
+	} else if (a1 instanceof JavaObjectTerm) {
 	    hash = ((JavaObjectTerm) a1).object();
 	} else {
 	    throw new IllegalDomainException(this, 1, "hash_or_alias", a1);
@@ -46,20 +46,20 @@ class PRED_$hash_remove_first_3 extends Predicate.P3 {
 	    throw new InternalException(this + ": Hash is not HashtableOfTerm");
 	a2 = a2.dereference();
 	Term elem = ((HashtableOfTerm) hash).get(a2);
-	if (elem == null || elem.isNil())
+	if (elem == null || Prolog.Nil.equals(elem))
 	    return cont;
 	a3 = a3.dereference();
 	Term x  = elem;
 	Term x0 = Prolog.Nil;
 	Term y,z;
-	while(! x.isNil()) {
-	    if (! x.isList())
+	while(! Prolog.Nil.equals(x)) {
+	    if (! (x instanceof ListTerm))
 		throw new InternalException(this + ": the valus of " + a2 + " is not list structure");
 	    y = ((ListTerm)x).car().dereference();
 	    z = ((ListTerm)x).cdr().dereference();
 	    if (y.equals(a3)) {
-		if (z.isNil()) {
-		    if (x0.isList())
+		if (Prolog.Nil.equals(z)) {
+		    if (x0 instanceof ListTerm)
 			((ListTerm)x0).setCdr(Prolog.Nil);
 		    else 
 			elem = Prolog.Nil;
@@ -72,7 +72,7 @@ class PRED_$hash_remove_first_3 extends Predicate.P3 {
 	    x0 = x;
 	    x = z;
 	}
-	if (elem.isNil() && a2.isInteger()) {
+	if (Prolog.Nil.equals(elem) && a2 instanceof IntegerTerm) {
 	    ((HashtableOfTerm)hash).remove(a2);
 	    //	    System.out.println("################ key " + a2 + " is removed");
 	} else {

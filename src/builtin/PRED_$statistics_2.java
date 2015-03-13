@@ -29,9 +29,9 @@ class PRED_$statistics_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
     engine.requireFeature(Prolog.Feature.STATISTICS, this, a1);
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (! a1.isSymbol()) {
+	} else if (! (a1 instanceof SymbolTerm)) {
 	    throw new IllegalTypeException(this, 1, "atom", a1);
 	} else if (a1.equals(SYM_RUNTIME)) {
 	    long val1, val2;

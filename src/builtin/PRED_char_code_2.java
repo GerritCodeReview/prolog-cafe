@@ -24,10 +24,10 @@ public class PRED_char_code_2 extends Predicate.P2 {
 
 	a1 = a1.dereference();
 	a2 = a2.dereference();
-	if (a1.isVariable()) { // char_code(-Char, +CharCode)
-	    if (a2.isVariable()) {
+	if (a1 instanceof VariableTerm) { // char_code(-Char, +CharCode)
+	    if (a2 instanceof VariableTerm) {
 		throw new PInstantiationException(this, 2);
-	    } else if (! a2.isInteger()) {
+	    } else if (! (a2 instanceof IntegerTerm)) {
 		throw new IllegalTypeException(this, 2, "integer", a2);
 	    }
 	    int i = ((IntegerTerm)a2).intValue();
@@ -35,7 +35,7 @@ public class PRED_char_code_2 extends Predicate.P2 {
 		throw new RepresentationException(this, 2, "character_code");
 	    if (! a1.unify(SymbolTerm.create((char)i), engine.trail))
 		return engine.fail();
-	} else if (a1.isSymbol()) { // char_code(+Char, ?CharCode)
+	} else if (a1 instanceof SymbolTerm) { // char_code(+Char, ?CharCode)
 	    String s = ((SymbolTerm)a1).name();
 	    if (s.length() != 1)
 		throw new IllegalTypeException(this, 1, "character", a1);

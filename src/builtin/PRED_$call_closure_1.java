@@ -20,7 +20,7 @@ class PRED_$call_closure_1 extends Predicate.P1 {
 	// a1 must be closure
 	a1 = arg1.dereference();
 
-	if (! a1.isClosure())
+	if (! (a1 instanceof ClosureTerm))
 	    return engine.fail();
 	code = ((ClosureTerm) a1).getCode();
 	code.cont = this.cont;

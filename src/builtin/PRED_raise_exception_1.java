@@ -20,7 +20,7 @@ public class PRED_raise_exception_1 extends Predicate.P1 {
 	a1 = arg1;
 
 	a1 = a1.dereference();
-	if (a1.isVariable())
+	if (a1 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 1);
 	throw new TermException(a1);
     }

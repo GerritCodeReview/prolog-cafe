@@ -30,19 +30,19 @@ public class PRED_put_code_2 extends Predicate.P2 {
 
 	// Char
 	a2 = a2.dereference(); 
-	if (a2.isVariable())
+	if (a2 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 2);
-	if (! a2.isInteger())
+	if (! (a2 instanceof IntegerTerm))
 	    throw new IllegalTypeException(this, 2, "integer", a2);
 	// S_or_a
 	a1 = a1.dereference(); 
-	if (a1.isVariable()) {
+	if (a1 instanceof VariableTerm) {
 	    throw new PInstantiationException(this, 1);
-	} else if (a1.isSymbol()) {
+	} else if (a1 instanceof SymbolTerm) {
 	    if (! engine.getStreamManager().containsKey(a1))
 		throw new ExistenceException(this, 1, "stream", a1, "");
 	    stream = ((JavaObjectTerm) engine.getStreamManager().get(a1)).object();
-	} else if (a1.isJavaObject()) {
+	} else if (a1 instanceof JavaObjectTerm) {
 	    stream = ((JavaObjectTerm) a1).object();
 	} else {
 	    throw new IllegalDomainException(this, 1, "stream_or_alias", a1);

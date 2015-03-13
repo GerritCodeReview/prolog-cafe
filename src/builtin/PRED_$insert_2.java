@@ -22,7 +22,7 @@ class PRED_$insert_2 extends Predicate.P2 {
 	int idx;
 
 	a2 = a2.dereference();
-	if (! a2.isVariable())
+	if (! (a2 instanceof VariableTerm))
 	    throw new IllegalTypeException(this, 2, "variable", a2);
 	a1 = a1.dereference();
 	idx = engine.internalDB.insert(a1);

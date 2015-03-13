@@ -26,19 +26,19 @@ class PRED_$get_instances_2 extends Predicate.P2 {
 	int idx;
 
 	a1 = a1.dereference();
-	if (a1.isNil())
+	if (Prolog.Nil.equals(a1))
 	    return engine.fail();
-	if (! a1.isList())
+	if (! (a1 instanceof ListTerm))
 	    throw new IllegalTypeException(this, 1, "list", a1);
 	Term x = Prolog.Nil;
 	Term tmp = a1;
-	while(! tmp.isNil()) {
-	    if (! tmp.isList())
+	while(! Prolog.Nil.equals(tmp)) {
+	    if (! (tmp instanceof ListTerm))
 		throw new IllegalTypeException(this, 1, "list", a1);
 	    Term car = ((ListTerm)tmp).car().dereference();
-	    if (car.isVariable())
+	    if (car instanceof VariableTerm)
 		throw new PInstantiationException(this, 1);
-	    if (! car.isInteger()) 
+	    if (! (car instanceof IntegerTerm)) 
 		throw new RepresentationException(this, 1, "integer");
 	    // car is an integer
 	    int i = ((IntegerTerm)car).intValue();

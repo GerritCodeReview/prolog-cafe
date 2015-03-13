@@ -7,6 +7,7 @@ import com.googlecode.prolog_cafe.lang.Predicate;
 import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.VariableTerm;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,10 +32,10 @@ public class PRED_regex_compile_2 extends Predicate.P2 {
       Term a1 = arg1.dereference();
       Term a2 = arg2.dereference();
 
-      if (a1.isVariable()) {
+      if (a1 instanceof VariableTerm) {
         throw new PInstantiationException(this, 1);
       }
-      if (!a1.isSymbol()) {
+      if (!(a1 instanceof SymbolTerm)) {
         throw new IllegalTypeException(this, 1, "atom", a1);
       }
       Pattern pattern = Pattern.compile(a1.name(), Pattern.MULTILINE);

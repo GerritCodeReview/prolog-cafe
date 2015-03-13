@@ -73,7 +73,7 @@ public class VariableTerm extends Term implements Undoable {
      * @see Trail
      */
   public void bind(Term t, Trail trail) {
-    if (t.isVariable()) {
+    if (t instanceof VariableTerm) {
       VariableTerm v = (VariableTerm) t;
       if (v.timeStamp >= this.timeStamp) {
         v.val = this;
@@ -212,7 +212,7 @@ public class VariableTerm extends Term implements Undoable {
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	if(val != this)
 	    return val.compareTo(anotherTerm);
-	if (! anotherTerm.isVariable())
+	if (! (anotherTerm instanceof VariableTerm))
 	    return BEFORE;
 	if (this == anotherTerm) 
 	    return EQUAL;

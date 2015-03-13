@@ -48,20 +48,20 @@ public class PRED_open_4 extends Predicate.P4 {
 
 	// stream
 	a3 = a3.dereference();
-	if (! a3.isVariable())
+	if (! (a3 instanceof VariableTerm))
 	    throw new IllegalTypeException(this, 3, "variable", a3);
 	// source_sink
 	a1 = a1.dereference();
-	if (a1.isVariable())
+	if (a1 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 1);
-	if (! a1.isSymbol())
+	if (! (a1 instanceof SymbolTerm))
 	    throw new IllegalDomainException(this, 1, "source_sink", a1);
 	file = new File(((SymbolTerm) a1).name());
 	// io_mode
 	a2 = a2.dereference();
-	if (a2.isVariable())
+	if (a2 instanceof VariableTerm)
 	    throw new PInstantiationException(this, 2);
-	if (! a2.isSymbol()) 
+	if (! (a2 instanceof SymbolTerm)) 
 	    throw new IllegalTypeException(this, 2, "atom", a2);
 	try {
 	    if (a2.equals(SYM_READ)) {
@@ -92,20 +92,20 @@ public class PRED_open_4 extends Predicate.P4 {
 	// stream_options
 	a4 = a4.dereference();
 	Term tmp = a4;
-	while (! tmp.isNil()) {
-	    if (tmp.isVariable())
+	while (! Prolog.Nil.equals(tmp)) {
+	    if (tmp instanceof VariableTerm)
 		throw new PInstantiationException(this, 4);
-	    if (! tmp.isList())
+	    if (! (tmp instanceof ListTerm))
 		throw new IllegalTypeException(this, 4, "list", a4);
 	    Term car = ((ListTerm) tmp).car().dereference();
-	    if (car.isVariable())
+	    if (car instanceof VariableTerm)
 		throw new PInstantiationException(this, 4);
-	    if (car.isStructure()) {
+	    if (car instanceof StructureTerm) {
 		SymbolTerm functor = ((StructureTerm) car).functor();
 		Term[] args = ((StructureTerm) car).args();
 		if (functor.equals(SYM_ALIAS_1)) {
 		    alias = args[0].dereference();
-		    if (! alias.isSymbol())
+		    if (! (alias instanceof SymbolTerm))
 			throw new IllegalDomainException(this, 4, "stream_option", car);
 		    if (engine.getStreamManager().containsKey(alias))
 			throw new PermissionException(this, "open", "source_sink", car, "");
