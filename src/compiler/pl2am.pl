@@ -181,7 +181,6 @@ pl2am([PrologFile, AsmFile, Opts]) :-
 	open(AsmFile, write, Out),
 	compile_all_predicates(Out),
 	close(Out).
-pl2am(_).
 
 /*****************************************************************
   Read in Program
