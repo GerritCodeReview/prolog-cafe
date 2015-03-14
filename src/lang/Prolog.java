@@ -117,7 +117,7 @@ public final class Prolog {
   private void initOnce() {
     if (pcl == null) pcl = new PrologClassLoader();
     if (internalDB == null) internalDB = new InternalDatabase();
-    if (streamManager == null) streamManager = new HashtableOfTerm();
+    if (streamManager == null) streamManager = new HashtableOfTerm(7);
   }
 
     /** Initializes this Prolog engine. */

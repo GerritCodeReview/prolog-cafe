@@ -92,6 +92,9 @@ public abstract class PrologControl {
      */
     public void configureUserIO(InputStream in, OutputStream out,
         OutputStream err) {
+      if (engine.streamManager == null) {
+        engine.streamManager = new HashtableOfTerm(7);
+      }
       if (in != null) {
         engine.streamManager.put(
             SymbolTerm.intern("user_input"),
