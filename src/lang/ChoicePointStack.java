@@ -85,15 +85,4 @@ public final class ChoicePointStack {
     // Since the stack is represented as a linked list, there is no limit.
     return Integer.MAX_VALUE;
   }
-
-  /** Shows the contents of this <code>CPFStack</code>. */
-  public void show() {
-    if (top == null) {
-      System.out.println("{choice point stack is empty!}");
-      return;
-    }
-    for (ChoicePointFrame e = top; e != null; e = e.prior) {
-      System.out.println(e);
-    }
-  }
 }

@@ -81,17 +81,5 @@ public final class Trail {
 	    t.undo();
 	}
     }
-
-    /** Shows the contents of this <code>Trail</code>. */
-    public void show() {
-	if (empty()) {
-	    System.out.println("{trail stack is empty!}");
-	    return;
-	}
-	for (int i=0; i<=top; i++) {
-	    System.out.print("trail[" + i + "]: ");
-	    System.out.println(buffer[i]);
-	}
-    }
 }
 
