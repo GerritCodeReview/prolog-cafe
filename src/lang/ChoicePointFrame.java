@@ -51,6 +51,7 @@ class ChoicePointFrame {
       }
 
       void restore(Prolog engine) {
+        engine.cont = this.cont;
         engine.r1 = this.r1;
         engine.r2 = this.r2;
       }
