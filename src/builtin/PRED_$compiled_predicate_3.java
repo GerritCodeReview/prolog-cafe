@@ -14,6 +14,7 @@ public final class PRED_$compiled_predicate_3 extends Predicate.P3 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1 = arg1.dereference();

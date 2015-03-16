@@ -39,6 +39,7 @@ public class JavaException extends BuiltinException {
     /** Returns a term representation of this <code>JavaException</code>:
      * <code>java_error(goal,argNo,exception)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -53,6 +54,7 @@ public class JavaException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>JavaException</code>. */
+    @Override
     public String toString() {
 	String s = "{JAVA ERROR: " + goal.toString();
 	if (argNo > 0)

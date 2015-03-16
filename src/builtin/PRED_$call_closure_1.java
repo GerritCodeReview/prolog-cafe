@@ -12,6 +12,7 @@ class PRED_$call_closure_1 extends Predicate.P1 {
 	this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1;

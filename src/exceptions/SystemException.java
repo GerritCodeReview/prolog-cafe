@@ -26,12 +26,14 @@ public class SystemException extends PrologException {
     /** Returns a term representation of this <code>SystemException</code>:
      * <code>system_error(message)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {SymbolTerm.create(message)};
 	return new StructureTerm(SYSTEM_ERROR, args);
     }
 
     /** Returns a string representation of this <code>SystemException</code>. */
+    @Override
     public String toString() {
 	String s = "{SYSTEM ERROR: " + message;
 	s += "}";

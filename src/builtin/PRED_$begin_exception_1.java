@@ -16,6 +16,7 @@ class PRED_$begin_exception_1 extends BlockPredicate {
 	this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1;

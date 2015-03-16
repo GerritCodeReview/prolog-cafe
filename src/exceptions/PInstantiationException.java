@@ -34,12 +34,14 @@ public class PInstantiationException extends BuiltinException {
     /** Returns a term representation of this <code>PInstantiationException</code>:
      * <code>instantiation_error(goal,argNo)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {new JavaObjectTerm(goal), new IntegerTerm(argNo)};
 	return new StructureTerm(INSTANTIATION_ERROR, args);
     }
 
     /** Returns a string representation of this <code>PInstantiationException</code>. */
+    @Override
     public String toString() {
 	String s = "{INSTANTIATION ERROR: " + goal.toString();
 	if (argNo > 0)

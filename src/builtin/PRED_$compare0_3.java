@@ -13,6 +13,7 @@ public final class PRED_$compare0_3 extends Predicate.P3 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a2 = arg2.dereference();

@@ -40,6 +40,7 @@ public class EvaluationException extends BuiltinException {
     /** Returns a term representation of this <code>EvaluationException</code>:
      * <code>evaluation_error(goal,argNo,errorType)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -49,6 +50,7 @@ public class EvaluationException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>EvaluationException</code>. */
+    @Override
     public String toString() {
 	String s = "{EVALUATION ERROR: " + goal.toString();
 	if (argNo > 0)

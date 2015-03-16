@@ -23,6 +23,7 @@ class PRED_$read_token0_3 extends Predicate.P3 {
 
     /* The a1 must be user, user_input, and 
        java.io.PushbackReader, otherwise fails. */
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2, a3;

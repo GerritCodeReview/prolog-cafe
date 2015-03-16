@@ -12,6 +12,7 @@ public class PRED_$get_level_1 extends Predicate.P1 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
 	//        engine.setB0(); 
 	Term a1;

@@ -16,6 +16,7 @@ public class OutOfScope implements Undoable {
 	p = _p;
     }
 
+    @Override
     public void undo() {
 	p.outOfScope = false;
     }

@@ -23,6 +23,7 @@ public class ClosureTerm extends Term {
       return TYPE_CLOSURE;
     }
 
+    @Override
     public boolean unify(Term t, Trail trail) {
 	//	t = t.dereference();
 	if (t instanceof VariableTerm)
@@ -32,8 +33,10 @@ public class ClosureTerm extends Term {
 	return code.equals(((ClosureTerm)t).code);
     }
 
+    @Override
     public String toQuotedString() { return toString(); }
 
+    @Override
     public String name() { return ""; }
 
     /* Object */
@@ -47,17 +50,20 @@ public class ClosureTerm extends Term {
      * equivalent to this <code>ClosureTerm</code>, false otherwise.
      * @see #compareTo
      */
+    @Override
     public boolean equals(Object obj) { // obj must be dereferenced
 	if (! (obj instanceof ClosureTerm))
 	    return false;
 	return code.equals(((ClosureTerm)obj).code);
     }
 
+    @Override
     public int hashCode() {
 	return code.hashCode();
     }
 
     /** Returns a string representation of this <code>ClosureTerm</code>. */
+    @Override
     public String toString() {
 	return "closure[" + code.toString() + "]";
     }
@@ -72,6 +78,7 @@ public class ClosureTerm extends Term {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced
 	if (! (anotherTerm instanceof ClosureTerm))
 	    return AFTER;

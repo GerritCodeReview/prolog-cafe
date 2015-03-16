@@ -21,6 +21,7 @@ class PRED_$hash_remove_first_3 extends Predicate.P3 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2, a3;

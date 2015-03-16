@@ -28,6 +28,7 @@ public class BuiltinException extends PrologException {
 	message = _message;
     }
 
+    @Override
     public Term getMessageTerm() {
 	return message;
     }

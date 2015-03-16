@@ -18,11 +18,13 @@ public class Success extends Operation {
      * @param engine Prolog engine
      * @see PrologControl#success
      */
+    @Override
     public Operation exec(Prolog engine) {
 	engine.control.success();
 	return engine.fail();
     }
 
     /** Returns a string representation of this <code>Success</code>. */
+    @Override
     public String toString(){ return "Success"; }
 }

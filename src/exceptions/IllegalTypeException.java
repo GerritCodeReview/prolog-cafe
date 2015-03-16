@@ -51,6 +51,7 @@ public class IllegalTypeException extends BuiltinException {
     /** Returns a term representation of this <code>IllegalTypeException</code>:
      * <code>type_error(goal,argNo,type,culprit)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -61,6 +62,7 @@ public class IllegalTypeException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>IllegalTypeException</code>. */
+    @Override
     public String toString() {
 	String s = "{TYPE ERROR: " + goal.toString();
 	if (argNo > 0)

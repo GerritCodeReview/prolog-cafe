@@ -31,6 +31,7 @@ public class PRED_get_char_2 extends Predicate.P2 {
 	return ((SymbolTerm)t).name().length() == 1;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2;

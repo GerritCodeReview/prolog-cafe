@@ -20,6 +20,7 @@ public class PRED_keysort_2 extends Predicate.P2 {
 	this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
 	Term a1, a2;
@@ -74,6 +75,7 @@ public class PRED_keysort_2 extends Predicate.P2 {
 }
 
 class KeySortComparator implements java.util.Comparator<Term> {
+    @Override
     public int compare(Term t1, Term t2) {
 	Term arg1 = ((StructureTerm)t1).args()[0].dereference();
 	Term arg2 = ((StructureTerm)t2).args()[0].dereference();
