@@ -54,7 +54,7 @@ public class PRED_atom_codes_2 extends Predicate.P2 {
 	    char[] chars = ((SymbolTerm)a1).name().toCharArray();
 	    Term x = Prolog.Nil;
 	    for (int i=chars.length; i>0; i--) {
-		x = new ListTerm(new IntegerTerm((int)chars[i-1]), x);
+		x = new ListTerm(new IntegerTerm(chars[i-1]), x);
 	    }
 	    if(! a2.unify(x, engine.trail)) 
 		return engine.fail();

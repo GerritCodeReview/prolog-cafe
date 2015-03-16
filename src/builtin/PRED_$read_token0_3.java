@@ -66,7 +66,7 @@ class PRED_$read_token0_3 extends Predicate.P3 {
 		char[] chars = (s.toString()).toCharArray();
 		token = Prolog.Nil;
 		for (int i=chars.length; i>0; i--){
-		    token = new ListTerm(new IntegerTerm((int)chars[i-1]), token);
+		    token = new ListTerm(new IntegerTerm(chars[i-1]), token);
 		}
 		break;
 	    default :

@@ -59,7 +59,7 @@ class PRED_read_line_2 extends Predicate.P2 {
 	    for (int i=chars.length; i>0; i--) {
 		if (! Character.isDefined((int)chars[i-1]))
 		    throw new RepresentationException(this, 0, "character");
-		t = new ListTerm(new IntegerTerm((int)chars[i-1]), t);
+		t = new ListTerm(new IntegerTerm(chars[i-1]), t);
 	    }
 	    if(! a2.unify(t, engine.trail))
 		return engine.fail();

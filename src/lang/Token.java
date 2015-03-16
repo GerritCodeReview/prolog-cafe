@@ -429,14 +429,14 @@ public class Token {
 	p = s.toCharArray(); // string --> chars[]
 	if (Character.isLowerCase(p[0])){
 	    for (int i=1; i<p.length; i++){
-		if (! Character.isLetterOrDigit(p[i]) && ((int)p[i]) != '_')
+		if (! Character.isLetterOrDigit(p[i]) && (p[i]) != '_')
 		    return 3;
 	    }
 	    return 0;
 	}
-	if (isSymbol((int) p[0])){
+	if (isSymbol(p[0])){
 	    for (int i=1; i<p.length; i++){
-		if (! isSymbol((int) p[i]))
+		if (! isSymbol(p[i]))
 		    return 3;
 	    }
 	    return 1;
