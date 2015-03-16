@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e18ed27f_cf509db5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011842
+      },
+      "writtenOn": "2015-03-16T17:46:40Z",
+      "side": 1,
+      "message": "Is there a way to describe this in terms of its positive effect that couldn\u0027t be achieved by turning off the warning?\n\nE.g.\n\n Remove redundant type argument specifications\n\n Java 7 can infer type arguments. Using that when possible\n instead of explicitly specifying the arguments usually makes\n code easier to read and tweak, so do so.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "9578ef65c2e0c59ffd6b849175087090728b3bb8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
