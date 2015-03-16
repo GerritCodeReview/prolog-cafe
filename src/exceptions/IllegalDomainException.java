@@ -18,6 +18,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class IllegalDomainException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>domain_error/4</code>. */
     public static final SymbolTerm DOMAIN_ERROR = SymbolTerm.intern("domain_error", 4);
 

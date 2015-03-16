@@ -18,6 +18,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class EvaluationException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>evaluation_error/3</code>. */
     public static final SymbolTerm EVALUATION_ERROR = SymbolTerm.intern("evaluation_error", 3);
 

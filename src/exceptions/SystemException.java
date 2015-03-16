@@ -12,6 +12,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class SystemException extends PrologException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>system_error/1</code>. */
     public static final SymbolTerm SYSTEM_ERROR = SymbolTerm.intern("system_error", 1);
 

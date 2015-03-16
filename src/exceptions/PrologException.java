@@ -10,6 +10,7 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public abstract class PrologException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
 
     /** Constructs a new Prolog exception. */
     public PrologException() {}

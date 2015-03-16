@@ -17,6 +17,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class RepresentationException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>representation_error/3</code>. */
     public static final SymbolTerm REPRESENTATION_ERROR = SymbolTerm.intern("representation_error", 3);
 
