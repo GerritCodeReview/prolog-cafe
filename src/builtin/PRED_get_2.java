@@ -56,8 +56,7 @@ public class PRED_get_2 extends Predicate.P2 {
 	if (! (stream instanceof PushbackReader))
 	    throw new PermissionException(this, "input", "stream", a1, "");
 	// read a non-blank single character
-	try {
-	    PushbackReader in = (PushbackReader) stream;
+	try (PushbackReader in = (PushbackReader) stream) {
 	    int c = in.read();
 	    while(Character.isWhitespace((char)c))
 		c = in.read();
