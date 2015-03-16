@@ -16,6 +16,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class PermissionException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>permission_error/5</code>. */
     public static final SymbolTerm PERMISSION_ERROR = SymbolTerm.intern("permission_error", 5);
 

@@ -17,6 +17,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class SyntaxException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>syntax_error/5</code>. */
     public static final SymbolTerm SYNTAX_ERROR = SymbolTerm.intern("syntax_error", 5);
 

@@ -17,6 +17,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class IllegalTypeException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>type_error/4</code>. */
     public static final SymbolTerm TYPE_ERROR = SymbolTerm.intern("type_error", 4);
 

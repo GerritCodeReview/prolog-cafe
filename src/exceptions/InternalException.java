@@ -12,6 +12,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class InternalException extends PrologException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>internal_error/1</code>. */
     public static final SymbolTerm INTERNAL_ERROR = SymbolTerm.intern("internal_error", 1);
 
