@@ -40,7 +40,7 @@ public class PRED_char_code_2 extends Predicate.P2 {
 	    String s = ((SymbolTerm)a1).name();
 	    if (s.length() != 1)
 		throw new IllegalTypeException(this, 1, "character", a1);
-	    if(! a2.unify(new IntegerTerm((int)s.charAt(0)), engine.trail)) 
+	    if(! a2.unify(new IntegerTerm(s.charAt(0)), engine.trail))
 		return engine.fail();
 	} else {
 	    return engine.fail();
