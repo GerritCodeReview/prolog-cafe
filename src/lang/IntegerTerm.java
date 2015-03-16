@@ -51,7 +51,7 @@ public class IntegerTerm extends NumberTerm {
      * @see Term#convertible(Class, Class)
      */
     @Override
-    public boolean convertible(Class type) { return convertible(Integer.class, type); }
+    public boolean convertible(Class<?> type) { return convertible(Integer.class, type); }
 
     @Override
     public String name() { return ""; }

@@ -30,8 +30,8 @@ class PRED_$call_2 extends Predicate.P2 {
 	String functor;
 	int arity;
 	Term[] args;
-	Class clazz;
-	Constructor constr;
+	Class<?> clazz;
+	Constructor<?> constr;
 	Operation pred;
 
 	try {

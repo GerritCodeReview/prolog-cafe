@@ -100,7 +100,7 @@ public class ListTerm extends Term {
      * @see Term#convertible(Class, Class)
      */
     @Override
-    public boolean convertible(Class type) { 
+    public boolean convertible(Class<?> type) { 
 	return convertible(List.class, type); 
     }
 
@@ -152,7 +152,7 @@ public class ListTerm extends Term {
      * this <code>IntegerTerm</code>.
      */
     @Override
-    public List toJava() { 
+    public List<?> toJava() { 
 	List<Object> vec = new ArrayList<>();
 	Term t = this;
 	while(t instanceof ListTerm) {

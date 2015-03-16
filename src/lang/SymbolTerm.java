@@ -223,7 +223,7 @@ public abstract class SymbolTerm extends Term {
      * @see Term#convertible(Class, Class)
      */
     @Override
-    public boolean convertible(Class type) { return convertible(String.class, type); }
+    public boolean convertible(Class<?> type) { return convertible(String.class, type); }
 
     /**
      * Returns a <code>java.lang.String</code> corresponds to this <code>SymbolTerm</code>

@@ -103,7 +103,7 @@ public class VariableTerm extends Term implements Undoable {
      * @see #val
      */
     @Override
-    public boolean convertible(Class type) {
+    public boolean convertible(Class<?> type) {
 	if (val != this)
 	    return val.convertible(type);
 	return convertible(this.getClass(), type);

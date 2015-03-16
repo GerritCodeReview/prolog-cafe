@@ -142,7 +142,7 @@ public class BufferingPrologControl extends PrologControl {
    */
   private boolean run(int newLimit) {
     resLimit = newLimit;
-    resBuffer = new ArrayList(Math.min(newLimit, 16));
+    resBuffer = new ArrayList<>(Math.min(newLimit, 16));
 
     executePredicate();
     return 0 < resBuffer.size();
