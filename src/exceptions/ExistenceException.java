@@ -30,14 +30,14 @@ public class ExistenceException extends BuiltinException {
     public Term   culprit;
 
     /** Holds a string representation of detail message. */
-    public String message;
+    public String msg;
 
     /** Constructs a new <code>ExistenceException</code>
      * with a object type, its culprit, and message. */
     public ExistenceException(String _objType, Term _culprit, String _message) {
 	objType    = _objType;
 	culprit    = _culprit;
-	message    = _message;
+	msg        = _message;
     }
 
     /** Constructs a new <code>ExistenceException</code> 
@@ -47,7 +47,7 @@ public class ExistenceException extends BuiltinException {
 	this.argNo = _argNo;
 	objType    = _objType;
 	culprit    = _culprit;
-	message    = _message;
+	msg        = _message;
     }
 
     /** Returns a term representation of this <code>ExistenceException</code>:
@@ -60,7 +60,7 @@ public class ExistenceException extends BuiltinException {
 	    new IntegerTerm(argNo),
 	    SymbolTerm.create(objType),
 	    culprit,
-	    SymbolTerm.create(message)};
+	    SymbolTerm.create(msg)};
 	return new StructureTerm(EXISTENCE_ERROR, args);
     }
 

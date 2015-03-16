@@ -29,14 +29,14 @@ public class SyntaxException extends BuiltinException {
     public Term culprit;
 
     /** Holds a string representation of detail message. */
-    public String message;
+    public String msg;
 
     /** Constructs a new <code>SyntaxException</code> 
      * with a valid type, its culprit, and message. */
     public SyntaxException(String _type, Term _culprit, String _message) {
 	type       = _type;
 	culprit    = _culprit;
-	message    = _message;
+	msg        = _message;
     }
 
     /** Constructs a new <code>SyntaxException</code> with the given arguments. */
@@ -45,7 +45,7 @@ public class SyntaxException extends BuiltinException {
 	this.argNo = _argNo;
 	type       = _type;
 	culprit    = _culprit;
-	message    = _message;
+	msg        = _message;
     }
 
     /** Returns a term representation of this <code>SyntaxException</code>:
@@ -58,7 +58,7 @@ public class SyntaxException extends BuiltinException {
 	    new IntegerTerm(argNo), 
 	    SymbolTerm.create(type),
 	    culprit,
-	    SymbolTerm.create(message) };
+	    SymbolTerm.create(msg) };
 	return new StructureTerm(SYNTAX_ERROR, args);
     }
 

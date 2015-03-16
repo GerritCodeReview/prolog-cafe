@@ -37,7 +37,7 @@ public class PermissionException extends BuiltinException {
     public Term culprit;
 
     /** Holds a string representation of detail message. */
-    public String message;
+    public String msg;
 
     /** Constructs a new <code>PermissionException</code>
      * with the given arguments. */
@@ -50,7 +50,7 @@ public class PermissionException extends BuiltinException {
 	operation = _operation;
 	permissionType   = _permissionType;
 	culprit   = _culprit;
-	message   = _message;
+	msg       = _message;
     }
 
     /** Returns a term representation of this <code>PermissionException</code>:
@@ -63,7 +63,7 @@ public class PermissionException extends BuiltinException {
 	    SymbolTerm.create(operation),
 	    SymbolTerm.create(permissionType),
 	    culprit,
-	    SymbolTerm.create(message)};
+	    SymbolTerm.create(msg)};
 	return new StructureTerm(PERMISSION_ERROR, args);
     }
 
@@ -72,7 +72,7 @@ public class PermissionException extends BuiltinException {
     public String toString() {
 	String s = "{PERMISSION ERROR: " + goal.toString();
 	s += " - can not " + operation + " " + permissionType + " " + culprit.toString();
-	s += ": " + message;
+	s += ": " + msg;
 	s += "}";
 	return s;
     }
