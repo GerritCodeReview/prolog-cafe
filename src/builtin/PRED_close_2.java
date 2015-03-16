@@ -99,13 +99,13 @@ public class PRED_close_2 extends Predicate.P2 {
 		throw new TermException(new JavaObjectTerm(e));
 	    }
 	} else if (stream instanceof PrintWriter) {
-	    PrintWriter out = (PrintWriter) stream;
-	    if (out.checkError()) {
-		if (! forceFlag)
-		    throw new SystemException("output stream error");
+	    try (PrintWriter out = (PrintWriter) stream) {
+	      if (out.checkError()) {
+	        if (! forceFlag)
+	          throw new SystemException("output stream error");
+	        }
+	      out.flush();
 	    }
-	    out.flush();
-	    out.close();
 	} else {
 	    throw new IllegalDomainException(this, 1, "stream_or_alias", a1);
 	}
