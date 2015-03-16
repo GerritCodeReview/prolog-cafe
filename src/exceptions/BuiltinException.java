@@ -12,6 +12,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class BuiltinException extends PrologException {
+    private static final long serialVersionUID = 1L;
+
     Term message;
 
     /** Holds the goal in which this exception occurs. */

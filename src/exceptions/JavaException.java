@@ -18,6 +18,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class JavaException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>java_error/3</code>. */
     public static final SymbolTerm JAVA_ERROR = SymbolTerm.intern("java_error", 3);
 

@@ -18,6 +18,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class PInstantiationException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>instantiation/2</code>. */
     public static final SymbolTerm INSTANTIATION_ERROR = SymbolTerm.intern("instantiation_error", 2);
 

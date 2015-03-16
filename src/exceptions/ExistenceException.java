@@ -17,6 +17,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class ExistenceException extends BuiltinException {
+    private static final long serialVersionUID = 1L;
+
     /** A functor symbol of <code>existence_error/5</code>. */
     public static final SymbolTerm EXISTENCE_ERROR = SymbolTerm.intern("existence_error", 5);
 

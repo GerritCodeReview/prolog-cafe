@@ -13,6 +13,8 @@ import com.googlecode.prolog_cafe.lang.Term;
  * @version 1.0
  */
 public class TermException extends PrologException {
+    private static final long serialVersionUID = 1L;
+
     /** Message as term. */
     Term message;
 

@@ -9,6 +9,8 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class HashtableOfTerm extends HashMap<Term,Term> {
+    private static final long serialVersionUID = 1L;
+
     public HashtableOfTerm() { 
 	super(); 
     }
