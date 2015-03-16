@@ -21,9 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class SymbolTerm extends Term {
     /** Symbol table. */
     private static final ConcurrentHashMap<Key, InternRef> SYMBOL_TABLE =
-      new ConcurrentHashMap<Key, InternRef>();
+      new ConcurrentHashMap<>();
 
-    private static final ReferenceQueue<Interned> DEAD = new ReferenceQueue<Interned>();
+    private static final ReferenceQueue<Interned> DEAD = new ReferenceQueue<>();
 
     private static final class Key {
       final String name;

@@ -186,7 +186,7 @@ public class Compiler {
       String out = ".";
       String amdir = null;
       boolean stackTrace = false;
-      LinkedList<String> plsrc = new LinkedList<String>();
+      LinkedList<String> plsrc = new LinkedList<>();
       int argi = 0;
       for (; argi < argv.length; argi++) {
         String a = argv[argi];

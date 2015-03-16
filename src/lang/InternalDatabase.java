@@ -34,14 +34,14 @@ public class InternalDatabase {
     public InternalDatabase(int n) {
 	maxContents = n;
 	buffer = new Term[Math.min(maxContents, DEFAULT_SIZE)];
-	reusableIndices = new LinkedList<Integer>();
+	reusableIndices = new LinkedList<>();
 	top = -1;
     }
 
     InternalDatabase(Prolog engine, InternalDatabase src, boolean deepCopy) {
       maxContents = src.maxContents;
       buffer = new Term[src.buffer.length];
-      reusableIndices = new LinkedList<Integer>(src.reusableIndices);
+      reusableIndices = new LinkedList<>(src.reusableIndices);
       top = src.top;
 
       if (deepCopy) {

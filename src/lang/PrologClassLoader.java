@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PrologClassLoader extends ClassLoader {
   private final ConcurrentHashMap<Key, CacheEntry> predicateCache =
-      new ConcurrentHashMap<Key, CacheEntry>();
+      new ConcurrentHashMap<>();
 
   /** Initialize using the {@link ClassLoader#getSystemClassLoader()}. */
   public PrologClassLoader() {
