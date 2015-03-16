@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "268720d3_61e2561c",
+        "filename": "src/lang/PrologControl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1013092
+      },
+      "writtenOn": "2015-03-16T04:35:25Z",
+      "side": 1,
+      "message": "Why 7? I see 3 entries below.",
+      "range": {
+        "startLine": 96,
+        "startChar": 51,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "facc64ad0c68bf2c0009b26b849ce6a7487215a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
