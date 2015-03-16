@@ -197,6 +197,11 @@ public class VariableTerm extends Term implements Undoable {
 	return this == obj;
     }
 
+    @Override
+    public int hashCode() {
+      return System.identityHashCode(this);
+    }
+
     /**
      * Returns a string representation of this term if unbound.
      * Otherwise, returns the value of dereferenced term:
