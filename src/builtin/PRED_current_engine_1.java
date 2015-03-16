@@ -1,5 +1,9 @@
 package com.googlecode.prolog_cafe.builtin;
-import  com.googlecode.prolog_cafe.lang.*;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.Term;
 /**
  * <code>current_engine/1</code>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

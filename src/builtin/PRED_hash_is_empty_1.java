@@ -3,8 +3,14 @@ import com.googlecode.prolog_cafe.exceptions.ExistenceException;
 import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
 import com.googlecode.prolog_cafe.exceptions.InternalException;
 import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
-import com.googlecode.prolog_cafe.lang.*;
-import java.util.Hashtable;
+import com.googlecode.prolog_cafe.lang.HashtableOfTerm;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.VariableTerm;
 /**
    <code>hash_is_empty/1</code><br>
    @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

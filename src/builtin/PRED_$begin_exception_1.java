@@ -1,7 +1,13 @@
 package com.googlecode.prolog_cafe.builtin;
 import com.googlecode.prolog_cafe.exceptions.JavaException;
 import com.googlecode.prolog_cafe.exceptions.PrologException;
-import  com.googlecode.prolog_cafe.lang.*;
+import com.googlecode.prolog_cafe.lang.BlockPredicate;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.OutOfLoop;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.PrologControl;
+import com.googlecode.prolog_cafe.lang.Term;
 /**
  * <code>'$begin_exception'/1</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
