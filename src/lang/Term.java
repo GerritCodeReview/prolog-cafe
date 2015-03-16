@@ -53,7 +53,7 @@ public abstract class Term implements Comparable<Term> {
      * <code>type</code>. Otherwise <code>false</code>.
      * @see #convertible(Class, Class)
      */
-    public boolean convertible(Class type) { return convertible(getClass(), type); }
+    public boolean convertible(Class<?> type) { return convertible(getClass(), type); }
 
     /** Returns a copy of this object. */
     protected Term copy(Prolog engine) { return this; }
@@ -84,7 +84,7 @@ public abstract class Term implements Comparable<Term> {
     /**
      * Check whether there is a widening conversion from <code>from</code> to <code>to</code>.
      */
-    protected static boolean convertible(Class from, Class<?> to) {
+    protected static boolean convertible(Class<?> from, Class<?> to) {
 	if (from == null)
 	    return ! to.isPrimitive();
 	if (to.isAssignableFrom(from)) {

@@ -56,7 +56,7 @@ public class DoubleTerm extends NumberTerm {
      * @see Term#convertible(Class, Class)
      */
     @Override
-    public boolean convertible(Class type) { return convertible(Double.class, type); }
+    public boolean convertible(Class<?> type) { return convertible(Double.class, type); }
 
     /** 
      * Returns a <code>java.lang.Double</code> corresponds to this <code>DoubleTerm</code>

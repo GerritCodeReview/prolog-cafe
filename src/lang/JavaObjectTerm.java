@@ -31,7 +31,7 @@ public class JavaObjectTerm extends Term {
     public Object  object() { return obj; }
 
     /** Returns a <code>java.lang.Class</code> of object wrapped by this <code>JavaObjectTerm</code>. */
-    public Class   getClazz() { return obj.getClass(); }
+    public Class<?>   getClazz() { return obj.getClass(); }
 
     @Override
     public String name() { return ""; }
@@ -61,7 +61,7 @@ public class JavaObjectTerm extends Term {
      * @see Term#convertible(Class, Class)
      */
     @Override
-    public boolean convertible(Class type) { return convertible(obj.getClass(), type); }
+    public boolean convertible(Class<?> type) { return convertible(obj.getClass(), type); }
 
     /** 
      * Returns the object wrapped by this <code>JavaObjectTerm</code>.

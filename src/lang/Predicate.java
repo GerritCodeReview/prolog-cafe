@@ -31,8 +31,8 @@ public abstract class Predicate extends Operation {
 
   @Override
   public String toString() {
-    LinkedList<Class> toScan = new LinkedList<>();
-    Class clazz = getClass();
+    LinkedList<Class<?>> toScan = new LinkedList<>();
+    Class<?> clazz = getClass();
     while (clazz != Predicate.class) {
       toScan.addFirst(clazz);
       clazz = clazz.getSuperclass();
@@ -41,7 +41,7 @@ public abstract class Predicate extends Operation {
     StringBuffer sb = new StringBuffer();
     sb.append(PredicateEncoder.decodeFunctor(getClass().getName()));
     boolean first = true;
-    for (Class c : toScan) {
+    for (Class<?> c : toScan) {
       for (Field f : c.getDeclaredFields()) {
         if ((f.getModifiers() & Modifier.STATIC) == 0
             && f.getType() == Term.class
