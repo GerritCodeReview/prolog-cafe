@@ -118,10 +118,10 @@ public class IntegerTerm extends NumberTerm {
     public int intValue() { return this.val; }
 
     @Override
-    public long longValue() { return (long)(this.val); }
+    public long longValue() { return (this.val); }
 
     @Override
-    public double doubleValue() { return (double)(this.val); }
+    public double doubleValue() { return (this.val); }
 
     @Override
     public int arithCompareTo(NumberTerm t) {
@@ -206,7 +206,7 @@ public class IntegerTerm extends NumberTerm {
 	    throw new IllegalTypeException("integer", t);
 	if (t.intValue() == 0)
 	    throw new EvaluationException("zero_divisor");
-	return new IntegerTerm((int) (this.val / t.intValue()));
+	return new IntegerTerm(this.val / t.intValue());
     }
 
     /** 
@@ -334,7 +334,7 @@ public class IntegerTerm extends NumberTerm {
     public NumberTerm toDegrees() { return new DoubleTerm(Math.toDegrees(this.doubleValue())); }
 
     @Override
-    public NumberTerm toFloat() { return new DoubleTerm((double) this.val); }
+    public NumberTerm toFloat() { return new DoubleTerm(this.val); }
 
     @Override
     public NumberTerm toRadians() { return new DoubleTerm(Math.toRadians(this.doubleValue())); }

@@ -64,7 +64,7 @@ public class PRED_number_codes_2 extends Predicate.P2 {
 	    char[] chars = a1.toString().toCharArray();
 	    Term y = Prolog.Nil;
 	    for (int i=chars.length; i>0; i--) {
-		y = new ListTerm(new IntegerTerm((int)chars[i-1]), y);
+		y = new ListTerm(new IntegerTerm(chars[i-1]), y);
 	    }
 	    if (! a2.unify(y, engine.trail) ) 
 		return engine.fail();
