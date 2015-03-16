@@ -1,5 +1,11 @@
 package com.googlecode.prolog_cafe.builtin;
-import  com.googlecode.prolog_cafe.lang.*;
+import com.googlecode.prolog_cafe.lang.IntegerTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.Token;
 /**
  * <code>'$atom_type0'/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

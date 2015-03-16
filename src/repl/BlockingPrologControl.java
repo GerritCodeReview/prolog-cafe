@@ -1,7 +1,6 @@
 package com.googlecode.prolog_cafe.repl;
 
 import com.googlecode.prolog_cafe.exceptions.PrologException;
-import com.googlecode.prolog_cafe.lang.HashtableOfTerm;
 import com.googlecode.prolog_cafe.lang.Predicate;
 import com.googlecode.prolog_cafe.lang.PrologControl;
 import com.googlecode.prolog_cafe.lang.Term;

@@ -1,5 +1,8 @@
 package com.googlecode.prolog_cafe.builtin;
-import  com.googlecode.prolog_cafe.lang.*;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.Term;
 /**
  * <code>'$set_exception'/1</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
