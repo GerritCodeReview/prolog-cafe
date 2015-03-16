@@ -3,7 +3,6 @@ import com.googlecode.prolog_cafe.exceptions.ExistenceException;
 import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.exceptions.SystemException;
 import  com.googlecode.prolog_cafe.lang.*;
-import java.lang.reflect.*;
 /**
  * <code>'$call'/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
@@ -30,9 +29,6 @@ class PRED_$call_2 extends Predicate.P2 {
 	String functor;
 	int arity;
 	Term[] args;
-	Class<?> clazz;
-	Constructor<?> constr;
-	Operation pred;
 
 	try {
 	    if (! (a1 instanceof SymbolTerm))
