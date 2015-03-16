@@ -9,7 +9,6 @@ import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 import com.googlecode.prolog_cafe.lang.VariableTerm;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**

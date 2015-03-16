@@ -1,8 +1,4 @@
 package com.googlecode.prolog_cafe.builtin;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.PushbackReader;
-
 import com.googlecode.prolog_cafe.exceptions.ExistenceException;
 import com.googlecode.prolog_cafe.exceptions.IllegalDomainException;
 import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
@@ -19,6 +15,10 @@ import com.googlecode.prolog_cafe.lang.StructureTerm;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 import com.googlecode.prolog_cafe.lang.VariableTerm;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
 /**
  * <code>close/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

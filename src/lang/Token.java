@@ -1,6 +1,7 @@
 package com.googlecode.prolog_cafe.lang;
-import java.util.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.PushbackReader;
 /**
  * The <code>Token</code> class contains methods
  * for character input/output.<br>

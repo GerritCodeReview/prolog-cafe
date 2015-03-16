@@ -3,7 +3,14 @@ import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
 import com.googlecode.prolog_cafe.exceptions.RepresentationException;
 import com.googlecode.prolog_cafe.exceptions.SyntaxException;
-import  com.googlecode.prolog_cafe.lang.*;
+import com.googlecode.prolog_cafe.lang.DoubleTerm;
+import com.googlecode.prolog_cafe.lang.IntegerTerm;
+import com.googlecode.prolog_cafe.lang.ListTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.VariableTerm;
 /**
  * <code>number_codes/2</code><br>
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
