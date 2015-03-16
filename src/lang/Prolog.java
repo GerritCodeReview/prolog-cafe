@@ -88,7 +88,7 @@ public final class Prolog {
       control = c;
       trail = new Trail();
       stack = new ChoicePointStack(trail);
-      copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+      copyHash = new IdentityHashMap<>();
       hashManager = new HashtableOfTerm();
     }
 
@@ -96,7 +96,7 @@ public final class Prolog {
       control = c;
       trail = new Trail();
       stack = new ChoicePointStack(trail);
-      copyHash = new IdentityHashMap<VariableTerm, VariableTerm>();
+      copyHash = new IdentityHashMap<>();
       pcl = pmc.pcl;
 
       // During restore there is no need to copy terms. clause/2 inside of

@@ -31,7 +31,7 @@ public abstract class Predicate extends Operation {
 
   @Override
   public String toString() {
-    LinkedList<Class> toScan = new LinkedList<Class>();
+    LinkedList<Class> toScan = new LinkedList<>();
     Class clazz = getClass();
     while (clazz != Predicate.class) {
       toScan.addFirst(clazz);

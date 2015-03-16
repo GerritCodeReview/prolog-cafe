@@ -153,7 +153,7 @@ public class ListTerm extends Term {
      */
     @Override
     public List toJava() { 
-	List<Object> vec = new ArrayList<Object>();
+	List<Object> vec = new ArrayList<>();
 	Term t = this;
 	while(t instanceof ListTerm) {
 	    vec.add(((ListTerm)t).car().dereference().toJava());
