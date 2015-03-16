@@ -27,7 +27,7 @@ public class PRED_keysort_2 extends Predicate.P2 {
 	a1 = arg1;
 	a2 = arg2;
 	int len;
-	Term tmp, tmp2;
+	Term tmp;
 	Term[] list;
 
 	a1 = a1.dereference();

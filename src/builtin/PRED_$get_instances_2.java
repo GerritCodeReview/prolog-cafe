@@ -24,7 +24,6 @@ class PRED_$get_instances_2 extends Predicate.P2 {
         Term a1, a2;
         a1 = arg1;
         a2 = arg2;
-	int idx;
 
 	a1 = a1.dereference();
 	if (Prolog.Nil.equals(a1))
