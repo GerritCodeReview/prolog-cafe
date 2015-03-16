@@ -1,18 +1,11 @@
 package com.googlecode.prolog_cafe.repl;
 import com.googlecode.prolog_cafe.exceptions.HaltException;
-import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.StructureTerm;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.PushbackReader;
 import java.util.EnumSet;
 import java.util.StringTokenizer;
 /**

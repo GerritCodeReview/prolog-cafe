@@ -5,8 +5,16 @@ import com.googlecode.prolog_cafe.exceptions.IllegalTypeException;
 import com.googlecode.prolog_cafe.exceptions.PInstantiationException;
 import com.googlecode.prolog_cafe.exceptions.PermissionException;
 import com.googlecode.prolog_cafe.exceptions.RepresentationException;
-import com.googlecode.prolog_cafe.lang.*;
-import java.io.*;
+import com.googlecode.prolog_cafe.lang.IntegerTerm;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
+import com.googlecode.prolog_cafe.lang.Operation;
+import com.googlecode.prolog_cafe.lang.Predicate;
+import com.googlecode.prolog_cafe.lang.Prolog;
+import com.googlecode.prolog_cafe.lang.SymbolTerm;
+import com.googlecode.prolog_cafe.lang.Term;
+import com.googlecode.prolog_cafe.lang.VariableTerm;
+
+import java.io.PrintWriter;
 /**
    <code>put_code/2</code><br>
    @author Mutsunori Banbara (banbara@kobe-u.ac.jp)

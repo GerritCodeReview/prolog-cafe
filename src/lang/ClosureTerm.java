@@ -1,5 +1,4 @@
 package com.googlecode.prolog_cafe.lang;
-import java.util.*;
 /**
  * Closure.<br>
  * The class <code>ClosureTerm</code> represents a closure structure.<br>
