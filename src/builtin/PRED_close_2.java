@@ -37,6 +37,7 @@ public class PRED_close_2 extends Predicate.P2 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.requireFeature(Prolog.Feature.IO, this, arg1);
         engine.setB0();

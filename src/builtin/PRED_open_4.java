@@ -33,6 +33,7 @@ public class PRED_open_4 extends Predicate.P4 {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.requireFeature(Prolog.Feature.IO, this, arg1);
         engine.setB0();

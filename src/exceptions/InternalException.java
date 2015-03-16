@@ -26,12 +26,14 @@ public class InternalException extends PrologException {
     /** Returns a term representation of this <code>InternalException</code>:
      * <code>internal_error(message)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {SymbolTerm.create(message)};
 	return new StructureTerm(INTERNAL_ERROR, args);
     }
 
     /** Returns a string representation of this <code>InternalException</code>. */
+    @Override
     public String toString() {
 	String s = "{INTERNAL ERROR: " + message;
 	s += "}";

@@ -61,6 +61,7 @@ public class StructureTerm extends Term {
      * @return the value of <code>arity</code>.
      * @see #arity
      */
+    @Override
     public int arity(){ return args.length; }
 
     /** Returns the argument terms of this <code>StructureTerm</code>.
@@ -74,8 +75,10 @@ public class StructureTerm extends Term {
      * @see #functor
      * @see SymbolTerm#name
      */
+    @Override
     public String name(){ return functor.name(); }
 
+    @Override
     public Term arg(int nth) { return args[nth]; }
 
     @Override
@@ -83,6 +86,7 @@ public class StructureTerm extends Term {
       return TYPE_STRUCTURE;
     }
 
+    @Override
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
 	if (t instanceof VariableTerm) {
@@ -100,6 +104,7 @@ public class StructureTerm extends Term {
 	return true;
     }
 
+    @Override
     protected Term copy(Prolog engine) {
 	Term[] a = new Term[args.length];
 	for (int i=0; i<args.length; i++)
@@ -107,6 +112,7 @@ public class StructureTerm extends Term {
 	return new StructureTerm(functor, a);
     }
 
+    @Override
     public boolean isGround() {
 	for (int i=0; i<args.length; i++) {
 	    if (! args[i].isGround())
@@ -115,6 +121,7 @@ public class StructureTerm extends Term {
 	return true;
     }
 
+    @Override
     public String toQuotedString() {
 	String delim = "";
 	String s = functor.toQuotedString() + "(";
@@ -137,6 +144,7 @@ public class StructureTerm extends Term {
      * equivalent to this <code>StructureTerm</code>, false otherwise.
      * @see #compareTo
      */
+    @Override
     public boolean equals(Object obj) {
 	if (! (obj instanceof StructureTerm))
 	    return false;
@@ -149,6 +157,7 @@ public class StructureTerm extends Term {
 	return true;
     }
 
+    @Override
     public int hashCode() {
 	int h = 1;
 	h = 31*h + functor.hashCode();
@@ -158,6 +167,7 @@ public class StructureTerm extends Term {
     }
 
     /** Returns a string representation of this <code>StructureTerm</code>. */
+    @Override
     public String toString() {
 	String delim = "";
 	String s = functor.toString() + "(";
@@ -179,6 +189,7 @@ public class StructureTerm extends Term {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	SymbolTerm functor2;
 	Term[] args2;

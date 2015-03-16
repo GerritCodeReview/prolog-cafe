@@ -81,6 +81,7 @@ public class ListTerm extends Term {
     }
 
     /* Term */
+    @Override
     public boolean unify(Term t, Trail trail) {
 	t = t.dereference();
 	if (t instanceof VariableTerm) {
@@ -98,14 +99,17 @@ public class ListTerm extends Term {
      * <code>convertible(List.class, type)</code>.
      * @see Term#convertible(Class, Class)
      */
+    @Override
     public boolean convertible(Class type) { 
 	return convertible(List.class, type); 
     }
 
+    @Override
     protected Term copy(Prolog engine) { 
 	return new ListTerm(car.copy(engine), cdr.copy(engine)); 
     }
 
+    @Override
     public boolean isGround() {
 	if (! car.isGround())
 	    return false;
@@ -114,8 +118,10 @@ public class ListTerm extends Term {
 	return true;
     }
 
+    @Override
     public String name() { return SYM_DOT.name(); }
 
+    @Override
     public Term arg(int nth) {
       Term t = this;
       int old_nth = nth;
@@ -145,6 +151,7 @@ public class ListTerm extends Term {
      * @return a {@link java.util.List} object equivalent to
      * this <code>IntegerTerm</code>.
      */
+    @Override
     public List toJava() { 
 	List<Object> vec = new ArrayList<Object>();
 	Term t = this;
@@ -155,6 +162,7 @@ public class ListTerm extends Term {
 	return vec;	
     }
 
+    @Override
     public String toQuotedString() {
 	Term x = this;
 	String s = "[";
@@ -182,6 +190,7 @@ public class ListTerm extends Term {
      * equivalent to this <code>ListTerm</code>, false otherwise.
      * @see #compareTo
      */
+    @Override
     public boolean equals(Object obj) {
     	if (! (obj instanceof ListTerm))
     	    return false;
@@ -189,6 +198,7 @@ public class ListTerm extends Term {
 	    && cdr.equals(((ListTerm)obj).cdr().dereference());
     }
 
+    @Override
     public int hashCode() {
 	int h = 1;
 	h = 31*h + SYM_DOT.hashCode();
@@ -198,6 +208,7 @@ public class ListTerm extends Term {
     }
 
     /** Returns a string representation of this <code>ListTerm</code>. */
+    @Override
     public String toString() {
 	Term x = this;	
 	String s = "[";
@@ -224,6 +235,7 @@ public class ListTerm extends Term {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	if (anotherTerm instanceof VariableTerm || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)) || anotherTerm instanceof SymbolTerm)
 	    return AFTER;

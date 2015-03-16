@@ -20,6 +20,7 @@ class PRED_$statistics_2 extends Predicate.P2 {
 	this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine){
         engine.setB0();
 	Term a1, a2;

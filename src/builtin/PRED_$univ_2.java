@@ -19,10 +19,12 @@ public class PRED_$univ_2 extends Predicate.P2 {
         this.cont = cont;
     }
 
+    @Override
     public String toString() {
         return "=..(" + arg1 + "," + arg2 + ")";
     }
 
+    @Override
     public Operation exec(Prolog engine) {
         engine.setB0();
         Term a1, a2;

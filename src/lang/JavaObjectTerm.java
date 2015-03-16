@@ -33,8 +33,10 @@ public class JavaObjectTerm extends Term {
     /** Returns a <code>java.lang.Class</code> of object wrapped by this <code>JavaObjectTerm</code>. */
     public Class   getClazz() { return obj.getClass(); }
 
+    @Override
     public String name() { return ""; }
 
+    @Override
     public String  toQuotedString() { return toString(); }
 
     @Override
@@ -42,6 +44,7 @@ public class JavaObjectTerm extends Term {
       return TYPE_JAVA_OBJECT;
     }
 
+    @Override
     public boolean unify(Term t, Trail trail) {
 	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);
@@ -57,6 +60,7 @@ public class JavaObjectTerm extends Term {
      * @see #getClazz()
      * @see Term#convertible(Class, Class)
      */
+    @Override
     public boolean convertible(Class type) { return convertible(obj.getClass(), type); }
 
     /** 
@@ -64,6 +68,7 @@ public class JavaObjectTerm extends Term {
      * @return the value of <code>obj</code>.
      * @see #obj
      */
+    @Override
     public Object toJava() { return obj; }
 
     /* Object */
@@ -78,17 +83,20 @@ public class JavaObjectTerm extends Term {
      * equivalent to this <code>JavaObjectTerm</code>, false otherwise.
      * @see #compareTo
      */
+    @Override
     public boolean equals(Object o) {
 	if (! (o instanceof JavaObjectTerm))
 	    return false;
 	return obj.equals(((JavaObjectTerm)o).obj);
     }
 
+    @Override
     public int hashCode() {
 	return obj.hashCode();
     }
 
     /** Returns a string representation of this <code>JavaObjectTerm</code>. */
+    @Override
     public String toString() {
 	return obj.getClass().getName()
       + "(0x" + Integer.toHexString(hashCode()) + ")";
@@ -104,6 +112,7 @@ public class JavaObjectTerm extends Term {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	if (anotherTerm instanceof VariableTerm 
 	    || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)) 

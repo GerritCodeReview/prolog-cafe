@@ -207,6 +207,7 @@ public class BlockingPrologControl
    * @see #result
    * @see #thread
    */
+  @Override
   protected synchronized void success() {
   resultReady = true;
   result = true;
@@ -234,6 +235,7 @@ public class BlockingPrologControl
    * @see #result
    * @see #thread
    */
+  @Override
   protected synchronized void fail() {
   resultReady = true;
   result = false;
@@ -246,6 +248,7 @@ public class BlockingPrologControl
   }
 
   /** @return true if the engine is no longer supposed to execute. */
+  @Override
   public boolean isEngineStopped() {
     return thread == null;
   }
@@ -367,6 +370,7 @@ public class BlockingPrologControl
    * @see #fail
    * @see #stop
    */
+  @Override
   public void run() {
     try {
       executePredicate();

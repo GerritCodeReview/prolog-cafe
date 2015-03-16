@@ -20,6 +20,7 @@ class ChoicePointFrame {
       engine.cont = this.cont;
     }
 
+    @Override
     public String toString() {
       String t = " time:" + timeStamp + "\n" ;
       t = t + " cont:" + cont + "\n";
@@ -36,6 +37,7 @@ class ChoicePointFrame {
         this.r1 = engine.r1;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -50,6 +52,7 @@ class ChoicePointFrame {
         this.r2 = engine.r2;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.r1 = this.r1;
         engine.r2 = this.r2;
@@ -65,6 +68,7 @@ class ChoicePointFrame {
         this.r3 = engine.r3;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -83,6 +87,7 @@ class ChoicePointFrame {
         this.r4 = engine.r4;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -103,6 +108,7 @@ class ChoicePointFrame {
         this.r5 = engine.r5;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -125,6 +131,7 @@ class ChoicePointFrame {
         this.r6 = engine.r6;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -149,6 +156,7 @@ class ChoicePointFrame {
         this.r7 = engine.r7;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -175,6 +183,7 @@ class ChoicePointFrame {
         this.r8 = engine.r8;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -203,6 +212,7 @@ class ChoicePointFrame {
         this.r9 = engine.r9;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;
@@ -233,6 +243,7 @@ class ChoicePointFrame {
         this.r10 = engine.r10;
       }
 
+      @Override
       void restore(Prolog engine) {
         engine.cont = this.cont;
         engine.r1 = this.r1;

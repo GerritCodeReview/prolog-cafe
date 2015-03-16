@@ -60,6 +60,7 @@ public class VariableTerm extends Term implements Undoable {
      * @see #bind(Term,Trail)
      * @see Trail
      */
+    @Override
     public boolean unify(Term t, Trail trail) {
 	if (val != this)
 	    return val.unify(t, trail);
@@ -101,6 +102,7 @@ public class VariableTerm extends Term implements Undoable {
      * convertible with <code>type</code>. Otherwise <code>false</code>.
      * @see #val
      */
+    @Override
     public boolean convertible(Class type) {
 	if (val != this)
 	    return val.convertible(type);
@@ -112,6 +114,7 @@ public class VariableTerm extends Term implements Undoable {
      * Otherwise, returns the value of <code>val.copy(engine)</code>.
      * @see #val
      */
+    @Override
     protected Term copy(Prolog engine) {
 	VariableTerm co;
 	if (val != this)
@@ -125,18 +128,21 @@ public class VariableTerm extends Term implements Undoable {
 	return co;
     }
 
+    @Override
     public Term dereference() {
 	if (val == this)
 	    return this;
 	return val.dereference();
     }
 
+    @Override
     public boolean isGround() {
 	if (val != this)
 	    return val.isGround();
 	return false;
     }
 
+    @Override
     public String name() {
     if (val == this)
       return "";
@@ -150,6 +156,7 @@ public class VariableTerm extends Term implements Undoable {
      * @return a Java object defined in <em>Prolog Cafe interoperability with Java</em>.
      * @see #val
      */
+    @Override
     public Object toJava() { 
 	if (val != this)
 	    return val.toJava();
@@ -162,6 +169,7 @@ public class VariableTerm extends Term implements Undoable {
      * <code>val.toQuotedString()</code>
      * @see #val
      */
+    @Override
     public String toQuotedString() {
 	if (val != this)
 	    return val.toQuotedString();
@@ -180,6 +188,7 @@ public class VariableTerm extends Term implements Undoable {
      * @see #val
      * @see #compareTo
     */
+    @Override
     public boolean equals(Object obj) {
 	if(val != this)
 	    return val.equals(obj);
@@ -194,6 +203,7 @@ public class VariableTerm extends Term implements Undoable {
      * <code>val.toString()</code>
      * @see #val
      */
+    @Override
     public String toString() {
 	if (val != this)
 	    return val.toString();
@@ -201,6 +211,7 @@ public class VariableTerm extends Term implements Undoable {
     }
 
     /* Undoable */
+    @Override
     public void undo() { val = this; }
 
     /* Comparable */
@@ -213,6 +224,7 @@ public class VariableTerm extends Term implements Undoable {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	if(val != this)
 	    return val.compareTo(anotherTerm);

@@ -51,6 +51,7 @@ public class ExistenceException extends BuiltinException {
     /** Returns a term representation of this <code>ExistenceException</code>:
      * <code>existence_error(goal,argNo,objType,culprit,message)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -62,6 +63,7 @@ public class ExistenceException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>ExistenceException</code>. */
+    @Override
     public String toString() {
 	String s = "{EXISTENCE ERROR:";
 	if (argNo > 0)

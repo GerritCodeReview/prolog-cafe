@@ -13,6 +13,7 @@ public class Failure extends Operation {
     public static final Failure FAILURE = new Failure();
     private Failure() {}
 
+    @Override
     public Operation exec(Prolog engine) {
 	engine.control.fail();
 	engine.halt = 1; // halt(0)
@@ -20,6 +21,7 @@ public class Failure extends Operation {
     }
 
     /** Returns a string representation of this <code>Failure</code>. */
+    @Override
     public String toString(){ return "Failure"; }
 
     public static final Operation fail_0 = new PRED_fail_0();

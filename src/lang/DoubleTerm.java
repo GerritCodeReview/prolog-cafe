@@ -38,6 +38,7 @@ public class DoubleTerm extends NumberTerm {
       return TYPE_DOUBLE;
     }
 
+    @Override
     public boolean unify(Term t, Trail trail) {
 	if (t instanceof VariableTerm)
 	    return ((VariableTerm)t).unify(this, trail);
@@ -46,6 +47,7 @@ public class DoubleTerm extends NumberTerm {
 	return this.val == ((DoubleTerm)t).value();
     }
 
+    @Override
     public String name() { return ""; }
 
     /** 
@@ -53,6 +55,7 @@ public class DoubleTerm extends NumberTerm {
      * <code>convertible(Double.class, type)</code>.
      * @see Term#convertible(Class, Class)
      */
+    @Override
     public boolean convertible(Class type) { return convertible(Double.class, type); }
 
     /** 
@@ -61,10 +64,12 @@ public class DoubleTerm extends NumberTerm {
      * @return a <code>java.lang.Double</code> object equivalent to
      * this <code>DoubleTerm</code>.
      */
+    @Override
     public Object toJava() { return Double.valueOf(val); }
 
     /* Object */
     /** Returns a string representation of this <code>DoubleTerm</code>. */
+    @Override
     public String toString() { return Double.toString(this.val); }
 
     /**
@@ -76,12 +81,14 @@ public class DoubleTerm extends NumberTerm {
      * point number equivalent to this <code>DoubleTerm</code>, false otherwise.
      * @see #compareTo
     */
+    @Override
     public boolean equals(Object obj) {
 	if (! (obj instanceof DoubleTerm))
 	    return false;
 	return Double.doubleToLongBits(this.val) == Double.doubleToLongBits(((DoubleTerm)obj).val);
     }
 
+    @Override
     public int hashCode() {
 	long bits = Double.doubleToLongBits(this.val);
 	return (int)(bits ^ (bits >>> 32));
@@ -97,6 +104,7 @@ public class DoubleTerm extends NumberTerm {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced
 	if (anotherTerm instanceof VariableTerm)
 	    return AFTER;
@@ -106,94 +114,119 @@ public class DoubleTerm extends NumberTerm {
     }
 
     /* NumberTerm */
+    @Override
     public int intValue() { return (int)val; }
 
+    @Override
     public long longValue() { return (long)val; }
 
+    @Override
     public double doubleValue() { return val; }
 
+    @Override
     public int arithCompareTo(NumberTerm t) {
 	return Double.compare(this.val, t.doubleValue());
     }
 
+    @Override
     public NumberTerm abs() { return new DoubleTerm(Math.abs(this.val)); }
 
+    @Override
     public NumberTerm acos() { return new DoubleTerm(Math.acos(this.val)); }
 
+    @Override
     public NumberTerm add(NumberTerm t) { return new DoubleTerm(this.val + t.doubleValue()); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm and(NumberTerm t) { throw new IllegalTypeException("integer", this); }
     //    public NumberTerm and(NumberTerm t) { return new IntegerTerm(this.intValue() & t.intValue()); }
 
+    @Override
     public NumberTerm asin() { return new DoubleTerm(Math.asin(this.val)); }
 
+    @Override
     public NumberTerm atan() { return new DoubleTerm(Math.atan(this.val)); }
 
+    @Override
     public NumberTerm ceil() { return new IntegerTerm((int) Math.ceil(this.val)); }
 
+    @Override
     public NumberTerm cos() { return new DoubleTerm(Math.cos(this.val)); }
 
     /** 
      * @exception EvaluationException if the given argument
      * <code>NumberTerm</code> represents <coe>0</code>.
      */
+    @Override
     public NumberTerm divide(NumberTerm t) { 
 	if (t.doubleValue() == 0)
 	    throw new EvaluationException("zero_divisor");
 	return new DoubleTerm(this.val / t.doubleValue());
     }
 
+    @Override
     public NumberTerm exp() { return new DoubleTerm(Math.exp(this.val)); }
 
+    @Override
     public NumberTerm floatIntPart() { 
 	return new DoubleTerm(Math.signum(this.val) * Math.floor(Math.abs(this.val)));
     }
 
+    @Override
     public NumberTerm floatFractPart() { 
 	return new DoubleTerm(this.val - Math.signum(this.val) * Math.floor(Math.abs(this.val)));
     }
 
+    @Override
     public NumberTerm floor() { return new IntegerTerm((int) Math.floor(this.val)); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm intDivide(NumberTerm t) { throw new IllegalTypeException("integer", this); }
     //    public NumberTerm intDivide(NumberTerm t) {	return new IntegerTerm((int)(this.intValue() / t.intValue())); }
 
     /** 
      * @exception EvaluationException if this object represents <coe>0</code>.
      */
+    @Override
     public NumberTerm log() { 
 	if (this.val == 0)
 	    throw new EvaluationException("undefined");
 	return new DoubleTerm(Math.log(this.val)); 
     }
 
+    @Override
     public NumberTerm max(NumberTerm t) { return new DoubleTerm(Math.max(this.val, t.doubleValue())); }
 
+    @Override
     public NumberTerm min(NumberTerm t) { return new DoubleTerm(Math.min(this.val, t.doubleValue())); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm mod(NumberTerm t) { throw new IllegalTypeException("integer", this); }
     //    public NumberTerm mod(NumberTerm t) { return new IntegerTerm(this.intValue() % t.intValue()); }
 
+    @Override
     public NumberTerm multiply(NumberTerm t) { return new DoubleTerm(this.val * t.doubleValue()); }
 
+    @Override
     public NumberTerm negate() { return new DoubleTerm(- this.val); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm not() { throw new IllegalTypeException("integer", this); }
     //    public NumberTerm not() { return new IntegerTerm(~ this.intValue()); }
 
@@ -201,51 +234,66 @@ public class DoubleTerm extends NumberTerm {
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm or(NumberTerm t) { throw new IllegalTypeException("integer", this); }
     //    public NumberTerm or(NumberTerm t) { return new IntegerTerm(this.intValue() | t.intValue()); }
 
+    @Override
     public NumberTerm pow(NumberTerm t) { return new DoubleTerm(Math.pow(this.val, t.doubleValue())); }
 
+    @Override
     public NumberTerm rint() { return new DoubleTerm(Math.rint(this.val)); }
 
+    @Override
     public NumberTerm round() { return new IntegerTerm((int) Math.round(this.val)); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm shiftLeft(NumberTerm t) { throw new IllegalTypeException("integer", this); }
 
     /** 
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm shiftRight(NumberTerm t) { throw new IllegalTypeException("integer", this); }
 
+    @Override
     public NumberTerm signum() {return new DoubleTerm(Math.signum(this.val)); }
  
+    @Override
     public NumberTerm sin() { return new DoubleTerm(Math.sin(this.val)); }
 
     /** 
      * @exception EvaluationException if this object represents
      * a floating point number less than <coe>0</code>.
      */
+    @Override
     public NumberTerm sqrt() { 
 	if (this.val < 0)
 	    throw new EvaluationException("undefined");
 	return new DoubleTerm(Math.sqrt(this.val)); 
     }
 
+    @Override
     public NumberTerm subtract(NumberTerm t) { return new DoubleTerm(this.val - t.doubleValue()); }
 
+    @Override
     public NumberTerm tan() { return new DoubleTerm(Math.tan(this.val)); }
 
+    @Override
     public NumberTerm toDegrees() { return new DoubleTerm(Math.toDegrees(this.val)); }
 
+    @Override
     public NumberTerm toFloat() { return this; }
 
+    @Override
     public NumberTerm toRadians() { return new DoubleTerm(Math.toRadians(this.val)); }
 
+    @Override
     public NumberTerm truncate() { 
 	if (this.val >= 0)
 	    return new IntegerTerm((int) Math.floor(this.val));
@@ -257,5 +305,6 @@ public class DoubleTerm extends NumberTerm {
      * Throws a <code>type_error</code>.
      * @exception IllegalTypeException
      */
+    @Override
     public NumberTerm xor(NumberTerm t) { throw new IllegalTypeException("integer", this); }
 }

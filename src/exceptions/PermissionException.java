@@ -54,6 +54,7 @@ public class PermissionException extends BuiltinException {
     /** Returns a term representation of this <code>PermissionException</code>:
      * <code>permission_error(goal,argNo,operation,permissionType,culprit,message)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -65,6 +66,7 @@ public class PermissionException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>PermissionException</code>. */
+    @Override
     public String toString() {
 	String s = "{PERMISSION ERROR: " + goal.toString();
 	s += " - can not " + operation + " " + permissionType + " " + culprit.toString();

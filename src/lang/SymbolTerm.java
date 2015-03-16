@@ -171,12 +171,14 @@ public abstract class SymbolTerm extends Term {
      * @return the value of <code>arity</code>.
      * @see #arity
      */
+    @Override
     public int arity() { return arity; }
 
     /** Returns the string representation of this <code>SymbolTerm</code>.
      * @return the value of <code>name</code>.
      * @see #name
      */
+    @Override
     public String name() { return name; }
 
     @Override
@@ -184,6 +186,7 @@ public abstract class SymbolTerm extends Term {
       return TYPE_SYMBOL;
     }
 
+    @Override
     public boolean unify(Term t, Trail trail) {
       t = t.dereference();
       if (t instanceof VariableTerm) {
@@ -219,6 +222,7 @@ public abstract class SymbolTerm extends Term {
      * <code>convertible(String.class, type)</code>.
      * @see Term#convertible(Class, Class)
      */
+    @Override
     public boolean convertible(Class type) { return convertible(String.class, type); }
 
     /**
@@ -227,11 +231,14 @@ public abstract class SymbolTerm extends Term {
      * @return a <code>java.lang.String</code> object equivalent to
      * this <code>SymbolTerm</code>.
      */
+    @Override
     public Object toJava() { return name; }
 
+    @Override
     public String toQuotedString() { return Token.toQuotedString(name); }
 
     /** Returns a string representation of this <code>SymbolTerm</code>. */
+    @Override
     public String toString() { return name; }
 
     /* Comparable */
@@ -244,6 +251,7 @@ public abstract class SymbolTerm extends Term {
      * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
      * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
      */
+    @Override
     public int compareTo(Term anotherTerm) { // anotherTerm must be dereferenced.
 	if (anotherTerm instanceof VariableTerm || ((anotherTerm instanceof IntegerTerm) || (anotherTerm instanceof DoubleTerm)))
 	    return AFTER;

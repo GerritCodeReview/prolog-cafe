@@ -12,6 +12,7 @@ public class PRED_$neck_cut_0 extends Predicate {
         this.cont = cont;
     }
 
+    @Override
     public Operation exec(Prolog engine) {
 	//        engine.setB0(); 
         engine.neckCut();

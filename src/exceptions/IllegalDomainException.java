@@ -54,6 +54,7 @@ public class IllegalDomainException extends BuiltinException {
     /** Returns a term representation of this <code>IllegalDomainException</code>:
      * <code>domain_error(goal,argNo,type,culprit)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -64,6 +65,7 @@ public class IllegalDomainException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>IllegalDomainException</code>. */
+    @Override
     public String toString() {
 	String s = "{DOMAIN ERROR: " + goal.toString();
 	if (argNo > 0)

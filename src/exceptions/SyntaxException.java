@@ -49,6 +49,7 @@ public class SyntaxException extends BuiltinException {
     /** Returns a term representation of this <code>SyntaxException</code>:
      * <code>syntax_error(goal,argNo,type,culprit,message)</code>.
      */
+    @Override
     public Term getMessageTerm() {
 	Term[] args = {
 	    new JavaObjectTerm(goal), 
@@ -60,6 +61,7 @@ public class SyntaxException extends BuiltinException {
     }
 
     /** Returns a string representation of this <code>SyntaxException</code>. */
+    @Override
     public String toString() {
 	String s = "{SYNTAX ERROR: " + goal.toString();
 	if (argNo > 0)
