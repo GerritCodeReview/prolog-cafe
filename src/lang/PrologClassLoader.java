@@ -122,7 +122,7 @@ public class PrologClassLoader extends ClassLoader {
           new ClassCastException("Does not extend " + Predicate.class));
       }
 
-      Class[] params = new Class[arity + 1];
+      Class<?>[] params = new Class[arity + 1];
       for (int i = 0; i < arity; i++)
         params[i] = Term.class;
       params[arity] = Operation.class;
