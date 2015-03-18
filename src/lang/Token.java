@@ -269,7 +269,7 @@ public class Token {
 		c1 = quote;
 	    } 
 	    else if (c1 == '\\') {
-		rc = escapeSequences(c1, s, in);
+		rc = escapeSequences(s, in);
 		if (rc > 0)
 		    continue;
 		else
@@ -279,7 +279,7 @@ public class Token {
 	}
     }
 
-    public static int escapeSequences(int backslash, StringBuffer s, PushbackReader in)	
+    public static int escapeSequences(StringBuffer s, PushbackReader in)
 	throws IOException {
 
 	int c;
