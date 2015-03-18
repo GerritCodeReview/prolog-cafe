@@ -16,6 +16,24 @@
       "revId": "66ac39f47655e2cd94c0144e48373ddea03083c5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6692f867_4b8e2533",
+        "filename": "src/builtin/PRED_close_2.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-18T07:21:17Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "6692f867_ab6f89f5",
+      "revId": "66ac39f47655e2cd94c0144e48373ddea03083c5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
