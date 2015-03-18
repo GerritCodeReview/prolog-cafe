@@ -55,7 +55,11 @@ public abstract class Term implements Comparable<Term> {
      */
     public boolean convertible(Class<?> type) { return convertible(getClass(), type); }
 
-    /** Returns a copy of this object. */
+    /**
+     * Returns a copy of this object.
+     * @param engine the engine.
+     *
+     */
     protected Term copy(Prolog engine) { return this; }
 
     /** Returns the dereference value of this term. */
