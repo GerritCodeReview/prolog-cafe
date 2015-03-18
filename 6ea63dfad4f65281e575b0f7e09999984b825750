@@ -46,6 +46,30 @@
       "revId": "6ea63dfad4f65281e575b0f7e09999984b825750",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46cc147d_4274324f",
+        "filename": "src/lang/VariableTerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:55:49Z",
+      "side": 1,
+      "message": "To fix the warning I think we need to override, but the only safe implementation is to invoke Object\u0027s implementation:\n\n  @Override\n  public int hashCode() {\n    return System. identityHashCode(this);\n  }",
+      "parentUuid": "46cc147d_823f1a6a",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 5
+      },
+      "revId": "6ea63dfad4f65281e575b0f7e09999984b825750",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
