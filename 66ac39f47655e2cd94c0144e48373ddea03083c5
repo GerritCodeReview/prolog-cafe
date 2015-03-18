@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6692f867_ab6f89f5",
+        "filename": "src/builtin/PRED_close_2.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:47:41Z",
+      "side": 0,
+      "message": "Removing the close and hiding it in try-with-resources when we didn\u0027t create it here feels very weird to me. Maybe in 5 years I will grow out of that, but it seems like a bad way to say \"oh and now close this thing that was opened very far away from here\".",
+      "revId": "66ac39f47655e2cd94c0144e48373ddea03083c5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}

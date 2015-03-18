@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46cc147d_623a167d",
+        "filename": "src/builtin/PRED_get_2.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:47:41Z",
+      "side": 1,
+      "message": "This stream should not be closed here. It needs to stay open so the compiler can keep reading more characters from the stream.",
+      "revId": "0da0debf24d8c32e17d185458414d39ad11e8e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
