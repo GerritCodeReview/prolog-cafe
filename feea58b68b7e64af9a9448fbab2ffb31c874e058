@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6692f867_2b4b998b",
+        "filename": ".settings/org.eclipse.jdt.ui.prefs",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:53:17Z",
+      "side": 1,
+      "message": "I think we actually want:\n\n  com.googlecode.prolog_cafe;com;junit;...\n\nThat is \"our code\" (Prolog Cafe), then everything else. We are probably never going to see \"com.google.\" imports inside of Prolog Cafe.",
+      "range": {
+        "startLine": 3,
+        "startChar": 31,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "feea58b68b7e64af9a9448fbab2ffb31c874e058",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6692f867_0b46dd82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:53:17Z",
+      "side": 1,
+      "message": "organize",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "feea58b68b7e64af9a9448fbab2ffb31c874e058",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
