@@ -100,12 +100,16 @@ public class PRED_close_2 extends Predicate.P2 {
 	    }
 	} else if (stream instanceof PrintWriter) {
 	    PrintWriter out = (PrintWriter) stream;
-	    if (out.checkError()) {
-		if (! forceFlag)
-		    throw new SystemException("output stream error");
+	    try {
+	      if (out.checkError()) {
+	        if (! forceFlag) {
+	          throw new SystemException("output stream error");
+	        }
+	      }
+	    } finally {
+	      out.flush();
+	      out.close();
 	    }
-	    out.flush();
-	    out.close();
 	} else {
 	    throw new IllegalDomainException(this, 1, "stream_or_alias", a1);
 	}
