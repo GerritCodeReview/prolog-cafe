@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6692f867_2b64791c",
+        "filename": "src/lang/VariableTerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:41:14Z",
+      "side": 1,
+      "message": "Oooh. Here be dragons. You can\u0027t actually do this.\n\nIs this a findbugs thing you are trying to \"fix\"?\n\nhashCode() needs to be stable for an object. But val is mutated to be different things during the execution of a Prolog program. A VariableTerm that was stored in a HashMap as a key needs to have the same hashCode through its life.\n\nThe default java.lang.Object hashCode() implementation gives a stable hash for the variable. I think that makes more sense then trying to define our own hashCode for the object based on a mutable property.\n\nRelying on the object identity hashCode still gets us \"some\" value of a.hashCode() \u003d\u003d b.hashCode() if a.equals(b).",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 5
+      },
+      "revId": "6ea63dfad4f65281e575b0f7e09999984b825750",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
