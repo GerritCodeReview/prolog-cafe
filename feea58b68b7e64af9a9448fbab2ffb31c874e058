@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6692f867_0badfd9a",
+        "filename": ".settings/org.eclipse.jdt.ui.prefs",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-18T07:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6692f867_2b4b998b",
+      "range": {
+        "startLine": 3,
+        "startChar": 31,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "feea58b68b7e64af9a9448fbab2ffb31c874e058",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6692f867_0b46dd82",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-18T06:53:17Z",
       "side": 1,
       "message": "organize",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "feea58b68b7e64af9a9448fbab2ffb31c874e058",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46cc147d_e28c66cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-18T07:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6692f867_0b46dd82",
       "range": {
         "startLine": 9,
         "startChar": 32,
