@@ -22,6 +22,30 @@
       "revId": "6ea63dfad4f65281e575b0f7e09999984b825750",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46cc147d_823f1a6a",
+        "filename": "src/lang/VariableTerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-03-18T06:47:42Z",
+      "side": 1,
+      "message": "\u003e Is this a findbugs thing you are trying to \"fix\"?\n\nNo, this is fixing a warning shown by Eclipse.\n\n\u003e The default java.lang.Object hashCode() implementation ...\n\nOK, so should be safe to just not override it?  Or better to explicitly invoke Object\u0027s implementation?",
+      "parentUuid": "6692f867_2b64791c",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 5
+      },
+      "revId": "6ea63dfad4f65281e575b0f7e09999984b825750",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
