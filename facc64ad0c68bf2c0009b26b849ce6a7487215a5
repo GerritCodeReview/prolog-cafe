@@ -22,6 +22,30 @@
       "revId": "facc64ad0c68bf2c0009b26b849ce6a7487215a5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6692f867_cb1db594",
+        "filename": "src/lang/PrologControl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-03-18T06:07:49Z",
+      "side": 1,
+      "message": "WAG. I think HashMap default is 16, which is too many entries for the 3 below. At a default load factor of 0.75, 3 entries should need about 4 slots in the table. Shoving it to 7 just means its smaller than the default, but larger than the actual used demand, so its somewhere in the middle, where we are probably in a reasonable tradeoff between memory used and collisions.",
+      "parentUuid": "268720d3_61e2561c",
+      "range": {
+        "startLine": 96,
+        "startChar": 51,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "facc64ad0c68bf2c0009b26b849ce6a7487215a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
