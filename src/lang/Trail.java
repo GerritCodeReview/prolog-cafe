@@ -22,7 +22,7 @@ public final class Trail {
 
   /** Constructs a new trail stack. */
   public Trail() {
-    this(20000);
+    this(100);
   }
 
   /** Constructs a new trail stack with the given size. */
@@ -38,15 +38,13 @@ public final class Trail {
 
   /** Pushes an entry to this <code>Trail</code>. */
   public void push(Undoable t) {
-    try {
-      buffer[++top] = t;
-    } catch (ArrayIndexOutOfBoundsException e) {
+    if (++top >= buffer.length) {
       int len = buffer.length;
-      Undoable[] new_buffer = new Undoable[len+20000];
+      Undoable[] new_buffer = new Undoable[2 * len];
       System.arraycopy(buffer, 0, new_buffer, 0, len);
       buffer = new_buffer;
-      buffer[top] = t;
     }
+    buffer[top] = t;
   }
 
   /** Pops an entry from this <code>Trail</code>. */
