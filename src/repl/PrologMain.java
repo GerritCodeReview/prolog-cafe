@@ -41,7 +41,7 @@ public class PrologMain {
 	    System.err.println(HEADER);
 	    if (argv.length != 1) {
 		usage();
-		System.exit(999);
+		System.exit(1);
 	    } 
 	    Term arg1 = Prolog.Nil;
 	    arg1 = new ListTerm(SymbolTerm.intern("user"), arg1);
@@ -88,16 +88,12 @@ public class PrologMain {
 	}
     }
 
-    /** Shows usage */
-    protected static void usage() {
-	String s = "Usage:\n";
-	s += "java -cp $PLCAFEDIR/plcafe.jar";
-	s += " com.googlecode.prolog_cafe.lang.PrologMain package:predicate\n";
-	s += "java -cp $PLCAFEDIR/plcafe.jar";
-	s += " com.googlecode.prolog_cafe.lang.PrologMain predicate\n";
-	s += "    package:        package name\n";
-	s += "    predicate:      predicate name (only atom)";
-	System.out.println(s);
-    }
+  /** Shows usage */
+  protected static void usage() {
+    System.err.println("Usage:");
+    System.err.println("  java -jar cafeteria.jar package:predicate");
+    System.err.println("  java -jar cafeteria.jar predicate");
+    System.err.println("    package:        package name\n");
+    System.err.println("    predicate:      predicate name (only atom)");
+  }
 }
-
