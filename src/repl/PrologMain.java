@@ -32,16 +32,13 @@ import java.util.StringTokenizer;
  * @version 1.0
  */
 public class PrologMain {
-    /** Version information */
-    public static final String VERSION   = "Prolog Cafe 1.2.5 (mantis)";
-    /** Copyright information */
-    public static final String COPYRIGHT = "Copyright(C) 1997-2009 M.Banbara and N.Tamura";
+    private static final String COPYRIGHT = "Copyright(C) 1997-2009 M.Banbara and N.Tamura";
+    private static final String HEADER = "Prolog Cafe (" + COPYRIGHT + ")";
 
     public static void main(String argv[]) {
 	BlockingPrologControl p;
 	try {
-	    System.err.println("\n" + VERSION); 
-	    System.err.println(COPYRIGHT);
+	    System.err.println(HEADER);
 	    if (argv.length != 1) {
 		usage();
 		System.exit(999);
