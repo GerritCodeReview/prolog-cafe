@@ -1,13 +1,21 @@
 package com.googlecode.prolog_cafe.repl;
 
 import com.googlecode.prolog_cafe.exceptions.HaltException;
+import com.googlecode.prolog_cafe.lang.JavaObjectTerm;
 import com.googlecode.prolog_cafe.lang.ListTerm;
 import com.googlecode.prolog_cafe.lang.Prolog;
 import com.googlecode.prolog_cafe.lang.StructureTerm;
 import com.googlecode.prolog_cafe.lang.SymbolTerm;
 import com.googlecode.prolog_cafe.lang.Term;
 
-import java.util.EnumSet;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintStream;
+import java.io.PushbackReader;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /** Launches the meta-interpreter from the command line. */
@@ -18,27 +26,66 @@ public class PrologMain {
   public static void main(String argv[]) {
     try {
       System.err.println(HEADER);
-      if (argv.length != 1) {
-        usage();
-        System.exit(1);
-      }
-
-      Term packages = new ListTerm(
-        SymbolTerm.intern(Prolog.BUILTIN),
-        new ListTerm(SymbolTerm.intern("user"), Prolog.Nil));
-
-      Term goal = parseAtomicGoal(argv[0]);
-      if (goal == null) {
-        usage();
-        System.exit(1);
-      }
 
       BlockingPrologControl p = new BlockingPrologControl();
-      p.setEnabled(EnumSet.allOf(Prolog.Feature.class), true);
       p.configureUserIO(System.in, System.out, System.err);
-      p.setPredicate(Prolog.BUILTIN, "initialization", packages, goal);
-      for (boolean r = p.call(); r; r = p.redo()) {
+      p.setMaxDatabaseSize(256);
+
+      List<File> toLoad = new ArrayList<>(4);
+      long reductionLimit = Long.MAX_VALUE;
+      Term goal = null;
+      for (int i = 0; i < argv.length; i++) {
+        String arg = argv[i];
+        if (arg.equals("--enable-io")) {
+          p.setEnabled(Prolog.Feature.IO, true);
+        } else if (arg.equals("--enable-statistics")) {
+          p.setEnabled(Prolog.Feature.STATISTICS, true);
+        } else if (arg.startsWith("--max-database-size=")) {
+          String v = arg.substring(arg.indexOf('=') + 1);
+          p.setMaxDatabaseSize(Integer.parseInt(v, 10));
+        } else if (arg.startsWith("--reduction-limit=")) {
+          String v = arg.substring(arg.indexOf('=') + 1);
+          reductionLimit = Long.parseLong(v, 10);
+        } else if (arg.equals("-f") && i + 1 < argv.length) {
+          toLoad.add(new File(argv[++i]));
+        } else if (arg.startsWith("-")) {
+          usage();
+          System.exit(1);
+        } else if (i == argv.length - 1) {
+          goal = parseAtomicGoal(arg);
+        } else {
+          usage();
+          System.exit(1);
+        }
       }
+
+      initializePackages(p, goal);
+      for (File file : toLoad) {
+        try (FileReader src = new FileReader(file);
+            BufferedReader buf = new BufferedReader(src);
+            PushbackReader in = new PushbackReader(buf, Prolog.PUSHBACK_SIZE)) {
+          Term path = SymbolTerm.create(file.getPath());
+          if (!p.execute(Prolog.BUILTIN, "consult_stream",
+              path, new JavaObjectTerm(in))) {
+            System.err.println();
+            System.err.flush();
+            System.exit(1);
+          }
+        }
+        System.err.println();
+        System.err.flush();
+      }
+
+      if (goal == null) {
+        System.err.println();
+        System.err.flush();
+        goal = new StructureTerm(SymbolTerm.intern(":", 2), new Term[]{
+          SymbolTerm.intern(Prolog.BUILTIN),
+          SymbolTerm.create("cafeteria")});
+      }
+
+      p.setReductionLimit(reductionLimit);
+      p.execute(Prolog.BUILTIN, "call", goal);
     } catch (HaltException e) {
       System.exit(e.getStatus());
     } catch (Exception e) {
@@ -73,11 +120,35 @@ public class PrologMain {
     }
   }
 
+  private static void initializePackages(BlockingPrologControl p, Term goal) {
+    LinkedHashSet<String> set = new LinkedHashSet<>(3);
+    set.add(Prolog.BUILTIN);
+    set.add("user");
+    if (goal != null) {
+      set.add(goal.arg(1).name());
+    }
+
+    List<String> list = new ArrayList<>(set);
+    Term done = SymbolTerm.intern("true");
+    Term head = Prolog.Nil;
+    for (int i = list.size() - 1; 0 <= i; i--) {
+      head = new ListTerm(SymbolTerm.intern(list.get(i)), head);
+    }
+    p.execute(Prolog.BUILTIN, "initialization", head, done);
+  }
+
   private static void usage() {
-    System.err.println("Usage:");
-    System.err.println("  java -jar cafeteria.jar package:predicate");
-    System.err.println("  java -jar cafeteria.jar predicate");
-    System.err.println("    package:        package name\n");
-    System.err.println("    predicate:      predicate name (only atom)");
+    PrintStream e = System.err;
+    e.println("usage:  java -jar cafeteria.jar [options] [goal]");
+    e.println();
+    e.println("  --enable-io           : enable file system access");
+    e.println("  --enable-statistics   : enable statistics/2");
+    e.println("  --max-database-size=N : maximum entries in dynamic database");
+    e.println("  --reduction-limit=N   : max reductions during execution");
+    e.println();
+    e.println("   -f source.pl         : load file.pl  (may be repeated)");
+    e.println();
+    e.println("  goal :          predicate or package:predicate");
+    e.println("                  (if not specified, runs interactive loop)");
   }
 }
