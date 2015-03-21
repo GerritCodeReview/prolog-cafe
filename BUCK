@@ -1,4 +1,4 @@
-VERSION = '1.4'
+VERSION = '1.4.1'
 SRC = 'java/com/googlecode/prolog_cafe/'
 
 REPL = [
