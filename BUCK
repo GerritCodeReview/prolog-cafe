@@ -13,15 +13,14 @@ IO = [
   SRC + 'builtin/PRED_tab_2.java',
 ]
 
-genrule(
+zip_file(
   name = 'all',
-  cmd = ':>all',
-  deps = [
+  srcs = [
     ':cafeteria',
     ':compiler',
     ':runtime',
   ],
-  out = '__fake.all__',
+  out = 'all.zip',
 )
 
 java_binary(
