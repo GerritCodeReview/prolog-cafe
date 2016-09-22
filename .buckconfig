@@ -3,6 +3,10 @@
   install = //:install
   deploy = //:deploy
 
+[java]
+  source_level = 8
+  target_level = 8
+
 [buildfile]
   includes = //bootstrap.defs \
       //bucklets/java_sources.bucklet \
