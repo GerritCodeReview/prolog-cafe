@@ -18,7 +18,7 @@ def pl2am(name, src, out):
       + ']).'
       + '">$TMP/go.pl;'
       + 'cd $SRCDIR/%s;' % dirname(src)
-      + 'swipl --quiet -g go,halt -t "halt(1)" $TMP/go.pl',
+      + 'swipl --traditional --quiet -g go,halt -t "halt(1)" $TMP/go.pl',
     srcs = [
       'src/compiler/package_fx.pl',
       'src/compiler/pl2am.pl',
@@ -42,7 +42,7 @@ def am2j(name, am, out):
       + ']).'
       + '">$TMP/go.pl;'
       + 'mkdir $TMP/java;'
-      + 'swipl --quiet -g go,halt -t "halt(1)" $TMP/go.pl;'
+      + 'swipl --traditional --quiet -g go,halt -t "halt(1)" $TMP/go.pl;'
       + 'cd $TMP/java; zip -qr $OUT .',
     srcs = ['src/compiler/am2j.pl'],
   )
