@@ -7,18 +7,18 @@ Gerrit Code Review's customizable project rules.
 
 ## Build
 
-To bootstrap [Buck] and [SWI-Prolog] >= 6.6.4 must be installed and
+To bootstrap [Bazel] and [SWI-Prolog] >= 6.6.4 must be installed and
 then build the runtime and compiler with:
 
-    buck build all
+    bazel build :all
 
 To package for Maven into the local `~/.m2/repository` directory:
 
-    buck build install
+    ./mvn.sh install
 
 To publish to the gerrit-maven storage bucket:
 
-    buck build deploy
+    ./mvn.sh deploy
 
-[Buck]: https://github.com/facebook/buck/
+[Bazel]: https://www.bazel.build/versions/master/docs/install.html
 [SWI-Prolog]: http://www.swi-prolog.org/
