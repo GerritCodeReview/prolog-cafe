@@ -1,7 +1,5 @@
-/.buckd
 /.settings
 /.apt_generated
-/buck-out
 /bazel-bin
 /bazel-genfiles
 /bazel-out
