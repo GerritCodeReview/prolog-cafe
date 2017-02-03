@@ -16,6 +16,24 @@
       "revId": "e2e989548866c0964c85d03e8c834445b2638530",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5f34923_f9ee2c2b",
+        "filename": ".classpath",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "Feb 2, 2017 7:43:35 PM",
+      "side": 1,
+      "message": "Adding Shawn to the reviewers list.\n\nWell, this diff hasn\u0027t added this file, only modified. Also note, that this project differs from all other gerrit related project, as it doesn\u0027t have any depenencies beyond SWI-Prolog and JVM. That why Shawn just added this file to git, here: I64b2349437, with this explanation:\n\n  Creating the Eclipse project configuration is trivial as there are\n  no dependencies for Prolog Cafe beyond its single source directory\n  and the JVM.",
+      "parentUuid": "1a4ee438_afe0d47c",
+      "revId": "e2e989548866c0964c85d03e8c834445b2638530",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
