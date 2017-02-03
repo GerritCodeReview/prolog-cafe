@@ -1,7 +1,7 @@
 load("@com_googlesource_gerrit_bazlets//tools/maven:package.bzl", "maven_package")
 load("//:prolog.bzl", "pl2j")
 
-VERSION = "1.4.2"
+VERSION = "1.4.3"
 
 SRC = "java/com/googlecode/prolog_cafe/"
 
