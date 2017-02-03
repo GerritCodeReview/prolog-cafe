@@ -34,6 +34,24 @@
       "revId": "e2e989548866c0964c85d03e8c834445b2638530",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf9f1f16_f541bb02",
+        "filename": ".classpath",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "Feb 2, 2017 7:44:46 PM",
+      "side": 1,
+      "message": "OK.  Seems reasonable.  Maybe in a followup change we should document not to use the project generation.",
+      "parentUuid": "a5f34923_f9ee2c2b",
+      "revId": "e2e989548866c0964c85d03e8c834445b2638530",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
