@@ -3,6 +3,6 @@ workspace(name = "prolog_cafe")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "0f87babe07a555425d829c6e7951e296e9e24579",
+    commit = "42244973783cd0b14c5dc24014a97c4148488d6a",
     #    local_path = "/home/<user>/projects/bazlets"
 )
