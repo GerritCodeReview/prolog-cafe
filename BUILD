@@ -54,38 +54,12 @@ java_library(
     ),
 )
 
-#java_library(
-#  name = 'builtin',
-#  srcs = glob([SRC + 'builtin/*.java'], exclude = REPL + IO) +
-#  [
-##    ':builtin_srcs',
-##    ':system_srcs',
-#  ],
-#  deps = [':lang'],
-#)
-
-# TODO(davido): Fix that mess when this major Bazel bug is fixed:
-# https://github.com/bazelbuild/bazel/issues/374
-# That why I left the original :builtin rule from Buck, so that
-# you can feel my pain, to emulate the glob with zip, to hide
-# the files that contain '$' from Bazel.
-genrule(
-    name = "builtin_srcjar",
-    outs = ["builtin.srcjar"],
-    cmd = " && ".join([
-        "TMP=$$(mktemp -d || mktemp -d -t bazel-tmp)",
-        "ROOT=$$PWD",
-        "cd java",
-        "zip -q $$ROOT/$@ com/googlecode/prolog_cafe/builtin/*.java",
-        "zip -qd $$ROOT/$@ com/googlecode/prolog_cafe/builtin/PRED_\$$write_toString_2.java %s" % " ".join([s[5:] for s in IO]),
-    ]),
-    local = 1,
-)
-
 java_library(
     name = "builtin",
-    srcs = [
-        ":builtin_srcjar",
+    srcs = glob(
+        [SRC + "builtin/*.java"],
+        exclude = REPL + IO,
+    ) + [
         ":builtin_srcs",
         ":system_srcs",
     ],
@@ -156,25 +130,9 @@ java_binary(
     runtime_deps = [":cafeteria_lib"],
 )
 
-# TODO(davido): Same as above
-genrule(
-    name = "cafeteria_lib_srcjar",
-    outs = ["cafeteria_lib.srcjar"],
-    cmd = " && ".join([
-        "TMP=$$(mktemp -d || mktemp -d -t bazel-tmp)",
-        "ROOT=$$PWD",
-        "cd java",
-        "zip -q $$ROOT/$@ com/googlecode/prolog_cafe/repl/*.java com/googlecode/prolog_cafe/builtin/PRED_\$$write_toString_2.java",
-    ]),
-    local = 1,
-)
-
 java_library(
     name = "cafeteria_lib",
-    srcs = [
-        ":cafeteria_lib.srcjar",
-        ":cafeteria_srcs",
-    ],
+    srcs = glob([SRC + "repl/*.java"]) + REPL + [":cafeteria_srcs"],
     deps = [
         ":builtin",
         ":io",
@@ -188,23 +146,18 @@ pl2j(
     out = "cafeteria.srcjar",
 )
 
-# TODO(davido): Same as above
-genrule(
+java_library(
     name = "runtime_src",
-    srcs = [
+    resources = glob(
+        [
+            SRC + "builtin/*.java",
+            SRC + "lang/*.java",
+        ],
+        exclude = REPL + IO,
+    ) + [
         "src/builtin/builtins.pl",
         "src/builtin/system.pl",
     ],
-    outs = ["runtime_sources.zip"],
-    cmd = " && ".join([
-        "TMP=$$(mktemp -d || mktemp -d -t bazel-tmp)",
-        "ROOT=$$PWD",
-        "cp $(SRCS) $$TMP/",
-        "cd $$TMP",
-        "unzip -q $$ROOT/$(location :builtin_srcjar)",
-        "zip -qr $$ROOT/$@ .",
-    ]),
-    tools = [":builtin_srcjar"],
 )
 
 java_library(
@@ -220,22 +173,11 @@ java_library(
     ],
 )
 
-# TODO(davido): Same as above
-genrule(
+java_library(
     name = "cafeteria_src",
-    srcs = [
+    resources = glob([SRC + "repl/*.java"]) + REPL + [
         "src/builtin/cafeteria.pl",
     ],
-    outs = ["cafeteria_sources.zip"],
-    cmd = " && ".join([
-        "TMP=$$(mktemp -d || mktemp -d -t bazel-tmp)",
-        "ROOT=$$PWD",
-        "cp $(SRCS) $$TMP/",
-        "cd $$TMP",
-        "unzip -q $$ROOT/$(location :cafeteria_lib_srcjar)",
-        "zip -qr $$ROOT/$@ .",
-    ]),
-    tools = [":cafeteria_lib_srcjar"],
 )
 
 maven_package(
