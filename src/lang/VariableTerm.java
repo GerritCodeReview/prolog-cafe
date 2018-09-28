@@ -14,6 +14,7 @@ import com.googlecode.prolog_cafe.exceptions.InternalException;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
+@SuppressWarnings("EqualsWrongThing")
 public class VariableTerm extends Term implements Undoable {
     /** Holds a term to which this variable is bound. Initial value is <code>this</code> (self-reference). */
     private Term val;
