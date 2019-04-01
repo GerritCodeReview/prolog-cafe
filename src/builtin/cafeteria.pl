@@ -92,11 +92,11 @@ consult(File) :- atom(File), !, '$consult'(File).
 '$consult'(F) :-
 	'$prolog_file_name'(F, PF),
 	open(PF, read, In),
-	print_message(info, [consulting,File,'...']),
+	print_message(info, [consulting,PF,'...']),
 	statistics(runtime, _),
-	consult_stream(File, In),
+	consult_stream(PF, In),
 	statistics(runtime, [_,T]),
-	print_message(info, [File,consulted,T,msec]),
+	print_message(info, [PF,consulted,T,msec]),
 	close(In).
 
 '$prolog_file_name'(File,  File) :- sub_atom(File, _, _, After, '.'), After > 0, !.
