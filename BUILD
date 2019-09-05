@@ -1,3 +1,4 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 load("@com_googlesource_gerrit_bazlets//tools/maven:package.bzl", "maven_package")
 load("//:prolog.bzl", "pl2j")
 
