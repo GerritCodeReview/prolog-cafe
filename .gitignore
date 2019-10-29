@@ -1,7 +1,6 @@
 /.settings
 /.apt_generated
 /bazel-bin
-/bazel-genfiles
 /bazel-out
 /bazel-prolog-cafe
 /bazel-testlogs
