@@ -4,7 +4,7 @@ load("//:bazlets.bzl", "load_bazlets")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 load_bazlets(
-    commit = "97e83629a68dedda29125657a0a0a8cb21094de1",
+    commit = "f30a992da9fc855dce819875afb59f9dd6f860cd",
     #    local_path = "/home/<user>/projects/bazlets"
 )
 
